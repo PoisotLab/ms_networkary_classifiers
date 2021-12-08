@@ -49,7 +49,7 @@ $$
 \end{pmatrix} \odot \begin{pmatrix}
     s & (1-s) \\
     (1-s) & s
-\end{pmatrix}
+\end{pmatrix} \,.
 $$
 
 Note that when $s=0$, $\mathbf{Tr}(\mathbf{M}) = 0$ (the classifier is *always*
@@ -58,7 +58,33 @@ $s=1$, the classifier is perfect.
 
 The second element we can adjust in this hypothetical classifier is its bias,
 specifically its tendency to over-predict interactions. Like above, we can do so
-by defining a bias matrix
+by defining a bias matrix $\mathbf{B}$, where interactions are over-predicted
+with probability $b$, and express the final classifier confusion matrix as
+$\mathbf{M}\odot \mathbf{S}\odot \mathbf{B}$, *i.e.*
+
+$$
+\begin{pmatrix}
+    \rho^2 & \rho (1-\rho) \\
+    (1-\rho) \rho & (1-\rho)^2
+\end{pmatrix} \odot \begin{pmatrix}
+    s & (1-s) \\
+    (1-s) & s
+\end{pmatrix} \odot \begin{pmatrix}
+    b & b \\
+    (1-b) & (1-b)
+\end{pmatrix}\,.
+$$
+
+The final expression for the confusion matrix in which we can regulate the skill
+and the bias is
+
+$$
+\mathbf{C} = \begin{pmatrix}
+    s\times b\times \rho^2 & (1-s)\times b\times \rho (1-\rho) \\
+    (1-s)\times (1-b)\times (1-\rho) \rho & s\times (1-b)\times (1-\rho)^2
+\end{pmatrix} \,.
+$$
+
 # Numerical experiments
 
 ## Effect of training set on performance
