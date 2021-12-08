@@ -352,7 +352,7 @@ and the \(F_1\) score (\(2\text{tp}/(2\text{tp}+\text{fp}+\text{fn})\)).
 \textbf{Justification} of why these 4
 
 Assuming a no-skill unbiased classifier (\emph{i.e.}
-\(\mathbf{C}=\matbf{M}\)), the accuracy is \(\rho^2 + (1-\rho)^2\), the
+\(\mathbf{C}=\mathbf{M}\)), the accuracy is \(\rho^2 + (1-\rho)^2\), the
 balanced accuracy is \(0.5\), Youden's J is \(0\), and \(F_1=\rho\). In
 other words, given a connectance \(\rho = 0.05\), we expect that a
 classifier guessing at random would still achieve an accuracy of
@@ -424,9 +424,9 @@ both the obviously failed model runs, and the networks that are more
 densely connected compared to the connectance of empirical food webs
 (and are therefore less difficult to predict, being less imbalanced).
 
-\hypertarget{effect-of-training-set-on-performance}{%
-\subsection{Effect of training set on
-performance}\label{effect-of-training-set-on-performance}}
+\hypertarget{effect-of-training-set-bias-on-performance}{%
+\subsection{Effect of training set bias on
+performance}\label{effect-of-training-set-bias-on-performance}}
 
 \hypertarget{required-amount-of-positives-to-get-the-best-performance}{%
 \subsection{Required amount of positives to get the best
