@@ -16,16 +16,28 @@ summary of the results
 In this section, we will assume a network of connectance $\rho$, *i.e.* having
 $\rho S^2$ interactions (where $S$ is the species richness), and $(1-\rho) S^2$
 non-interactions. Therefore, the vector describing the *true* state of the
-network is $\mathbf{o}' = [\rho, (1-\rho)]$ (we can safely drop the $S^2$ terms,
-as we will work on the confusion matrix, which ends up expressing *relative*
-values).
+network is a column vector $\mathbf{o}^T = [\rho (1-\rho)]$ (we can safely drop
+the $S^2$ terms, as we will work on the confusion matrix, which ends up
+expressing *relative* values).
 
 In order to write the values of the confusion matrix for a hypothetical
 classifier, we need to define two characteristics: its skill, and its bias.
 Skill, here, refers to the propensity of the classifier to get the correct
 answer (*i.e.* to assign interactions where they are, and to not assign them
 where they are not). A no-skill classifier guesses at random, *i.e.* it will
-guess interactions with a probability $\rho$.
+guess interactions with a probability $\rho$. The predictions of a no-skill
+classifier can be expressed as a row vector $\mathbf{p} = [\rho (1-\rho)]$. The
+confusion matrix $\mathbf{M}$ for a no-skill classifier is given by the
+element-wise product of these vectors $\mathbf{o} \odot \mathbf{p}$, *i.e.*
+
+$$
+\mathbf{M} = \begin{pmatrix}
+    \rho^2 & \rho (1-\rho) \\
+    (1-\rho) \rho & (1-\rho)^2
+\end{pmatrix}
+$$
+
+
 
 # Numerical experiments
 
