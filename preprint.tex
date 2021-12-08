@@ -407,6 +407,23 @@ Youden's J
 (\(\text{tp}/(\text{tp}+\text{fn})+\text{tn}/(\text{tn}+\text{fp})-1\)),
 and the \(F_1\) score (\(2\text{tp}/(2\text{tp}+\text{fp}+\text{fn})\)).
 
+\textbf{Justification} of why these 4
+
+Assuming a no-skill unbiased classifier (\emph{i.e.}
+\(\mathbf{C}=\matbf{M}\)), the accuracy is \(\rho^2 + (1-\rho)^2\), the
+balanced accuracy is \(0.5\), Youden's J is \(0\), and \(F_1=\rho\). In
+other words, given a connectance \(\rho = 0.05\), we expect that a
+classifier guessing at random would still achieve an accuracy of
+\(0.905\); for a connectance of \(\rho = 0.01\), this accuracy
+\emph{increases} to over \(0.98\). In other words, networks with fewer
+interactions have inherently higher accuracy, because it is easy to
+predict the overwheling majority of non-interactions right.
+
+In order to examine how these values change w.r.t. the skill and bias,
+we performed a grid exploration of the values of \(s\) (from 0 to 1),
+and of \(\text{logit}(b)\), and visualize the result for a connectance
+of \textbf{TODO}.
+
 \hypertarget{numerical-experiments}{%
 \section{Numerical experiments}\label{numerical-experiments}}
 
