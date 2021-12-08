@@ -212,9 +212,20 @@
             \mathbf{M} = \begin{pmatrix}
                 \rho^2 &amp; \rho (1-\rho) \\
                 (1-\rho) \rho &amp; (1-\rho)^2
+            \end{pmatrix} \,.
+            $$</span></p>
+            <p>In order to regulate the skill of this classifier, we can define a skill matrix <span class="math inline"><strong>S</strong></span> with diagonal elements equal to <span class="math inline"><em>s</em></span>, and off-diagonal elements equal to <span class="math inline">(1 − <em>s</em>)</span>, and re-express the skill-adjusted confusion matrix as <span class="math inline"><strong>M</strong> ⊙ <strong>S</strong></span>, <em>i.e.</em></p>
+            <p><span class="math display">$$
+            \begin{pmatrix}
+                \rho^2 &amp; \rho (1-\rho) \\
+                (1-\rho) \rho &amp; (1-\rho)^2
+            \end{pmatrix} \odot \begin{pmatrix}
+                s &amp; (1-s) \\
+                (1-s) &amp; s
             \end{pmatrix}
             $$</span></p>
-            <h1 id="numerical-experiments">Numerical experiments</h1>
+            <p>Note that when <span class="math inline"><em>s</em> = 0</span>, <span class="math inline"><strong>T</strong><strong>r</strong>(<strong>M</strong>) = 0</span> (the classifier is <em>always</em> wrong), when <span class="math inline"><em>s</em> = 0.5</span>, the classifier is no-skill and guesses at random, and when <span class="math inline"><em>s</em> = 1</span>, the classifier is perfect.</p>
+            <p>The second element we can adjust in this hypothetical classifier is its bias, specifically its tendency to over-predict interactions. Like above, we can do so by defining a bias matrix # Numerical experiments</p>
             <h2 id="effect-of-training-set-on-performance">Effect of training set on performance</h2>
             <h2 id="required-amount-of-positives-to-get-the-best-performance">Required amount of positives to get the best performance</h2>
             <h1 id="guidelines-for-prediction">Guidelines for prediction</h1>
