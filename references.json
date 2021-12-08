@@ -1,119 +1,194 @@
 [
     {
-        "DOI": "10.1002/jez.1400610202",
+        "DOI": "10.1371/journal.pone.0240215",
+        "PMCID": "PMC7540853",
         "author": [
             {
-                "family": "Allee",
-                "given": "W. C."
-            },
-            {
-                "family": "Bowen",
-                "given": "Edith S."
+                "family": "Balayla",
+                "given": "Jacques"
             }
         ],
-        "container-title": "Journal of Experimental Zoology",
-        "id": "Allee1932StuAni",
-        "issue": "2",
+        "container-title": "PLoS ONE",
+        "id": "Balayla2020PreThr",
+        "issue": "10",
         "issued": {
             "date-parts": [
                 [
-                    1932,
-                    2
+                    2020,
+                    10,
+                    7
                 ]
             ]
         },
-        "page": "185-207",
-        "title": "Studies in animal aggregations: Mass protection against colloidal silver among goldfishes",
-        "type": "article-journal",
-        "volume": "61"
-    },
-    {
-        "author": [
-            {
-                "family": "Camerano",
-                "given": "Lorenzo"
-            }
-        ],
-        "container-title": "Atti Della R. Accad. Delle Sci. Torino",
-        "id": "Camerano1880EquViv",
-        "issued": {
-            "date-parts": [
-                [
-                    1880
-                ]
-            ]
-        },
-        "page": "393-414",
-        "title": "Dell\u2019equilibrio dei viventi merce la reciproca distruzione",
+        "page": "e0240215",
+        "title": "Prevalence threshold (\u03c6e) and the geometry of screening curves",
         "type": "article-journal",
         "volume": "15"
     },
     {
+        "URL": "http://arxiv.org/abs/1505.01658",
         "author": [
             {
-                "family": "Elton",
-                "given": "Charles S"
-            }
-        ],
-        "id": "Elton1927AniEco",
-        "issued": {
-            "date-parts": [
-                [
-                    1927
-                ]
-            ]
-        },
-        "publisher": "University of Chicago Press",
-        "title": "Animal ecology",
-        "type": "book"
-    },
-    {
-        "author": [
-            {
-                "family": "Fahrenholz",
-                "given": "H."
-            }
-        ],
-        "container-title": "Zool. Anz.",
-        "id": "Fahrenholz1913EctUnd",
-        "issued": {
-            "date-parts": [
-                [
-                    1913
-                ]
-            ]
-        },
-        "page": "371-374",
-        "title": "Ectoparasiten und abstammungslehre",
-        "type": "article-journal",
-        "volume": "41"
-    },
-    {
-        "DOI": "10.1111/j.1096-3642.1935.tb01680.x",
-        "author": [
-            {
-                "family": "Nicholson",
-                "given": "A. J."
+                "family": "Branco",
+                "given": "Paula"
             },
             {
-                "family": "Bailey",
-                "given": "V. A."
+                "family": "Torgo",
+                "given": "Luis"
+            },
+            {
+                "family": "Ribeiro",
+                "given": "Rita"
             }
         ],
-        "container-title": "Proceedings of the Zoological Society of London",
-        "id": "Nicholson1935BalAni",
+        "id": "Branco2015SurPre",
+        "issued": {
+            "date-parts": [
+                [
+                    2015,
+                    5,
+                    13
+                ]
+            ]
+        },
+        "title": "A Survey of Predictive Modelling under Imbalanced Distributions",
+        "type": "webpage"
+    },
+    {
+        "DOI": "10.1371/journal.pone.0118432",
+        "author": [
+            {
+                "family": "Saito",
+                "given": "Takaya"
+            },
+            {
+                "family": "Rehmsmeier",
+                "given": "Marc"
+            }
+        ],
+        "container-title": "PLOS ONE",
+        "id": "Saito2015PrePlo",
         "issue": "3",
         "issued": {
             "date-parts": [
                 [
-                    1935,
-                    9
+                    2015,
+                    3,
+                    4
                 ]
             ]
         },
-        "page": "551-598",
-        "title": "The Balance of Animal Populations.Part I.",
+        "page": "e0118432",
+        "title": "The Precision-Recall Plot Is More Informative than the ROC Plot When Evaluating Binary Classifiers on Imbalanced Datasets",
         "type": "article-journal",
-        "volume": "105"
+        "volume": "10"
+    },
+    {
+        "DOI": "10.1098/rstb.2021.0063",
+        "author": [
+            {
+                "family": "Strydom",
+                "given": "Tanya"
+            },
+            {
+                "family": "Catchen",
+                "given": "Michael D."
+            },
+            {
+                "family": "Banville",
+                "given": "Francis"
+            },
+            {
+                "family": "Caron",
+                "given": "Dominique"
+            },
+            {
+                "family": "Dansereau",
+                "given": "Gabriel"
+            },
+            {
+                "family": "Desjardins-Proulx",
+                "given": "Philippe"
+            },
+            {
+                "family": "Forero-Mu\u00f1oz",
+                "given": "Norma R."
+            },
+            {
+                "family": "Higino",
+                "given": "Gracielle"
+            },
+            {
+                "family": "Mercier",
+                "given": "Benjamin"
+            },
+            {
+                "family": "Gonzalez",
+                "given": "Andrew"
+            },
+            {
+                "family": "Gravel",
+                "given": "Dominique"
+            },
+            {
+                "family": "Pollock",
+                "given": "Laura"
+            },
+            {
+                "family": "Poisot",
+                "given": "Timoth\u00e9e"
+            }
+        ],
+        "container-title": "Philosophical Transactions of the Royal Society B: Biological Sciences",
+        "id": "Strydom2021RoaPre",
+        "issue": "1837",
+        "issued": {
+            "date-parts": [
+                [
+                    2021,
+                    11,
+                    8
+                ]
+            ]
+        },
+        "page": "20210063",
+        "title": "A roadmap towards predicting species interaction networks (across space and time)",
+        "type": "article-journal",
+        "volume": "376"
+    },
+    {
+        "DOI": "10.1038/s41576-021-00434-9",
+        "author": [
+            {
+                "family": "Whalen",
+                "given": "Sean"
+            },
+            {
+                "family": "Schreiber",
+                "given": "Jacob"
+            },
+            {
+                "family": "Noble",
+                "given": "William S."
+            },
+            {
+                "family": "Pollard",
+                "given": "Katherine S."
+            }
+        ],
+        "container-title": "Nature Reviews Genetics",
+        "id": "Whalen2021NavPit",
+        "issued": {
+            "date-parts": [
+                [
+                    2021,
+                    11,
+                    26
+                ]
+            ]
+        },
+        "page": "1-13",
+        "title": "Navigating the pitfalls of applying machine learning in genomics",
+        "type": "article-journal"
     }
 ]

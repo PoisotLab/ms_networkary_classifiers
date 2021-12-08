@@ -219,7 +219,9 @@ context of the low volume of data.%
 example on diagnostic test: rare events are hard to detect even with
 really good models
 
-summary of model challenges for networks
+summary of model challenges for networks - Strydom et al. (2021)
+importance of drawing on traits + validation is challenging - Whalen et
+al. (2021) machine learning from genomics
 
 introduction to the confusion matrix
 
@@ -231,6 +233,10 @@ summary of the results
 
 \hypertarget{baseline-values}{%
 \section{Baseline values}\label{baseline-values}}
+
+\hypertarget{confusion-matrix-with-skill-and-bias}{%
+\subsection{Confusion matrix with skill and
+bias}\label{confusion-matrix-with-skill-and-bias}}
 
 In this section, we will assume a network of connectance \(\rho\),
 \emph{i.e.} having \(\rho S^2\) interactions (where \(S\) is the species
@@ -308,6 +314,14 @@ the skill and the bias is
 \end{pmatrix} \,.
 \]
 
+\hypertarget{what-are-the-baseline-values-of-performance-measures}{%
+\subsection{What are the baseline values of performance
+measures?}\label{what-are-the-baseline-values-of-performance-measures}}
+
+In this section, we will change the values of \(b\) abd \(s\) for a
+given value of \(\rho\), and see how the values of common performance
+measures for binary classification are affected.
+
 \hypertarget{numerical-experiments}{%
 \section{Numerical experiments}\label{numerical-experiments}}
 
@@ -323,6 +337,26 @@ performance}\label{required-amount-of-positives-to-get-the-best-performance}}
 \section{Guidelines for prediction}\label{guidelines-for-prediction}}
 
 \hypertarget{references}{%
-\section{References}\label{references}}
+\section*{References}\label{references}}
+\addcontentsline{toc}{section}{References}
+
+\hypertarget{refs}{}
+\begin{CSLReferences}{1}{0}
+\leavevmode\hypertarget{ref-Strydom2021RoaPre}{}%
+Strydom, T., Catchen, M. D., Banville, F., Caron, D., Dansereau, G.,
+Desjardins-Proulx, P., Forero-Muñoz, N. R., Higino, G., Mercier, B.,
+Gonzalez, A., Gravel, D., Pollock, L., \& Poisot, T. (2021). A roadmap
+towards predicting species interaction networks (across space and time).
+\emph{Philosophical Transactions of the Royal Society B: Biological
+Sciences}, \emph{376}(1837), 20210063.
+\url{https://doi.org/10.1098/rstb.2021.0063}
+
+\leavevmode\hypertarget{ref-Whalen2021NavPit}{}%
+Whalen, S., Schreiber, J., Noble, W. S., \& Pollard, K. S. (2021).
+Navigating the pitfalls of applying machine learning in genomics.
+\emph{Nature Reviews Genetics}, 1--13.
+\url{https://doi.org/10.1038/s41576-021-00434-9}
+
+\end{CSLReferences}
 
 \end{document}

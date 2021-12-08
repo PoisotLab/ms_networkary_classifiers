@@ -201,11 +201,12 @@
         
         <article>
             <p>example on diagnostic test: rare events are hard to detect even with really good models</p>
-            <p>summary of model challenges for networks</p>
+            <p>summary of model challenges for networks - <span class="citation" data-cites="Strydom2021RoaPre">Strydom et al. (2021)</span> importance of drawing on traits + validation is challenging - <span class="citation" data-cites="Whalen2021NavPit">Whalen et al. (2021)</span> machine learning from genomics</p>
             <p>introduction to the confusion matrix</p>
             <p>list of problems to solve - baseline values and response to bias - effect of training set bias on performance - which models need the least amount of interactions to work</p>
             <p>summary of the results</p>
             <h1 id="baseline-values">Baseline values</h1>
+            <h2 id="confusion-matrix-with-skill-and-bias">Confusion matrix with skill and bias</h2>
             <p>In this section, we will assume a network of connectance <span class="math inline"><em>ρ</em></span>, <em>i.e.</em> having <span class="math inline"><em>ρ</em><em>S</em><sup>2</sup></span> interactions (where <span class="math inline"><em>S</em></span> is the species richness), and <span class="math inline">(1 − <em>ρ</em>)<em>S</em><sup>2</sup></span> non-interactions. Therefore, the vector describing the <em>true</em> state of the network is a column vector <span class="math inline"><strong>o</strong><sup><em>T</em></sup> = [<em>ρ</em>(1 − <em>ρ</em>)]</span> (we can safely drop the <span class="math inline"><em>S</em><sup>2</sup></span> terms, as we will work on the confusion matrix, which ends up expressing <em>relative</em> values).</p>
             <p>In order to write the values of the confusion matrix for a hypothetical classifier, we need to define two characteristics: its skill, and its bias. Skill, here, refers to the propensity of the classifier to get the correct answer (<em>i.e.</em> to assign interactions where they are, and to not assign them where they are not). A no-skill classifier guesses at random, <em>i.e.</em> it will guess interactions with a probability <span class="math inline"><em>ρ</em></span>. The predictions of a no-skill classifier can be expressed as a row vector <span class="math inline"><strong>p</strong> = [<em>ρ</em>(1 − <em>ρ</em>)]</span>. The confusion matrix <span class="math inline"><strong>M</strong></span> for a no-skill classifier is given by the element-wise product of these vectors <span class="math inline"><strong>o</strong> ⊙ <strong>p</strong></span>, <em>i.e.</em></p>
             <p><span class="math display">$$
@@ -245,11 +246,21 @@
                 (1-s)\times (1-b)\times (1-\rho) \rho &amp; s\times (1-b)\times (1-\rho)^2
             \end{pmatrix} \,.
             $$</span></p>
+            <h2 id="what-are-the-baseline-values-of-performance-measures">What are the baseline values of performance measures?</h2>
+            <p>In this section, we will change the values of <span class="math inline"><em>b</em></span> abd <span class="math inline"><em>s</em></span> for a given value of <span class="math inline"><em>ρ</em></span>, and see how the values of common performance measures for binary classification are affected.</p>
             <h1 id="numerical-experiments">Numerical experiments</h1>
             <h2 id="effect-of-training-set-on-performance">Effect of training set on performance</h2>
             <h2 id="required-amount-of-positives-to-get-the-best-performance">Required amount of positives to get the best performance</h2>
             <h1 id="guidelines-for-prediction">Guidelines for prediction</h1>
-            <h1 id="references">References</h1>
+            <h1 class="unnumbered" id="references">References</h1>
+            <div id="refs" class="references csl-bib-body hanging-indent" data-line-spacing="2" role="doc-bibliography">
+            <div id="ref-Strydom2021RoaPre" class="csl-entry" role="doc-biblioentry">
+            Strydom, T., Catchen, M. D., Banville, F., Caron, D., Dansereau, G., Desjardins-Proulx, P., Forero-Muñoz, N. R., Higino, G., Mercier, B., Gonzalez, A., Gravel, D., Pollock, L., &amp; Poisot, T. (2021). A roadmap towards predicting species interaction networks (across space and time). <em>Philosophical Transactions of the Royal Society B: Biological Sciences</em>, <em>376</em>(1837), 20210063. <a href="https://doi.org/10.1098/rstb.2021.0063">https://doi.org/10.1098/rstb.2021.0063</a>
+            </div>
+            <div id="ref-Whalen2021NavPit" class="csl-entry" role="doc-biblioentry">
+            Whalen, S., Schreiber, J., Noble, W. S., &amp; Pollard, K. S. (2021). Navigating the pitfalls of applying machine learning in genomics. <em>Nature Reviews Genetics</em>, 1–13. <a href="https://doi.org/10.1038/s41576-021-00434-9">https://doi.org/10.1038/s41576-021-00434-9</a>
+            </div>
+            </div>
         </article>
     </main>
 
