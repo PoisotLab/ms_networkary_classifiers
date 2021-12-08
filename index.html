@@ -202,7 +202,12 @@
         <article>
             <p>example on diagnostic test: rare events are hard to detect even with really good models</p>
             <p>summary of model challenges for networks - <span class="citation" data-cites="Strydom2021RoaPre">Strydom et al. (2021)</span> importance of drawing on traits + validation is challenging - <span class="citation" data-cites="Whalen2021NavPit">Whalen et al. (2021)</span> machine learning from genomics</p>
-            <p>introduction to the confusion matrix</p>
+            <p>Binary classifiers are usually assessed by measuring properties of their confusion matrix, <em>i.e.</em> the contingency table reporting true/false positive/negative hits. The same approach is used to evaluate <em>e.g.</em> species occurrence models <span class="citation" data-cites="Allouche2006AssAcc">(Allouche et al., 2006)</span>. A confusion matrix is laid out as</p>
+            <p><span class="math display">$$\begin{pmatrix}
+                \text{tp} &amp; \text{fp} \\
+                \text{fn} &amp; \text{tn}
+            \end{pmatrix} \,,$$</span></p>
+            <p>wherein <span class="math inline">tp</span> is the number of interactions predicted as positive, <span class="math inline">tn</span> is the number of non-interactions predicted as negative, <span class="math inline">fp</span> is the number of non-interactions predicted as positive, and <span class="math inline">fn</span> is the number of interactions predicted as negative. Almost all measures based on the confusion matrix express rates of error or success as proportions, and therefore the values of these components matter in a <em>relative</em> way.</p>
             <p>list of problems to solve - baseline values and response to bias - effect of training set bias on performance - which models need the least amount of interactions to work</p>
             <p>summary of the results</p>
             <h1 id="baseline-values">Baseline values</h1>
@@ -258,6 +263,9 @@
             <h1 id="guidelines-for-prediction">Guidelines for prediction</h1>
             <h1 class="unnumbered" id="references">References</h1>
             <div id="refs" class="references csl-bib-body hanging-indent" data-line-spacing="2" role="doc-bibliography">
+            <div id="ref-Allouche2006AssAcc" class="csl-entry" role="doc-biblioentry">
+            Allouche, O., Tsoar, A., &amp; Kadmon, R. (2006). Assessing the accuracy of species distribution models: Prevalence, kappa and the true skill statistic (TSS). <em>Journal of Applied Ecology</em>, <em>43</em>(6), 1223–1232. <a href="https://doi.org/10.1111/j.1365-2664.2006.01214.x">https://doi.org/10.1111/j.1365-2664.2006.01214.x</a>
+            </div>
             <div id="ref-Bezanson2017JulFre" class="csl-entry" role="doc-biblioentry">
             Bezanson, J., Edelman, A., Karpinski, S., &amp; Shah, V. (2017). Julia: A Fresh Approach to Numerical Computing. <em>SIAM Review</em>, <em>59</em>(1), 65–98. <a href="https://doi.org/10.1137/141000671">https://doi.org/10.1137/141000671</a>
             </div>

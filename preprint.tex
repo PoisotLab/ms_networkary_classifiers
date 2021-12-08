@@ -281,7 +281,24 @@ summary of model challenges for networks - Strydom et al. (2021)
 importance of drawing on traits + validation is challenging - Whalen et
 al. (2021) machine learning from genomics
 
-introduction to the confusion matrix
+Binary classifiers are usually assessed by measuring properties of their
+confusion matrix, \emph{i.e.} the contingency table reporting true/false
+positive/negative hits. The same approach is used to evaluate
+\emph{e.g.} species occurrence models (Allouche et al., 2006). A
+confusion matrix is laid out as
+
+\[\begin{pmatrix}
+    \text{tp} & \text{fp} \\
+    \text{fn} & \text{tn}
+\end{pmatrix} \,,\]
+
+wherein \(\text{tp}\) is the number of interactions predicted as
+positive, \(\text{tn}\) is the number of non-interactions predicted as
+negative, \(\text{fp}\) is the number of non-interactions predicted as
+positive, and \(\text{fn}\) is the number of interactions predicted as
+negative. Almost all measures based on the confusion matrix express
+rates of error or success as proportions, and therefore the values of
+these components matter in a \emph{relative} way.
 
 list of problems to solve - baseline values and response to bias -
 effect of training set bias on performance - which models need the least
@@ -455,6 +472,12 @@ performance}\label{required-amount-of-positives-to-get-the-best-performance}}
 
 \hypertarget{refs}{}
 \begin{CSLReferences}{1}{0}
+\leavevmode\hypertarget{ref-Allouche2006AssAcc}{}%
+Allouche, O., Tsoar, A., \& Kadmon, R. (2006). Assessing the accuracy of
+species distribution models: Prevalence, kappa and the true skill
+statistic (TSS). \emph{Journal of Applied Ecology}, \emph{43}(6),
+1223--1232. \url{https://doi.org/10.1111/j.1365-2664.2006.01214.x}
+
 \leavevmode\hypertarget{ref-Bezanson2017JulFre}{}%
 Bezanson, J., Edelman, A., Karpinski, S., \& Shah, V. (2017). Julia: A
 Fresh Approach to Numerical Computing. \emph{SIAM Review}, \emph{59}(1),
