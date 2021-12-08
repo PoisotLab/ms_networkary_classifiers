@@ -121,7 +121,7 @@ $F_1$ score ($2\text{tp}/(2\text{tp}+\text{fp}+\text{fn})$).
 
 **Justification** of why these 4
 
-Assuming a no-skill unbiased classifier (*i.e.* $\mathbf{C}=\matbf{M}$), the
+Assuming a no-skill unbiased classifier (*i.e.* $\mathbf{C}=\mathbf{M}$), the
 accuracy is $\rho^2 + (1-\rho)^2$, the balanced accuracy is $0.5$, Youden's J is
 $0$, and $F_1=\rho$. In other words, given a connectance $\rho = 0.05$, we
 expect that a classifier guessing at random would still achieve an accuracy of
