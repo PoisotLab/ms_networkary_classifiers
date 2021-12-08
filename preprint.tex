@@ -398,9 +398,26 @@ that are close analogues to the niche model (Williams \& Martinez,
 is, therefore, a simple case which most classifiers should be able to
 learn.
 
-\hypertarget{effect-of-training-set-on-performance}{%
-\subsection{Effect of training set on
-performance}\label{effect-of-training-set-on-performance}}
+The training sample is composed of 30\% of the \(4\times 10^4\) possible
+entries in the network, \emph{i.e.} \(n=12000\). Out of these
+interactions, we pick a proportion \(\nu\) (the training set bias) to be
+positive, so that the training set has \(\nu n\) interactions, and
+\((1-\nu) n\) non-interactions. We vary \(\nu\) uniformly in \(]0,1[\).
+This allows to evaluate how the measures of binary classification
+performance respond to artificially rebalanced dataset for a given
+network connectance. Note that both \(\xi\) and \(\nu\) are sampled from
+a distribution rather than being picked on a grid; this is because there
+is no direct relationship between the value of \(\xi\) and the
+connectance of the simulated network, and therefore the precise value of
+\(\xi\) is not relevant for the analysis of the results.
+
+The dataset used for numerical experiments is composed of 20000 such
+\((\xi, \nu)\) pairs, on which four models are trained: a decision tree
+regressor, a boosted regression tree, a ridge regressor, and a random
+forest regressor. All models were taken from the \texttt{MLJ.jl} package
+(Blaom et al., 2020; Blaom \& Vollmer, 2020) in Julia 1.7 (Bezanson et
+al., 2017). The complete code to run the simulations is given as an
+appendix. \#\# Effect of training set on performance
 
 \hypertarget{required-amount-of-positives-to-get-the-best-performance}{%
 \subsection{Required amount of positives to get the best
@@ -415,6 +432,22 @@ performance}\label{required-amount-of-positives-to-get-the-best-performance}}
 
 \hypertarget{refs}{}
 \begin{CSLReferences}{1}{0}
+\leavevmode\hypertarget{ref-Bezanson2017JulFre}{}%
+Bezanson, J., Edelman, A., Karpinski, S., \& Shah, V. (2017). Julia: A
+Fresh Approach to Numerical Computing. \emph{SIAM Review}, \emph{59}(1),
+65--98. \url{https://doi.org/10.1137/141000671}
+
+\leavevmode\hypertarget{ref-Blaom2020MljJul}{}%
+Blaom, A. D., Kiraly, F., Lienart, T., Simillides, Y., Arenas, D., \&
+Vollmer, S. J. (2020). MLJ: A Julia package for composable machine
+learning. \emph{Journal of Open Source Software}, \emph{5}(55), 2704.
+\url{https://doi.org/10.21105/joss.02704}
+
+\leavevmode\hypertarget{ref-Blaom2020FleMod}{}%
+Blaom, A. D., \& Vollmer, S. J. (2020, December 31). \emph{Flexible
+model composition in machine learning and its implementation in MLJ}.
+\url{http://arxiv.org/abs/2012.15505}
+
 \leavevmode\hypertarget{ref-Strydom2021RoaPre}{}%
 Strydom, T., Catchen, M. D., Banville, F., Caron, D., Dansereau, G.,
 Desjardins-Proulx, P., Forero-Muñoz, N. R., Higino, G., Mercier, B.,

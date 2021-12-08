@@ -26,6 +26,113 @@
         "volume": "15"
     },
     {
+        "DOI": "10.1137/141000671",
+        "author": [
+            {
+                "family": "Bezanson",
+                "given": "J."
+            },
+            {
+                "family": "Edelman",
+                "given": "A."
+            },
+            {
+                "family": "Karpinski",
+                "given": "S."
+            },
+            {
+                "family": "Shah",
+                "given": "V."
+            }
+        ],
+        "container-title": "SIAM Review",
+        "id": "Bezanson2017JulFre",
+        "issue": "1",
+        "issued": {
+            "date-parts": [
+                [
+                    2017,
+                    1,
+                    1
+                ]
+            ]
+        },
+        "page": "65-98",
+        "title": "Julia: A Fresh Approach to Numerical Computing",
+        "type": "article-journal",
+        "volume": "59"
+    },
+    {
+        "URL": "http://arxiv.org/abs/2012.15505",
+        "author": [
+            {
+                "family": "Blaom",
+                "given": "Anthony D."
+            },
+            {
+                "family": "Vollmer",
+                "given": "Sebastian J."
+            }
+        ],
+        "id": "Blaom2020FleMod",
+        "issued": {
+            "date-parts": [
+                [
+                    2020,
+                    12,
+                    31
+                ]
+            ]
+        },
+        "title": "Flexible model composition in machine learning and its implementation in MLJ",
+        "type": "webpage"
+    },
+    {
+        "DOI": "10.21105/joss.02704",
+        "author": [
+            {
+                "family": "Blaom",
+                "given": "Anthony D."
+            },
+            {
+                "family": "Kiraly",
+                "given": "Franz"
+            },
+            {
+                "family": "Lienart",
+                "given": "Thibaut"
+            },
+            {
+                "family": "Simillides",
+                "given": "Yiannis"
+            },
+            {
+                "family": "Arenas",
+                "given": "Diego"
+            },
+            {
+                "family": "Vollmer",
+                "given": "Sebastian J."
+            }
+        ],
+        "container-title": "Journal of Open Source Software",
+        "id": "Blaom2020MljJul",
+        "issue": "55",
+        "issued": {
+            "date-parts": [
+                [
+                    2020,
+                    11,
+                    7
+                ]
+            ]
+        },
+        "page": "2704",
+        "title": "MLJ: A Julia package for composable machine learning",
+        "type": "article-journal",
+        "volume": "5"
+    },
+    {
         "URL": "http://arxiv.org/abs/1505.01658",
         "author": [
             {
