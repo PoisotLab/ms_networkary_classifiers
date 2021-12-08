@@ -222,10 +222,30 @@
             \end{pmatrix} \odot \begin{pmatrix}
                 s &amp; (1-s) \\
                 (1-s) &amp; s
-            \end{pmatrix}
+            \end{pmatrix} \,.
             $$</span></p>
             <p>Note that when <span class="math inline"><em>s</em> = 0</span>, <span class="math inline"><strong>T</strong><strong>r</strong>(<strong>M</strong>) = 0</span> (the classifier is <em>always</em> wrong), when <span class="math inline"><em>s</em> = 0.5</span>, the classifier is no-skill and guesses at random, and when <span class="math inline"><em>s</em> = 1</span>, the classifier is perfect.</p>
-            <p>The second element we can adjust in this hypothetical classifier is its bias, specifically its tendency to over-predict interactions. Like above, we can do so by defining a bias matrix # Numerical experiments</p>
+            <p>The second element we can adjust in this hypothetical classifier is its bias, specifically its tendency to over-predict interactions. Like above, we can do so by defining a bias matrix <span class="math inline"><strong>B</strong></span>, where interactions are over-predicted with probability <span class="math inline"><em>b</em></span>, and express the final classifier confusion matrix as <span class="math inline"><strong>M</strong> ⊙ <strong>S</strong> ⊙ <strong>B</strong></span>, <em>i.e.</em></p>
+            <p><span class="math display">$$
+            \begin{pmatrix}
+                \rho^2 &amp; \rho (1-\rho) \\
+                (1-\rho) \rho &amp; (1-\rho)^2
+            \end{pmatrix} \odot \begin{pmatrix}
+                s &amp; (1-s) \\
+                (1-s) &amp; s
+            \end{pmatrix} \odot \begin{pmatrix}
+                b &amp; b \\
+                (1-b) &amp; (1-b)
+            \end{pmatrix}\,.
+            $$</span></p>
+            <p>The final expression for the confusion matrix in which we can regulate the skill and the bias is</p>
+            <p><span class="math display">$$
+            \mathbf{C} = \begin{pmatrix}
+                s\times b\times \rho^2 &amp; (1-s)\times b\times \rho (1-\rho) \\
+                (1-s)\times (1-b)\times (1-\rho) \rho &amp; s\times (1-b)\times (1-\rho)^2
+            \end{pmatrix} \,.
+            $$</span></p>
+            <h1 id="numerical-experiments">Numerical experiments</h1>
             <h2 id="effect-of-training-set-on-performance">Effect of training set on performance</h2>
             <h2 id="required-amount-of-positives-to-get-the-best-performance">Required amount of positives to get the best performance</h2>
             <h1 id="guidelines-for-prediction">Guidelines for prediction</h1>
