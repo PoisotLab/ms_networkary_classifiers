@@ -109,6 +109,24 @@ the niche model [@Williams2000SimRul], but has the benefit of only relying on
 two features ($g_i, v_j$), and having the exact same rule for all interactions.
 It is, therefore, a simple case which most classifiers should be able to learn.
 
+The training sample is composed of 30% of the $4\times 10^4$ possible entries in
+the network, *i.e.* $n=12000$. Out of these interactions, we pick a proportion
+$\nu$ (the training set bias) to be positive, so that the training set has $\nu
+n$ interactions, and $(1-\nu) n$ non-interactions. We vary $\nu$ uniformly in
+$]0,1[$. This allows to evaluate how the measures of binary classification
+performance respond to artificially rebalanced dataset for a given network
+connectance. Note that both $\xi$ and $\nu$ are sampled from a distribution
+rather than being picked on a grid; this is because there is no direct
+relationship between the value of $\xi$ and the connectance of the simulated
+network, and therefore the precise value of $\xi$ is not relevant for the
+analysis of the results.
+
+The dataset used for numerical experiments is composed of 20000 such $(\xi,
+\nu)$ pairs, on which four models are trained: a decision tree regressor, a
+boosted regression tree, a ridge regressor, and a random forest regressor. All
+models were taken from the `MLJ.jl` package [@Blaom2020MljJul; @Blaom2020FleMod]
+in Julia 1.7 [@Bezanson2017JulFre]. The complete code to run the simulations is
+given as an appendix.
 ## Effect of training set on performance
 
 ## Required amount of positives to get the best performance
