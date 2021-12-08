@@ -52,7 +52,7 @@ $$
 \end{pmatrix} \,.
 $$
 
-Note that when $s=0$, $\mathbf{Tr}(\mathbf{M}) = 0$ (the classifier is *always*
+Note that when $s=0$, $\text{Tr}(\mathbf{M}) = 0$ (the classifier is *always*
 wrong), when $s=0.5$, the classifier is no-skill and guesses at random, and when
 $s=1$, the classifier is perfect.
 
