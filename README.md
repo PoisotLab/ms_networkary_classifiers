@@ -4,7 +4,22 @@ summary of model challenges for networks
 - @Strydom2021RoaPre importance of drawing on traits + validation is challenging
 - @Whalen2021NavPit machine learning from genomics
 
-introduction to the confusion matrix
+Binary classifiers are usually assessed by measuring properties of their
+confusion matrix, *i.e.* the contingency table reporting true/false
+positive/negative hits. The same approach is used to evaluate *e.g.* species
+occurrence models [@Allouche2006AssAcc]. A confusion matrix is laid out as
+
+$$\begin{pmatrix}
+    \text{tp} & \text{fp} \\
+    \text{fn} & \text{tn}
+\end{pmatrix} \,,$$
+
+wherein $\text{tp}$ is the number of interactions predicted as positive,
+$\text{tn}$ is the number of non-interactions predicted as negative, $\text{fp}$
+is the number of non-interactions predicted as positive, and $\text{fn}$ is the
+number of interactions predicted as negative. Almost all measures based on the
+confusion matrix express rates of error or success as proportions, and therefore
+the values of these components matter in a *relative* way.
 
 list of problems to solve
 - baseline values and response to bias
