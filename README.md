@@ -19,7 +19,10 @@ $\text{tn}$ is the number of non-interactions predicted as negative, $\text{fp}$
 is the number of non-interactions predicted as positive, and $\text{fn}$ is the
 number of interactions predicted as negative. Almost all measures based on the
 confusion matrix express rates of error or success as proportions, and therefore
-the values of these components matter in a *relative* way.
+the values of these components matter in a *relative* way. At a coarse scale, a
+classifier is *accurate* when the trace of the matrix divided by the sum of the
+matrix is close to 1, with other measures focusing on different ways in which
+the classifer is wrong.
 
 list of problems to solve
 - baseline values and response to bias
