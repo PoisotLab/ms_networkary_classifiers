@@ -1,6 +1,8 @@
 example on diagnostic test: rare events are hard to detect even with really good models
 
 summary of model challenges for networks
+- @Strydom2021RoaPre importance of drawing on traits + validation is challenging
+- @Whalen2021NavPit machine learning from genomics
 
 introduction to the confusion matrix
 
@@ -12,6 +14,8 @@ list of problems to solve
 summary of the results
 
 # Baseline values 
+
+## Confusion matrix with skill and bias
 
 In this section, we will assume a network of connectance $\rho$, *i.e.* having
 $\rho S^2$ interactions (where $S$ is the species richness), and $(1-\rho) S^2$
@@ -84,6 +88,12 @@ $$
     (1-s)\times (1-b)\times (1-\rho) \rho & s\times (1-b)\times (1-\rho)^2
 \end{pmatrix} \,.
 $$
+
+## What are the baseline values of performance measures?
+
+In this section, we will change the values of $b$ abd $s$ for a given value of
+$\rho$, and see how the values of common performance measures for binary
+classification are affected.
 
 # Numerical experiments
 
