@@ -202,10 +202,12 @@
         <article>
             <p>example on diagnostic test: rare events are hard to detect even with really good models</p>
             <p>summary of model challenges for networks</p>
+            <p>introduction to the confusion matrix</p>
             <p>list of problems to solve - baseline values and response to bias - effect of training set bias on performance - which models need the least amount of interactions to work</p>
             <p>summary of the results</p>
             <h1 id="baseline-values">Baseline values</h1>
-            <p>In this section, we will assume a network of connectance <span class="math inline"><em>ρ</em></span>, <em>i.e.</em> having <span class="math inline"><em>ρ</em><em>S</em><sup>2</sup></span> interactions (where <span class="math inline"><em>S</em></span> is the species richness), and <span class="math inline">(1 − <em>ρ</em>)<em>S</em><sup>2</sup></span> non-interactions. Therefore, the vector describing the <em>true</em> state of the network is <span class="math inline"><em>o⃗</em> = [<em>ρ</em>, (1 − <em>ρ</em>)]</span>.</p>
+            <p>In this section, we will assume a network of connectance <span class="math inline"><em>ρ</em></span>, <em>i.e.</em> having <span class="math inline"><em>ρ</em><em>S</em><sup>2</sup></span> interactions (where <span class="math inline"><em>S</em></span> is the species richness), and <span class="math inline">(1 − <em>ρ</em>)<em>S</em><sup>2</sup></span> non-interactions. Therefore, the vector describing the <em>true</em> state of the network is <span class="math inline"><strong>o</strong>′ = [<em>ρ</em>, (1 − <em>ρ</em>)]</span> (we can safely drop the <span class="math inline"><em>S</em><sup>2</sup></span> terms, as we will work on the confusion matrix, which ends up expressing <em>relative</em> values).</p>
+            <p>In order to write the values of the confusion matrix for a hypothetical classifier, we need to define two characteristics: its skill, and its bias. Skill, here, refers to the propensity of the classifier to get the correct answer (<em>i.e.</em> to assign interactions where they are, and to not assign them where they are not). A no-skill classifier guesses at random, <em>i.e.</em> it will guess interactions with a probability <span class="math inline"><em>ρ</em></span>.</p>
             <h1 id="numerical-experiments">Numerical experiments</h1>
             <h2 id="effect-of-training-set-on-performance">Effect of training set on performance</h2>
             <h2 id="required-amount-of-positives-to-get-the-best-performance">Required amount of positives to get the best performance</h2>
