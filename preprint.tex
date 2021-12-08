@@ -398,7 +398,14 @@ measures?}\label{what-are-the-baseline-values-of-performance-measures}}
 
 In this section, we will change the values of \(b\) abd \(s\) for a
 given value of \(\rho\), and see how the values of common performance
-measures for binary classification are affected.
+measures for binary classification are affected. Specifically, we will
+focus on four quantities: the accuracy
+(\((\text{tp}+\text{tn})/(\text{tp}+\text{tn}+\text{fp}+\text{fn})\)),
+the \emph{balanced} accuracy
+(\(\text{tp}/(2(\text{tp}+\text{fn}))+\text{tn}/(2(\text{tn}+\text{fp}))\)),
+Youden's J
+(\(\text{tp}/(\text{tp}+\text{fn})+\text{tn}/(\text{tn}+\text{fp})-1\)),
+and the \(F_1\) score (\(2\text{tp}/(2\text{tp}+\text{fp}+\text{fn})\)).
 
 \hypertarget{numerical-experiments}{%
 \section{Numerical experiments}\label{numerical-experiments}}
