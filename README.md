@@ -34,11 +34,31 @@ $$
 \mathbf{M} = \begin{pmatrix}
     \rho^2 & \rho (1-\rho) \\
     (1-\rho) \rho & (1-\rho)^2
+\end{pmatrix} \,.
+$$
+
+In order to regulate the skill of this classifier, we can define a skill matrix
+$\mathbf{S}$ with diagonal elements equal to $s$, and off-diagonal elements
+equal to $(1-s)$, and re-express the skill-adjusted confusion matrix as
+$\mathbf{M} \odot \mathbf{S}$, *i.e.*
+
+$$
+\begin{pmatrix}
+    \rho^2 & \rho (1-\rho) \\
+    (1-\rho) \rho & (1-\rho)^2
+\end{pmatrix} \odot \begin{pmatrix}
+    s & (1-s) \\
+    (1-s) & s
 \end{pmatrix}
 $$
 
+Note that when $s=0$, $\mathbf{Tr}(\mathbf{M}) = 0$ (the classifier is *always*
+wrong), when $s=0.5$, the classifier is no-skill and guesses at random, and when
+$s=1$, the classifier is perfect.
 
-
+The second element we can adjust in this hypothetical classifier is its bias,
+specifically its tendency to over-predict interactions. Like above, we can do so
+by defining a bias matrix
 # Numerical experiments
 
 ## Effect of training set on performance
