@@ -185,7 +185,7 @@ networks that are more densely connected compared to the connectance of
 empirical food webs (and are therefore less difficult to predict, being less
 imbalanced).
 
-## Effect of training set on performance
+## Effect of training set bias on performance
 
 ## Required amount of positives to get the best performance
 
