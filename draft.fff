@@ -1,0 +1,10 @@
+\begin{figure}
+\hypertarget{fig:analytics}{%
+\centering
+\includegraphics{figures/analytics.png}
+\caption{Consequences of changing the classifier skills (\(s\)) and bias
+(\(s\)) for a connectance \(\rho=0.15\), on accuracy, \(F_1\), postive
+predictive value, and \(\kappa\). \textbf{TODO} discussion of
+results}\label{fig:analytics}
+}
+\end{figure}
