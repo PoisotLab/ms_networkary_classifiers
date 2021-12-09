@@ -134,6 +134,10 @@ In order to examine how these values change w.r.t. the skill and bias, we
 performed a grid exploration of the values of $s$ (from 0 to 1), and of
 $\text{logit}(b)$, and visualize the result for a connectance of **TODO**.
 
+![Consequences of changing the classifier skills ($s$) and bias ($s$) for a
+connectance $\rho=0.15$, on accuracy, $F_1$, postive predictive value, and
+$\kappa$. **TODO** discussion of results](figures/analytics.png){#fig:analytics}
+
 # Numerical experiments
 
 In the following section, we will generate random networks, and train four
