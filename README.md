@@ -134,11 +134,6 @@ In order to examine how these values change w.r.t. the skill and bias, we
 performed a grid exploration of the values of $s$ (from 0 to 1), and of
 $\text{logit}(b)$, and visualize the result for a connectance of **TODO**.
 
-## What are the baseline values of thresholding performance?
-
-ROC-AUC v. PR-AUC, vary $s$ to simulate a classifier ranging from no-skill to
-perfect
-
 # Numerical experiments
 
 In the following section, we will generate random networks, and train four
