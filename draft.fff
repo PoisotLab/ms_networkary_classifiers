@@ -13,7 +13,7 @@ to skill (being negative whenever \(s < 0.5\)), and peaks for values of
 \(b \approx 0.5\); nevertheless, the value of bias for which \(\kappa\)
 is maximized in \emph{not} \(b=0.5\), but instead increases with
 classifier skill. In other words, at equal skill, maximizing \(\kappa\)
-would lead to select a \emph{more} bias
+would lead to select a \emph{more} biased
 classifier.}\label{fig:analytics}
 }
 \end{figure}
