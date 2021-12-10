@@ -166,6 +166,38 @@
         "volume": "5"
     },
     {
+        "DOI": "10.1371/journal.pone.0177678",
+        "PMCID": "PMC5456046",
+        "author": [
+            {
+                "family": "Boughorbel",
+                "given": "Sabri"
+            },
+            {
+                "family": "Jarray",
+                "given": "Fethi"
+            },
+            {
+                "family": "El-Anbari",
+                "given": "Mohammed"
+            }
+        ],
+        "container-title": "PloS One",
+        "id": "Boughorbel2017OptCla",
+        "issue": "6",
+        "issued": {
+            "date-parts": [
+                [
+                    2017
+                ]
+            ]
+        },
+        "page": "e0177678",
+        "title": "Optimal classifier for imbalanced data using Matthews Correlation Coefficient metric",
+        "type": "article-journal",
+        "volume": "12"
+    },
+    {
         "URL": "http://arxiv.org/abs/1505.01658",
         "author": [
             {
@@ -193,6 +225,36 @@
         },
         "title": "A Survey of Predictive Modelling under Imbalanced Distributions",
         "type": "webpage"
+    },
+    {
+        "DOI": "10.1186/s12864-019-6413-7",
+        "PMCID": "PMC6941312",
+        "author": [
+            {
+                "family": "Chicco",
+                "given": "Davide"
+            },
+            {
+                "family": "Jurman",
+                "given": "Giuseppe"
+            }
+        ],
+        "container-title": "BMC genomics",
+        "id": "Chicco2020AdvMat",
+        "issue": "1",
+        "issued": {
+            "date-parts": [
+                [
+                    2020,
+                    1,
+                    2
+                ]
+            ]
+        },
+        "page": "6",
+        "title": "The advantages of the Matthews correlation coefficient (MCC) over F1 score and accuracy in binary classification evaluation",
+        "type": "article-journal",
+        "volume": "21"
     },
     {
         "DOI": "10.1186/s13040-021-00244-z",
@@ -224,6 +286,34 @@
         },
         "page": "13",
         "title": "The Matthews correlation coefficient (MCC) is more reliable than balanced accuracy, bookmaker informedness, and markedness in two-class confusion matrix evaluation",
+        "type": "article-journal",
+        "volume": "14"
+    },
+    {
+        "DOI": "10.1371/journal.pone.0222916",
+        "PMCID": "PMC6762152",
+        "author": [
+            {
+                "family": "Delgado",
+                "given": "Rosario"
+            },
+            {
+                "family": "Tibau",
+                "given": "Xavier-Andoni"
+            }
+        ],
+        "container-title": "PloS One",
+        "id": "Delgado2019WhyCoh",
+        "issue": "9",
+        "issued": {
+            "date-parts": [
+                [
+                    2019
+                ]
+            ]
+        },
+        "page": "e0222916",
+        "title": "Why Cohen\u2019s Kappa should be avoided as performance measure in classification",
         "type": "article-journal",
         "volume": "14"
     },

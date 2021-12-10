@@ -1,7 +1,7 @@
 \begin{figure}
-\hypertarget{fig:analytics}{%
+\hypertarget{fig:bias}{%
 \centering
-\includegraphics{figures/analytics.png}
+\includegraphics{figures/changing-bias.png}
 \caption{Consequences of changing the classifier skills (\(s\)) and bias
 (\(s\)) for a connectance \(\rho=0.15\), on accuracy, \(F_1\), postive
 predictive value, and \(\kappa\). Accuracy increases with skill, but
@@ -13,7 +13,15 @@ to skill (being negative whenever \(s < 0.5\)), and peaks for values of
 \(b \approx 0.5\); nevertheless, the value of bias for which \(\kappa\)
 is maximized in \emph{not} \(b=0.5\), but instead increases with
 classifier skill. In other words, at equal skill, maximizing \(\kappa\)
-would lead to select a \emph{more} biased
-classifier.}\label{fig:analytics}
+would lead to select a \emph{more} biased classifier.}\label{fig:bias}
+}
+\end{figure}
+\efloatseparator
+ 
+\begin{figure}
+\hypertarget{fig:connectance}{%
+\centering
+\includegraphics{figures/changing-connectance.png}
+\caption{TODO}\label{fig:connectance}
 }
 \end{figure}
