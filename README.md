@@ -51,7 +51,14 @@ $F_1$ score and positive predictive values are less sensitive to bias, but
 @Chicco2021MatCor - MCC maximizes other measures, other measures do not maximize
 MCC, except notably when prevalence is low, or the baseline guessing level is
 uncertain, which applies to networks. In this cases, informedness should be used
-as a maximization criterion.
+as a maximization criterion. Formulating guidelines is particularly important,
+because most of the litterature existing on optimizing classifier performance in
+the life sciences is focused on genomics applications [which has very specific
+challenges, see a recent discussion by @Whalen2021NavPit], and can give
+contradictory recommendations [@Chicco2020AdvMat; @Delgado2019WhyCoh;
+@Boughorbel2017OptCla]. This points not to a defficiency in the litterature, but
+rather to a need for domain-specific evaluation of how the particular ways in
+which datasets are biased can affect the performance of predictive models.
 
 # Baseline values 
 
@@ -171,7 +178,11 @@ skill (being negative whenever $s < 0.5$), and peaks for values of $b \approx
 0.5$; nevertheless, the value of bias for which $\kappa$ is maximized in *not*
 $b=0.5$, but instead increases with classifier skill. In other words, at equal
 skill, maximizing $\kappa$ would lead to select a *more* biased
-classifier.](figures/analytics.png){#fig:analytics}
+classifier.](figures/changing-bias.png){#fig:bias}
+
+## Are the measures affected by connectance?
+
+![TODO](figures/changing-connectance.png){#fig:connectance}
 
 # Numerical experiments
 
