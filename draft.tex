@@ -225,9 +225,7 @@ al. (2021) machine learning from genomics
 
 Binary classifiers are usually assessed by measuring properties of their
 confusion matrix, \emph{i.e.} the contingency table reporting true/false
-positive/negative hits. The same approach is used to evaluate
-\emph{e.g.} species occurrence models (Allouche et al., 2006). A
-confusion matrix is laid out as
+positive/negative hits. A confusion matrix is laid out as
 
 \[\begin{pmatrix}
     \text{tp} & \text{fp} \\
@@ -245,11 +243,38 @@ classifier is \emph{accurate} when the trace of the matrix divided by
 the sum of the matrix is close to 1, with other measures focusing on
 different ways in which the classifer is wrong.
 
-list of problems to solve - baseline values and response to bias -
-effect of training set bias on performance - which models need the least
-amount of interactions to work
+The same approach is used to evaluate \emph{e.g.} species distribution
+models (SDMs). Indeed, the training and evaluation of SDMs as binary
+classifiers suffers from the same issue of low prevalence. In a previous
+work, Allouche et al. (2006) suggested that \(\kappa\) was a better test
+of model performance than the True Skill Statistic (TSS), which we will
+refer to as Youden's informedness (or \(J\)); these conclusions were
+later criticized by Somodi et al. (2017), who emphasized that
+informedness' relationship to prevalence depends on assumptions about
+bias in the model. Although this work offers recommendations about the
+comparison of models, it doesn't establishes baselines or good practices
+for training on imbalanced ecological data. Within the context of
+networks, there are three specific issues that need to be adressed.
+First, what values of performance measures are we expecting for a
+classifier that has poor performance? This is particularly important as
+it can evaluate whether low prevalence can lull us into a false sense of
+predictive accuracy. Second, independently of the question of model
+evaluation, is low prevalence an issue for \emph{training}, and can we
+remedy it? Finally, because the low amount of data on interaction makes
+a lot of imbalance correction methods (see \emph{e.g.} Branco et al.,
+2015) hard to apply, which indicators can be optimized with the least
+amount of positive interaction data?
 
-summary of the results
+We establish that due to the low prevalence of interactions, even poor
+classifiers applied to food web data will reach a high accuracy; this is
+because the measure is dominated by the accidental correct predictions
+of negatives. The \(F_1\) score and positive predictive values are less
+sensitive to bias, but \textbf{TODO}
+
+Chicco et al. (2021) - MCC maximizes other measures, other measures do
+not maximize MCC, except notably when prevalence is low, or the baseline
+guessing level is uncertain, which applies to networks. In this cases,
+informedness should be used as a maximization criterion.
 
 \hypertarget{baseline-values}{%
 \section{Baseline values}\label{baseline-values}}
@@ -487,6 +512,24 @@ learning. \emph{Journal of Open Source Software}, \emph{5}(55), 2704.
 Blaom, A. D., \& Vollmer, S. J. (2020, December 31). \emph{Flexible
 model composition in machine learning and its implementation in MLJ}.
 \url{http://arxiv.org/abs/2012.15505}
+
+\leavevmode\hypertarget{ref-Branco2015SurPre}{}%
+Branco, P., Torgo, L., \& Ribeiro, R. (2015, May 13). \emph{A Survey of
+Predictive Modelling under Imbalanced Distributions}.
+\url{http://arxiv.org/abs/1505.01658}
+
+\leavevmode\hypertarget{ref-Chicco2021MatCor}{}%
+Chicco, D., Tötsch, N., \& Jurman, G. (2021). The Matthews correlation
+coefficient (MCC) is more reliable than balanced accuracy, bookmaker
+informedness, and markedness in two-class confusion matrix evaluation.
+\emph{BioData Mining}, \emph{14}, 13.
+\url{https://doi.org/10.1186/s13040-021-00244-z}
+
+\leavevmode\hypertarget{ref-Somodi2017PreDep}{}%
+Somodi, I., Lepesi, N., \& Botta‐Dukát, Z. (2017). Prevalence dependence
+in model goodness measures with special emphasis on true skill
+statistics. \emph{Ecology and Evolution}, \emph{7}(3), 863--872.
+\url{https://doi.org/10.1002/ece3.2654}
 
 \leavevmode\hypertarget{ref-Strydom2021RoaPre}{}%
 Strydom, T., Catchen, M. D., Banville, F., Caron, D., Dansereau, G.,
