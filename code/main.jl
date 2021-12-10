@@ -25,6 +25,8 @@ for ls in LinRange(-10, 10, 9)
         push!(results, (ρ, logistic(ls), logistic(lb), Symbol("Positive Predictive Value"), ppv(𝐌)))
         push!(results, (ρ, logistic(ls), logistic(lb), :F1, csi(𝐌)))
         push!(results, (ρ, logistic(ls), logistic(lb), Symbol("κ"), κ(𝐌)))
+        push!(results, (ρ, logistic(ls), logistic(lb), :MCC, mcc(𝐌)))
+        push!(results, (ρ, logistic(ls), logistic(lb), :Informedness, informedness(𝐌)))
     end
 end
 
@@ -32,4 +34,4 @@ data(results) *
     mapping(:b => logit => "logit(bias)", :value => "Measure value", layout=:measure => nonnumeric, color=:s => logit => "logit(skill)", group=:s => nonnumeric) *
     (visual(Lines, colormap=:tofino)) |> 
     plt -> draw(plt, facet=(;linkyaxes = :none)) |>
-    plt -> save("analytics.png", plt, px_per_unit = 10)
+    plt -> save("analytics.png", plt, px_per_unit = 3)
