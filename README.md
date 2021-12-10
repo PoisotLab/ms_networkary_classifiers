@@ -49,7 +49,9 @@ $F_1$ score and positive predictive values are less sensitive to bias, but
 **TODO**
 
 @Chicco2021MatCor - MCC maximizes other measures, other measures do not maximize
-MCC
+MCC, except notably when prevalence is low, or the baseline guessing level is
+uncertain, which applies to networks. In this cases, informedness should be used
+as a maximization criterion.
 
 # Baseline values 
 
