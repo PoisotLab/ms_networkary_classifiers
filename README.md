@@ -136,7 +136,15 @@ $\text{logit}(b)$, and visualize the result for a connectance of **TODO**.
 
 ![Consequences of changing the classifier skills ($s$) and bias ($s$) for a
 connectance $\rho=0.15$, on accuracy, $F_1$, postive predictive value, and
-$\kappa$. **TODO** discussion of results](figures/analytics.png){#fig:analytics}
+$\kappa$. Accuracy increases with skill, but also increases when the bias tends
+towards estimating *fewer* interactions. The $F_1$ score increases with skill
+but also increases when the bias tends towards estimating *more* interactions;
+PPV behaves in the same way. Interestingly, $\kappa$ responds as expected to
+skill (being negative whenever $s < 0.5$), and peaks for values of $b \approx
+0.5$; nevertheless, the value of bias for which $\kappa$ is maximized in *not*
+$b=0.5$, but instead increases with classifier skill. In other words, at equal
+skill, maximizing $\kappa$ would lead to select a *more* bias
+classifier.](figures/analytics.png){#fig:analytics}
 
 # Numerical experiments
 
