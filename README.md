@@ -107,6 +107,9 @@ $$
 \end{pmatrix} \,.
 $$
 
+In all further simulations, the confusion matrix $\mathbf{C}$ is transformed so
+that it sums to 1.
+
 ## What are the baseline values of performance measures?
 
 In this section, we will change the values of $b$ abd $s$ for a given value of
