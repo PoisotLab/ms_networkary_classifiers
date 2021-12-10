@@ -6,8 +6,7 @@ summary of model challenges for networks
 
 Binary classifiers are usually assessed by measuring properties of their
 confusion matrix, *i.e.* the contingency table reporting true/false
-positive/negative hits. The same approach is used to evaluate *e.g.* species
-occurrence models [@Allouche2006AssAcc]. A confusion matrix is laid out as
+positive/negative hits. A confusion matrix is laid out as
 
 $$\begin{pmatrix}
     \text{tp} & \text{fp} \\
@@ -24,12 +23,33 @@ classifier is *accurate* when the trace of the matrix divided by the sum of the
 matrix is close to 1, with other measures focusing on different ways in which
 the classifer is wrong.
 
-list of problems to solve
-- baseline values and response to bias
-- effect of training set bias on performance
-- which models need the least amount of interactions to work
+The same approach is used to evaluate *e.g.* species distribution models (SDMs).
+Indeed, the training and evaluation of SDMs as binary classifiers suffers from
+the same issue of low prevalence. In a previous work, @Allouche2006AssAcc
+suggested that $\kappa$ was a better test of model performance than the True
+Skill Statistic (TSS), which we will refer to as Youden's informedness (or $J$);
+these conclusions were later criticized by @Somodi2017PreDep, who emphasized
+that informedness' relationship to prevalence depends on assumptions about bias
+in the model. Although this work offers recommendations about the comparison of
+models, it doesn't establishes baselines or good practices for training on
+imbalanced ecological data. Within the context of networks, there are three
+specific issues that need to be adressed. First, what values of performance
+measures are we expecting for a classifier that has poor performance? This is
+particularly important as it can evaluate whether low prevalence can lull us
+into a false sense of predictive accuracy. Second, independently of the question
+of model evaluation, is low prevalence an issue for *training*, and can we
+remedy it? Finally, because the low amount of data on interaction makes a lot of
+imbalance correction methods [see *e.g.* @Branco2015SurPre] hard to apply, which
+indicators can be optimized with the least amount of positive interaction data?
 
-summary of the results
+We establish that due to the low prevalence of interactions, even poor
+classifiers applied to food web data will reach a high accuracy; this is because
+the measure is dominated by the accidental correct predictions of negatives. The
+$F_1$ score and positive predictive values are less sensitive to bias, but
+**TODO**
+
+@Chicco2021MatCor - MCC maximizes other measures, other measures do not maximize
+MCC
 
 # Baseline values 
 
