@@ -71,7 +71,7 @@ data(@subset(results, _keepval.(:measure))) *
 connectance_values = unique(select(results, [:runid, :connectance]))
 connectance_values.conbin = zeros(Float64, size(connectance_values,1))
 n_connectance_bins = 100
-bins_connectance = LinRange(0.0, 0.2, n_connectance_bins+1)
+bins_connectance = LinRange(0.0, 0.3, n_connectance_bins+1)
 for i in 1:n_connectance_bins
     _idx = findall(bins_connectance[i] .<= connectance_values.connectance .< bins_connectance[i+1])
     connectance_values.conbin[_idx] .= (bins_connectance[i+1] + bins_connectance[i])/2.0
