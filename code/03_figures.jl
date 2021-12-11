@@ -72,7 +72,7 @@ data(@subset(results, _keepval.(:measure))) *
 # Make bins for connectance to get the optimal bias
 connectance_values = unique(select(results, [:runid, :connectance]))
 connectance_values.conbin = zeros(Float64, size(connectance_values,1))
-n_connectance_bins = 200
+n_connectance_bins = 150
 bins_connectance = LinRange(0.0, 0.2, n_connectance_bins+1)
 for i in 1:n_connectance_bins
     _idx = findall(bins_connectance[i] .<= connectance_values.connectance .< bins_connectance[i+1])
@@ -91,12 +91,12 @@ _keepval(f) = f in ["MCC", "INF", "PRAUC", "ROCAUC"]
 data(@subset(opt, _keepval.(:measure))) * 
     mapping(:conbin, :bias, col=:model, row=:measure) *
     (AlgebraOfGraphics.density() * visual(Contour, color=:grey, alpha=0.3) + smooth() * visual(linewidth=2.0)) |>
-    plt -> draw(plt, facet=(;linkyaxes = :minimal)) |>
+    plt -> draw(plt, facet=(;linkyaxes = :minimal), axis = (xticks = LinearTicks(3),)) |>
     plt -> save(joinpath(@__DIR__, "..", "figures", "optim_bias.png"), plt, px_per_unit = 3)
 
 _keepval(f) = f in ["MCC", "INF", "PRAUC", "ROCAUC"]
 data(@subset(opt, _keepval.(:measure))) * 
     mapping(:conbin, :value, col=:model, row=:measure) *
     (AlgebraOfGraphics.density() * visual(Contour, color=:grey, alpha=0.3) + smooth() * visual(linewidth=2.0)) |>
-    plt -> draw(plt, facet=(;linkyaxes = :minimal)) |>
+    plt -> draw(plt, facet=(;linkyaxes = :minimal), axis = (xticks = LinearTicks(3),)) |>
     plt -> save(joinpath(@__DIR__, "..", "figures", "optim_perf.png"), plt, px_per_unit = 3)
