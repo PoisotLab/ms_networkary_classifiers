@@ -56,10 +56,11 @@ imbalanced data, as it has more desirable statistical properties. More recently,
 should be replaced by Youden's informedness (also known as $J$, bookmaker's
 accuracy, and the True-Skill Statistic) when the imbalance in the dataset may
 not be representative [which is the case as networks are under-sampled;
-@Jordano2016SamNet; @Jordano2016ChaEco; @McLeod2021SamAsy], when classifiers
-need to be compared across different datasets, and when comparing the results to
-a no-skill (baseline) classifier is important. As these conditions are likely to
-be met with network data, there is a need to evaluate which measures of
+@Jordano2016SamNet; @Jordano2016ChaEco], when classifiers need to be compared
+across different datasets [for example when predicting a system in space, where
+undersampling varies locally; @McLeod2021SamAsy], and when comparing the results
+to a no-skill (baseline) classifier is important. As these conditions are likely
+to be met with network data, there is a need to evaluate which measures of
 classification accuracy respond in a desirable way.
 
 A lot of binary classifiers are built by using a regressor (whose task is to
@@ -70,7 +71,11 @@ exist) can be determined by picking a threshold maximizing some value on the ROC
 curve or the PR curve. The area under these curves (ROC-AUC and PR-AUC
 henceforth) give ideas on the overall goodness of the classifier.
 @Saito2015PrePlo established that the ROC-AUC is biased towards over-estimating
-performance for imbalanced data.
+performance for imbalanced data; on the contrary, the PR-AUC is able to identify
+classifiers that are less able to detect positive interactions correctly, with
+the additional advantage of having a baseline value equal to prevalence.
+Therefore, it is important to assess whether these two measures return different
+results when applied to ecological network prediction.
 
 We establish that due to the low prevalence of interactions, even poor
 classifiers applied to food web data will reach a high accuracy; this is because
