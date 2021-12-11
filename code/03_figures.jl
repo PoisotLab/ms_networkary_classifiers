@@ -39,11 +39,19 @@ end
 results = leftjoin(results, select(connectance_values, [:runid, :midpoint]), on=:runid)
 
 # Dataviz
-data(@subset(results, :measure .== "MCC")) *
-    mapping(:bias, :value, row=:midpoint => nonnumeric, col=:model) *
+_keepval(f) = f in ["MCC", "INF"]
+data(@subset(results, _keepval.(:measure))) *
+    mapping(:bias => "Training set bias", :value => "Value", row=:midpoint => nonnumeric, col=:model, color=:measure) *
     (AlgebraOfGraphics.density() * visual(Contour, color=:grey, alpha=0.3) + smooth() * visual(linewidth=2.0)) |>
     plt -> draw(plt, facet=(;linkyaxes = :none)) |>
-    plt -> save(joinpath(@__DIR__, "..", "figures", "changing-bias.png"), plt, px_per_unit = 3)
+    plt -> save(joinpath(@__DIR__, "..", "figures", "bias_mcc_inf.png"), plt, px_per_unit = 3)
+
+_keepval(f) = f in ["PRAUC", "ROCAUC"]
+data(@subset(results, _keepval.(:measure))) *
+    mapping(:bias => "Training set bias", :value => "Value", row=:midpoint => nonnumeric, col=:model, color=:measure) *
+    (AlgebraOfGraphics.density() * visual(Contour, color=:grey, alpha=0.3) + smooth() * visual(linewidth=2.0)) |>
+    plt -> draw(plt, facet=(;linkyaxes = :none)) |>
+    plt -> save(joinpath(@__DIR__, "..", "figures", "bias_roc_pr.png"), plt, px_per_unit = 3)
 
 # Make bins for connectance to get the optimal bias
 connectance_values = unique(select(results, [:runid, :connectance]))
@@ -59,10 +67,9 @@ results = leftjoin(results, select(connectance_values, [:runid, :conbin]), on=:r
 bmm = groupby(results, [:model, :measure, :conbin])
 opt = combine(bmm, [:value, :bias] => ((v,b) -> median(b[sortperm(v)[end-min(20, length(v))+1:end]])) => :optimalbias)
 
-_keepval(f) = f in ["PRAUC", "F1", "INF"]
-@subset!(opt, _keepval.(:measure))
-
-data(opt) * 
+_keepval(f) = f in ["MCC", "INF", "PRAUC", "ROCAUC"]
+data(@subset(opt, _keepval.(:measure))) * 
     mapping(:conbin, :optimalbias, col=:model, row=:measure) *
     (AlgebraOfGraphics.density() * visual(Contour, color=:grey, alpha=0.3) + smooth() * visual(linewidth=2.0)) |>
-    draw
+    plt -> draw(plt, facet=(;linkyaxes = :none)) |>
+    plt -> save(joinpath(@__DIR__, "..", "figures", "optim_bias.png"), plt, px_per_unit = 3)

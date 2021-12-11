@@ -302,7 +302,13 @@ imbalanced).
 
 ## Effect of training set bias on performance
 
+![TODO](figures/bias_mcc_inf.png){#fig:biasmccinf}
+
+![TODO](figures/bias_roc_pr.png){#fig:biasrocpr}
+
 ## Required amount of positives to get the best performance
+
+![TODO](figures/optim_mcc_inf.png){#fig:optimbias}
 
 # Guidelines for prediction
 
