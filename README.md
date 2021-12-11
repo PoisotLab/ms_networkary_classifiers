@@ -86,6 +86,16 @@ $F_1$ score and positive predictive values are less sensitive to bias, but
 
 # Baseline values 
 
+## Definition of the performance measures
+
+$\kappa$
+
+$F_{\beta}$
+
+informedness
+
+MCC
+
 ## Confusion matrix with skill and bias
 
 In this section, we will assume a network of connectance $\rho$, *i.e.* having
@@ -190,7 +200,11 @@ $\text{logit}(s)$ and $\text{logit}(b)$ linearly from $-10$ to $10$, of $\rho$
 linearly in $]0, 0.5]$, which is within the range of usually observed
 connectance values for empirical food webs. Note that at this point, there is no
 food web model to speak of; rather, the confusion matrix we discuss can be
-obtained for any classification task.
+obtained for any classification task. Based on the previous discussion, the
+desirable properties for a measure of classifier success should be: an increase
+with classifier skill, especially at low bias; a hump-shaped response to bias,
+especially at high skill, and ideally center around $\text{logit}(b)=0$; an
+increase with prevalence up until equiprevalence is reached.
 
 ![Consequences of changing the classifier skills ($s$) and bias ($s$) for a
 connectance $\rho=0.15$, on accuracy, $F_1$, postive predictive value, and
@@ -204,9 +218,25 @@ $b=0.5$, but instead increases with classifier skill. In other words, at equal
 skill, maximizing $\kappa$ would lead to select a *more* biased
 classifier.](figures/changing-bias.png){#fig:bias}
 
-## Are the measures affected by connectance?
+In @fig:bias, we show that none of the four measures satisfy all the
+considerations at once: $F_1$ increases with skill, and increases monotonously
+with bias; this is because $F_1$ does not account for true negatives, and the
+increase in positive detection masks the over-prediction of interactions.
+Informedness varies with skill, reaching 0 for a no-skill classifier, but is
+entirely unsensitive to bias. Both MCC and $\kappa$ have the same behavior,
+whereby they increase with skill. $\kappa$ peaks at increasing values of biass
+for increasing skill, *i.e.* is likely to lead to the selection of a classifier
+that over-predicts interactions. By contract, MCC peaks at the same value,
+regardless of skill, but this value is not $\text{logit}(b)=0$: unless at very
+high classifier skill, MCC risks leading to a model that over-predicts
+interactions. In @fig:connectance, we show that all measures except $F_1$ give a
+value of 0 for a no-skill classifier, and are forced towars their correct
+maximal value when skill changes (*i.e.* a more connected networks will have
+higher values for a skilled classifierd, and lower values for a classifier
+making mostly mistakes).
 
 ![TODO](figures/changing-connectance.png){#fig:connectance}
+
 
 # Numerical experiments
 
