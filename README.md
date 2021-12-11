@@ -1,8 +1,6 @@
-example on diagnostic test: rare events are hard to detect even with really good models
-
-summary of model challenges for networks
-- @Strydom2021RoaPre importance of drawing on traits + validation is challenging
-- @Whalen2021NavPit machine learning from genomics
+- example on diagnostic test: rare events are hard to detect even with really good models
+- summary of model challenges for networks
+- @Strydom2021RoaPre importance of drawing on traits + validation is challenging + comparing across space
 
 Binary classifiers are usually assessed by measuring properties of their
 confusion matrix, *i.e.* the contingency table reporting true/false
@@ -30,17 +28,49 @@ suggested that $\kappa$ was a better test of model performance than the True
 Skill Statistic (TSS), which we will refer to as Youden's informedness (or $J$);
 these conclusions were later criticized by @Somodi2017PreDep, who emphasized
 that informedness' relationship to prevalence depends on assumptions about bias
-in the model. Although this work offers recommendations about the comparison of
-models, it doesn't establishes baselines or good practices for training on
-imbalanced ecological data. Within the context of networks, there are three
-specific issues that need to be adressed. First, what values of performance
-measures are we expecting for a classifier that has poor performance? This is
-particularly important as it can evaluate whether low prevalence can lull us
-into a false sense of predictive accuracy. Second, independently of the question
-of model evaluation, is low prevalence an issue for *training*, and can we
-remedy it? Finally, because the low amount of data on interaction makes a lot of
-imbalance correction methods [see *e.g.* @Branco2015SurPre] hard to apply, which
-indicators can be optimized with the least amount of positive interaction data?
+in the model, and therefore recommend the use of $\kappa$ as a validation of
+classification performance. Although this work offers recommendations about the
+comparison of models, it doesn't establishes baselines or good practices for
+training on imbalanced ecological data. Within the context of networks, there
+are three specific issues that need to be adressed. First, what values of
+performance measures are we expecting for a classifier that has poor
+performance? This is particularly important as it can evaluate whether low
+prevalence can lull us into a false sense of predictive accuracy. Second,
+independently of the question of model evaluation, is low prevalence an issue
+for *training*, and can we remedy it? Finally, because the low amount of data on
+interaction makes a lot of imbalance correction methods [see *e.g.*
+@Branco2015SurPre] hard to apply, which indicators can be optimized with the
+least amount of positive interaction data?
+
+In addition to the literature on SDMs, most of the research on machine learning
+application to life sciences is focused on genomics [which has very specific
+challenges, see a recent discussion by @Whalen2021NavPit]; this sub-field has
+generated largely different recommendations. @Chicco2020AdvMat suggest using
+Matthews correlation coefficient (MCC) over $F_1$, as a protection against
+over-inflation of predicted results; @Delgado2019WhyCoh advocate against the use
+of Cohen's $\kappa$, again in favor of MCC, as the relative nature of $\kappa$
+means that a worse classifier can be picked over a better one; similarly,
+@Boughorbel2017OptCla recommend MCC over other measures of performance for
+imbalanced data, as it has more desirable statistical properties. More recently,
+@Chicco2021MatCor temper the apparent supremacy of the MCC, by suggesting it
+should be replaced by Youden's informedness (also known as $J$, bookmaker's
+accuracy, and the True-Skill Statistic) when the imbalance in the dataset may
+not be representative [which is the case as networks are under-sampled;
+@Jordano2016SamNet; @Jordano2016ChaEco; @McLeod2021SamAsy], when classifiers
+need to be compared across different datasets, and when comparing the results to
+a no-skill (baseline) classifier is important. As these conditions are likely to
+be met with network data, there is a need to evaluate which measures of
+classification accuracy respond in a desirable way.
+
+A lot of binary classifiers are built by using a regressor (whose task is to
+guess the value of the interaction, amd can therefore return somethins
+considered to be a pseudo-probability); in this case, the optimal value below
+which predicitions are assumed to be negative (*i.e.* the interaction does not
+exist) can be determined by picking a threshold maximizing some value on the ROC
+curve or the PR curve. The area under these curves (ROC-AUC and PR-AUC
+henceforth) give ideas on the overall goodness of the classifier.
+@Saito2015PrePlo established that the ROC-AUC is biased towards over-estimating
+performance for imbalanced data.
 
 We establish that due to the low prevalence of interactions, even poor
 classifiers applied to food web data will reach a high accuracy; this is because
@@ -48,17 +78,6 @@ the measure is dominated by the accidental correct predictions of negatives. The
 $F_1$ score and positive predictive values are less sensitive to bias, but
 **TODO**
 
-@Chicco2021MatCor - MCC maximizes other measures, other measures do not maximize
-MCC, except notably when prevalence is low, or the baseline guessing level is
-uncertain, which applies to networks. In this cases, informedness should be used
-as a maximization criterion. Formulating guidelines is particularly important,
-because most of the litterature existing on optimizing classifier performance in
-the life sciences is focused on genomics applications [which has very specific
-challenges, see a recent discussion by @Whalen2021NavPit], and can give
-contradictory recommendations [@Chicco2020AdvMat; @Delgado2019WhyCoh;
-@Boughorbel2017OptCla]. This points not to a defficiency in the litterature, but
-rather to a need for domain-specific evaluation of how the particular ways in
-which datasets are biased can affect the performance of predictive models.
 
 # Baseline values 
 
