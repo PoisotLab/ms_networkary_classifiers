@@ -59,6 +59,82 @@
         "volume": "15"
     },
     {
+        "DOI": "10.1101/2020.05.22.111344",
+        "author": [
+            {
+                "family": "Becker",
+                "given": "Daniel"
+            },
+            {
+                "family": "Albery",
+                "given": "Gregory F."
+            },
+            {
+                "family": "Sjodin",
+                "given": "Anna R."
+            },
+            {
+                "family": "Poisot",
+                "given": "Timothee"
+            },
+            {
+                "family": "Bergner",
+                "given": "Laura"
+            },
+            {
+                "family": "Dallas",
+                "given": "Tad"
+            },
+            {
+                "family": "Eskew",
+                "given": "Evan A."
+            },
+            {
+                "family": "Farrell",
+                "given": "Maxwell J."
+            },
+            {
+                "family": "Guth",
+                "given": "Sarah"
+            },
+            {
+                "family": "Han",
+                "given": "Barbara A."
+            },
+            {
+                "family": "Simmons",
+                "given": "Nancy B."
+            },
+            {
+                "family": "Stock",
+                "given": "Michiel"
+            },
+            {
+                "family": "Teeling",
+                "given": "Emma C."
+            },
+            {
+                "family": "Carlson",
+                "given": "Colin J."
+            }
+        ],
+        "container-title": "bioRxiv",
+        "id": "Becker2021OptPre",
+        "issued": {
+            "date-parts": [
+                [
+                    2021,
+                    8,
+                    5
+                ]
+            ]
+        },
+        "page": "2020.05.22.111344",
+        "publisher": "Cold Spring Harbor Laboratory",
+        "title": "Optimizing predictive models to prioritize viral discovery in zoonotic reservoirs",
+        "type": "article-journal"
+    },
+    {
         "DOI": "10.1137/141000671",
         "author": [
             {
@@ -449,6 +525,59 @@
         "title": "Sampling and asymptotic network properties of spatial multi-trophic networks",
         "type": "article-journal",
         "volume": "n/a"
+    },
+    {
+        "URL": "http://arxiv.org/abs/2105.14973",
+        "author": [
+            {
+                "family": "Poisot",
+                "given": "Timoth\u00e9e"
+            },
+            {
+                "family": "Ouellet",
+                "given": "Marie-Andr\u00e9e"
+            },
+            {
+                "family": "Mollentze",
+                "given": "Nardus"
+            },
+            {
+                "family": "Farrell",
+                "given": "Maxwell J."
+            },
+            {
+                "family": "Becker",
+                "given": "Daniel J."
+            },
+            {
+                "family": "Albery",
+                "given": "Gregory F."
+            },
+            {
+                "family": "Gibb",
+                "given": "Rory J."
+            },
+            {
+                "family": "Seifert",
+                "given": "Stephanie N."
+            },
+            {
+                "family": "Carlson",
+                "given": "Colin J."
+            }
+        ],
+        "id": "Poisot2021ImpMam",
+        "issued": {
+            "date-parts": [
+                [
+                    2021,
+                    5,
+                    31
+                ]
+            ]
+        },
+        "title": "Imputing the mammalian virome with linear filtering and singular value decomposition",
+        "type": "webpage"
     },
     {
         "DOI": "10.1371/journal.pone.0118432",
