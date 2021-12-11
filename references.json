@@ -318,6 +318,106 @@
         "volume": "14"
     },
     {
+        "DOI": "10.1371/journal.pbio.1002559",
+        "author": [
+            {
+                "family": "Jordano",
+                "given": "Pedro"
+            }
+        ],
+        "container-title": "PLOS Biol",
+        "id": "Jordano2016ChaEco",
+        "issue": "9",
+        "issued": {
+            "date-parts": [
+                [
+                    2016,
+                    9,
+                    15
+                ]
+            ]
+        },
+        "page": "e1002559",
+        "title": "Chasing Ecological Interactions",
+        "type": "article-journal",
+        "volume": "14"
+    },
+    {
+        "DOI": "10.1111/1365-2435.12763",
+        "author": [
+            {
+                "family": "Jordano",
+                "given": "Pedro"
+            }
+        ],
+        "container-title": "Functional Ecology",
+        "id": "Jordano2016SamNet",
+        "issued": {
+            "date-parts": [
+                [
+                    2016,
+                    9
+                ]
+            ]
+        },
+        "title": "Sampling networks of ecological interactions",
+        "type": "article-journal"
+    },
+    {
+        "DOI": "10.1111/oik.08650",
+        "author": [
+            {
+                "family": "McLeod",
+                "given": "Anne"
+            },
+            {
+                "family": "Leroux",
+                "given": "Shawn J."
+            },
+            {
+                "family": "Gravel",
+                "given": "Dominique"
+            },
+            {
+                "family": "Chu",
+                "given": "Cindy"
+            },
+            {
+                "family": "Cirtwill",
+                "given": "Alyssa R."
+            },
+            {
+                "family": "Fortin",
+                "given": "Marie-Jos\u00e9e"
+            },
+            {
+                "family": "Galiana",
+                "given": "N\u00faria"
+            },
+            {
+                "family": "Poisot",
+                "given": "Timoth\u00e9e"
+            },
+            {
+                "family": "Wood",
+                "given": "Spencer A."
+            }
+        ],
+        "container-title": "Oikos",
+        "id": "McLeod2021SamAsy",
+        "issue": "n/a",
+        "issued": {
+            "date-parts": [
+                [
+                    2021
+                ]
+            ]
+        },
+        "title": "Sampling and asymptotic network properties of spatial multi-trophic networks",
+        "type": "article-journal",
+        "volume": "n/a"
+    },
+    {
         "DOI": "10.1371/journal.pone.0118432",
         "author": [
             {
