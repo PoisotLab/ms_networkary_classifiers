@@ -501,6 +501,20 @@ values for a classifier making mostly mistakes).
 }
 \end{figure}
 
+These two analyses point to the following recommendations: MCC is indeed
+more appropriate than \(\kappa\), as although sensitive to bias, it is
+sensitive in a consistent way. Informedness is appropriate at
+discriminating between different skills, but confounded by bias. \(F_1\)
+is increasing with bias, and should not be prioritized to evalue the
+performance of the model. The discussion of sensitivity to bias should
+come with a domain-specific caveat: although it is likely that
+interactions documented in ecological networks are correct, a lot of
+non-interactions are simply unobserved; as predictive models are used
+for data-inflation (\emph{i.e.} the prediction of new interactions), it
+is not necessarilly a bad thing to select models that predict more
+interactions than the original dataset, because the original dataset
+misses some interactions.
+
 \hypertarget{numerical-experiments}{%
 \section{Numerical experiments}\label{numerical-experiments}}
 
