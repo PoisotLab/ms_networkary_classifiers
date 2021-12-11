@@ -72,7 +72,7 @@ data(@subset(results, _keepval.(:measure))) *
 # Make bins for connectance to get the optimal bias
 connectance_values = unique(select(results, [:runid, :connectance]))
 connectance_values.conbin = zeros(Float64, size(connectance_values,1))
-n_connectance_bins = 100
+n_connectance_bins = 200
 bins_connectance = LinRange(0.0, 0.2, n_connectance_bins+1)
 for i in 1:n_connectance_bins
     _idx = findall(bins_connectance[i] .<= connectance_values.connectance .< bins_connectance[i+1])
@@ -82,8 +82,8 @@ end
 results = leftjoin(results, select(connectance_values, [:runid, :conbin]), on=:runid)
 bmm = groupby(results, [:model, :measure, :conbin])
 function optival(v,b)
-    idx = sortperm(v)[end-min(20, length(v))+1:end]
-    return (bias=median(b[idx]), value=median(v[idx]))
+    idx = sortperm(v)[end-min(50, length(v))+1:end]
+    return (bias=mean(b[idx]), value=mean(v[idx]))
 end
 opt = combine(bmm, [:value, :bias] => ((v,b) -> optival(v,b)) => AsTable)
 
