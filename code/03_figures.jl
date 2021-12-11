@@ -5,7 +5,7 @@ using DataFramesMeta
 using StatsBase
 using Statistics
 
-results = DataFrame(CSV.File("output.csv"))
+results = DataFrame(CSV.File(joinpath(@__DIR__, "output.csv")))
 allowmissing!(results, :value)
 replace!(results.value, NaN => missing)
 dropmissing!(results)
@@ -39,10 +39,11 @@ end
 results = leftjoin(results, select(connectance_values, [:runid, :midpoint]), on=:runid)
 
 # Dataviz
-data(@subset(results, :measure .== "F1")) *
+data(@subset(results, :measure .== "MCC")) *
     mapping(:bias, :value, row=:midpoint => nonnumeric, col=:model) *
     (AlgebraOfGraphics.density() * visual(Contour, color=:grey, alpha=0.3) + smooth() * visual(linewidth=2.0)) |>
-    draw
+    plt -> draw(plt, facet=(;linkyaxes = :none)) |>
+    plt -> save(joinpath(@__DIR__, "..", "figures", "changing-bias.png"), plt, px_per_unit = 3)
 
 # Make bins for connectance to get the optimal bias
 connectance_values = unique(select(results, [:runid, :connectance]))
