@@ -83,8 +83,8 @@ candidate_models = [
 ]
 
 S = 100
-_n_sims = 500
-conditions_co = rand(_n_sims) .* 0.25 .+ 0.01
+_n_sims = 20000
+conditions_co = rand(_n_sims) .* 0.26 .+ 0.001
 conditions_bias = rand(_n_sims) .* 0.98 .+ 0.01
 conditions = hcat(conditions_co, conditions_bias)
 

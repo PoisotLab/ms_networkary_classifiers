@@ -11,7 +11,7 @@ replace!(results.value, NaN => missing)
 dropmissing!(results)
 
 # Drop the models with obviously borked classifiers
-results.runid = hash.(results.connectance .* results.breadth .* results.bias)
+results.runid = hash.(results.connectance .* results.co .* results.bias)
 
 todrop = unique(vcat([
     @subset(results, :measure .== "ACC", :value .== 0.0).runid,
@@ -37,8 +37,6 @@ end
 
 # Join the two dataframes
 results = leftjoin(results, select(connectance_values, [:runid, :midpoint]), on=:runid)
-
-# axis = (xticks = LinearTicks(n),) ??
 
 # Dataviz
 _keepval(f) = f in ["MCC", "INF"]
@@ -72,7 +70,7 @@ data(@subset(results, _keepval.(:measure))) *
 # Make bins for connectance to get the optimal bias
 connectance_values = unique(select(results, [:runid, :connectance]))
 connectance_values.conbin = zeros(Float64, size(connectance_values,1))
-n_connectance_bins = 150
+n_connectance_bins = 100
 bins_connectance = LinRange(0.0, 0.2, n_connectance_bins+1)
 for i in 1:n_connectance_bins
     _idx = findall(bins_connectance[i] .<= connectance_values.connectance .< bins_connectance[i+1])
