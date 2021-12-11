@@ -644,7 +644,7 @@ in fig.~\ref{fig:optimbias}.
 \begin{figure}
 \hypertarget{fig:optimbias}{%
 \centering
-\includegraphics{figures/optim_mcc_inf.png}
+\includegraphics{figures/optim_bias.png}
 \caption{TODO}\label{fig:optimbias}
 }
 \end{figure}
@@ -658,7 +658,22 @@ networks may require \emph{more} biasing of the training set in order to
 be optimally predicted, whereas smaller, more connected networks may
 not. It is worth noting that the optimal bias for the training set
 stabilizes at 0.5 regardless of connectance \emph{and} model \emph{and}
-measure of model evaluation. \# Guidelines for prediction
+measure of model evaluation.
+
+\begin{figure}
+\hypertarget{fig:optimperf}{%
+\centering
+\includegraphics{figures/optim_perf.png}
+\caption{TODO}\label{fig:optimperf}
+}
+\end{figure}
+
+\hypertarget{guidelines-for-prediction}{%
+\section{Guidelines for prediction}\label{guidelines-for-prediction}}
+
+The results presented here highlight an interesting paradox: larger
+networks more bias, smaller networks less bias but fewer int to begin
+with: it's difficult either way
 
 INF because we trust positives more than negative, but check with MCC
 
