@@ -345,7 +345,7 @@ training set needs to skew positive in order to get a good model; when this
 value is about 0.5, the training set needs to be artificially balanced to
 optimize the model performance. These results are presented in @fig:optimbias.
 
-![TODO](figures/optim_mcc_inf.png){#fig:optimbias}
+![TODO](figures/optim_bias.png){#fig:optimbias}
 
 Interestingly, as long as the connectance of the network was above $\approx
 0.1$, the optimal prevalence in the training set is 0.5, *i.e.* as many
@@ -356,13 +356,19 @@ the training set in order to be optimally predicted, whereas smaller, more
 connected networks may not. It is worth noting that the optimal bias for the
 training set stabilizes at 0.5 regardless of connectance *and* model *and*
 measure of model evaluation.
+
+![TODO](figures/optim_perf.png){#fig:optimperf}
+
 # Guidelines for prediction
+
+The results presented here highlight an interesting paradox: larger networks
+more bias, smaller networks less bias but fewer int to begin with: it's
+difficult either way
 
 INF because we trust positives more than negative, but check with MCC
 
 PR-AUC
 
 usually default to training set bias of 0.5
-
 
 # References

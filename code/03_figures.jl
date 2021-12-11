@@ -79,11 +79,22 @@ end
 
 results = leftjoin(results, select(connectance_values, [:runid, :conbin]), on=:runid)
 bmm = groupby(results, [:model, :measure, :conbin])
-opt = combine(bmm, [:value, :bias] => ((v,b) -> median(b[sortperm(v)[end-min(20, length(v))+1:end]])) => :optimalbias)
+function optival(v,b)
+    idx = sortperm(v)[end-min(20, length(v))+1:end]
+    return (bias=median(b[idx]), value=median(v[idx]))
+end
+opt = combine(bmm, [:value, :bias] => ((v,b) -> optival(v,b)) => AsTable)
 
 _keepval(f) = f in ["MCC", "INF", "PRAUC", "ROCAUC"]
 data(@subset(opt, _keepval.(:measure))) * 
-    mapping(:conbin, :optimalbias, col=:model, row=:measure) *
+    mapping(:conbin, :bias, col=:model, row=:measure) *
     (AlgebraOfGraphics.density() * visual(Contour, color=:grey, alpha=0.3) + smooth() * visual(linewidth=2.0)) |>
     plt -> draw(plt, facet=(;linkyaxes = :none)) |>
     plt -> save(joinpath(@__DIR__, "..", "figures", "optim_bias.png"), plt, px_per_unit = 3)
+
+_keepval(f) = f in ["MCC", "INF", "PRAUC", "ROCAUC"]
+data(@subset(opt, _keepval.(:measure))) * 
+    mapping(:conbin, :value, col=:model, row=:measure) *
+    (AlgebraOfGraphics.density() * visual(Contour, color=:grey, alpha=0.3) + smooth() * visual(linewidth=2.0)) |>
+    plt -> draw(plt, facet=(;linkyaxes = :none)) |>
+    plt -> save(joinpath(@__DIR__, "..", "figures", "optim_perf.png"), plt, px_per_unit = 3)
