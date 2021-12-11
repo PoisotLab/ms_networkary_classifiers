@@ -407,35 +407,36 @@ transformed so that it sums to 1.
 \subsection{What are the baseline values of performance
 measures?}\label{what-are-the-baseline-values-of-performance-measures}}
 
-In this section, we will change the values of \(b\) abd \(s\) for a
-given value of \(\rho\), and see how the values of common performance
-measures for binary classification are affected. Specifically, we will
-focus on four quantities: the accuracy
-(\((\text{tp}+\text{tn})/(\text{tp}+\text{tn}+\text{fp}+\text{fn})\)),
-the \emph{balanced} accuracy
-(\(\text{tp}/(2(\text{tp}+\text{fn}))+\text{tn}/(2(\text{tn}+\text{fp}))\)),
-Youden's J
-(\(\text{tp}/(\text{tp}+\text{fn})+\text{tn}/(\text{tn}+\text{fp})-1\)),
-and the \(F_1\) score (\(2\text{tp}/(2\text{tp}+\text{fp}+\text{fn})\)).
+In this section, we will change the values of \(b\), \(s\), and
+\(\rho\), and report how the main measures discussed in the introduction
+(MCC, \(F_1\), \(\kappa\), and informedness) are responding to issues
+with the classifier. Before we do so, it is important to explain why we
+will not focus on accuracy too much. Accuracy is the number of correct
+predictions (\(\text{Tr}(\mathbf{C})\)) divided by the sum of the
+confusion matrix. For a no-skill, no-bias classifier, accuracy is equal
+to \(\rho^2 + (1-\rho)^2\); for \(\rho = 0.05\), this is
+\(\approx 0.90\), and for \(\rho = 0.01\), this is equal to
+\(\approx 0.98\). In other words, the values of accuracy are expected to
+be so high that they are not really informatived (this is simply
+explained by the fact that for \(\rho\) small,
+\(\rho^2 \ll (1-\rho)^2\)). More concerning is the fact that introducing
+bias changes the response of accuracy in unexpected ways. Assuming a
+no-skill classifier, the numerator of accuracy becomes
+\(b\rho^2 + (1-b)(1-\rho)^2\), which increases when \(b\) is low, which
+specifically means that at equal skill, a classifier that under-predicts
+interactions will have higher accuracy than an un-biased classifier.
+These issues are absent from balanced accuracy, but should nevertheless
+lead us to not report accuracy as the primary measure of network
+prediction success; moving forward, we will focus on other measures.
 
-\textbf{Justification} of why these 4
-
-Assuming a no-skill unbiased classifier (\(s=0.5\), \emph{i.e.}
-\(\mathbf{C}=\mathbf{M}\) after normalization), the accuracy is
-\(\rho^2 + (1-\rho)^2\), the balanced accuracy is \(0.5\), Youden's J is
-\(0\), and \(F_1=\rho\). In other words, given a connectance
-\(\rho = 0.05\), we expect that a classifier guessing at random would
-still achieve an accuracy of \(0.905\); for a connectance of
-\(\rho = 0.01\), this accuracy \emph{increases} to over \(0.98\). In
-other words, networks with fewer interactions have inherently higher
-accuracy, because it is easy to predict the overwheling majority of
-non-interactions right.
-
-In order to examine how these values change w.r.t. the skill and bias,
-we performed a grid exploration of the values of \(\text{logit}(s)\) and
-\(\text{logit}(b)\) linearly from \(-10\) to \(10\), and visualize the
-result for a connectance of \(\rho = 0.15\), which is within the range
-of usually observed connectance values for empirical food webs.
+In order to examine how MCC, \(F_1\), \(\kappa\), and informedness
+change w.r.t. the imbalance, skill, and bias, we performed a grid
+exploration of the values of \(\text{logit}(s)\) and \(\text{logit}(b)\)
+linearly from \(-10\) to \(10\), of \(\rho\) linearly in \(]0, 0.5]\),
+which is within the range of usually observed connectance values for
+empirical food webs. Note that at this point, there is no food web model
+to speak of; rather, the confusion matrix we discuss can be obtained for
+any classification task.
 
 \begin{figure}
 \hypertarget{fig:bias}{%
