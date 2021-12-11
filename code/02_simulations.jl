@@ -70,7 +70,7 @@ candidate_models = [
 
 S = 200
 
-_n_sims = 500
+_n_sims = 20000
 conditions_breadth = rand(_n_sims) .* 0.1 .+ 0.005
 conditions_bias = rand(_n_sims) .* 0.98 .+ 0.01
 conditions = hcat(conditions_breadth, conditions_bias)
