@@ -83,7 +83,9 @@ the measure is dominated by the accidental correct predictions of negatives. The
 $F_1$ score and positive predictive values are less sensitive to bias, but
 **TODO**
 
-# Baseline values 
+# Baseline values
+
+Intro
 
 ## Definition of the performance measures
 
