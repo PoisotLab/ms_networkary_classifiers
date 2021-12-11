@@ -302,14 +302,67 @@ imbalanced).
 
 ## Effect of training set bias on performance
 
+In @fig:biasmccinf, we present the response of MCC and informedness to (i) four
+levels of network connectance and (ii) a gradient of training set bias, for the
+four component models as well as the ensemble. All models reached a higher
+performance on more connected networks, and using more biased training sets
+(with the exception of ridge regression, whose informedness decreased in
+performance with training set bias). In all cases, informedness was extremely
+high, which is an expected consequence of the fact that this is the value we
+optimized to determine the cutoff. MCC increased with training set bias,
+although this increase became less steep with increasing connectance.
+Interestingly, the ensemble almost always outclassed its component models.
+
 ![TODO](figures/bias_mcc_inf.png){#fig:biasmccinf}
+
+In @fig:biasrocpr, we present the same information as @fig:biasmccinf, this time
+using ROC-AUC and PR-AUC. ROC-AUC is always high, and does not vary with
+training set bias. On the other hand, PR-AUC shows very strong responses,
+increasing with training set bias. It is notable here that two classifiers that
+seemed to be performing well (Decision Tree and Random Forest) based on their
+MCC are not able to reach a high PR-AUC even at higher connectances. As in
+@fig:biasmccinf, the ensemble outperforms its component models.
 
 ![TODO](figures/bias_roc_pr.png){#fig:biasrocpr}
 
+Based on the results presented in @fig:biasmccinf and @fig:biasrocpr, it seems
+that informedness and ROC-AUC are not necessarilly able to discriminate between
+good and bad classifiers (although this result may be an artifact for
+informedness, as it has been optimized when thresholding). On the other hand,
+MCC and PR-AUC show a strong response to training set bias, and may therefore be
+more useful at model comparison.
+
 ## Required amount of positives to get the best performance
+
+The previous results revealed that the measure of classification performance
+responds both to the bias in the training set *and* to the connectance of the
+network; from a practical point of view, assembling a training set requires to
+withold positive information, which in ecological networks are very scarce (and
+typically more valuable than negatives, on which there is a doubt). For this
+reason, across all values of connectance, we measured the training set bias that
+maximized a series of performance measures. When this value is high, the
+training set needs to skew positive in order to get a good model; when this
+value is about 0.5, the training set needs to be artificially balanced to
+optimize the model performance. These results are presented in @fig:optimbias.
 
 ![TODO](figures/optim_mcc_inf.png){#fig:optimbias}
 
+Interestingly, as long as the connectance of the network was above $\approx
+0.1$, the optimal prevalence in the training set is 0.5, *i.e.* as many
+positives as negatives. Low connectance is usually achieved for very large
+networks, due to the scaling relationship between richness and links
+[@MacDonald2020RevLin]. Therefore, larger networks may require *more* biasing of
+the training set in order to be optimally predicted, whereas smaller, more
+connected networks may not. It is worth noting that the optimal bias for the
+training set stabilizes at 0.5 regardless of connectance *and* model *and*
+measure of model evaluation.
 # Guidelines for prediction
+
+INF because we trust positives more than negative, but check with MCC
+
+PR-AUC
+
+usually default to training set bias of 0.5
+
 
 # References

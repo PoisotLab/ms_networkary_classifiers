@@ -70,7 +70,7 @@ candidate_models = [
 
 S = 200
 
-_n_sims = 2000
+_n_sims = 500
 conditions_breadth = rand(_n_sims) .* 0.1 .+ 0.005
 conditions_bias = rand(_n_sims) .* 0.98 .+ 0.01
 conditions = hcat(conditions_breadth, conditions_bias)
@@ -133,6 +133,7 @@ Threads.@threads for i in 1:size(conditions, 1)
         push!(results[Threads.threadid()], (breadth, bias, mean(𝐲), candidate_model.first, :MKD, markedness(𝐌)))
         push!(results[Threads.threadid()], (breadth, bias, mean(𝐲), candidate_model.first, :F1, f1(𝐌)))
         push!(results[Threads.threadid()], (breadth, bias, mean(𝐲), candidate_model.first, :MCC, mcc(𝐌)))
+        push!(results[Threads.threadid()], (breadth, bias, mean(𝐲), candidate_model.first, :postbias, (𝐌.tp+𝐌.fp)/(𝐌.tp+𝐌.fn)))
     end
 
     # Ensemble model
@@ -174,6 +175,7 @@ Threads.@threads for i in 1:size(conditions, 1)
         push!(results[Threads.threadid()], (breadth, bias, mean(𝐲), :ensemble, :MKD, markedness(𝐌)))
         push!(results[Threads.threadid()], (breadth, bias, mean(𝐲), :ensemble, :F1, f1(𝐌)))
         push!(results[Threads.threadid()], (breadth, bias, mean(𝐲), :ensemble, :MCC, mcc(𝐌)))
+        push!(results[Threads.threadid()], (breadth, bias, mean(𝐲), :ensemble, :postbias, (𝐌.tp+𝐌.fp)/(𝐌.tp+𝐌.fn)))
     end
 end
 

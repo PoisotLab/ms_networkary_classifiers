@@ -32,7 +32,7 @@ n_connectance_bins = 4
 bins_connectance = LinRange(0.0, 0.2, n_connectance_bins+1)
 for i in 1:n_connectance_bins
     _idx = findall(bins_connectance[i] .<= connectance_values.connectance .< bins_connectance[i+1])
-    connectance_values.midpoint[_idx] .= (bins_connectance[i+1] + bins_connectance[i])/2.0
+    connectance_values.midpoint[_idx] .= round((bins_connectance[i+1] + bins_connectance[i])/2.0; digits=4)
 end
 
 # Join the two dataframes
@@ -52,6 +52,20 @@ data(@subset(results, _keepval.(:measure))) *
     (AlgebraOfGraphics.density() * visual(Contour, color=:grey, alpha=0.3) + smooth() * visual(linewidth=2.0)) |>
     plt -> draw(plt, facet=(;linkyaxes = :none)) |>
     plt -> save(joinpath(@__DIR__, "..", "figures", "bias_roc_pr.png"), plt, px_per_unit = 3)
+
+_keepval(f) = f in ["PT"]
+data(@subset(results, _keepval.(:measure))) *
+    mapping(:bias => "Training set bias", :value => "Prevalence threshold", row=:midpoint => nonnumeric, col=:model) *
+    (AlgebraOfGraphics.density() * visual(Contour, color=:grey, alpha=0.3) + smooth() * visual(linewidth=2.0)) |>
+    plt -> draw(plt, facet=(;linkyaxes = :none)) |>
+    plt -> save(joinpath(@__DIR__, "..", "figures", "bias_pt.png"), plt, px_per_unit = 3)
+
+_keepval(f) = f in ["postbias"]
+data(@subset(results, _keepval.(:measure))) *
+    mapping(:bias => "Training set bias", :value => logistic => "Value", row=:midpoint => nonnumeric, col=:model) *
+    (AlgebraOfGraphics.density() * visual(Contour, color=:grey, alpha=0.3) + smooth() * visual(linewidth=2.0)) |>
+    plt -> draw(plt, facet=(;linkyaxes = :none)) |>
+    plt -> save(joinpath(@__DIR__, "..", "figures", "bias_co.png"), plt, px_per_unit = 3)
 
 # Make bins for connectance to get the optimal bias
 connectance_values = unique(select(results, [:runid, :connectance]))
