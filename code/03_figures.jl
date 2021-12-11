@@ -19,7 +19,7 @@ todrop = unique(vcat([
     @subset(results, :measure .== "TNR", :value .== 0.0).runid,
     @subset(results, :measure .== "FPR", :value .== 1.0).runid,
     @subset(results, :measure .== "FNR", :value .== 1.0).runid,
-    @subset(results, :connectance .>= 0.2).runid
+    @subset(results, :connectance .>= 0.3).runid
 ]...))
 
 tokeep(f) = !(f in todrop)
@@ -28,8 +28,8 @@ tokeep(f) = !(f in todrop)
 # Make bins for connectance to make the plotting more efficient
 connectance_values = unique(select(results, [:runid, :connectance]))
 connectance_values.midpoint = zeros(Float64, size(connectance_values,1))
-n_connectance_bins = 4
-bins_connectance = LinRange(0.0, 0.2, n_connectance_bins+1)
+n_connectance_bins = 6
+bins_connectance = LinRange(0.0, 0.3, n_connectance_bins+1)
 for i in 1:n_connectance_bins
     _idx = findall(bins_connectance[i] .<= connectance_values.connectance .< bins_connectance[i+1])
     connectance_values.midpoint[_idx] .= round((bins_connectance[i+1] + bins_connectance[i])/2.0; digits=4)
