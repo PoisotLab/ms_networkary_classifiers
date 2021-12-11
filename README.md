@@ -359,16 +359,54 @@ measure of model evaluation.
 
 ![TODO](figures/optim_perf.png){#fig:optimperf}
 
-# Guidelines for prediction
+# Guidelines for the assesment of network predictive models
 
 The results presented here highlight an interesting paradox: larger networks
-more bias, smaller networks less bias but fewer int to begin with: it's
-difficult either way
+(with lower connectance) require more training set bias in order to maximize
+model performance [@fig:optimbias], but are also more difficult to predict
+according to MCC and PR-AUC [@fig:optimperf]. This suggests that the task of
+network prediction will be difficult regardless of network size: by being
+limited by the *frequency* of interactions when the network is large, and by
+being limited by the *number* of interactions when the network is small.
+Nevertheless, based on the simulations and numerical experiments, it is possible
+to formulate a series of recommendations for the evaluation of network
+prediction models.
 
-INF because we trust positives more than negative, but check with MCC
+First, because we should have more trust in reported interactions than in
+reported absences of interactions, we can draw on previous literature to
+recommend informedness as a measure to decide on a threshold
+[@Chicco2021MatCor]; this being said, because informedness is insensitive to
+bias, the model performance is better evaluated through the use of MCC
+[@fig:biasmccinf]. Because $F_1$ is monotonously sensitive to classifier bias
+[@fig:bias] and network connectance [@fig:connectance], MCC should be prefered
+as a measure of model evaluation.
 
-PR-AUC
+Second, because the PR-AUC responds more to network connectance [@fig:optimperf]
+and training set imbalance [@fig:biasrocpr], it should be used as a measure of
+model performance over the ROC-AUC. This is not to say that ROC-AUC should be
+discarded (in fact, a low ROC-AUC is a sign of an issue with the model), but
+that its interpretation should be guided by the PR-AUC value. This again echoes
+recommendations from other fields [@Saito2015PrePlo].
 
-usually default to training set bias of 0.5
+Thirdly, regardless of network connectance *or* measure to evaluate the model
+performance, as long as the network connectance is larger than $\approx 0.1$,
+artificially balancing the training set to have equiprevalence will give the
+best possible results. This was true for all models.
+
+Finally, it is noteworthy that the ensemble model was systematically better than
+the component models; even when poor models were included (Random Forest and
+Decision Tree), the ensemble was able to leverage the different biases expressed
+by the models to make an overall more accurate prediction. We do not expect that
+ensembles will *always* be better than single models. In a recent multi-model
+comparison, @Becker2021OptPre found that the ensemble was *not* the best model.
+There is no general conclusion to draw from this besides reinforcing the need to
+be pragmatic about which models should be included in the ensemble, or whether
+to use an ensemble at all. In a sense, the surprising peformance of the ensemble
+model should form the basis of the last recommendation: optimal training set
+bias and its interaction with connectance and binary classifier is, in a sense,
+an hyperparameter that should be assessed. The distribution of results in
+@fig:optimbias and @fig:optimperf show that there are variations around the
+trend; furthermore, networks with different structures than the one we simulated
+here may respond in different ways.
 
 # References
