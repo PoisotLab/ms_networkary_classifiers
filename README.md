@@ -236,7 +236,11 @@ maximal value when skill changes (*i.e.* a more connected networks will have
 higher values for a skilled classifierd, and lower values for a classifier
 making mostly mistakes).
 
-![TODO](figures/changing-connectance.png){#fig:connectance}
+![As in @fig:bias, consequences of changing connectance for different levels of
+classifier skill, assuming no classifier bias. Informedness, $\kappa$, and MCC
+do increase with connectance, but only when the classifier is not no-skill; by
+way of contrast, a more connected network will give a higher $F_1$ value even
+with a no-skill classifier.](figures/changing-connectance.png){#fig:connectance}
 
 These two analyses point to the following recommendations: MCC is indeed more
 appropriate than $\kappa$, as although sensitive to bias, it is sensitive in a
@@ -247,8 +251,11 @@ sensitivity to bias should come with a domain-specific caveat: although it is
 likely that interactions documented in ecological networks are correct, a lot of
 non-interactions are simply unobserved; as predictive models are used for
 data-inflation (*i.e.* the prediction of new interactions), it is not
-necessarilly a bad thing to select models that predict more interactions than
-the original dataset, because the original dataset misses some interactions.
+necessarilly a bad thing in practice to select models that predict more
+interactions than the original dataset, because the original dataset misses some
+interactions. Furthermore, the weight of positive interactions could be adjusted
+if some information about the extent of undersampling exists [*e.g.*
+@Branco2015SurPre].
 
 # Illustration on empirical food webs
 

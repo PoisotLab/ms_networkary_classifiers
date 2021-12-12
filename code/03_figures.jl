@@ -44,14 +44,14 @@ results = leftjoin(results, select(connectance_values, [:runid, :midpoint]), on=
 # Dataviz
 _keepval(f) = f in ["MCC", "INF"]
 data(@subset(results, _keepval.(:measure))) *
-    mapping(:bias => "Training set bias", :value => "Value", row=:midpoint => nonnumeric, col=:model, color=:measure) *
+    mapping(:bias => "Training set bias", :value => "Value", row=:midpoint => nonnumeric, col=:model, color=:measure => "Measure") *
     (AlgebraOfGraphics.density() * visual(Contour, color=:grey, alpha=0.3) + smooth() * visual(linewidth=2.0)) |>
     plt -> draw(plt, facet=(;linkyaxes = :minimal)) |>
     plt -> save(joinpath(@__DIR__, "..", "figures", "bias_mcc_inf.png"), plt, px_per_unit = 3)
 
 _keepval(f) = f in ["PRAUC", "ROCAUC"]
 data(@subset(results, _keepval.(:measure))) *
-    mapping(:bias => "Training set bias", :value => "Value", row=:midpoint => nonnumeric, col=:model, color=:measure) *
+    mapping(:bias => "Training set bias", :value => "Value", row=:midpoint => nonnumeric, col=:model, color=:measure => "Measure") *
     (AlgebraOfGraphics.density() * visual(Contour, color=:grey, alpha=0.3) + smooth() * visual(linewidth=2.0)) |>
     plt -> draw(plt, facet=(;linkyaxes = :minimal)) |>
     plt -> save(joinpath(@__DIR__, "..", "figures", "bias_roc_pr.png"), plt, px_per_unit = 3)
@@ -65,7 +65,7 @@ data(@subset(results, _keepval.(:measure))) *
 
 _keepval(f) = f in ["postbias"]
 data(@subset(results, _keepval.(:measure))) *
-    mapping(:bias => "Training set bias", :value => (v -> logistic(v-1)) => "Value", row=:midpoint => nonnumeric, col=:model) *
+    mapping(:bias => "Training set bias", :value => (v -> logistic(v-1)) => "Relative connectance", row=:midpoint => nonnumeric, col=:model) *
     (AlgebraOfGraphics.density() * visual(Contour, color=:grey, alpha=0.3) + smooth() * visual(linewidth=2.0)) |>
     plt -> draw(plt, facet=(;linkyaxes = :minimal)) |>
     plt -> save(joinpath(@__DIR__, "..", "figures", "bias_co.png"), plt, px_per_unit = 3)
@@ -90,14 +90,14 @@ opt = combine(bmm, [:value, :bias] => ((v,b) -> optival(v,b)) => AsTable)
 
 _keepval(f) = f in ["MCC", "INF", "PRAUC", "ROCAUC"]
 data(@subset(opt, _keepval.(:measure))) * 
-    mapping(:conbin, :bias, col=:model, row=:measure) *
+    mapping(:conbin => "Network connectance", :bias => "Optimal training set bias", col=:model, row=:measure) *
     (AlgebraOfGraphics.density() * visual(Contour, color=:grey, alpha=0.3) + smooth() * visual(linewidth=2.0)) |>
     plt -> draw(plt, facet=(;linkyaxes = :minimal), axis = (xticks = LinearTicks(3),)) |>
     plt -> save(joinpath(@__DIR__, "..", "figures", "optim_bias.png"), plt, px_per_unit = 3)
 
 _keepval(f) = f in ["MCC", "INF", "PRAUC", "ROCAUC"]
 data(@subset(opt, _keepval.(:measure))) * 
-    mapping(:conbin, :value, col=:model, row=:measure) *
+    mapping(:conbin => "Network connectance", :value => "Validation measure value", col=:model, row=:measure) *
     (AlgebraOfGraphics.density() * visual(Contour, color=:grey, alpha=0.3) + smooth() * visual(linewidth=2.0)) |>
     plt -> draw(plt, facet=(;linkyaxes = :minimal), axis = (xticks = LinearTicks(3),)) |>
     plt -> save(joinpath(@__DIR__, "..", "figures", "optim_perf.png"), plt, px_per_unit = 3)
