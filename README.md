@@ -97,6 +97,10 @@ informedness
 
 MCC
 
+ROC-AUC
+
+PR-AUC
+
 ## Confusion matrix with skill and bias
 
 In this section, we will assume a network of connectance $\rho$, *i.e.* having
@@ -259,21 +263,42 @@ if some information about the extent of undersampling exists [*e.g.*
 
 # Illustration on empirical food webs
 
-In this section, we use a collection of XX empirical networks
-
-## Using t-SBN and RDPG to simulate arbitrarily imperfect classifier
-
-use t-SVD to only use some information
-
-cumulative eigenvalues up to rank n give amount of information recovered
-
-can be thresholded
-
-how do values react to using fewer ranks
+In this section, we use a collection of 22 empirical networks
+[@Thompson1999EffSea; @Thompson2004LanUse] from streams in NEw Zealand; these
+networks were previously analyzed by @Pomeranz2018InfPre, who found that a
+variety of rule-based models tended to increase the number of interactions. Our
+goal here is not to infer which interactions are missing, but rather to estimate
+(i) how much precise knowledge of the network influences the measures of
+classification performance, and (ii) whether an increase in performance also
+results in more ecologically realistic networks. In order to do so, we use a
+trucated Singular Value Decomposition (t-SVD) coupled to a Random Dot Product
+Graph [RDPG; *e.g.* @DallaRiva2015ExpEvo] at increasingly high dimensions to
+reconstruct an approximation of the network. Recent work by @Poisot2021ImpMam
+and @Strydom2021FooWeb show that t-SVD and RDPG are able to infer biotic
+interactions in, respectively, host-virus and predator-prey systems. The
+t-SVD/RDPG approach is covered in detail by @Strydom2021FooWeb; by approximating
+the network at different ranks, where rank 1 is the coarsest, we can generate a
+matrix that can be thresholded and compared to the original network. The
+variance explained at each rank is given by the relative sum of the eigenvalues
+of the SVD up to the chosen rank, and measures how much information about the
+network we can capture [@Strydom2021SvdEnt].
 
 ## Effect of classifier performance on metrics
 
-...
+By changing the rank of approximation from 1 (variance explained is minimized)
+to 45 (variance explained is close to 1), we show in @fig:svdperf that although
+all measures of classification performance increase the more we know about the
+network, MCC is initially lower compared to informedness; similarly, ROC-AUC is
+consistently higher compared to PR-AUC.
+
+![TODO](figures/svd_perf.png){#fig:svdperf}
+
+## Effect of classifier performance on network properties
+
+![TODO](figures/svd_ecol.png)
+
+connectance, spectral radius [@Staniczenko2013GhoNes], entropy
+[@Stock2021DisInf]
 
 # Numerical experiments
 
