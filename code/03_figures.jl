@@ -21,7 +21,7 @@ todrop = unique(vcat([
     @subset(results, :measure .== "FPR", :value .== 1.0).runid,
     @subset(results, :measure .== "FNR", :value .== 1.0).runid,
     @subset(results, :measure .== "PRAUC", :value .<= 0.0).runid,
-    @subset(results, :connectance .>= 0.35).runid,
+    @subset(results, :connectance .>= 0.25).runid,
     @subset(results, :connectance .<= 0.05).runid
 ]...))
 
@@ -32,7 +32,7 @@ tokeep(f) = !(f in todrop)
 connectance_values = unique(select(results, [:runid, :connectance]))
 connectance_values.midpoint = zeros(Float64, size(connectance_values,1))
 n_connectance_bins = 5
-bins_connectance = LinRange(0.05, 0.35, n_connectance_bins+1)
+bins_connectance = LinRange(0.05, 0.25, n_connectance_bins+1)
 for i in 1:n_connectance_bins
     _idx = findall(bins_connectance[i] .<= connectance_values.connectance .< bins_connectance[i+1])
     connectance_values.midpoint[_idx] .= round((bins_connectance[i+1] + bins_connectance[i])/2.0; digits=4)
@@ -74,7 +74,7 @@ data(@subset(results, _keepval.(:measure))) *
 connectance_values = unique(select(results, [:runid, :connectance]))
 connectance_values.conbin = zeros(Float64, size(connectance_values,1))
 n_connectance_bins = 100
-bins_connectance = LinRange(0.05, 0.35, n_connectance_bins+1)
+bins_connectance = LinRange(0.05, 0.4, n_connectance_bins+1)
 for i in 1:n_connectance_bins
     _idx = findall(bins_connectance[i] .<= connectance_values.connectance .< bins_connectance[i+1])
     connectance_values.conbin[_idx] .= (bins_connectance[i+1] + bins_connectance[i])/2.0
