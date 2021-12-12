@@ -32,7 +32,8 @@ function network(S, ξ)
     𝐱₂ = repeat(𝐱ₕ; inner=length(𝐱ᵥ))
     𝐱₃ = abs.(𝐱₁ .- 𝐱₂)
     𝐲 = [L(𝐱₁[i], 𝐱₂[i]; r=ξ) for i in 1:(S*S)]
-    𝐱 = table(hcat(𝐱₁, 𝐱₂, 𝐱₃))
+    #𝐱 = table(hcat(𝐱₁, 𝐱₂, 𝐱₃))
+    𝐱 = table(hcat(𝐱₁, 𝐱₂))
     return (𝐱, 𝐲)
 end
 
@@ -61,8 +62,8 @@ candidate_models = [
 ]
 
 S = 100
-_n_sims = 300
-conditions_breadth = rand(_n_sims) .* 0.22 .+ 0.01
+_n_sims = 2000
+conditions_breadth = rand(_n_sims) .* 0.4 .+ 0.05
 conditions_bias = rand(_n_sims) .* 0.98 .+ 0.01
 conditions = hcat(conditions_breadth, conditions_bias)
 

@@ -11,7 +11,7 @@ replace!(results.value, NaN => missing)
 dropmissing!(results)
 
 # Drop the models with obviously borked classifiers
-results.runid = hash.(results.connectance .* results.co .* results.bias)
+results.runid = hash.(results.connectance .* results.breadth .* results.bias)
 
 todrop = unique(vcat([
     @subset(results, :measure .== "ACC", :value .== 0.0).runid,
@@ -19,7 +19,9 @@ todrop = unique(vcat([
     @subset(results, :measure .== "TNR", :value .== 0.0).runid,
     @subset(results, :measure .== "FPR", :value .== 1.0).runid,
     @subset(results, :measure .== "FNR", :value .== 1.0).runid,
-    @subset(results, :connectance .>= 0.3).runid
+    @subset(results, :measure .== "PRAUC", :value .<= 0.0).runid,
+    @subset(results, :connectance .>= 0.45).runid,
+    @subset(results, :connectance .<= 0.05).runid
 ]...))
 
 tokeep(f) = !(f in todrop)
@@ -28,8 +30,8 @@ tokeep(f) = !(f in todrop)
 # Make bins for connectance to make the plotting more efficient
 connectance_values = unique(select(results, [:runid, :connectance]))
 connectance_values.midpoint = zeros(Float64, size(connectance_values,1))
-n_connectance_bins = 6
-bins_connectance = LinRange(0.0, 0.3, n_connectance_bins+1)
+n_connectance_bins = 4
+bins_connectance = LinRange(0.05, 0.45, n_connectance_bins+1)
 for i in 1:n_connectance_bins
     _idx = findall(bins_connectance[i] .<= connectance_values.connectance .< bins_connectance[i+1])
     connectance_values.midpoint[_idx] .= round((bins_connectance[i+1] + bins_connectance[i])/2.0; digits=4)
@@ -62,7 +64,7 @@ data(@subset(results, _keepval.(:measure))) *
 
 _keepval(f) = f in ["postbias"]
 data(@subset(results, _keepval.(:measure))) *
-    mapping(:bias => "Training set bias", :value => logistic => "Value", row=:midpoint => nonnumeric, col=:model) *
+    mapping(:bias => "Training set bias", :value => (v -> logistic(v-1)) => "Value", row=:midpoint => nonnumeric, col=:model) *
     (AlgebraOfGraphics.density() * visual(Contour, color=:grey, alpha=0.3) + smooth() * visual(linewidth=2.0)) |>
     plt -> draw(plt, facet=(;linkyaxes = :minimal)) |>
     plt -> save(joinpath(@__DIR__, "..", "figures", "bias_co.png"), plt, px_per_unit = 3)
@@ -71,7 +73,7 @@ data(@subset(results, _keepval.(:measure))) *
 connectance_values = unique(select(results, [:runid, :connectance]))
 connectance_values.conbin = zeros(Float64, size(connectance_values,1))
 n_connectance_bins = 100
-bins_connectance = LinRange(0.0, 0.3, n_connectance_bins+1)
+bins_connectance = LinRange(0.05, 0.45, n_connectance_bins+1)
 for i in 1:n_connectance_bins
     _idx = findall(bins_connectance[i] .<= connectance_values.connectance .< bins_connectance[i+1])
     connectance_values.conbin[_idx] .= (bins_connectance[i+1] + bins_connectance[i])/2.0
