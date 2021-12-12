@@ -22,52 +22,30 @@ end
 include(joinpath(@__DIR__, "confusionmatrix.jl"))
 
 # Network generation function
-function nichemodel(; C=0.2, S=100)
-    # Beta distribution parameter
-    β = 1.0 / (2.0 * C) - 1.0
-    # Generate body size
-    n = sort(rand(Uniform(0.0, 1.0), S))
-    # Generate random ranges
-    r = n .* rand(Beta(1.0, β), S)
-    # Generate random centroids
-    c = [rand(Uniform(r[i] / 2, n[i])) for i in 1:S]
-    # Smallest species is an obligate producer
-    n[1] = c[1] = 0.0
-    # Fill
-    predictors = zeros(Float64, (S * S, 6))
-    response = zeros(Float64, S * S)
-    for i in 1:S
-        for j in 1:S
-            idx = S * (i - 1) + j
-            predictors[idx, :] = [n[i], r[i], c[i], n[j], r[j], c[j]]
-            response[idx] = c[i] - r[i] / 2 <= n[j] <= c[i] + r[j] / 2
-        end
-    end
-    # Return
-    return table(predictors), response
+L(x::T, y::T; r::T=0.1) where {T<:Number} = (x-r/2.0) ≤ y ≤ (x+r/2.0)  ? one(T) : zero(T)
+function network(S, ξ)
+    infectivity = Beta(6.0, 8.0)
+    resistance = Beta(2.0, 8.0)
+    𝐱ᵥ = sort(rand(infectivity, S))
+    𝐱ₕ = sort(rand(resistance, S))
+    𝐱₁ = repeat(𝐱ᵥ; outer=length(𝐱ₕ))
+    𝐱₂ = repeat(𝐱ₕ; inner=length(𝐱ᵥ))
+    𝐱₃ = abs.(𝐱₁ .- 𝐱₂)
+    𝐲 = [L(𝐱₁[i], 𝐱₂[i]; r=ξ) for i in 1:(S*S)]
+    𝐱 = table(hcat(𝐱₁, 𝐱₂, 𝐱₃))
+    return (𝐱, 𝐲)
 end
 
 
 # Prepare the results
 results = [DataFrame(;
-    co=Float64[],
+    breadth=Float64[],
     bias=Float64[],
     connectance=Float64[],
     model=Symbol[],
     measure=Symbol[],
     value=Float64[],
 ) for _thr in 1:Threads.nthreads()]
-
-# Pick possible models based on a network
-#=
-_mock = nichemodel(S=10, C=0.2)
-_mods = models() do model
-    matching(model, _mock...) &&
-        model.prediction_type == :deterministic &&
-        model.is_supervised &&
-        model.is_pure_julia
-end
-=#
 
 # these regression machines go brrr as f u c k
 DecisionTree = @load DecisionTreeRegressor pkg = DecisionTree
@@ -83,16 +61,16 @@ candidate_models = [
 ]
 
 S = 100
-_n_sims = 20000
-conditions_co = rand(_n_sims) .* 0.26 .+ 0.001
+_n_sims = 300
+conditions_breadth = rand(_n_sims) .* 0.22 .+ 0.01
 conditions_bias = rand(_n_sims) .* 0.98 .+ 0.01
-conditions = hcat(conditions_co, conditions_bias)
+conditions = hcat(conditions_breadth, conditions_bias)
 
 Threads.@threads for i in 1:size(conditions, 1)
-    co, bias = conditions[i, :]
-    @info i, Threads.threadid(), co, bias
+    breadth, bias = conditions[i, :]
+    @info i, Threads.threadid(), breadth, bias
 
-    𝐗, 𝐲 = nichemodel(S=S, C=co)
+    𝐗, 𝐲 = network(S, breadth)
 
     # Training and testing sets
     training_size = round(Int64, 0.3 * length(𝐲))
@@ -127,26 +105,26 @@ Threads.@threads for i in 1:size(conditions, 1)
         ROCAUC = ∫(fpr.(M), tpr.(M))
         AUPRC = ∫(tpr.(M), ppv.(M))
         𝐌 = M[last(findmax(informedness.(M)))]
-        push!(results[Threads.threadid()], (co, bias, mean(𝐲), candidate_model.first, :ROCAUC, ROCAUC))
-        push!(results[Threads.threadid()], (co, bias, mean(𝐲), candidate_model.first, :PRAUC, AUPRC))
-        push!(results[Threads.threadid()], (co, bias, mean(𝐲), candidate_model.first, :CSI, csi(𝐌)))
-        push!(results[Threads.threadid()], (co, bias, mean(𝐲), candidate_model.first, :BA, balanced(𝐌)))
-        push!(results[Threads.threadid()], (co, bias, mean(𝐲), candidate_model.first, :ACC, accuracy(𝐌)))
-        push!(results[Threads.threadid()], (co, bias, mean(𝐲), candidate_model.first, :INF, informedness(𝐌)))
-        push!(results[Threads.threadid()], (co, bias, mean(𝐲), candidate_model.first, :PT, pt(𝐌)))
-        push!(results[Threads.threadid()], (co, bias, mean(𝐲), candidate_model.first, :FDR, fdir(𝐌)))
-        push!(results[Threads.threadid()], (co, bias, mean(𝐲), candidate_model.first, :FOR, fomr(𝐌)))
-        push!(results[Threads.threadid()], (co, bias, mean(𝐲), candidate_model.first, :KAPPA, κ(𝐌)))
-        push!(results[Threads.threadid()], (co, bias, mean(𝐲), candidate_model.first, :TPR, tpr(𝐌)))
-        push!(results[Threads.threadid()], (co, bias, mean(𝐲), candidate_model.first, :TNR, tnr(𝐌)))
-        push!(results[Threads.threadid()], (co, bias, mean(𝐲), candidate_model.first, :FPR, fpr(𝐌)))
-        push!(results[Threads.threadid()], (co, bias, mean(𝐲), candidate_model.first, :FNR, fnr(𝐌)))
-        push!(results[Threads.threadid()], (co, bias, mean(𝐲), candidate_model.first, :PPV, ppv(𝐌)))
-        push!(results[Threads.threadid()], (co, bias, mean(𝐲), candidate_model.first, :NPV, npv(𝐌)))
-        push!(results[Threads.threadid()], (co, bias, mean(𝐲), candidate_model.first, :MKD, markedness(𝐌)))
-        push!(results[Threads.threadid()], (co, bias, mean(𝐲), candidate_model.first, :F1, f1(𝐌)))
-        push!(results[Threads.threadid()], (co, bias, mean(𝐲), candidate_model.first, :MCC, mcc(𝐌)))
-        push!(results[Threads.threadid()], (co, bias, mean(𝐲), candidate_model.first, :postbias, (𝐌.tp+𝐌.fp)/(𝐌.tp+𝐌.fn)))
+        push!(results[Threads.threadid()], (breadth, bias, mean(𝐲), candidate_model.first, :ROCAUC, ROCAUC))
+        push!(results[Threads.threadid()], (breadth, bias, mean(𝐲), candidate_model.first, :PRAUC, AUPRC))
+        push!(results[Threads.threadid()], (breadth, bias, mean(𝐲), candidate_model.first, :CSI, csi(𝐌)))
+        push!(results[Threads.threadid()], (breadth, bias, mean(𝐲), candidate_model.first, :BA, balanced(𝐌)))
+        push!(results[Threads.threadid()], (breadth, bias, mean(𝐲), candidate_model.first, :ACC, accuracy(𝐌)))
+        push!(results[Threads.threadid()], (breadth, bias, mean(𝐲), candidate_model.first, :INF, informedness(𝐌)))
+        push!(results[Threads.threadid()], (breadth, bias, mean(𝐲), candidate_model.first, :PT, pt(𝐌)))
+        push!(results[Threads.threadid()], (breadth, bias, mean(𝐲), candidate_model.first, :FDR, fdir(𝐌)))
+        push!(results[Threads.threadid()], (breadth, bias, mean(𝐲), candidate_model.first, :FOR, fomr(𝐌)))
+        push!(results[Threads.threadid()], (breadth, bias, mean(𝐲), candidate_model.first, :KAPPA, κ(𝐌)))
+        push!(results[Threads.threadid()], (breadth, bias, mean(𝐲), candidate_model.first, :TPR, tpr(𝐌)))
+        push!(results[Threads.threadid()], (breadth, bias, mean(𝐲), candidate_model.first, :TNR, tnr(𝐌)))
+        push!(results[Threads.threadid()], (breadth, bias, mean(𝐲), candidate_model.first, :FPR, fpr(𝐌)))
+        push!(results[Threads.threadid()], (breadth, bias, mean(𝐲), candidate_model.first, :FNR, fnr(𝐌)))
+        push!(results[Threads.threadid()], (breadth, bias, mean(𝐲), candidate_model.first, :PPV, ppv(𝐌)))
+        push!(results[Threads.threadid()], (breadth, bias, mean(𝐲), candidate_model.first, :NPV, npv(𝐌)))
+        push!(results[Threads.threadid()], (breadth, bias, mean(𝐲), candidate_model.first, :MKD, markedness(𝐌)))
+        push!(results[Threads.threadid()], (breadth, bias, mean(𝐲), candidate_model.first, :F1, f1(𝐌)))
+        push!(results[Threads.threadid()], (breadth, bias, mean(𝐲), candidate_model.first, :MCC, mcc(𝐌)))
+        push!(results[Threads.threadid()], (breadth, bias, mean(𝐲), candidate_model.first, :postbias, (𝐌.tp+𝐌.fp)/(𝐌.tp+𝐌.fn)))
     end
 
     # Ensemble model
@@ -169,26 +147,26 @@ Threads.@threads for i in 1:size(conditions, 1)
         ROCAUC = ∫(fpr.(M), tpr.(M))
         AUPRC = ∫(tpr.(M), ppv.(M))
         𝐌 = M[last(findmax(informedness.(M)))]
-        push!(results[Threads.threadid()], (co, bias, mean(𝐲), :ensemble, :ROCAUC, ROCAUC))
-        push!(results[Threads.threadid()], (co, bias, mean(𝐲), :ensemble, :PRAUC, AUPRC))
-        push!(results[Threads.threadid()], (co, bias, mean(𝐲), :ensemble, :CSI, csi(𝐌)))
-        push!(results[Threads.threadid()], (co, bias, mean(𝐲), :ensemble, :BA, balanced(𝐌)))
-        push!(results[Threads.threadid()], (co, bias, mean(𝐲), :ensemble, :ACC, accuracy(𝐌)))
-        push!(results[Threads.threadid()], (co, bias, mean(𝐲), :ensemble, :INF, informedness(𝐌)))
-        push!(results[Threads.threadid()], (co, bias, mean(𝐲), :ensemble, :PT, pt(𝐌)))
-        push!(results[Threads.threadid()], (co, bias, mean(𝐲), :ensemble, :FDR, fdir(𝐌)))
-        push!(results[Threads.threadid()], (co, bias, mean(𝐲), :ensemble, :FOR, fomr(𝐌)))
-        push!(results[Threads.threadid()], (co, bias, mean(𝐲), :ensemble, :KAPPA, κ(𝐌)))
-        push!(results[Threads.threadid()], (co, bias, mean(𝐲), :ensemble, :TPR, tpr(𝐌)))
-        push!(results[Threads.threadid()], (co, bias, mean(𝐲), :ensemble, :TNR, tnr(𝐌)))
-        push!(results[Threads.threadid()], (co, bias, mean(𝐲), :ensemble, :FPR, fpr(𝐌)))
-        push!(results[Threads.threadid()], (co, bias, mean(𝐲), :ensemble, :FNR, fnr(𝐌)))
-        push!(results[Threads.threadid()], (co, bias, mean(𝐲), :ensemble, :PPV, ppv(𝐌)))
-        push!(results[Threads.threadid()], (co, bias, mean(𝐲), :ensemble, :NPV, npv(𝐌)))
-        push!(results[Threads.threadid()], (co, bias, mean(𝐲), :ensemble, :MKD, markedness(𝐌)))
-        push!(results[Threads.threadid()], (co, bias, mean(𝐲), :ensemble, :F1, f1(𝐌)))
-        push!(results[Threads.threadid()], (co, bias, mean(𝐲), :ensemble, :MCC, mcc(𝐌)))
-        push!(results[Threads.threadid()], (co, bias, mean(𝐲), :ensemble, :postbias, (𝐌.tp+𝐌.fp)/(𝐌.tp+𝐌.fn)))
+        push!(results[Threads.threadid()], (breadth, bias, mean(𝐲), :ensemble, :ROCAUC, ROCAUC))
+        push!(results[Threads.threadid()], (breadth, bias, mean(𝐲), :ensemble, :PRAUC, AUPRC))
+        push!(results[Threads.threadid()], (breadth, bias, mean(𝐲), :ensemble, :CSI, csi(𝐌)))
+        push!(results[Threads.threadid()], (breadth, bias, mean(𝐲), :ensemble, :BA, balanced(𝐌)))
+        push!(results[Threads.threadid()], (breadth, bias, mean(𝐲), :ensemble, :ACC, accuracy(𝐌)))
+        push!(results[Threads.threadid()], (breadth, bias, mean(𝐲), :ensemble, :INF, informedness(𝐌)))
+        push!(results[Threads.threadid()], (breadth, bias, mean(𝐲), :ensemble, :PT, pt(𝐌)))
+        push!(results[Threads.threadid()], (breadth, bias, mean(𝐲), :ensemble, :FDR, fdir(𝐌)))
+        push!(results[Threads.threadid()], (breadth, bias, mean(𝐲), :ensemble, :FOR, fomr(𝐌)))
+        push!(results[Threads.threadid()], (breadth, bias, mean(𝐲), :ensemble, :KAPPA, κ(𝐌)))
+        push!(results[Threads.threadid()], (breadth, bias, mean(𝐲), :ensemble, :TPR, tpr(𝐌)))
+        push!(results[Threads.threadid()], (breadth, bias, mean(𝐲), :ensemble, :TNR, tnr(𝐌)))
+        push!(results[Threads.threadid()], (breadth, bias, mean(𝐲), :ensemble, :FPR, fpr(𝐌)))
+        push!(results[Threads.threadid()], (breadth, bias, mean(𝐲), :ensemble, :FNR, fnr(𝐌)))
+        push!(results[Threads.threadid()], (breadth, bias, mean(𝐲), :ensemble, :PPV, ppv(𝐌)))
+        push!(results[Threads.threadid()], (breadth, bias, mean(𝐲), :ensemble, :NPV, npv(𝐌)))
+        push!(results[Threads.threadid()], (breadth, bias, mean(𝐲), :ensemble, :MKD, markedness(𝐌)))
+        push!(results[Threads.threadid()], (breadth, bias, mean(𝐲), :ensemble, :F1, f1(𝐌)))
+        push!(results[Threads.threadid()], (breadth, bias, mean(𝐲), :ensemble, :MCC, mcc(𝐌)))
+        push!(results[Threads.threadid()], (breadth, bias, mean(𝐲), :ensemble, :postbias, (𝐌.tp+𝐌.fp)/(𝐌.tp+𝐌.fn)))
     end
 end
 
