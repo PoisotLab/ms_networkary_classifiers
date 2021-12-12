@@ -22,7 +22,12 @@ would lead to select a \emph{more} biased classifier.}\label{fig:bias}
 \hypertarget{fig:connectance}{%
 \centering
 \includegraphics{figures/changing-connectance.png}
-\caption{TODO}\label{fig:connectance}
+\caption{As in fig.~\ref{fig:bias}, consequences of changing connectance
+for different levels of classifier skill, assuming no classifier bias.
+Informedness, \(\kappa\), and MCC do increase with connectance, but only
+when the classifier is not no-skill; by way of contrast, a more
+connected network will give a higher \(F_1\) value even with a no-skill
+classifier.}\label{fig:connectance}
 }
 \end{figure}
 \efloatseparator
