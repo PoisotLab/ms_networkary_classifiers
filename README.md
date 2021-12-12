@@ -250,6 +250,24 @@ data-inflation (*i.e.* the prediction of new interactions), it is not
 necessarilly a bad thing to select models that predict more interactions than
 the original dataset, because the original dataset misses some interactions.
 
+# Illustration on empirical food webs
+
+In this section, we use a collection of XX empirical networks
+
+## Using t-SBN and RDPG to simulate arbitrarily imperfect classifier
+
+use t-SVD to only use some information
+
+cumulative eigenvalues up to rank n give amount of information recovered
+
+can be thresholded
+
+how do values react to using fewer ranks
+
+## Effect of classifier performance on metrics
+
+...
+
 # Numerical experiments
 
 In the following section, we will generate random networks, and train four
