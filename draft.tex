@@ -224,8 +224,8 @@ context of the low volume of data.%
 \item
   summary of model challenges for networks
 \item
-  Strydom et al. (2021) importance of drawing on traits + validation is
-  challenging + comparing across space
+  Strydom, Catchen, et al. (2021) importance of drawing on traits +
+  validation is challenging + comparing across space
 \end{itemize}
 
 Binary classifiers are usually assessed by measuring properties of their
@@ -333,6 +333,10 @@ measures}\label{definition-of-the-performance-measures}}
 informedness
 
 MCC
+
+ROC-AUC
+
+PR-AUC
 
 \hypertarget{confusion-matrix-with-skill-and-bias}{%
 \subsection{Confusion matrix with skill and
@@ -528,25 +532,60 @@ extent of undersampling exists (\emph{e.g.} Branco et al., 2015).
 \section{Illustration on empirical food
 webs}\label{illustration-on-empirical-food-webs}}
 
-In this section, we use a collection of XX empirical networks
-
-\hypertarget{using-t-sbn-and-rdpg-to-simulate-arbitrarily-imperfect-classifier}{%
-\subsection{Using t-SBN and RDPG to simulate arbitrarily imperfect
-classifier}\label{using-t-sbn-and-rdpg-to-simulate-arbitrarily-imperfect-classifier}}
-
-use t-SVD to only use some information
-
-cumulative eigenvalues up to rank n give amount of information recovered
-
-can be thresholded
-
-how do values react to using fewer ranks
+In this section, we use a collection of 22 empirical networks (Thompson
+\& Townsend, 2004; Thompson \& Townsend, 1999) from streams in NEw
+Zealand; these networks were previously analyzed by Pomeranz et al.
+(2018), who found that a variety of rule-based models tended to increase
+the number of interactions. Our goal here is not to infer which
+interactions are missing, but rather to estimate (i) how much precise
+knowledge of the network influences the measures of classification
+performance, and (ii) whether an increase in performance also results in
+more ecologically realistic networks. In order to do so, we use a
+trucated Singular Value Decomposition (t-SVD) coupled to a Random Dot
+Product Graph (RDPG; \emph{e.g.} Dalla Riva \& Stouffer, 2015) at
+increasingly high dimensions to reconstruct an approximation of the
+network. Recent work by Poisot et al. (2021) and Strydom, Bouskila, et
+al. (2021) show that t-SVD and RDPG are able to infer biotic
+interactions in, respectively, host-virus and predator-prey systems. The
+t-SVD/RDPG approach is covered in detail by Strydom, Bouskila, et al.
+(2021); by approximating the network at different ranks, where rank 1 is
+the coarsest, we can generate a matrix that can be thresholded and
+compared to the original network. The variance explained at each rank is
+given by the relative sum of the eigenvalues of the SVD up to the chosen
+rank, and measures how much information about the network we can capture
+(Strydom, Dalla Riva, et al., 2021).
 
 \hypertarget{effect-of-classifier-performance-on-metrics}{%
 \subsection{Effect of classifier performance on
 metrics}\label{effect-of-classifier-performance-on-metrics}}
 
-\ldots{}
+By changing the rank of approximation from 1 (variance explained is
+minimized) to 45 (variance explained is close to 1), we show in
+fig.~\ref{fig:svdperf} that although all measures of classification
+performance increase the more we know about the network, MCC is
+initially lower compared to informedness; similarly, ROC-AUC is
+consistently higher compared to PR-AUC.
+
+\begin{figure}
+\hypertarget{fig:svdperf}{%
+\centering
+\includegraphics{figures/svd_perf.png}
+\caption{TODO}\label{fig:svdperf}
+}
+\end{figure}
+
+\hypertarget{effect-of-classifier-performance-on-network-properties}{%
+\subsection{Effect of classifier performance on network
+properties}\label{effect-of-classifier-performance-on-network-properties}}
+
+\begin{figure}
+\centering
+\includegraphics{figures/svd_ecol.png}
+\caption{TODO}
+\end{figure}
+
+connectance, spectral radius (Staniczenko et al., 2013), entropy (Stock
+et al., 2021)
 
 \hypertarget{numerical-experiments}{%
 \section{Numerical experiments}\label{numerical-experiments}}
@@ -830,6 +869,11 @@ informedness, and markedness in two-class confusion matrix evaluation.
 \emph{BioData Mining}, \emph{14}, 13.
 \url{https://doi.org/10.1186/s13040-021-00244-z}
 
+\leavevmode\hypertarget{ref-DallaRiva2015ExpEvo}{}%
+Dalla Riva, G. V., \& Stouffer, D. B. (2015). Exploring the evolutionary
+signature of food webs' backbones using functional traits. \emph{Oikos},
+\emph{125}(4), 446--456. \url{https://doi.org/10.1111/oik.02305}
+
 \leavevmode\hypertarget{ref-Delgado2019WhyCoh}{}%
 Delgado, R., \& Tibau, X.-A. (2019). Why Cohen's Kappa should be avoided
 as performance measure in classification. \emph{PloS One}, \emph{14}(9),
@@ -855,6 +899,18 @@ M.-J., Galiana, N., Poisot, T., \& Wood, S. A. (2021). Sampling and
 asymptotic network properties of spatial multi-trophic networks.
 \emph{Oikos}, \emph{n/a}(n/a). \url{https://doi.org/10.1111/oik.08650}
 
+\leavevmode\hypertarget{ref-Poisot2021ImpMam}{}%
+Poisot, T., Ouellet, M.-A., Mollentze, N., Farrell, M. J., Becker, D.
+J., Albery, G. F., Gibb, R. J., Seifert, S. N., \& Carlson, C. J. (2021,
+May 31). \emph{Imputing the mammalian virome with linear filtering and
+singular value decomposition}. \url{http://arxiv.org/abs/2105.14973}
+
+\leavevmode\hypertarget{ref-Pomeranz2018InfPre}{}%
+Pomeranz, J. P., Thompson, R. M., Poisot, T., \& Harding, J. S. (2018).
+Inferring predator-prey interactions in food webs. \emph{Methods in
+Ecology and Evolution}, \emph{0}.
+\url{https://doi.org/10.1111/2041-210X.13125}
+
 \leavevmode\hypertarget{ref-Saito2015PrePlo}{}%
 Saito, T., \& Rehmsmeier, M. (2015). The Precision-Recall Plot Is More
 Informative than the ROC Plot When Evaluating Binary Classifiers on
@@ -867,6 +923,23 @@ in model goodness measures with special emphasis on true skill
 statistics. \emph{Ecology and Evolution}, \emph{7}(3), 863--872.
 \url{https://doi.org/10.1002/ece3.2654}
 
+\leavevmode\hypertarget{ref-Staniczenko2013GhoNes}{}%
+Staniczenko, P. P. A., Kopp, J. C., \& Allesina, S. (2013). The ghost of
+nestedness in ecological networks. \emph{Nature Communications},
+\emph{4}(1), 1391. \url{https://doi.org/10.1038/ncomms2422}
+
+\leavevmode\hypertarget{ref-Stock2021DisInf}{}%
+Stock, M., Hoebeke, L., \& De Baets, B. (2021). Disentangling the
+Information in Species Interaction Networks. \emph{Entropy},
+\emph{23}(6, 6), 703. \url{https://doi.org/10.3390/e23060703}
+
+\leavevmode\hypertarget{ref-Strydom2021FooWeb}{}%
+Strydom, T., Bouskila, S., Banville, F., Barros, C., Caron, D., Farrell,
+M. J., Fortin, M.-J., Hemming, V., Mercier, B., Pollock, L., Runghen,
+R., Riva, G. V. D., \& Poisot, T. (2021). \emph{Food web reconstruction
+through phylogenetic transfer of low-rank network representation}.
+\url{https://doi.org/10.32942/osf.io/y7sdz}
+
 \leavevmode\hypertarget{ref-Strydom2021RoaPre}{}%
 Strydom, T., Catchen, M. D., Banville, F., Caron, D., Dansereau, G.,
 Desjardins-Proulx, P., Forero-Muñoz, N. R., Higino, G., Mercier, B.,
@@ -875,6 +948,25 @@ towards predicting species interaction networks (across space and time).
 \emph{Philosophical Transactions of the Royal Society B: Biological
 Sciences}, \emph{376}(1837), 20210063.
 \url{https://doi.org/10.1098/rstb.2021.0063}
+
+\leavevmode\hypertarget{ref-Strydom2021SvdEnt}{}%
+Strydom, T., Dalla Riva, G. V., \& Poisot, T. (2021). SVD Entropy
+Reveals the High Complexity of Ecological Networks. \emph{Frontiers in
+Ecology and Evolution}, \emph{9}.
+\url{https://doi.org/10.3389/fevo.2021.623141}
+
+\leavevmode\hypertarget{ref-Thompson2004LanUse}{}%
+Thompson, R. M., \& Townsend, C. R. (2004). Land‐use influences on New
+Zealand stream communities: Effects on species composition, functional
+organisation, and food‐web structure. \emph{New Zealand Journal of
+Marine and Freshwater Research}, \emph{38}(4), 595--608.
+\url{https://doi.org/10.1080/00288330.2004.9517265}
+
+\leavevmode\hypertarget{ref-Thompson1999EffSea}{}%
+Thompson, R. M., \& Townsend, C. R. (1999). The Effect of Seasonal
+Variation on the Community Structure and Food-Web Attributes of Two
+Streams: Implications for Food-Web Science. \emph{Oikos}, \emph{87}(1),
+75--88. \url{https://doi.org/10.2307/3546998}
 
 \leavevmode\hypertarget{ref-Whalen2021NavPit}{}%
 Whalen, S., Schreiber, J., Noble, W. S., \& Pollard, K. S. (2021).
