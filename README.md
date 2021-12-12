@@ -410,4 +410,10 @@ an hyperparameter that should be assessed. The distribution of results in
 trend; furthermore, networks with different structures than the one we simulated
 here may respond in different ways.
 
+**Acknowledgements:** We acknowledge that this study was conducted on land
+within the traditional unceded territory of the Saint Lawrence Iroquoian,
+Anishinabewaki, Mohawk, Huron-Wendat, and Omàmiwininiwak nations. This research
+was enabled in part by support provided by Calcul Québec (www.calculquebec.ca)
+and Compute Canada (www.computecanada.ca).
+
 # References
