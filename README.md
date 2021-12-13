@@ -91,15 +91,15 @@ Intro
 
 $\kappa$
 
-$F_{\beta}$
-
 informedness
 
 MCC
 
 ROC-AUC
 
-PR-AUC
+$F_{\beta}$
+
+PR-AUC - baseline is prevalence, wtf are recall and precision, you may ask?
 
 ## Confusion matrix with skill and bias
 
@@ -405,47 +405,52 @@ its components models.
 # Do better classification accuracy result in more realistic networks?
 
 In this last section, we generate a network using the same model as before, with
-$S = 50$ species, a connectance of $\approx 0.16$ ($\xi = 0.19$), and a training
-set bias of $0.7$. The prediction made on the complete dataset is presented in
-@fig:ecovalid. Visualizing the results this way highlights the importance of
-exploratory data analysis: whereas all models return a network with interactions
-laying mostly on the diagonal (as expected), the Ridge Regression is quite
-obviously biased. Despite this, we can see that the ensemble is close to the
-initial dataset.
+$S_1, S_2 = 50, 80$ species, a connectance of $\approx 0.16$ ($\xi = 0.19$), and
+a training set bias of $0.7$. The prediction made on the complete dataset is
+presented in @fig:ecovalid. Visualizing the results this way highlights the
+importance of exploratory data analysis: whereas all models return a network
+with interactions laying mostly on the diagonal (as expected), the Ridge
+Regression is quite obviously biased. Despite this, we can see that the ensemble
+is close to the initial dataset.
 
 ![TODO](figures/valid_ensemble.png){#fig:ecovalid}
 
 The trained models were then thresholded (again by optimising informedness), and
 their predictions transformed back into networks for analysis; specifically, we
-measured the connectance, nestedness (REF), and modularity (REF). The results
-are presented in @tbl:comparison. The random forest model is an interesting
-instance here: it produces the network that looks the most like the original
-dataset, despite having a very low PR-AUC, suggesting it hits high recall at the
-cost of low precision. Although the ensemble was about to reach a very high
-PR-AUC (and a very high ROC-AUC), this did not necessarilly translate into more
-accurate reconstructions of the structure of the network. This result bears
-elaborating. Measures of model performance capture how much of the interactions
-and non-interactions are correctly identified. As long as these predictions are
-not perfect, some interactions will be predicted at the "wrong" position in the
-network; these measures cannot describe the structural effect of these mistakes.
-On the other hand, measures of network structure can have the same value with
-interactions that fall at drastically different positions; this is in part
-because a lot of these measures covary with connectance, and in part because as
-long as these values are not 0 or their respective maximum, there is a large
-number of network configurations that can have the same value.
+measured the connectance, nestedness (REF), and modularity (REF). This process
+was repeated 250 times, and the results are presented in @tbl:comparison. The
+random forest model is an interesting instance here: it produces the network
+that looks the most like the original dataset, despite having a very low PR-AUC,
+suggesting it hits high recall at the cost of low precision. Although the
+ensemble was about to reach a very high PR-AUC (and a very high ROC-AUC), this
+did not necessarilly translate into more accurate reconstructions of the
+structure of the network. This result bears elaborating. Measures of model
+performance capture how much of the interactions and non-interactions are
+correctly identified. As long as these predictions are not perfect, some
+interactions will be predicted at the "wrong" position in the network; these
+measures cannot describe the structural effect of these mistakes. On the other
+hand, measures of network structure can have the same value with interactions
+that fall at drastically different positions; this is in part because a lot of
+these measures covary with connectance, and in part because as long as these
+values are not 0 or their respective maximum, there is a large number of network
+configurations that can have the same value. That ROC-AUC is consistently larger
+than PR-AUC may be a case of this measure masking models that are not,
+individually, strong predictors [@Jeni2013FacImb].
 
 |            Model |   MCC    |   Inf.   | ROC-AUC  |  PR-AUC  |  Conn.   |  $\eta$  |   $Q$    |
 | ---------------: | :------: | :------: | :------: | :------: | :------: | :------: | :------: |
-|    Decision tree |   0.83   |   0.68   |   0.95   |   0.15   |   0.18   |   0.53   | **0.49** |
-|              BRT |   0.76   |   0.89   |   0.95   |   0.65   |   0.22   |   0.63   |   0.43   |
-|    Random Forest | **0.89** | **0.94** | **0.99** |   0.41   | **0.17** | **0.48** | **0.49** |
-| Ridge Regression |   0.67   |   0.85   |   0.89   |   0.38   |   0.27   |   1.0    |   0.26   |
-|         Ensemble |   0.84   |   0.91   | **0.99** | **0.94** |   0.19   |   0.54   |   0.48   |
-|             Data |          |          |          |          |   0.16   |   0.45   |   0.49   |
+|    Decision tree |   0.85   |   0.92   |   0.97   |   0.12   |   0.21   |   0.76   |   0.31   |
+|              BRT |   0.90   |   0.90   |   0.98   |   0.86   |   0.23   |   0.82   |   0.27   |
+|    Random Forest | **0.90** | **0.96** | **1.00** |   0.27   | **0.20** | **0.72** | **0.32** |
+| Ridge Regression |   0.80   |   0.91   |   0.95   |   0.58   |   0.24   |   1.0    |   0.18   |
+|         Ensemble |   0.88   |   0.94   | **1.00** | **0.96** | **0.20** |   0.75   |   0.31   |
+|             Data |          |          |          |          |   0.18   |   0.66   |   0.34   |
 
 : Values of four performance metrics, and three network structure metrics, for
-the predictions presented in @fig:ecovalid. The values in **bold** indicate the
-best value for each column (including ties).  {#tbl:comparison}
+250 independent predictions similar to the ones presented in @fig:ecovalid. The
+values in **bold** indicate the best value for each column (including ties).
+Because the values have been rounded, values of 1.0 for the ROC-AUC column
+indicate an average $\ge 0.99$. {#tbl:comparison}
 
 # Guidelines for the assesment of network predictive models
 

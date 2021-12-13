@@ -33,12 +33,12 @@ end
 function network(S, ξ)
     infectivity = Beta(6.0, 8.0)
     resistance = Beta(2.0, 8.0)
-    𝐱ᵥ = sort(rand(infectivity, S))
-    𝐱ₕ = sort(rand(resistance, S))
+    𝐱ᵥ = sort(rand(infectivity, S[1]))
+    𝐱ₕ = sort(rand(resistance, S[2]))
     𝐱₁ = repeat(𝐱ᵥ; outer=length(𝐱ₕ))
     𝐱₂ = repeat(𝐱ₕ; inner=length(𝐱ᵥ))
     𝐱₃ = abs.(𝐱₁ .- 𝐱₂)
-    𝐲 = [L(𝐱₁[i], 𝐱₂[i]; r=ξ) for i in 1:(S * S)]
+    𝐲 = [L(𝐱₁[i], 𝐱₂[i]; r=ξ) for i in 1:length(𝐱₁)]
     #𝐱 = table(hcat(𝐱₁, 𝐱₂, 𝐱₃))
     𝐱 = table(hcat(𝐱₁, 𝐱₂))
     return (𝐱, 𝐲)
@@ -56,7 +56,8 @@ candidate_models = [
     :RR => RidgeRegressor(),
 ]
 
-S = 50
+S = (50,80)
+
 
 𝐗, 𝐲 = network(S, 0.19)
 bias = 0.7
@@ -154,13 +155,3 @@ data(results) *
     visual(Heatmap, colormap=Reverse(:deep)) |>
     plt -> draw(plt, facet=(;linkyaxes = :minimal), axis = (xticks = LinearTicks(3),)) |>
     plt -> save(joinpath(@__DIR__, "..", "figures", "valid_ensemble.png"), plt, px_per_unit = 3)
-
-for v in ("DecTree", "BRT", "RF", "RR", "Ensemble", "Dataset")
-    @info v
-    @info (
-        reshape(@subset(results, :model .== v).guess, (S, S)) .|>
-        Bool
-    ) |>
-        BipartiteNetwork |>
-        n -> Q(brim(lp(n)...)...)
-end
