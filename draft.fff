@@ -66,3 +66,12 @@ classifier.}\label{fig:connectance}
 \caption{TODO}\label{fig:optimperf}
 }
 \end{figure}
+\efloatseparator
+ 
+\begin{figure}
+\hypertarget{fig:ecovalid}{%
+\centering
+\includegraphics{figures/valid_ensemble.png}
+\caption{TODO}\label{fig:ecovalid}
+}
+\end{figure}
