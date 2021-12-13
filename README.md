@@ -413,7 +413,7 @@ laying mostly on the diagonal (as expected), the Ridge Regression is quite
 obviously biased. Despite this, we can see that the ensemble is close to the
 initial dataset.
 
-![](figures/valid_ensemble.png){#fig:ecovalid}
+![TODO](figures/valid_ensemble.png){#fig:ecovalid}
 
 The trained models were then thresholded (again by optimising informedness), and
 their predictions transformed back into networks for analysis; specifically, we
