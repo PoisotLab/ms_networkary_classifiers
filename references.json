@@ -423,6 +423,37 @@
         "volume": "14"
     },
     {
+        "DOI": "10.1109/ACII.2013.47",
+        "author": [
+            {
+                "family": "Jeni",
+                "given": "L\u00e1szl\u00f3 A."
+            },
+            {
+                "family": "Cohn",
+                "given": "Jeffrey F."
+            },
+            {
+                "family": "De La Torre",
+                "given": "Fernando"
+            }
+        ],
+        "container-title": "2013 Humaine Association Conference on Affective Computing and Intelligent Interaction",
+        "event": "2013 Humaine Association Conference on Affective Computing and Intelligent Interaction",
+        "id": "Jeni2013FacImb",
+        "issued": {
+            "date-parts": [
+                [
+                    2013,
+                    9
+                ]
+            ]
+        },
+        "page": "245-251",
+        "title": "Facing Imbalanced Data\u2013Recommendations for the Use of Performance Metrics",
+        "type": "paper-conference"
+    },
+    {
         "DOI": "10.1371/journal.pbio.1002559",
         "author": [
             {
