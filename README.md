@@ -434,14 +434,14 @@ is in part because a lot of these measures covary with connectance, and in part
 because as long as these values are not 0 or their respective maximum, there is
 a large number of network configurations that can have the same value.
 
-| Model            | MCC      | Inf.     | ROC-AUC  | PR-AUC   | Conn.    | $\eta$   | $Q$      | Entropy  |
-| ---------------- | -------- | -------- | -------- | -------- | -------- | -------- | -------- | -------- |
-| Decision tree    | 0.83     | 0.68     | 0.95     | 0.15     | 0.18     | 0.53     | **0.49**     | 8.86     |
-| BRT              | 0.76     | 0.89     | 0.95     | 0.65     | 0.22     | 0.63     | 0.43     | 9.14     |
-| Random Forest    | **0.89** | **0.94** | **0.99** | 0.41     | **0.17** | **0.48** | **0.49** | **8.80** |
-| Ridge Regression | 0.67     | 0.85     | 0.89     | 0.38     | 0.27     | 1.0      | 0.26     | 9.40     |
-| Ensemble         | 0.84     | 0.91     | **0.99** | **0.94** | 0.19     | 0.54     | 0.48     | 8.92     |
-| Data             |          |          |          |          | 0.16     | 0.45     | 0.49     | 8.71     |
+|            Model |   MCC    |   Inf.   | ROC-AUC  |  PR-AUC  |  Conn.   |  $\eta$  |   $Q$    | Entropy  |
+| ---------------: | :------: | :------: | :------: | :------: | :------: | :------: | :------: | :------: |
+|    Decision tree |   0.83   |   0.68   |   0.95   |   0.15   |   0.18   |   0.53   | **0.49** |   8.86   |
+|              BRT |   0.76   |   0.89   |   0.95   |   0.65   |   0.22   |   0.63   |   0.43   |   9.14   |
+|    Random Forest | **0.89** | **0.94** | **0.99** |   0.41   | **0.17** | **0.48** | **0.49** | **8.80** |
+| Ridge Regression |   0.67   |   0.85   |   0.89   |   0.38   |   0.27   |   1.0    |   0.26   |   9.40   |
+|         Ensemble |   0.84   |   0.91   | **0.99** | **0.94** |   0.19   |   0.54   |   0.48   |   8.92   |
+|             Data |          |          |          |          |   0.16   |   0.45   |   0.49   |   8.71   |
 
 : Values of four performance metrics, and four network structure metrics, for the predictions presented in @fig:ecovalid. The values in **bold** indicate the best value for each column (including ties).  {#tbl:comparison}
 
