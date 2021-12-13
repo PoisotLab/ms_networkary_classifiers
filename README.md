@@ -55,7 +55,7 @@ tn/(tn+fp)$; informedness can be used to find the optimal cutpoint in
 thresholding analyses [@Schisterman2005OptCut]. The MCC is defined as 
 
 $$
-\frac{tp\times tn - fn\times fp}{\srt{(tp+fp)\times (tp+fn)\times (tn+fp)\times (tn+fn)}} \,.
+\frac{tp\times tn - fn\times fp}{\sqrt{(tp+fp)\times (tp+fn)\times (tn+fp)\times (tn+fn)}} \,.
 $$
 
 Finally, $F_1$ is the harmonic mean of precision (the chance that a positive even was correctly classified) and sensitivity (the ability to  correctly classify positive events), and is defined  as
@@ -504,7 +504,7 @@ indicate an average $\ge 0.99$. {#tbl:comparison}
 
 The results presented here highlight an interesting paradox: although the Random
 Forest was ultimately able to get a correct estimate of network structure
-[@tbl:comaprison], it ultimately remains a poor classifier, as evidenced by its
+[@tbl:comparison], it ultimately remains a poor classifier, as evidenced by its
 low PR-AUC. This suggests that the goal of predicting *interactions* and
 predicting *networks* may not be solvable in the same way -- of course a perfect
 classifier of interactions would make a perfect network prediction; but even the
