@@ -303,6 +303,92 @@
             </figure>
             <p>When trained at their optimal training set bias, performance still had a significant impact on the performance of some machines fig. 6. Notably, Decision Tree, Random Forest, and Ridge Regression had low values of PR-AUC. In all cases, the Boosted Regression Tree was reaching very good predictions (esepcially for connectances larger than 0.1), and the ensemble was almost always scoring perfectly. This suggests that all the models are biased in different ways, and that the averaging in the ensemble is able to correct these biases. We do not expect this last result to have any generality, and provide a discussion of a recent exemple in which the ensemble was performing worse than its components models.</p>
             <h1 id="do-better-classification-accuracy-result-in-more-realistic-networks">Do better classification accuracy result in more realistic networks?</h1>
+            <p>In this last section, we generate a network using the same model as before, with <span class="math inline"><em>S</em> = 50</span> species, a connectance of <span class="math inline"> ≈ 0.16</span> (<span class="math inline"><em>ξ</em> = 0.19</span>), and a training set bias of <span class="math inline">0.7</span>. The prediction made on the complete dataset is presented in fig. <strong>¿fig:ecovalid?</strong>. Visualizing the results this way highlights the importance of exploratory data analysis: whereas all models return a network with interactions laying mostly on the diagonal (as expected), the Ridge Regression is quite obviously biased. Despite this, we can see that the ensemble is close to the initial dataset.</p>
+            <p><img src="figures/valid_ensemble.png" id="fig:ecovalid" /></p>
+            <p>The trained models were then thresholded (again by optimising informedness), and their predictions transformed back into networks for analysis; specifically, we measured the connectance, nestedness (REF), modularity (REF), and entropy (REF). The results are presented in the following table:</p>
+            <table>
+            <thead>
+            <tr class="header">
+            <th>Model</th>
+            <th>MCC</th>
+            <th>Inf.</th>
+            <th>ROC-AUC</th>
+            <th>PR-AUC</th>
+            <th>Conn.</th>
+            <th><span class="math inline"><em>η</em></span></th>
+            <th><span class="math inline"><em>Q</em></span></th>
+            <th>Entropy</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr class="odd">
+            <td>Decision tree</td>
+            <td>0.83</td>
+            <td>0.68</td>
+            <td>0.95</td>
+            <td>0.15</td>
+            <td>0.18</td>
+            <td>0.53</td>
+            <td>0.49</td>
+            <td>8.86</td>
+            </tr>
+            <tr class="even">
+            <td>BRT</td>
+            <td>0.76</td>
+            <td>0.89</td>
+            <td>0.95</td>
+            <td><strong>0.65</strong></td>
+            <td>0.22</td>
+            <td>0.63</td>
+            <td>0.43</td>
+            <td>9.14</td>
+            </tr>
+            <tr class="odd">
+            <td>Random Forest</td>
+            <td><strong>0.89</strong></td>
+            <td><strong>0.94</strong></td>
+            <td><strong>0.99</strong></td>
+            <td>0.41</td>
+            <td><strong>0.17</strong></td>
+            <td><strong>0.48</strong></td>
+            <td><strong>0.49</strong></td>
+            <td><strong>8.80</strong></td>
+            </tr>
+            <tr class="even">
+            <td>Ridge Regression</td>
+            <td>0.67</td>
+            <td>0.85</td>
+            <td>0.89</td>
+            <td>0.38</td>
+            <td>0.27</td>
+            <td>1.0</td>
+            <td>0.26</td>
+            <td>9.40</td>
+            </tr>
+            <tr class="odd">
+            <td>Ensemble</td>
+            <td>0.84</td>
+            <td>0.91</td>
+            <td><strong>0.99</strong></td>
+            <td><strong>0.94</strong></td>
+            <td>0.19</td>
+            <td>0.54</td>
+            <td>0.48</td>
+            <td>8.92</td>
+            </tr>
+            <tr class="even">
+            <td>Data</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>0.16</td>
+            <td>0.45</td>
+            <td>0.49</td>
+            <td>8.71</td>
+            </tr>
+            </tbody>
+            </table>
             <h1 id="guidelines-for-the-assesment-of-network-predictive-models">Guidelines for the assesment of network predictive models</h1>
             <p>The results presented here highlight an interesting paradox: larger networks (with lower connectance) require more training set bias in order to maximize model performance fig. 5, but are also more difficult to predict according to MCC and PR-AUC fig. 6. This suggests that the task of network prediction will be difficult regardless of network size: by being limited by the <em>frequency</em> of interactions when the network is large, and by being limited by the <em>number</em> of interactions when the network is small. Nevertheless, based on the simulations and numerical experiments, it is possible to formulate a series of recommendations for the evaluation of network prediction models.</p>
             <p>First, because we should have more trust in reported interactions than in reported absences of interactions, we can draw on previous literature to recommend informedness as a measure to decide on a threshold <span class="citation" data-cites="Chicco2021MatCor">(Chicco et al., 2021)</span>; this being said, because informedness is insensitive to bias, the model performance is better evaluated through the use of MCC fig. 3. Because <span class="math inline"><em>F</em><sub>1</sub></span> is monotonously sensitive to classifier bias fig. 1 and network connectance fig. 2, MCC should be prefered as a measure of model evaluation.</p>
