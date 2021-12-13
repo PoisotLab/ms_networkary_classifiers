@@ -325,14 +325,15 @@ core days (approx. 117 hours).
 After the simulations were completed, we removed all runs (*i.e.* pairs of $\xi$
 and $\nu$) for which at least one of the following conditions was met: the
 accuracy was 0, the true positive or true negative rates were 0, the connectance
-was larger than 0.2. This removes both the obviously failed model runs, and the
+was larger than 0.25. This removes both the obviously failed model runs, and the
 networks that are more densely connected compared to the connectance of
 empirical food webs (and are therefore less difficult to predict, being less
-imbalanced).
+imbalanced; preliminary analyses of data with a connectance larger than 3
+revealed that all machines reached consistently high performance).
 
 ## Effect of training set bias on performance
 
-In @fig:biasmccinf, we present the response of MCC and informedness to (i) four
+In @fig:biasmccinf, we present the response of MCC and informedness to (i) five
 levels of network connectance and (ii) a gradient of training set bias, for the
 four component models as well as the ensemble. All models reached a higher
 performance on more connected networks, and using more biased training sets
@@ -341,7 +342,10 @@ performance with training set bias). In all cases, informedness was extremely
 high, which is an expected consequence of the fact that this is the value we
 optimized to determine the cutoff. MCC increased with training set bias,
 although this increase became less steep with increasing connectance.
-Interestingly, the ensemble almost always outclassed its component models.
+Interestingly, the ensemble almost always outclassed its component models. In a
+few cases, both MCC and informedness stared decreasing when the training set
+bias got too close to one, which suggests that it is possible to over-correct
+the imbalance.
 
 ![TODO](figures/bias_mcc_inf.png){#fig:biasmccinf}
 
@@ -371,23 +375,32 @@ withold positive information, which in ecological networks are very scarce (and
 typically more valuable than negatives, on which there is a doubt). For this
 reason, across all values of connectance, we measured the training set bias that
 maximized a series of performance measures. When this value is high, the
-training set needs to skew positive in order to get a good model; when this
-value is about 0.5, the training set needs to be artificially balanced to
-optimize the model performance. These results are presented in @fig:optimbias.
+training set needs to skew more positive in order to get a performant model;
+when this value is about 0.5, the training set needs to be artificially balanced
+to optimize the model performance. These results are presented in
+@fig:optimbias.
 
 ![TODO](figures/optim_bias.png){#fig:optimbias}
 
-Interestingly, as long as the connectance of the network was above $\approx
-0.1$, the optimal prevalence in the training set is 0.5, *i.e.* as many
-positives as negatives. Low connectance is usually achieved for very large
-networks, due to the scaling relationship between richness and links
-[@MacDonald2020RevLin]. Therefore, larger networks may require *more* biasing of
-the training set in order to be optimally predicted, whereas smaller, more
-connected networks may not. It is worth noting that the optimal bias for the
-training set stabilizes at 0.5 regardless of connectance *and* model *and*
-measure of model evaluation.
+The more "optimistic" measures (ROC-AUC and informedness) required a biasing of
+the dataset from about 0.4 to 0.75 to be maximized, with the amount of bias
+required decreasing only slightly with the connectance of the original network.
+MCC and PR-AUC required values of training set bias from 0.75 to almost 1 to be
+optimized, which is in line with the results of the previous section, *i.e.*
+they are more stringent tests of model performance. 
 
 ![TODO](figures/optim_perf.png){#fig:optimperf}
+
+When trained at their optimal training set bias, performance still had a
+significant impact on the performance of some machines [@fig:optimperf].
+Notably, Decision Tree, Random Forest, and Ridge Regression had low values of
+PR-AUC. In all cases, the Boosted Regression Tree was reaching very good
+predictions (esepcially for connectances larger than 0.1), and the ensemble was
+almost always scoring perfectly. This suggests that all the models are biased in
+different ways, and that the averaging in the ensemble is able to correct these
+biases. We do not expect this last result to have any generality, and provide a
+discussion of a recent exemple in which the ensemble was performing worse than
+its components models.
 
 # Do better classification accuracy result in more realistic networks?
 
