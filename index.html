@@ -305,8 +305,10 @@
             <h1 id="do-better-classification-accuracy-result-in-more-realistic-networks">Do better classification accuracy result in more realistic networks?</h1>
             <p>In this last section, we generate a network using the same model as before, with <span class="math inline"><em>S</em> = 50</span> species, a connectance of <span class="math inline"> ≈ 0.16</span> (<span class="math inline"><em>ξ</em> = 0.19</span>), and a training set bias of <span class="math inline">0.7</span>. The prediction made on the complete dataset is presented in fig. <strong>¿fig:ecovalid?</strong>. Visualizing the results this way highlights the importance of exploratory data analysis: whereas all models return a network with interactions laying mostly on the diagonal (as expected), the Ridge Regression is quite obviously biased. Despite this, we can see that the ensemble is close to the initial dataset.</p>
             <p><img src="figures/valid_ensemble.png" id="fig:ecovalid" /></p>
-            <p>The trained models were then thresholded (again by optimising informedness), and their predictions transformed back into networks for analysis; specifically, we measured the connectance, nestedness (REF), modularity (REF), and entropy (REF). The results are presented in the following table:</p>
+            <p>The trained models were then thresholded (again by optimising informedness), and their predictions transformed back into networks for analysis; specifically, we measured the connectance, nestedness (REF), modularity (REF), and entropy (REF). The results are presented in tbl. 1. The random forest model is an interesting instance here: it produces the network that looks the most like the original dataset, despite having a very low PR-AUC, suggesting it hits high recall at the cost of low precision. Although the ensemble was about to reach a very high PR-AUC (and a very high ROC-AUC), this did not necessarilly translate into more accurate reconstructions of the structure of the network. This result bears elaborating. Measures of model performance capture how much of the interactions and non-interactions are correctly identified. As long as these predictions are not perfect, some interactions will be predicted at the “wrong” position in the network; these measures cannot describe the structural effect of these mistakes. On the other hand, measures of network structure can have the same value with interactions that fall at drastically different positions; this is in part because a lot of these measures covary with connectance, and in part because as long as these values are not 0 or their respective maximum, there is a large number of network configurations that can have the same value.</p>
+            <div id="tbl:comparison">
             <table>
+            <caption>Table 1: Values of four performance metrics, and four network structure metrics, for the predictions presented in fig. <strong>¿fig:ecovalid?</strong>. The values in <strong>bold</strong> indicate the best value for each column (including ties).</caption>
             <thead>
             <tr class="header">
             <th>Model</th>
@@ -329,7 +331,7 @@
             <td>0.15</td>
             <td>0.18</td>
             <td>0.53</td>
-            <td>0.49</td>
+            <td><strong>0.49</strong></td>
             <td>8.86</td>
             </tr>
             <tr class="even">
@@ -337,7 +339,7 @@
             <td>0.76</td>
             <td>0.89</td>
             <td>0.95</td>
-            <td><strong>0.65</strong></td>
+            <td>0.65</td>
             <td>0.22</td>
             <td>0.63</td>
             <td>0.43</td>
@@ -389,6 +391,7 @@
             </tr>
             </tbody>
             </table>
+            </div>
             <h1 id="guidelines-for-the-assesment-of-network-predictive-models">Guidelines for the assesment of network predictive models</h1>
             <p>The results presented here highlight an interesting paradox: larger networks (with lower connectance) require more training set bias in order to maximize model performance fig. 5, but are also more difficult to predict according to MCC and PR-AUC fig. 6. This suggests that the task of network prediction will be difficult regardless of network size: by being limited by the <em>frequency</em> of interactions when the network is large, and by being limited by the <em>number</em> of interactions when the network is small. Nevertheless, based on the simulations and numerical experiments, it is possible to formulate a series of recommendations for the evaluation of network prediction models.</p>
             <p>First, because we should have more trust in reported interactions than in reported absences of interactions, we can draw on previous literature to recommend informedness as a measure to decide on a threshold <span class="citation" data-cites="Chicco2021MatCor">(Chicco et al., 2021)</span>; this being said, because informedness is insensitive to bias, the model performance is better evaluated through the use of MCC fig. 3. Because <span class="math inline"><em>F</em><sub>1</sub></span> is monotonously sensitive to classifier bias fig. 1 and network connectance fig. 2, MCC should be prefered as a measure of model evaluation.</p>
