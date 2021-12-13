@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.23 (TeX Live 2021) (preloaded format=pdflatex 2021.12.1)  13 DEC 2021 19:12
+This is pdfTeX, Version 3.141592653-2.6-1.40.23 (TeX Live 2021) (preloaded format=pdflatex 2021.12.1)  13 DEC 2021 19:14
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1217,7 +1217,7 @@ LaTeX Font Info:    Font shape `U/ccicons/m/n' will be
 ! Undefined control sequence.
 <argument> \srt 
                 {(tp+fp)\times (tp+fn)\times (tn+fp)\times (tn+fn)}
-l.339 ...mes (tp+fn)\times (tn+fp)\times (tn+fn)}}
+l.338 ...mes (tp+fn)\times (tn+fp)\times (tn+fn)}}
                                                    \,.
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -1227,92 +1227,92 @@ and I'll forget about whatever was undefined.
 
 [2]
 LaTeX Font Info:    Font shape `T1/phv/m/n' will be
-(Font)              scaled to size 10.25993pt on input line 441.
+(Font)              scaled to size 10.25993pt on input line 440.
 LaTeX Font Info:    Font shape `T1/phv/b/n' will be
-(Font)              scaled to size 10.25993pt on input line 441.
+(Font)              scaled to size 10.25993pt on input line 440.
 LaTeX Font Info:    Font shape `T1/phv/b/n' will be
-(Font)              scaled to size 8.54997pt on input line 455.
+(Font)              scaled to size 8.54997pt on input line 454.
  [3]
 <figures/changing-bias.png, id=76, 2409.0pt x 1806.75pt>
 File: figures/changing-bias.png Graphic file (type png)
 <use figures/changing-bias.png>
-Package pdftex.def Info: figures/changing-bias.png  used on input line 584.
+Package pdftex.def Info: figures/changing-bias.png  used on input line 583.
 (pdftex.def)             Requested size: 386.67299pt x 289.99568pt.
 <figures/changing-connectance.png, id=79, 2409.0pt x 1806.75pt>
 File: figures/changing-connectance.png Graphic file (type png)
 <use figures/changing-connectance.png>
 Package pdftex.def Info: figures/changing-connectance.png  used on input line 6
-16.
+15.
 (pdftex.def)             Requested size: 386.67299pt x 289.99568pt.
 
-Underfull \hbox (badness 1132) in paragraph at lines 616--616
+Underfull \hbox (badness 1132) in paragraph at lines 615--615
 \T1/stix2/m/n/8.21255 ing con-nectance for dif-fer-ent lev-els of clas-
  []
 
 [4] [5 <./figures/changing-bias.png> <./figures/changing-connectance.png>]
 LaTeX Font Info:    Font shape `T1/zi4/m/n' will be
-(Font)              scaled to size 9.0pt on input line 677.
+(Font)              scaled to size 9.0pt on input line 676.
 
 [6]
 <figures/bias_mcc_inf.png, id=102, 2409.0pt x 1806.75pt>
 File: figures/bias_mcc_inf.png Graphic file (type png)
 <use figures/bias_mcc_inf.png>
-Package pdftex.def Info: figures/bias_mcc_inf.png  used on input line 739.
+Package pdftex.def Info: figures/bias_mcc_inf.png  used on input line 738.
 (pdftex.def)             Requested size: 386.67299pt x 289.99568pt.
 <figures/bias_roc_pr.png, id=106, 2409.0pt x 1806.75pt>
 File: figures/bias_roc_pr.png Graphic file (type png)
 <use figures/bias_roc_pr.png>
-Package pdftex.def Info: figures/bias_roc_pr.png  used on input line 757.
+Package pdftex.def Info: figures/bias_roc_pr.png  used on input line 756.
 (pdftex.def)             Requested size: 386.67299pt x 289.99568pt.
 <figures/optim_bias.png, id=110, 2409.0pt x 1806.75pt>
 File: figures/optim_bias.png Graphic file (type png)
 <use figures/optim_bias.png>
-Package pdftex.def Info: figures/optim_bias.png  used on input line 790.
+Package pdftex.def Info: figures/optim_bias.png  used on input line 789.
 (pdftex.def)             Requested size: 386.67299pt x 289.99568pt.
  [7 <./figures/bias_mcc_inf.png>] [8 <./figures/bias_roc_pr.png> <./figures/opt
 im_bias.png>]
 <figures/optim_perf.png, id=127, 2409.0pt x 1806.75pt>
 File: figures/optim_perf.png Graphic file (type png)
 <use figures/optim_perf.png>
-Package pdftex.def Info: figures/optim_perf.png  used on input line 806.
+Package pdftex.def Info: figures/optim_perf.png  used on input line 805.
 (pdftex.def)             Requested size: 386.67299pt x 289.99568pt.
 <figures/valid_ensemble.png, id=130, 2409.0pt x 1806.75pt>
 File: figures/valid_ensemble.png Graphic file (type png)
 <use figures/valid_ensemble.png>
-Package pdftex.def Info: figures/valid_ensemble.png  used on input line 840.
+Package pdftex.def Info: figures/valid_ensemble.png  used on input line 839.
 (pdftex.def)             Requested size: 386.67299pt x 289.99568pt.
  [9 <./figures/optim_perf.png>]
-Overfull \hbox (386.67299pt too wide) detected at line 875
+Overfull \hbox (386.67299pt too wide) detected at line 874
 []
  []
 
 
-Underfull \hbox (badness 10000) in alignment at lines 869--880
+Underfull \hbox (badness 10000) in alignment at lines 868--879
 [] [] [] [] [] [] [] []
  []
 
 
-Underfull \hbox (badness 10000) in alignment at lines 880--885
+Underfull \hbox (badness 10000) in alignment at lines 879--884
 [] [] [] [] [] [] [] []
  []
 
 
-Underfull \hbox (badness 10000) in alignment at lines 885--898
+Underfull \hbox (badness 10000) in alignment at lines 884--897
 [] [] [] [] [] [] [] []
  []
 
 
 LaTeX Warning: Reference `tbl:comaprison' on page 10 undefined on input line 90
-6.
+5.
 
 [10 <./figures/valid_ensemble.png>] [11]
-Overfull \hbox (1.94629pt too wide) in paragraph at lines 1021--1026
+Overfull \hbox (1.94629pt too wide) in paragraph at lines 1020--1025
 [][]\T1/stix2/m/n/9 Boughorbel, S., Jar-ray, F., & El-Anbari, M. (2017). Op-ti-
 mal clas-si-fier for im-bal-anced data us-ing Matthews
  []
 
 [12]
-Overfull \hbox (38.48262pt too wide) in paragraph at lines 1122--1127
+Overfull \hbox (38.48262pt too wide) in paragraph at lines 1121--1126
 \T1/stix2/m/n/9 chine learn-ing in ge-nomics. \T1/stix2/m/it/9 Na-ture Re-views
  Ge-net-ics\T1/stix2/m/n/9 , 1--13. [][]$\T1/zi4/m/n/9 https : / / doi . org / 
 10 . 1038 / s41576-[]021-[]00434-[]9$[][] 
@@ -1328,8 +1328,8 @@ Package rerunfilecheck Info: File `preprint.out' has not changed.
 (rerunfilecheck)             Checksum: 8E3DF819F353F9454E64F489AD85C2D4;2476.
  ) 
 Here is how much of TeX's memory you used:
- 30803 strings out of 478353
- 560137 string characters out of 5850104
+ 30804 strings out of 478353
+ 560157 string characters out of 5850104
  845815 words of memory out of 5000000
  48317 multiletter control sequences out of 15000+600000
  558466 words of font info for 140 fonts, out of 8000000 for 9000
@@ -1351,10 +1351,10 @@ xmf-dist/fonts/type1/public/stix2-type1/STIX2Text-Regular.pfb></opt/texlive/tex
 dir/texmf-dist/fonts/type1/public/ccicons/ccicons.pfb></opt/texlive/texdir/texm
 f-dist/fonts/type1/urw/helvetic/uhvb8a.pfb></opt/texlive/texdir/texmf-dist/font
 s/type1/urw/helvetic/uhvr8a.pfb>
-Output written on preprint.pdf (13 pages, 3510014 bytes).
+Output written on preprint.pdf (13 pages, 3511641 bytes).
 PDF statistics:
- 298 PDF objects out of 1000 (max. 8388607)
- 251 compressed objects within 3 object streams
- 75 named destinations out of 1000 (max. 500000)
+ 301 PDF objects out of 1000 (max. 8388607)
+ 254 compressed objects within 3 object streams
+ 76 named destinations out of 1000 (max. 500000)
  125 words of extra memory for PDF output out of 10000 (max. 10000000)
 

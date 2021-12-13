@@ -1252,5 +1252,28 @@
         "title": "Simple rules yield complex food webs",
         "type": "article-journal",
         "volume": "404"
+    },
+    {
+        "DOI": "10.1002/1097-0142(1950)3:1<32::AID-CNCR2820030106>3.0.CO;2-3",
+        "author": [
+            {
+                "family": "Youden",
+                "given": "W. J."
+            }
+        ],
+        "container-title": "Cancer",
+        "id": "Youden1950IndRat",
+        "issue": "1",
+        "issued": {
+            "date-parts": [
+                [
+                    1950
+                ]
+            ]
+        },
+        "page": "32-35",
+        "title": "Index for rating diagnostic tests",
+        "type": "article-journal",
+        "volume": "3"
     }
 ]

@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.23 (TeX Live 2021) (preloaded format=pdflatex 2021.12.1)  13 DEC 2021 19:12
+This is pdfTeX, Version 3.141592653-2.6-1.40.23 (TeX Live 2021) (preloaded format=pdflatex 2021.12.1)  13 DEC 2021 19:13
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -854,7 +854,7 @@ LaTeX Font Info:    Font shape `T1/phv/m/n' will be
 ! Undefined control sequence.
 <argument> \srt 
                 {(tp+fp)\times (tp+fn)\times (tn+fp)\times (tn+fn)}
-l.281 ...mes (tp+fn)\times (tn+fp)\times (tn+fn)}}
+l.280 ...mes (tp+fn)\times (tn+fp)\times (tn+fn)}}
                                                    \,.
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -868,49 +868,49 @@ and I'll forget about whatever was undefined.
  (draft.fff) [8] [9] [10] [11] [12] [13]
 
 LaTeX Warning: Reference `tbl:comaprison' on page 14 undefined on input line 84
-8.
+7.
 
 [14] [15] [16] [17] 
 AED: lastpage setting LastPage
 [18] AED endfloat: Processing end Figures and Tables (./draft.fff
-<figures/changing-bias.png, id=219, 2409.0pt x 1806.75pt>
+<figures/changing-bias.png, id=221, 2409.0pt x 1806.75pt>
 File: figures/changing-bias.png Graphic file (type png)
 <use figures/changing-bias.png>
 Package pdftex.def Info: figures/changing-bias.png  used on input line 17.
 (pdftex.def)             Requested size: 489.10307pt x 366.82979pt.
  [19 <./figures/changing-bias.png>]
-<figures/changing-connectance.png, id=226, 2409.0pt x 1806.75pt>
+<figures/changing-connectance.png, id=228, 2409.0pt x 1806.75pt>
 File: figures/changing-connectance.png Graphic file (type png)
 <use figures/changing-connectance.png>
 Package pdftex.def Info: figures/changing-connectance.png  used on input line 3
 1.
 (pdftex.def)             Requested size: 489.10307pt x 366.82979pt.
  [20 <./figures/changing-connectance.png>]
-<figures/bias_mcc_inf.png, id=234, 2409.0pt x 1806.75pt>
+<figures/bias_mcc_inf.png, id=236, 2409.0pt x 1806.75pt>
 File: figures/bias_mcc_inf.png Graphic file (type png)
 <use figures/bias_mcc_inf.png>
 Package pdftex.def Info: figures/bias_mcc_inf.png  used on input line 40.
 (pdftex.def)             Requested size: 489.10307pt x 366.82979pt.
  [21 <./figures/bias_mcc_inf.png>]
-<figures/bias_roc_pr.png, id=240, 2409.0pt x 1806.75pt>
+<figures/bias_roc_pr.png, id=242, 2409.0pt x 1806.75pt>
 File: figures/bias_roc_pr.png Graphic file (type png)
 <use figures/bias_roc_pr.png>
 Package pdftex.def Info: figures/bias_roc_pr.png  used on input line 49.
 (pdftex.def)             Requested size: 489.10307pt x 366.82979pt.
  [22 <./figures/bias_roc_pr.png>]
-<figures/optim_bias.png, id=246, 2409.0pt x 1806.75pt>
+<figures/optim_bias.png, id=248, 2409.0pt x 1806.75pt>
 File: figures/optim_bias.png Graphic file (type png)
 <use figures/optim_bias.png>
 Package pdftex.def Info: figures/optim_bias.png  used on input line 58.
 (pdftex.def)             Requested size: 489.10307pt x 366.82979pt.
  [23 <./figures/optim_bias.png>]
-<figures/optim_perf.png, id=252, 2409.0pt x 1806.75pt>
+<figures/optim_perf.png, id=254, 2409.0pt x 1806.75pt>
 File: figures/optim_perf.png Graphic file (type png)
 <use figures/optim_perf.png>
 Package pdftex.def Info: figures/optim_perf.png  used on input line 67.
 (pdftex.def)             Requested size: 489.10307pt x 366.82979pt.
  [24 <./figures/optim_perf.png>]
-<figures/valid_ensemble.png, id=258, 2409.0pt x 1806.75pt>
+<figures/valid_ensemble.png, id=260, 2409.0pt x 1806.75pt>
 File: figures/valid_ensemble.png Graphic file (type png)
 <use figures/valid_ensemble.png>
 Package pdftex.def Info: figures/valid_ensemble.png  used on input line 76.
@@ -924,8 +924,8 @@ Package rerunfilecheck Info: File `draft.out' has not changed.
 (rerunfilecheck)             Checksum: AA908B18C7244AD3D621A6CF9F3D33D7;2469.
  ) 
 Here is how much of TeX's memory you used:
- 18877 strings out of 478353
- 307161 string characters out of 5850104
+ 18878 strings out of 478353
+ 307181 string characters out of 5850104
  582039 words of memory out of 5000000
  36629 multiletter control sequences out of 15000+600000
  504346 words of font info for 89 fonts, out of 8000000 for 9000
@@ -947,10 +947,10 @@ xmf-dist/fonts/type1/public/stix2-type1/STIX2Text-Regular.pfb></opt/texlive/tex
 dir/texmf-dist/fonts/type1/public/ccicons/ccicons.pfb></opt/texlive/texdir/texm
 f-dist/fonts/type1/urw/helvetic/uhvb8a.pfb></opt/texlive/texdir/texmf-dist/font
 s/type1/urw/helvetic/uhvr8a.pfb>
-Output written on draft.pdf (25 pages, 3465532 bytes).
+Output written on draft.pdf (25 pages, 3467199 bytes).
 PDF statistics:
- 338 PDF objects out of 1000 (max. 8388607)
- 279 compressed objects within 3 object streams
- 88 named destinations out of 1000 (max. 500000)
+ 340 PDF objects out of 1000 (max. 8388607)
+ 281 compressed objects within 3 object streams
+ 89 named destinations out of 1000 (max. 500000)
  108 words of extra memory for PDF output out of 10000 (max. 10000000)
 
