@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.23 (TeX Live 2021) (preloaded format=pdflatex 2021.12.1)  13 DEC 2021 19:02
+This is pdfTeX, Version 3.141592653-2.6-1.40.23 (TeX Live 2021) (preloaded format=pdflatex 2021.12.1)  13 DEC 2021 19:12
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1206,16 +1206,10 @@ File: t1zi4.fd 2018/01/14 T1/zi4 (Inconsolata)
 )
 LaTeX Font Info:    Font shape `T1/zi4/m/n' will be
 (Font)              scaled to size 8.21255pt on input line 228.
-LaTeX Font Info:    Trying to load font information for TS1+stix2 on input line
- 280.
-
-(/opt/texlive/texdir/texmf-dist/tex/latex/stix2-type1/ts1stix2.fd
-File: ts1stix2.fd 2018/04/02 v2.0.0-latex stix2 TS1 font definitions
-)
 LaTeX Font Info:    Font shape `T1/phv/m/n' will be
-(Font)              scaled to size 7.12506pt on input line 317.
+(Font)              scaled to size 7.12506pt on input line 305.
 LaTeX Font Info:    Font shape `U/ccicons/m/n' will be
-(Font)              scaled to size 7.50009pt on input line 317.
+(Font)              scaled to size 7.50009pt on input line 305.
  [1
 
 {/opt/texlive/texdir/texmf-var/fonts/map/pdftex/updmap/pdftex.map} <./logo.png>
@@ -1223,7 +1217,7 @@ LaTeX Font Info:    Font shape `U/ccicons/m/n' will be
 ! Undefined control sequence.
 <argument> \srt 
                 {(tp+fp)\times (tp+fn)\times (tn+fp)\times (tn+fn)}
-l.330 ...mes (tp+fn)\times (tn+fp)\times (tn+fn)}}
+l.339 ...mes (tp+fn)\times (tn+fp)\times (tn+fn)}}
                                                    \,.
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -1233,93 +1227,92 @@ and I'll forget about whatever was undefined.
 
 [2]
 LaTeX Font Info:    Font shape `T1/phv/m/n' will be
-(Font)              scaled to size 10.25993pt on input line 432.
+(Font)              scaled to size 10.25993pt on input line 441.
 LaTeX Font Info:    Font shape `T1/phv/b/n' will be
-(Font)              scaled to size 10.25993pt on input line 432.
+(Font)              scaled to size 10.25993pt on input line 441.
 LaTeX Font Info:    Font shape `T1/phv/b/n' will be
-(Font)              scaled to size 8.54997pt on input line 438.
+(Font)              scaled to size 8.54997pt on input line 455.
  [3]
-<figures/changing-bias.png, id=77, 2409.0pt x 1806.75pt>
+<figures/changing-bias.png, id=76, 2409.0pt x 1806.75pt>
 File: figures/changing-bias.png Graphic file (type png)
 <use figures/changing-bias.png>
-Package pdftex.def Info: figures/changing-bias.png  used on input line 575.
+Package pdftex.def Info: figures/changing-bias.png  used on input line 584.
 (pdftex.def)             Requested size: 386.67299pt x 289.99568pt.
-<figures/changing-connectance.png, id=80, 2409.0pt x 1806.75pt>
+<figures/changing-connectance.png, id=79, 2409.0pt x 1806.75pt>
 File: figures/changing-connectance.png Graphic file (type png)
 <use figures/changing-connectance.png>
 Package pdftex.def Info: figures/changing-connectance.png  used on input line 6
-07.
+16.
 (pdftex.def)             Requested size: 386.67299pt x 289.99568pt.
 
-Underfull \hbox (badness 1132) in paragraph at lines 607--607
+Underfull \hbox (badness 1132) in paragraph at lines 616--616
 \T1/stix2/m/n/8.21255 ing con-nectance for dif-fer-ent lev-els of clas-
  []
 
 [4] [5 <./figures/changing-bias.png> <./figures/changing-connectance.png>]
 LaTeX Font Info:    Font shape `T1/zi4/m/n' will be
-(Font)              scaled to size 9.0pt on input line 668.
+(Font)              scaled to size 9.0pt on input line 677.
 
 [6]
-<figures/bias_mcc_inf.png, id=104, 2409.0pt x 1806.75pt>
+<figures/bias_mcc_inf.png, id=102, 2409.0pt x 1806.75pt>
 File: figures/bias_mcc_inf.png Graphic file (type png)
 <use figures/bias_mcc_inf.png>
-Package pdftex.def Info: figures/bias_mcc_inf.png  used on input line 730.
+Package pdftex.def Info: figures/bias_mcc_inf.png  used on input line 739.
 (pdftex.def)             Requested size: 386.67299pt x 289.99568pt.
-<figures/bias_roc_pr.png, id=108, 2409.0pt x 1806.75pt>
+<figures/bias_roc_pr.png, id=106, 2409.0pt x 1806.75pt>
 File: figures/bias_roc_pr.png Graphic file (type png)
 <use figures/bias_roc_pr.png>
-Package pdftex.def Info: figures/bias_roc_pr.png  used on input line 748.
+Package pdftex.def Info: figures/bias_roc_pr.png  used on input line 757.
 (pdftex.def)             Requested size: 386.67299pt x 289.99568pt.
-<figures/optim_bias.png, id=112, 2409.0pt x 1806.75pt>
+<figures/optim_bias.png, id=110, 2409.0pt x 1806.75pt>
 File: figures/optim_bias.png Graphic file (type png)
 <use figures/optim_bias.png>
-Package pdftex.def Info: figures/optim_bias.png  used on input line 781.
-(pdftex.def)             Requested size: 386.67299pt x 289.99568pt.
-<figures/optim_perf.png, id=113, 2409.0pt x 1806.75pt>
-File: figures/optim_perf.png Graphic file (type png)
-<use figures/optim_perf.png>
-Package pdftex.def Info: figures/optim_perf.png  used on input line 797.
+Package pdftex.def Info: figures/optim_bias.png  used on input line 790.
 (pdftex.def)             Requested size: 386.67299pt x 289.99568pt.
  [7 <./figures/bias_mcc_inf.png>] [8 <./figures/bias_roc_pr.png> <./figures/opt
 im_bias.png>]
-<figures/valid_ensemble.png, id=132, 2409.0pt x 1806.75pt>
+<figures/optim_perf.png, id=127, 2409.0pt x 1806.75pt>
+File: figures/optim_perf.png Graphic file (type png)
+<use figures/optim_perf.png>
+Package pdftex.def Info: figures/optim_perf.png  used on input line 806.
+(pdftex.def)             Requested size: 386.67299pt x 289.99568pt.
+<figures/valid_ensemble.png, id=130, 2409.0pt x 1806.75pt>
 File: figures/valid_ensemble.png Graphic file (type png)
 <use figures/valid_ensemble.png>
-Package pdftex.def Info: figures/valid_ensemble.png  used on input line 831.
+Package pdftex.def Info: figures/valid_ensemble.png  used on input line 840.
 (pdftex.def)             Requested size: 386.67299pt x 289.99568pt.
-
-Overfull \hbox (386.67299pt too wide) detected at line 866
+ [9 <./figures/optim_perf.png>]
+Overfull \hbox (386.67299pt too wide) detected at line 875
 []
  []
 
 
-Underfull \hbox (badness 10000) in alignment at lines 860--871
+Underfull \hbox (badness 10000) in alignment at lines 869--880
 [] [] [] [] [] [] [] []
  []
 
 
-Underfull \hbox (badness 10000) in alignment at lines 871--876
+Underfull \hbox (badness 10000) in alignment at lines 880--885
 [] [] [] [] [] [] [] []
  []
 
 
-Underfull \hbox (badness 10000) in alignment at lines 876--889
+Underfull \hbox (badness 10000) in alignment at lines 885--898
 [] [] [] [] [] [] [] []
  []
 
-[9 <./figures/optim_perf.png>]
 
-LaTeX Warning: Reference `tbl:comaprison' on page 10 undefined on input line 89
-7.
+LaTeX Warning: Reference `tbl:comaprison' on page 10 undefined on input line 90
+6.
 
-[10 <./figures/valid_ensemble.png>]
-Overfull \hbox (1.94629pt too wide) in paragraph at lines 1012--1017
+[10 <./figures/valid_ensemble.png>] [11]
+Overfull \hbox (1.94629pt too wide) in paragraph at lines 1021--1026
 [][]\T1/stix2/m/n/9 Boughorbel, S., Jar-ray, F., & El-Anbari, M. (2017). Op-ti-
 mal clas-si-fier for im-bal-anced data us-ing Matthews
  []
 
-[11]
-Overfull \hbox (38.48262pt too wide) in paragraph at lines 1113--1118
+[12]
+Overfull \hbox (38.48262pt too wide) in paragraph at lines 1122--1127
 \T1/stix2/m/n/9 chine learn-ing in ge-nomics. \T1/stix2/m/it/9 Na-ture Re-views
  Ge-net-ics\T1/stix2/m/n/9 , 1--13. [][]$\T1/zi4/m/n/9 https : / / doi . org / 
 10 . 1038 / s41576-[]021-[]00434-[]9$[][] 
@@ -1327,7 +1320,7 @@ Overfull \hbox (38.48262pt too wide) in paragraph at lines 1113--1118
 
 
 AED: lastpage setting LastPage
-[12] (./preprint.aux)
+[13] (./preprint.aux)
 
 LaTeX Warning: There were undefined references.
 
@@ -1335,34 +1328,33 @@ Package rerunfilecheck Info: File `preprint.out' has not changed.
 (rerunfilecheck)             Checksum: 8E3DF819F353F9454E64F489AD85C2D4;2476.
  ) 
 Here is how much of TeX's memory you used:
- 30829 strings out of 478353
- 560638 string characters out of 5850104
- 845814 words of memory out of 5000000
- 48340 multiletter control sequences out of 15000+600000
- 558807 words of font info for 141 fonts, out of 8000000 for 9000
+ 30803 strings out of 478353
+ 560137 string characters out of 5850104
+ 845815 words of memory out of 5000000
+ 48317 multiletter control sequences out of 15000+600000
+ 558466 words of font info for 140 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  108i,12n,117p,993b,643s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/opt/texlive/texdir/texmf-dist/fonts/enc/dvips/stix2-type1/stix2-mathcal.enc
 }{/opt/texlive/texdir/texmf-dist/fonts/enc/dvips/stix2-type1/stix2-mathrm-bold.
 enc}{/opt/texlive/texdir/texmf-dist/fonts/enc/dvips/stix2-type1/stix2-mathrm.en
-c}{/opt/texlive/texdir/texmf-dist/fonts/enc/dvips/base/8r.enc}{/opt/texlive/tex
-dir/texmf-dist/fonts/enc/dvips/stix2-type1/stix2-mathit.enc}{/opt/texlive/texdi
-r/texmf-dist/fonts/enc/dvips/stix2-type1/stix2-mathex.enc}{/opt/texlive/texdir/
+c}{/opt/texlive/texdir/texmf-dist/fonts/enc/dvips/stix2-type1/stix2-mathit.enc}
+{/opt/texlive/texdir/texmf-dist/fonts/enc/dvips/stix2-type1/stix2-mathex.enc}{/
+opt/texlive/texdir/texmf-dist/fonts/enc/dvips/base/8r.enc}{/opt/texlive/texdir/
 texmf-dist/fonts/enc/dvips/stix2-type1/stix2-t1.enc}{/opt/texlive/texdir/texmf-
-dist/fonts/enc/dvips/stix2-type1/stix2-ts1.enc}{/opt/texlive/texdir/texmf-dist/
-fonts/enc/dvips/inconsolata/i4-t1-0.enc}</opt/texlive/texdir/texmf-dist/fonts/t
-ype1/public/inconsolata/Inconsolata-zi4r.pfb></opt/texlive/texdir/texmf-dist/fo
-nts/type1/public/stix2-type1/STIX2Math.pfb></opt/texlive/texdir/texmf-dist/font
-s/type1/public/stix2-type1/STIX2Text-Bold.pfb></opt/texlive/texdir/texmf-dist/f
-onts/type1/public/stix2-type1/STIX2Text-Italic.pfb></opt/texlive/texdir/texmf-d
-ist/fonts/type1/public/stix2-type1/STIX2Text-Regular.pfb></opt/texlive/texdir/t
-exmf-dist/fonts/type1/public/ccicons/ccicons.pfb></opt/texlive/texdir/texmf-dis
-t/fonts/type1/urw/helvetic/uhvb8a.pfb></opt/texlive/texdir/texmf-dist/fonts/typ
-e1/urw/helvetic/uhvr8a.pfb>
-Output written on preprint.pdf (12 pages, 3509598 bytes).
+dist/fonts/enc/dvips/inconsolata/i4-t1-0.enc}</opt/texlive/texdir/texmf-dist/fo
+nts/type1/public/inconsolata/Inconsolata-zi4r.pfb></opt/texlive/texdir/texmf-di
+st/fonts/type1/public/stix2-type1/STIX2Math.pfb></opt/texlive/texdir/texmf-dist
+/fonts/type1/public/stix2-type1/STIX2Text-Bold.pfb></opt/texlive/texdir/texmf-d
+ist/fonts/type1/public/stix2-type1/STIX2Text-Italic.pfb></opt/texlive/texdir/te
+xmf-dist/fonts/type1/public/stix2-type1/STIX2Text-Regular.pfb></opt/texlive/tex
+dir/texmf-dist/fonts/type1/public/ccicons/ccicons.pfb></opt/texlive/texdir/texm
+f-dist/fonts/type1/urw/helvetic/uhvb8a.pfb></opt/texlive/texdir/texmf-dist/font
+s/type1/urw/helvetic/uhvr8a.pfb>
+Output written on preprint.pdf (13 pages, 3510014 bytes).
 PDF statistics:
- 297 PDF objects out of 1000 (max. 8388607)
- 250 compressed objects within 3 object streams
- 74 named destinations out of 1000 (max. 500000)
+ 298 PDF objects out of 1000 (max. 8388607)
+ 251 compressed objects within 3 object streams
+ 75 named destinations out of 1000 (max. 500000)
  125 words of extra memory for PDF output out of 10000 (max. 10000000)
 
