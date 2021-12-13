@@ -418,16 +418,32 @@ initial dataset.
 The trained models were then thresholded (again by optimising informedness), and
 their predictions transformed back into networks for analysis; specifically, we
 measured the connectance, nestedness (REF), modularity (REF), and entropy (REF).
-The results are presented in the following table:
+The results are presented in @tbl:comparison. The random forest model is an
+interesting instance here: it produces the network that looks the most like the
+original dataset, despite having a very low PR-AUC, suggesting it hits high
+recall at the cost of low precision. Although the ensemble was about to reach a
+very high PR-AUC (and a very high ROC-AUC), this did not necessarilly translate
+into more accurate reconstructions of the structure of the network. This result
+bears elaborating. Measures of model performance capture how much of the
+interactions and non-interactions are correctly identified. As long as these
+predictions are not perfect, some interactions will be predicted at the "wrong"
+position in the network; these measures cannot describe the structural effect of
+these mistakes. On the other hand, measures of network structure can have the
+same value with interactions that fall at drastically different positions; this
+is in part because a lot of these measures covary with connectance, and in part
+because as long as these values are not 0 or their respective maximum, there is
+a large number of network configurations that can have the same value.
 
 | Model            | MCC      | Inf.     | ROC-AUC  | PR-AUC   | Conn.    | $\eta$   | $Q$      | Entropy  |
 | ---------------- | -------- | -------- | -------- | -------- | -------- | -------- | -------- | -------- |
-| Decision tree    | 0.83     | 0.68     | 0.95     | 0.15     | 0.18     | 0.53     | 0.49     | 8.86     |
-| BRT              | 0.76     | 0.89     | 0.95     | **0.65** | 0.22     | 0.63     | 0.43     | 9.14     |
+| Decision tree    | 0.83     | 0.68     | 0.95     | 0.15     | 0.18     | 0.53     | **0.49**     | 8.86     |
+| BRT              | 0.76     | 0.89     | 0.95     | 0.65     | 0.22     | 0.63     | 0.43     | 9.14     |
 | Random Forest    | **0.89** | **0.94** | **0.99** | 0.41     | **0.17** | **0.48** | **0.49** | **8.80** |
 | Ridge Regression | 0.67     | 0.85     | 0.89     | 0.38     | 0.27     | 1.0      | 0.26     | 9.40     |
 | Ensemble         | 0.84     | 0.91     | **0.99** | **0.94** | 0.19     | 0.54     | 0.48     | 8.92     |
 | Data             |          |          |          |          | 0.16     | 0.45     | 0.49     | 8.71     |
+
+: Values of four performance metrics, and four network structure metrics, for the predictions presented in @fig:ecovalid. The values in **bold** indicate the best value for each column (including ties).  {#tbl:comparison}
 
 # Guidelines for the assesment of network predictive models
 
