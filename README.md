@@ -1,6 +1,21 @@
-- example on diagnostic test: rare events are hard to detect even with really good models
-- summary of model challenges for networks
-- @Strydom2021RoaPre importance of drawing on traits + validation is challenging + comparing across space
+The accuracy paradox is the basis of a number of problems in statistical
+education, and lies in the fact that, when the desired class is rare, a model
+that gets less and less performant will become more and more accurate and
+useful, simply by (i) underpredicting true positive cases and (ii)
+over-predicting false negatives. In other words, accuracy, defined as the
+proportion of predictions that are correct, is often useless as a measure of how
+predictive a model is. This is particularly true in ecological networks; the
+desired class (presence of an interaction between two species) is the one we
+care most about, and by far the least commmon. Herein lies the core challenge of
+predicting species interactions: the extreme imbalance between classes makes the
+training of predictive models difficult. In a recent contribution,
+@Strydom2021RoaPre highlight that predictive models of interactions can likely
+be improved by adding information (in the form of, *e.g.* traits), but that we
+do not have robust guidelines as to how the predictive ability of these models
+should be evaluated, nor about how the models should be trained. Here, by
+relying on simple derivations and a series of simulations, we formulate a number
+of such guidelines, specifically for the case of binary classifiers derived from
+thresholded values.
 
 Binary classifiers are usually assessed by measuring properties of their
 confusion matrix, *i.e.* the contingency table reporting true/false
@@ -132,16 +147,16 @@ guidelines for the prediction of ecological interactions.
 
 # Baseline values
 
-Intro
-
-## Confusion matrix with skill and bias
-
 In this section, we will assume a network of connectance $\rho$, *i.e.* having
 $\rho S^2$ interactions (where $S$ is the species richness), and $(1-\rho) S^2$
 non-interactions. Therefore, the vector describing the *true* state of the
 network is a column vector $\mathbf{o}^T = [\rho (1-\rho)]$ (we can safely drop
 the $S^2$ terms, as we will work on the confusion matrix, which ends up
-expressing *relative* values).
+expressing *relative* values). We will apply skill and bias to this matrix, and
+measure how a selection of performance metrics respond to changes in these
+values, in order to assess their suitability for model evaluation.
+
+## Confusion matrix with skill and bias
 
 In order to write the values of the confusion matrix for a hypothetical
 classifier, we need to define two characteristics: its skill, and its bias.
