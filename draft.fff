@@ -33,22 +33,6 @@ classifier.}\label{fig:connectance}
 \efloatseparator
  
 \begin{figure}
-\hypertarget{fig:svdperf}{%
-\centering
-\includegraphics{figures/svd_perf.png}
-\caption{TODO}\label{fig:svdperf}
-}
-\end{figure}
-\efloatseparator
- 
-\begin{figure}
-\centering
-\includegraphics{figures/svd_ecol.png}
-\caption{TODO}
-\end{figure}
-\efloatseparator
- 
-\begin{figure}
 \hypertarget{fig:biasmccinf}{%
 \centering
 \includegraphics{figures/bias_mcc_inf.png}

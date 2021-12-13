@@ -1004,6 +1004,39 @@
         "volume": "38"
     },
     {
+        "DOI": "10.1073/pnas.0504062102",
+        "author": [
+            {
+                "family": "Weitz",
+                "given": "J. S."
+            },
+            {
+                "family": "Hartman",
+                "given": "H."
+            },
+            {
+                "family": "Levin",
+                "given": "S. A."
+            }
+        ],
+        "container-title": "Proceedings of the National Academy of Sciences of the United States of America",
+        "id": "Weitz2005CoeArm",
+        "issue": "27",
+        "issued": {
+            "date-parts": [
+                [
+                    2005,
+                    5,
+                    7
+                ]
+            ]
+        },
+        "page": "9535-9540",
+        "title": "Coevolutionary arms races between bacteria and bacteriophage",
+        "type": "article-journal",
+        "volume": "102"
+    },
+    {
         "DOI": "10.1038/s41576-021-00434-9",
         "author": [
             {
