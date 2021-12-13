@@ -306,28 +306,88 @@ classifier is \emph{accurate} when the trace of the matrix divided by
 the sum of the matrix is close to 1, with other measures focusing on
 different ways in which the classifer is wrong.
 
+There is an immense amount of measures to evaluate the performance of
+classification tasks (Ferri et al., 2009). Here we will focus on five of
+them with high relevance for imbalanced learning (He \& Ma, 2013); three
+threshold metrics (\(\kappa\), informedness, and the Matthews
+Correlation Coefficient), and two ranking metrics (the ROC-AUC and
+PR-AUC). The \(\kappa\) measure of agreement (Landis \& Koch, 1977)
+establishes the extent to which two observers (here the data and the
+prediction) agree, and is measured as
+
+\[
+2\frac{tp\times tn - fn\times fp}{(tp+fp)\times (fp+tn)+(tn+fp)\times (tn+fn)} \,.
+\]
+
+Informedness (\textbf{Youden1950IndRat?}) (also known as bookmaker
+informedness or the True Skill Statistic) is
+\(\text{TPR}+\text{TNR}-1\), where \(\text{TPR}= tp/(tp+fn)\) and
+\(\text{TNR} = tn/(tn+fp)\); informedness can be used to find the
+optimal cutpoint in thresholding analyses (Schisterman et al., 2005).
+The MCC is defined as
+
+\[
+\frac{tp\times tn - fn\times fp}{\srt{(tp+fp)\times (tp+fn)\times (tn+fp)\times (tn+fn)}} \,.
+\]
+
+Finally, \(F_1\) is the harmonic mean of precision (the chance that a
+positive even was correctly classified) and sensitivity (the ability to
+correctly classify positive events), and is defined as
+
+\[
+2\frac{tp}{2\times tp + fp + fn}\,.
+\]
+
+A lot of binary classifiers are built by using a regressor (whose task
+is to guess the value of the interaction, amd can therefore return
+somethins considered to be a pseudo-probability); in this case, the
+optimal value below which predicitions are assumed to be negative
+(\emph{i.e.} the interaction does not exist) can be determined by
+picking a threshold maximizing some value on the ROC curve or the PR
+curve. The area under these curves (ROC-AUC and PR-AUC henceforth) give
+ideas on the overall goodness of the classifier. Saito \& Rehmsmeier
+(2015) established that the ROC-AUC is biased towards over-estimating
+performance for imbalanced data; on the contrary, the PR-AUC is able to
+identify classifiers that are less able to detect positive interactions
+correctly, with the additional advantage of having a baseline value
+equal to prevalence. Therefore, it is important to assess whether these
+two measures return different results when applied to ecological network
+prediction. The ROC curve is defined by the false positive rate on the
+\(x\) axis, and the true positive rate on the \(y\) axis, and the PR
+curve is defined by the true positive rate on the \(x\) axis, and the
+positive predictive value on the \(y\) axis. By comparison with the
+previous paragraph, it is obvious that \(F_1\) has ties to the PR curve
+(being close to the expected PR-AUC), and that informedness has ties to
+the ROC curve (whereby the threshold maximizing informedness is also the
+point of maximal inflection on the ROC curve). One important difference
+between ROC and PR is that the later does not prominently account for
+the size of the true negative compartments: in short, it is more
+sensitive to the correct positive predictions. In a context of strong
+imbalance, PR-AUC is therefore a more stringent test of model
+performance.
+
 The same approach is used to evaluate \emph{e.g.} species distribution
 models (SDMs). Indeed, the training and evaluation of SDMs as binary
-classifiers suffers from the same issue of low prevalence. In a previous
+classifiers suffers from the same issue of low prevalence. In previous
 work, Allouche et al. (2006) suggested that \(\kappa\) was a better test
-of model performance than the True Skill Statistic (TSS), which we will
-refer to as Youden's informedness (or \(J\)); these conclusions were
-later criticized by Somodi et al. (2017), who emphasized that
-informedness' relationship to prevalence depends on assumptions about
-bias in the model, and therefore recommend the use of \(\kappa\) as a
-validation of classification performance. Although this work offers
-recommendations about the comparison of models, it doesn't establishes
-baselines or good practices for training on imbalanced ecological data.
-Within the context of networks, there are three specific issues that
-need to be adressed. First, what values of performance measures are we
-expecting for a classifier that has poor performance? This is
-particularly important as it can evaluate whether low prevalence can
-lull us into a false sense of predictive accuracy. Second, independently
-of the question of model evaluation, is low prevalence an issue for
-\emph{training}, and can we remedy it? Finally, because the low amount
-of data on interaction makes a lot of imbalance correction methods (see
-\emph{e.g.} Branco et al., 2015) hard to apply, which indicators can be
-optimized with the least amount of positive interaction data?
+of model performance than the True Skill Statistic (TSS; which we refer
+to as Youden's informedness); these conclusions were later criticized by
+Somodi et al. (2017), who emphasized that informedness' relationship to
+prevalence depends on assumptions about bias in the model, and therefore
+recommend the use of \(\kappa\) as a validation of classification
+performance. Although this work offers recommendations about the
+comparison of models, it doesn't establishes baselines or good practices
+for training on imbalanced ecological data. Within the context of
+networks, there are three specific issues that need to be adressed.
+First, what values of performance measures are we expecting for a
+classifier that has poor performance? This is particularly important as
+it can evaluate whether low prevalence can lull us into a false sense of
+predictive accuracy. Second, independently of the question of model
+evaluation, is low prevalence an issue for \emph{training}, and can we
+remedy it? Finally, because the low amount of data on interaction makes
+a lot of imbalance correction methods (see \emph{e.g.} Branco et al.,
+2015) hard to apply, which indicators can be optimized with the least
+amount of positive interaction data?
 
 In addition to the literature on SDMs, most of the research on machine
 learning application to life sciences is focused on genomics (which has
@@ -353,49 +413,25 @@ conditions are likely to be met with network data, there is a need to
 evaluate which measures of classification accuracy respond in a
 desirable way.
 
-A lot of binary classifiers are built by using a regressor (whose task
-is to guess the value of the interaction, amd can therefore return
-somethins considered to be a pseudo-probability); in this case, the
-optimal value below which predicitions are assumed to be negative
-(\emph{i.e.} the interaction does not exist) can be determined by
-picking a threshold maximizing some value on the ROC curve or the PR
-curve. The area under these curves (ROC-AUC and PR-AUC henceforth) give
-ideas on the overall goodness of the classifier. Saito \& Rehmsmeier
-(2015) established that the ROC-AUC is biased towards over-estimating
-performance for imbalanced data; on the contrary, the PR-AUC is able to
-identify classifiers that are less able to detect positive interactions
-correctly, with the additional advantage of having a baseline value
-equal to prevalence. Therefore, it is important to assess whether these
-two measures return different results when applied to ecological network
-prediction.
-
 We establish that due to the low prevalence of interactions, even poor
 classifiers applied to food web data will reach a high accuracy; this is
 because the measure is dominated by the accidental correct predictions
-of negatives. The \(F_1\) score and positive predictive values are less
-sensitive to bias, but \textbf{TODO}
+of negatives. On simulated confusion matrices with ranges of imbalance
+that are credible for ecological networks, MCC had the most desirable
+behavior, and informedness is a linear measure of classifier skill. By
+performing simulations with four models and an ensemble,we show that
+informedness and ROC-AUC are consistently high on network data, and that
+MCC and PR-AUC are more accurate measures of the effective performance
+of the classifier. Finally, by measuring the structure of predicted
+networks, we highlight an interesting paradox: the models with the best
+performance measures are not the models with the closest reconstructed
+network structure. We discuss these results in the context of
+establishing guidelines for the prediction of ecological interactions.
 
 \hypertarget{baseline-values}{%
 \section{Baseline values}\label{baseline-values}}
 
 Intro
-
-\hypertarget{definition-of-the-performance-measures}{%
-\subsection{Definition of the performance
-measures}\label{definition-of-the-performance-measures}}
-
-\(\kappa\)
-
-informedness
-
-MCC
-
-ROC-AUC
-
-\(F_{\beta}\)
-
-PR-AUC - baseline is prevalence, wtf are recall and precision, you may
-ask?
 
 \hypertarget{confusion-matrix-with-skill-and-bias}{%
 \subsection{Confusion matrix with skill and
@@ -840,7 +876,8 @@ Model & MCC & Inf. & ROC-AUC & PR-AUC & Conn. & \(\eta\) &
 \endhead
 Decision tree & 0.85 & 0.92 & 0.97 & 0.12 & 0.21 & 0.76 &
 0.31\tabularnewline
-BRT & 0.90 & 0.90 & 0.98 & 0.86 & 0.23 & 0.82 & 0.27\tabularnewline
+BRT & \textbf{0.90} & 0.90 & 0.98 & 0.86 & 0.23 & 0.82 &
+0.27\tabularnewline
 Random Forest & \textbf{0.90} & \textbf{0.96} & \textbf{1.00} & 0.27 &
 \textbf{0.20} & \textbf{0.72} & \textbf{0.32}\tabularnewline
 Ridge Regression & 0.80 & 0.91 & 0.95 & 0.58 & 0.24 & 1.0 &
@@ -855,17 +892,27 @@ Data & & & & & 0.18 & 0.66 & 0.34\tabularnewline
 \section{Guidelines for the assesment of network predictive
 models}\label{guidelines-for-the-assesment-of-network-predictive-models}}
 
-The results presented here highlight an interesting paradox: larger
-networks (with lower connectance) require more training set bias in
-order to maximize model performance fig.~\ref{fig:optimbias}, but are
-also more difficult to predict according to MCC and PR-AUC
-fig.~\ref{fig:optimperf}. This suggests that the task of network
-prediction will be difficult regardless of network size: by being
-limited by the \emph{frequency} of interactions when the network is
-large, and by being limited by the \emph{number} of interactions when
-the network is small. Nevertheless, based on the simulations and
-numerical experiments, it is possible to formulate a series of
-recommendations for the evaluation of network prediction models.
+The results presented here highlight an interesting paradox: although
+the Random Forest was ultimately able to get a correct estimate of
+network structure tbl.~\ref{tbl:comaprison}, it ultimately remains a
+poor classifier, as evidenced by its low PR-AUC. This suggests that the
+goal of predicting \emph{interactions} and predicting \emph{networks}
+may not be solvable in the same way -- of course a perfect classifier of
+interactions would make a perfect network prediction; but even the best
+scoring predictor of interactions (the ensemble model) had not
+necessarilly the best prediction of network structure. The tasks of
+predicting networks structure and of predicting interactions within
+networks are essentially two different ones. For some applications
+(\emph{.e.g.} comparison of network structure across gradients), one may
+care more about a robust estimate of the structure, at the cost at
+putting some interactions at the wrong place. For other applications
+(\emph{e.g.} identifying pairs of interacting species), one may
+conversely care more about getting as many pairs right, even though the
+mistakes accumulate in the form of a slightly worse estimate of network
+structure. How these two approaches can be reconciled is undoubtedly a
+task for further research. Despite this apprent tension at the heart of
+the predictive exercise, we can use the results presented here to
+suggest a number of guidelines.
 
 First, because we should have more trust in reported interactions than
 in reported absences of interactions, we can draw on previous literature
@@ -882,33 +929,40 @@ fig.~\ref{fig:optimperf} and training set imbalance
 fig.~\ref{fig:biasrocpr}, it should be used as a measure of model
 performance over the ROC-AUC. This is not to say that ROC-AUC should be
 discarded (in fact, a low ROC-AUC is a sign of an issue with the model),
-but that its interpretation should be guided by the PR-AUC value. This
-again echoes recommendations from other fields (Saito \& Rehmsmeier,
-2015).
+but that its interpretation should be guided by the PR-AUC value.
+Specifically, a high ROC-AUC is not informative, as it can be associated
+to a low PR-AUC (see \emph{e.g.} Random Forest in
+tbl.~\ref{tbl:comparison}) This again echoes recommendations from other
+fields (Jeni et al., 2013; Saito \& Rehmsmeier, 2015).
 
-Thirdly, regardless of network connectance \emph{or} measure to evaluate
-the model performance, as long as the network connectance is larger than
-\(\approx 0.1\), artificially balancing the training set to have
-equiprevalence will give the best possible results. This was true for
-all models.
+Thirdly, regardless of network connectance, maximizing informedness
+required a training set bias of about 0.5, and maximizing the MCC
+required a training set bias of 0.7 and more. This has an important
+consequence in ecological networks, for which the pool of positive cases
+(interactions) to draw from is typically small: the most parsimonious
+measure (\emph{i.e.} the one requiring to discard the least amount of
+information to train the model) will give the best validation potential,
+and is probably the informedness (maximizing informedness is the
+generally accepted default for imbalanced classification; Schisterman et
+al., 2005).
 
 Finally, it is noteworthy that the ensemble model was systematically
-better than the component models; even when poor models were included
-(Random Forest and Decision Tree), the ensemble was able to leverage the
-different biases expressed by the models to make an overall more
-accurate prediction. We do not expect that ensembles will \emph{always}
-be better than single models. In a recent multi-model comparison, Becker
-et al. (2021) found that the ensemble was \emph{not} the best model.
-There is no general conclusion to draw from this besides reinforcing the
-need to be pragmatic about which models should be included in the
-ensemble, or whether to use an ensemble at all. In a sense, the
-surprising peformance of the ensemble model should form the basis of the
-last recommendation: optimal training set bias and its interaction with
-connectance and binary classifier is, in a sense, an hyperparameter that
-should be assessed. The distribution of results in
-fig.~\ref{fig:optimbias} and fig.~\ref{fig:optimperf} show that there
-are variations around the trend; furthermore, networks with different
-structures than the one we simulated here may respond in different ways.
+better than the component models; even when the models were individually
+far form perfect, the ensemble was able to leverage the different biases
+expressed by the models to make an overall more accurate prediction. We
+do not expect that ensembles will \emph{always} be better than single
+models. In a recent multi-model comparison, Becker et al. (2021) found
+that the ensemble was \emph{not} the best model. There is no general
+conclusion to draw from this besides reinforcing the need to be
+pragmatic about which models should be included in the ensemble, or
+whether to use an ensemble at all. In a sense, the surprising peformance
+of the ensemble model should form the basis of the last recommendation:
+optimal training set bias and its interaction with connectance and
+binary classifier is, in a sense, an hyperparameter that should be
+assessed. The distribution of results in fig.~\ref{fig:optimbias} and
+fig.~\ref{fig:optimperf} show that there are variations around the
+trend; furthermore, networks with different structures than the one we
+simulated here may respond in different ways.
 
 \textbf{Acknowledgements:} We acknowledge that this study was conducted
 on land within the traditional unceded territory of the Saint Lawrence
@@ -984,6 +1038,17 @@ Delgado, R., \& Tibau, X.-A. (2019). Why Cohen's Kappa should be avoided
 as performance measure in classification. \emph{PloS One}, \emph{14}(9),
 e0222916. \url{https://doi.org/10.1371/journal.pone.0222916}
 
+\leavevmode\hypertarget{ref-Ferri2009ExpCom}{}%
+Ferri, C., Hernández-Orallo, J., \& Modroiu, R. (2009). An experimental
+comparison of performance measures for classification. \emph{Pattern
+Recognition Letters}, \emph{30}(1), 27--38.
+\url{https://doi.org/10.1016/j.patrec.2008.08.010}
+
+\leavevmode\hypertarget{ref-He2013ImbLea}{}%
+He, H., \& Ma, Y. (Eds.). (2013). \emph{Imbalanced Learning:
+Foundations, Algorithms, and Applications} (1st edition). Wiley-IEEE
+Press.
+
 \leavevmode\hypertarget{ref-Jeni2013FacImb}{}%
 Jeni, L. A., Cohn, J. F., \& De La Torre, F. (2013). Facing Imbalanced
 Data--Recommendations for the Use of Performance Metrics. \emph{2013
@@ -999,6 +1064,11 @@ Jordano, P. (2016a). Chasing Ecological Interactions. \emph{PLOS Biol},
 Jordano, P. (2016b). Sampling networks of ecological interactions.
 \emph{Functional Ecology}. \url{https://doi.org/10.1111/1365-2435.12763}
 
+\leavevmode\hypertarget{ref-Landis1977MeaObs}{}%
+Landis, J. R., \& Koch, G. G. (1977). The Measurement of Observer
+Agreement for Categorical Data. \emph{Biometrics}, \emph{33}(1),
+159--174. \url{https://doi.org/10.2307/2529310}
+
 \leavevmode\hypertarget{ref-McLeod2021SamAsy}{}%
 McLeod, A., Leroux, S. J., Gravel, D., Chu, C., Cirtwill, A. R., Fortin,
 M.-J., Galiana, N., Poisot, T., \& Wood, S. A. (2021). Sampling and
@@ -1010,6 +1080,13 @@ Saito, T., \& Rehmsmeier, M. (2015). The Precision-Recall Plot Is More
 Informative than the ROC Plot When Evaluating Binary Classifiers on
 Imbalanced Datasets. \emph{PLOS ONE}, \emph{10}(3), e0118432.
 \url{https://doi.org/10.1371/journal.pone.0118432}
+
+\leavevmode\hypertarget{ref-Schisterman2005OptCut}{}%
+Schisterman, E. F., Perkins, N. J., Liu, A., \& Bondell, H. (2005).
+Optimal Cut-point and Its Corresponding Youden Index to Discriminate
+Individuals Using Pooled Blood Samples. \emph{Epidemiology},
+\emph{16}(1), 73--81.
+\url{https://doi.org/10.1097/01.ede.0000147512.81966.ba}
 
 \leavevmode\hypertarget{ref-Somodi2017PreDep}{}%
 Somodi, I., Lepesi, N., \& Botta‐Dukát, Z. (2017). Prevalence dependence

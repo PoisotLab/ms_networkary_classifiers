@@ -423,6 +423,66 @@
         "volume": "14"
     },
     {
+        "DOI": "10.1016/j.patrec.2008.08.010",
+        "author": [
+            {
+                "family": "Ferri",
+                "given": "C."
+            },
+            {
+                "family": "Hern\u00e1ndez-Orallo",
+                "given": "J."
+            },
+            {
+                "family": "Modroiu",
+                "given": "R."
+            }
+        ],
+        "container-title": "Pattern Recognition Letters",
+        "id": "Ferri2009ExpCom",
+        "issue": "1",
+        "issued": {
+            "date-parts": [
+                [
+                    2009,
+                    1,
+                    1
+                ]
+            ]
+        },
+        "page": "27-38",
+        "title": "An experimental comparison of performance measures for classification",
+        "type": "article-journal",
+        "volume": "30"
+    },
+    {
+        "edition": "1st edition",
+        "editor": [
+            {
+                "family": "He",
+                "given": "Haibo"
+            },
+            {
+                "family": "Ma",
+                "given": "Yunqian"
+            }
+        ],
+        "id": "He2013ImbLea",
+        "issued": {
+            "date-parts": [
+                [
+                    2013,
+                    7,
+                    1
+                ]
+            ]
+        },
+        "publisher": "Wiley-IEEE Press",
+        "publisher-place": "Hoboken, New Jersey",
+        "title": "Imbalanced Learning: Foundations, Algorithms, and Applications",
+        "type": "book"
+    },
+    {
         "DOI": "10.1109/ACII.2013.47",
         "author": [
             {
@@ -498,6 +558,35 @@
         },
         "title": "Sampling networks of ecological interactions",
         "type": "article-journal"
+    },
+    {
+        "DOI": "10.2307/2529310",
+        "URL": "http://www.jstor.org/stable/2529310",
+        "author": [
+            {
+                "family": "Landis",
+                "given": "J. Richard"
+            },
+            {
+                "family": "Koch",
+                "given": "Gary G."
+            }
+        ],
+        "container-title": "Biometrics",
+        "id": "Landis1977MeaObs",
+        "issue": "1",
+        "issued": {
+            "date-parts": [
+                [
+                    1977
+                ]
+            ]
+        },
+        "page": "159-174",
+        "publisher": "[Wiley, International Biometric Society]",
+        "title": "The Measurement of Observer Agreement for Categorical Data",
+        "type": "article-journal",
+        "volume": "33"
     },
     {
         "DOI": "10.1016/j.patter.2020.100079",
@@ -700,6 +789,42 @@
         "title": "The Precision-Recall Plot Is More Informative than the ROC Plot When Evaluating Binary Classifiers on Imbalanced Datasets",
         "type": "article-journal",
         "volume": "10"
+    },
+    {
+        "DOI": "10.1097/01.ede.0000147512.81966.ba",
+        "author": [
+            {
+                "family": "Schisterman",
+                "given": "Enrique F."
+            },
+            {
+                "family": "Perkins",
+                "given": "Neil J."
+            },
+            {
+                "family": "Liu",
+                "given": "Aiyi"
+            },
+            {
+                "family": "Bondell",
+                "given": "Howard"
+            }
+        ],
+        "container-title": "Epidemiology",
+        "id": "Schisterman2005OptCut",
+        "issue": "1",
+        "issued": {
+            "date-parts": [
+                [
+                    2005,
+                    1
+                ]
+            ]
+        },
+        "page": "73-81",
+        "title": "Optimal Cut-point and Its Corresponding Youden Index to Discriminate Individuals Using Pooled Blood Samples",
+        "type": "article-journal",
+        "volume": "16"
     },
     {
         "DOI": "10.1002/ece3.2654",
