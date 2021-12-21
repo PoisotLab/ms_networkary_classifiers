@@ -86,9 +86,9 @@ for i in 1:250
     push!(results, (i, :data, :Connectance, connectance(net)))
     push!(results, (i, :data, :Nestedness, η(net)))
     push!(results, (i, :data, :Modularity, Q(brim(lp(net)...)...)))
-    push!(results, (i, :data, :MotifOne, length(find_motif(net, _m1))))
-    push!(results, (i, :data, :MotifTwo, length(find_motif(net, _m2))))
-    push!(results, (i, :data, :MotifThree, length(find_motif(net, _m3))))
+    #push!(results, (i, :data, :MotifOne, length(find_motif(net, _m1))))
+    #push!(results, (i, :data, :MotifTwo, length(find_motif(net, _m2))))
+    #push!(results, (i, :data, :MotifThree, length(find_motif(net, _m3))))
     
 
     bias = 0.7
@@ -141,9 +141,9 @@ for i in 1:250
         push!(results, (i, candidate_model.first, :Connectance, connectance(net)))
         push!(results, (i, candidate_model.first, :Nestedness, η(net)))
         push!(results, (i, candidate_model.first, :Modularity, Q(brim(lp(net)...)...)))
-        push!(results, (i, candidate_model.first, :MotifOne, length(find_motif(net, _m1))))
-        push!(results, (i, candidate_model.first, :MotifTwo, length(find_motif(net, _m2))))
-        push!(results, (i, candidate_model.first, :MotifThree, length(find_motif(net, _m3))))
+        #push!(results, (i, candidate_model.first, :MotifOne, length(find_motif(net, _m1))))
+        #push!(results, (i, candidate_model.first, :MotifTwo, length(find_motif(net, _m2))))
+        #push!(results, (i, candidate_model.first, :MotifThree, length(find_motif(net, _m3))))
 
     end
 
@@ -176,9 +176,9 @@ for i in 1:250
     push!(results, (i, :ensemble, :Connectance, connectance(net)))
     push!(results, (i, :ensemble, :Nestedness, η(net)))
     push!(results, (i, :ensemble, :Modularity, Q(brim(lp(net)...)...)))
-    push!(results, (i, :ensemble, :MotifOne, length(find_motif(net, _m1))))
-    push!(results, (i, :ensemble, :MotifTwo, length(find_motif(net, _m2))))
-    push!(results, (i, :ensemble, :MotifThree, length(find_motif(net, _m3))))
+    #push!(results, (i, :ensemble, :MotifOne, length(find_motif(net, _m1))))
+    #push!(results, (i, :ensemble, :MotifTwo, length(find_motif(net, _m2))))
+    #push!(results, (i, :ensemble, :MotifThree, length(find_motif(net, _m3))))
 
 end
 
