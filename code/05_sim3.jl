@@ -11,6 +11,7 @@ using Distributions
 using AlgebraOfGraphics, CairoMakie
 using EcologicalNetworks
 using Random
+using Combinatorics
 
 Random.seed!(1)
 
@@ -52,7 +53,6 @@ end
 
 R(x) = R(x, extrema(x)...)
 
-
 DecisionTree = @load DecisionTreeRegressor pkg = DecisionTree
 RandomForest = @load RandomForestRegressor pkg = DecisionTree
 BoostedRegressor = @load EvoTreeRegressor pkg = EvoTrees
@@ -74,6 +74,10 @@ results = DataFrame(
     value = Float64[]
 )
 
+_m1 = BipartiteNetwork([true true; true true])
+_m2 = BipartiteNetwork([true false; true true])
+_m3 = BipartiteNetwork([true false; false true])
+
 for i in 1:250
 
     𝐗, 𝐲 = network(S, 0.19)
@@ -82,6 +86,10 @@ for i in 1:250
     push!(results, (i, :data, :Connectance, connectance(net)))
     push!(results, (i, :data, :Nestedness, η(net)))
     push!(results, (i, :data, :Modularity, Q(brim(lp(net)...)...)))
+    push!(results, (i, :data, :MotifOne, length(find_motif(net, _m1))))
+    push!(results, (i, :data, :MotifTwo, length(find_motif(net, _m2))))
+    push!(results, (i, :data, :MotifThree, length(find_motif(net, _m3))))
+    
 
     bias = 0.7
 
@@ -133,6 +141,9 @@ for i in 1:250
         push!(results, (i, candidate_model.first, :Connectance, connectance(net)))
         push!(results, (i, candidate_model.first, :Nestedness, η(net)))
         push!(results, (i, candidate_model.first, :Modularity, Q(brim(lp(net)...)...)))
+        push!(results, (i, candidate_model.first, :MotifOne, length(find_motif(net, _m1))))
+        push!(results, (i, candidate_model.first, :MotifTwo, length(find_motif(net, _m2))))
+        push!(results, (i, candidate_model.first, :MotifThree, length(find_motif(net, _m3))))
 
     end
 
@@ -165,6 +176,9 @@ for i in 1:250
     push!(results, (i, :ensemble, :Connectance, connectance(net)))
     push!(results, (i, :ensemble, :Nestedness, η(net)))
     push!(results, (i, :ensemble, :Modularity, Q(brim(lp(net)...)...)))
+    push!(results, (i, :ensemble, :MotifOne, length(find_motif(net, _m1))))
+    push!(results, (i, :ensemble, :MotifTwo, length(find_motif(net, _m2))))
+    push!(results, (i, :ensemble, :MotifThree, length(find_motif(net, _m3))))
 
 end
 
