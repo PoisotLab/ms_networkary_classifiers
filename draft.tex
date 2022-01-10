@@ -689,7 +689,11 @@ possible to over-correct the imbalance.
 \hypertarget{fig:biasmccinf}{%
 \centering
 \includegraphics{figures/bias_mcc_inf.png}
-\caption{TODO}\label{fig:biasmccinf}
+\caption{Response of MCC and Informedness to changes in the training set
+bias for a fixed connectance (rows). Both of these values approach 1 for
+a good model. Informedness is consistently high, and by contrast, MCC
+increases with additional training set bias. Across all models, training
+on a more connected network is easier.}\label{fig:biasmccinf}
 }
 \end{figure}
 
@@ -707,7 +711,12 @@ models.
 \hypertarget{fig:biasrocpr}{%
 \centering
 \includegraphics{figures/bias_roc_pr.png}
-\caption{TODO}\label{fig:biasrocpr}
+\caption{Response of ROC-AUC and PR-AUC to changes in the training set
+bias for a fixed connectance (rows). ROC-AUC is consistently high, and
+therefore not properly able to separate good from poor classifiers. On
+the other hand, PR-AUC responds to changes in the training set. As in
+fig.~\ref{fig:biasmccinf}, training on more connected networks is
+easier.}\label{fig:biasrocpr}
 }
 \end{figure}
 
@@ -740,7 +749,14 @@ are presented in fig.~\ref{fig:optimbias}.
 \hypertarget{fig:optimbias}{%
 \centering
 \includegraphics{figures/optim_bias.png}
-\caption{TODO}\label{fig:optimbias}
+\caption{Value of the optimal training set bias for the different models
+and measures evaluated here, over a range of connectances. Informedness
+was reliably maximized for balanced training sets, and kept this
+behavior across models. For other measures, larger connectances in the
+true network allowed lower biases in the training set. In a large number
+of cases, ``over-correcting'' by having training sets with more than
+half instances representing interactions would maximize the values of
+the model performance measures.}\label{fig:optimbias}
 }
 \end{figure}
 
@@ -763,7 +779,12 @@ exist starts gaining importance.
 \hypertarget{fig:optimperf}{%
 \centering
 \includegraphics{figures/optim_perf.png}
-\caption{TODO}\label{fig:optimperf}
+\caption{When trained on their optimally biased training set, most
+models were able to maximize their performance; this is not true for
+decision tree, which had a very low PR-AUC, and to some extent for ridge
+regression who had a slow increase with network connectance. The
+ensemble had a consistently high performance despite incorporating poor
+models.}\label{fig:optimperf}
 }
 \end{figure}
 
@@ -797,7 +818,13 @@ that the ensemble is close to the initial dataset.
 \hypertarget{fig:ecovalid}{%
 \centering
 \includegraphics{figures/valid_ensemble.png}
-\caption{TODO}\label{fig:ecovalid}
+\caption{Visualisation of the models predictions for one instance of a
+network prediction problem (shown in the ``Dataset'' panel). This figure
+reveals how inspecting the details of the prediction is important:
+indeed, although the performance measures hint at the fact that ridge
+regression is mediocre, this figure reveals that it is making
+predictions that correspond to a network with an entirely different
+topology (namely, nested as opposed to diagonal).}\label{fig:ecovalid}
 }
 \end{figure}
 
