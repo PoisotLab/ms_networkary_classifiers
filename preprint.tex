@@ -210,8 +210,8 @@ urlcolor=blue}
 
 \newcommand{\colorRule}[3][black]{\textcolor[HTML]{#1}{\rule{#2}{#3}}}
 
-\noindent {\LARGE \textbf{\textsf{Validating machine learning
-predictions of species interactions}}}
+\noindent {\LARGE \textbf{\textsf{Guidelines for the validation of
+machine learning predictions of species interactions}}}
 
 \medskip
 \begin{flushleft}
@@ -254,9 +254,9 @@ in which a variety of classifiers (for supervised learning) are trained
 on simulated networks, we develop a series of guidelines related to the
 choice of measures to use for model selection, and the degree of
 unbiasing to apply to the training dataset.%
-    \item Classifier accuracy and the ROC-AUC are not informative
+    \item Neither classifier accuracy nor the ROC-AUC are informative
 measures for the performance of interaction prediction. PR-AUC is a
-fairer assesment of performance. In some cases, even standard measures
+fairer assessment of performance. In some cases, even standard measures
 can lead to selecting a more biased classifier because the effect of
 connectance is strong. The amount of correction to apply to the training
 dataset depends on network connectance, on the measure to be optimized,
@@ -285,15 +285,17 @@ true in ecological networks; the desired class (presence of an
 interaction between two species) is the one we care most about, and by
 far the least commmon. Herein lies the core challenge of predicting
 species interactions: the extreme imbalance between classes makes the
-training of predictive models difficult. In a recent contribution,
-Strydom et al. (2021) highlight that predictive models of interactions
-can likely be improved by adding information (in the form of,
-\emph{e.g.} traits), but that we do not have robust guidelines as to how
-the predictive ability of these models should be evaluated, nor about
-how the models should be trained. Here, by relying on simple derivations
-and a series of simulations, we formulate a number of such guidelines,
-specifically for the case of binary classifiers derived from thresholded
-values.
+training of predictive models difficult. The connectance of empirical
+networks is usually well under 20\%, with larger networks having a lower
+connectance (MacDonald et al., 2020). Recent contributions (Becker et
+al., 2021; Strydom et al., 2021) highlight that predictive models of
+interactions can likely be improved by adding information (in the form
+of, \emph{e.g.} traits), but that we do not have robust guidelines as to
+how the predictive ability of these models should be evaluated, nor
+about how the models should be trained. Here, by relying on simple
+derivations and a series of simulations, we formulate a number of such
+guidelines, specifically for the case of binary classifiers derived from
+thresholded values.
 
 Binary classifiers are usually assessed by measuring properties of their
 confusion matrix, \emph{i.e.} the contingency table reporting true/false
@@ -315,14 +317,15 @@ classifier is \emph{accurate} when the trace of the matrix divided by
 the sum of the matrix is close to 1, with other measures focusing on
 different ways in which the classifer is wrong.
 
-There is an immense amount of measures to evaluate the performance of
+There is an immense diversity of measures to evaluate the performance of
 classification tasks (Ferri et al., 2009). Here we will focus on five of
 them with high relevance for imbalanced learning (He \& Ma, 2013); three
-threshold metrics (\(\kappa\), informedness, and the Matthews
-Correlation Coefficient), and two ranking metrics (the ROC-AUC and
-PR-AUC). The \(\kappa\) measure of agreement (Landis \& Koch, 1977)
-establishes the extent to which two observers (here the data and the
-prediction) agree, and is measured as
+threshold metrics (\(\kappa\), informedness, and MMC, the Matthews
+Correlation Coefficient), and two ranking metrics (the areas under the
+Receiving Operator Characteristic and the Precision-Recall curves; resp.
+ROC-ACU and PR-AUC). The \(\kappa\) measure of agreement (Landis \&
+Koch, 1977) establishes the extent to which two observers (here the data
+and the prediction) agree, and is measured as
 
 \[
 2\frac{tp\times tn - fn\times fp}{(tp+fp)\times (fp+tn)+(tn+fp)\times (tn+fn)} \,.
@@ -347,39 +350,42 @@ correctly classify positive events), and is defined as
 \]
 
 A lot of binary classifiers are built by using a regressor (whose task
-is to guess the value of the interaction, amd can therefore return
-somethins considered to be a pseudo-probability); in this case, the
-optimal value below which predicitions are assumed to be negative
-(\emph{i.e.} the interaction does not exist) can be determined by
-picking a threshold maximizing some value on the ROC curve or the PR
-curve. The area under these curves (ROC-AUC and PR-AUC henceforth) give
-ideas on the overall goodness of the classifier. Saito \& Rehmsmeier
-(2015) established that the ROC-AUC is biased towards over-estimating
-performance for imbalanced data; on the contrary, the PR-AUC is able to
-identify classifiers that are less able to detect positive interactions
-correctly, with the additional advantage of having a baseline value
-equal to prevalence. Therefore, it is important to assess whether these
-two measures return different results when applied to ecological network
-prediction. The ROC curve is defined by the false positive rate on the
-\(x\) axis, and the true positive rate on the \(y\) axis, and the PR
-curve is defined by the true positive rate on the \(x\) axis, and the
-positive predictive value on the \(y\) axis. By comparison with the
-previous paragraph, it is obvious that \(F_1\) has ties to the PR curve
-(being close to the expected PR-AUC), and that informedness has ties to
-the ROC curve (whereby the threshold maximizing informedness is also the
-point of maximal inflection on the ROC curve). One important difference
-between ROC and PR is that the later does not prominently account for
-the size of the true negative compartments: in short, it is more
-sensitive to the correct positive predictions. In a context of strong
-imbalance, PR-AUC is therefore a more stringent test of model
-performance.
+is to guess the value of the interaction, and can therefore return a
+value considered to be a pseudo-probability); in this case, the optimal
+value below which predictions are assumed to be negative (\emph{i.e.}
+the interaction does not exist) can be determined by picking a threshold
+maximizing some value on the ROC curve or the PR curve. The area under
+these curves (ROC-AUC and PR-AUC henceforth) give ideas on the overall
+goodness of the classifier. Saito \& Rehmsmeier (2015) established that
+the ROC-AUC is biased towards over-estimating performance for imbalanced
+data; on the contrary, the PR-AUC is able to identify classifiers that
+are less able to detect positive interactions correctly, with the
+additional advantage of having a baseline value equal to prevalence.
+Therefore, it is important to assess whether these two measures return
+different results when applied to ecological network prediction. The ROC
+curve is defined by the false positive rate on the \(x\) axis, and the
+true positive rate on the \(y\) axis, and the PR curve is defined by the
+true positive rate on the \(x\) axis, and the positive predictive value
+on the \(y\) axis. By comparison with the previous paragraph, it is
+obvious that \(F_1\) has ties to the PR curve (being close to the
+expected PR-AUC), and that informedness has ties to the ROC curve
+(whereby the threshold maximizing informedness is also the point of
+maximal inflection on the ROC curve). One important difference between
+ROC and PR is that the later does not prominently account for the size
+of the true negative compartments: in short, it is more sensitive to the
+correct positive predictions. In a context of strong imbalance, PR-AUC
+is therefore a more stringent test of model performance.
 
 The same approach is used to evaluate \emph{e.g.} species distribution
 models (SDMs). Indeed, the training and evaluation of SDMs as binary
-classifiers suffers from the same issue of low prevalence. In previous
-work, Allouche et al. (2006) suggested that \(\kappa\) was a better test
-of model performance than the True Skill Statistic (TSS; which we refer
-to as Youden's informedness); these conclusions were later criticized by
+classifiers suffers from the same issue of low prevalence; this is not
+surprising that the two fields (SDMs and network predictions) would
+share methods and their attached conceptual issues, as they suffer from
+data limitations, class imbalance, and the conversion of quantitative
+prediction into a binary classification. In previous work, Allouche et
+al. (2006) suggested that \(\kappa\) was a better test of model
+performance than the True Skill Statistic (TSS; which we refer to as
+Youden's informedness); these conclusions were later criticized by
 Somodi et al. (2017), who emphasized that informedness' relationship to
 prevalence depends on assumptions about bias in the model, and therefore
 recommend the use of \(\kappa\) as a validation of classification
@@ -423,11 +429,11 @@ desirable way.
 
 We establish that due to the low prevalence of interactions, even poor
 classifiers applied to food web data will reach a high accuracy; this is
-because the measure is dominated by the accidental correct predictions
+because the measure is dominated by the accidentally correct predictions
 of negatives. On simulated confusion matrices with ranges of imbalance
 that are credible for ecological networks, MCC had the most desirable
 behavior, and informedness is a linear measure of classifier skill. By
-performing simulations with four models and an ensemble,we show that
+performing simulations with four models and an ensemble, we show that
 informedness and ROC-AUC are consistently high on network data, and that
 MCC and PR-AUC are more accurate measures of the effective performance
 of the classifier. Finally, by measuring the structure of predicted
@@ -442,7 +448,8 @@ establishing guidelines for the prediction of ecological interactions.
 In this section, we will assume a network of connectance \(\rho\),
 \emph{i.e.} having \(\rho S^2\) interactions (where \(S\) is the species
 richness), and \((1-\rho) S^2\) non-interactions. Therefore, the vector
-describing the \emph{true} state of the network is a column vector
+describing the \emph{true} state of the network (assumed to be an
+unweighted, directed network) is a column vector
 \(\mathbf{o}^T = [\rho (1-\rho)]\) (we can safely drop the \(S^2\)
 terms, as we will work on the confusion matrix, which ends up expressing
 \emph{relative} values). We will apply skill and bias to this matrix,
@@ -625,11 +632,14 @@ come with a domain-specific caveat: although it is likely that
 interactions documented in ecological networks are correct, a lot of
 non-interactions are simply unobserved; as predictive models are used
 for data-inflation (\emph{i.e.} the prediction of new interactions), it
-is not necessarilly a bad thing in practice to select models that
-predict more interactions than the original dataset, because the
-original dataset misses some interactions. Furthermore, the weight of
-positive interactions could be adjusted if some information about the
-extent of undersampling exists (\emph{e.g.} Branco et al., 2015).
+is not necessarily a bad thing in practice to select models that predict
+more interactions than the original dataset, because the original
+dataset misses some interactions. Furthermore, the weight of positive
+interactions could be adjusted if some information about the extent of
+undersampling exists (\emph{e.g.} Branco et al., 2015). In a recent
+large-scale imputation of interactions in the mammal-virus networks,
+Poisot et al. (2021) for example estimated that 93\% of interactions are
+yet to be documented.
 
 \hypertarget{numerical-experiments-on-training-strategy}{%
 \section{Numerical experiments on training
@@ -655,8 +665,9 @@ between \(i\) and \(j\), all four models presented below were able to
 reach almost perfect predictions all the time (data not presented here)
 -- this is in part because the rule is fixed for all interactions. In
 order to make the problem more difficult to solve, we use \([v_i, h_j]\)
-as a feature vector, and therefore the models will have to uncover that
-the rule for interaction is \(\text{abs}(v_i, h_j) \le \xi\).
+as a feature vector (\emph{i.e.} the traits on which the models are
+trained), and therefore the models will have to uncover that the rule
+for interaction is \(\text{abs}(v_i, h_j) \le \xi\).
 
 The training sample is composed of 30\% of the \(10^4\) possible entries
 in the network, \emph{i.e.} \(n=3000\). Out of these interactions, we
@@ -679,12 +690,12 @@ package (Blaom et al., 2020; Blaom \& Vollmer, 2020) in Julia 1.7
 this is an obvious deviation from best practices, as the hyperparameters
 of any machine require training before its application on a real
 dataset. As we use 64000 such datasets, this would require 256000 unique
-instances of tweaking thehyperparameters, which is not realistic.
+instances of tweaking the hyperparameters, which is not realistic.
 Therefore, we assume that the default parameterizations are comparable
 across networks. All machines return a quantitative prediction, usually
-(but not necessarilly) in \([0,1]\), which is proportional (but not
-necessarilly linearly) to the probability of an interaction between
-\(i\) and \(j\).
+(but not necessarily) in \([0,1]\), which is proportional (but not
+necessarily linearly) to the probability of an interaction between \(i\)
+and \(j\).
 
 In order to pick the best adjacency matrix for a given trained machine,
 we performed a thresholding approach using 500 steps on predictions from
@@ -758,7 +769,7 @@ models.
 
 Based on the results presented in fig.~\ref{fig:biasmccinf} and
 fig.~\ref{fig:biasrocpr}, it seems that informedness and ROC-AUC are not
-necessarilly able to discriminate between good and bad classifiers
+necessarily able to discriminate between good and bad classifiers
 (although this result may be an artifact for informedness, as it has
 been optimized when thresholding). On the other hand, MCC and PR-AUC
 show a strong response to training set bias, and may therefore be more
@@ -847,8 +858,8 @@ results are presented in tbl.~\ref{tbl:comparison}. The random forest
 model is an interesting instance here: it produces the network that
 looks the most like the original dataset, despite having a very low
 PR-AUC, suggesting it hits high recall at the cost of low precision.
-Although the ensemble was about to reach a very high PR-AUC (and a very
-high ROC-AUC), this did not necessarilly translate into more accurate
+Although the ensemble was able to reach a very high PR-AUC (and a very
+high ROC-AUC), this did not necessarily translate into more accurate
 reconstructions of the structure of the network. This result bears
 elaborating. Measures of model performance capture how much of the
 interactions and non-interactions are correctly identified. As long as
@@ -908,7 +919,7 @@ goal of predicting \emph{interactions} and predicting \emph{networks}
 may not be solvable in the same way -- of course a perfect classifier of
 interactions would make a perfect network prediction; but even the best
 scoring predictor of interactions (the ensemble model) had not
-necessarilly the best prediction of network structure. The tasks of
+necessarily the best prediction of network structure. The tasks of
 predicting networks structure and of predicting interactions within
 networks are essentially two different ones. For some applications
 (\emph{.e.g.} comparison of network structure across gradients), one may
@@ -918,7 +929,7 @@ putting some interactions at the wrong place. For other applications
 conversely care more about getting as many pairs right, even though the
 mistakes accumulate in the form of a slightly worse estimate of network
 structure. How these two approaches can be reconciled is undoubtedly a
-task for further research. Despite this apprent tension at the heart of
+task for further research. Despite this apparent tension at the heart of
 the predictive exercise, we can use the results presented here to
 suggest a number of guidelines.
 
@@ -978,8 +989,10 @@ Iroquoian, Anishinabewaki, Mohawk, Huron-Wendat, and Omàmiwininiwak
 nations. This research was enabled in part by support provided by Calcul
 Québec (www.calculquebec.ca) and Compute Canada (www.computecanada.ca)
 through the Narval general purpose cluster. TP is supported by a NSERC
-Discovery Grant and Discovery Acceleration Supplement, and by a grant
-from the Institut de Valorisation des Données (IVADO).
+Discovery Grant and Discovery Acceleration Supplement, by funding to the
+Viral Emergence Research Initiative (VERENA) consortium including NSF
+BII 2021909, and by a grant from the Institut de Valorisation des
+Données (IVADO).
 
 \hypertarget{references}{%
 \section*{References}\label{references}}
@@ -1077,11 +1090,22 @@ Landis, J. R., \& Koch, G. G. (1977). The Measurement of Observer
 Agreement for Categorical Data. \emph{Biometrics}, \emph{33}(1),
 159--174. \url{https://doi.org/10.2307/2529310}
 
+\leavevmode\hypertarget{ref-MacDonald2020RevLin}{}%
+MacDonald, A. A. M., Banville, F., \& Poisot, T. (2020). Revisiting the
+Links-Species Scaling Relationship in Food Webs. \emph{Patterns},
+\emph{1}(0). \url{https://doi.org/10.1016/j.patter.2020.100079}
+
 \leavevmode\hypertarget{ref-McLeod2021SamAsy}{}%
 McLeod, A., Leroux, S. J., Gravel, D., Chu, C., Cirtwill, A. R., Fortin,
 M.-J., Galiana, N., Poisot, T., \& Wood, S. A. (2021). Sampling and
 asymptotic network properties of spatial multi-trophic networks.
 \emph{Oikos}, \emph{n/a}(n/a). \url{https://doi.org/10.1111/oik.08650}
+
+\leavevmode\hypertarget{ref-Poisot2021ImpMam}{}%
+Poisot, T., Ouellet, M.-A., Mollentze, N., Farrell, M. J., Becker, D.
+J., Albery, G. F., Gibb, R. J., Seifert, S. N., \& Carlson, C. J. (2021,
+May 31). \emph{Imputing the mammalian virome with linear filtering and
+singular value decomposition}. \url{http://arxiv.org/abs/2105.14973}
 
 \leavevmode\hypertarget{ref-Saito2015PrePlo}{}%
 Saito, T., \& Rehmsmeier, M. (2015). The Precision-Recall Plot Is More
