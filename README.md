@@ -409,7 +409,11 @@ few cases, both MCC and informedness stared decreasing when the training set
 bias got too close to one, which suggests that it is possible to over-correct
 the imbalance.
 
-![TODO](figures/bias_mcc_inf.png){#fig:biasmccinf}
+![Response of MCC and Informedness to changes in the training set bias for a
+fixed connectance (rows). Both of these values approach 1 for a good model.
+Informedness is consistently high, and by contrast, MCC increases with
+additional training set bias. Across all models, training on a more connected
+network is easier.](figures/bias_mcc_inf.png){#fig:biasmccinf}
 
 In @fig:biasrocpr, we present the same information as @fig:biasmccinf, this time
 using ROC-AUC and PR-AUC. ROC-AUC is always high, and does not vary with
@@ -419,7 +423,11 @@ seemed to be performing well (Decision Tree and Random Forest) based on their
 MCC are not able to reach a high PR-AUC even at higher connectances. As in
 @fig:biasmccinf, the ensemble outperforms its component models.
 
-![TODO](figures/bias_roc_pr.png){#fig:biasrocpr}
+![Response of ROC-AUC and PR-AUC to changes in the training set bias for a fixed
+connectance (rows). ROC-AUC is consistently high, and therefore not properly
+able to separate good from poor classifiers. On the other hand, PR-AUC responds
+to changes in the training set. As in @fig:biasmccinf, training on more
+connected networks is easier.](figures/bias_roc_pr.png){#fig:biasrocpr}
 
 Based on the results presented in @fig:biasmccinf and @fig:biasrocpr, it seems
 that informedness and ROC-AUC are not necessarily able to discriminate between
@@ -442,7 +450,14 @@ when this value is about 0.5, the training set needs to be artificially balanced
 to optimize the model performance. These results are presented in
 @fig:optimbias.
 
-![TODO](figures/optim_bias.png){#fig:optimbias}
+![Value of the optimal training set bias for the different models and measures
+evaluated here, over a range of connectances. Informedness was reliably
+maximized for balanced training sets, and kept this behavior across models. For
+other measures, larger connectances in the true network allowed lower biases in
+the training set. In a large number of cases, "over-correcting" by having
+training sets with more than half instances representing interactions would
+maximize the values of the model performance
+measures.](figures/optim_bias.png){#fig:optimbias}
 
 The more "optimistic" measures (ROC-AUC and informedness) required a biasing of
 the dataset from about 0.4 to 0.75 to be maximized, with the amount of bias
@@ -457,7 +472,11 @@ more biased training dataset might be beneficial. As connectance increases, the
 need for biased training sets is less prominent, as learning the rules for which
 interactions *do not* exist starts gaining importance.
 
-![TODO](figures/optim_perf.png){#fig:optimperf}
+![When trained on their optimally biased training set, most models were able to
+maximize their performance; this is not true for decision tree, which had a very
+low PR-AUC, and to some extent for ridge regression who had a slow increase with
+network connectance. The ensemble had a consistently high performance despite
+incorporating poor models.](figures/optim_perf.png){#fig:optimperf}
 
 When trained at their optimal training set bias, connectance still had a
 significant impact on the performance of some machines [@fig:optimperf].
@@ -481,7 +500,13 @@ with interactions laying mostly on the diagonal (as expected), the Ridge
 Regression is quite obviously biased. Despite this, we can see that the ensemble
 is close to the initial dataset.
 
-![TODO](figures/valid_ensemble.png){#fig:ecovalid}
+![Visualisation of the models predictions for one instance of a network
+prediction problem (shown in the "Dataset" panel). This figure reveals how
+inspecting the details of the prediction is important: indeed, although the
+performance measures hint at the fact that ridge regression is mediocre, this
+figure reveals that it is making predictions that correspond to a network with
+an entirely different topology (namely, nested as opposed to
+diagonal).](figures/valid_ensemble.png){#fig:ecovalid}
 
 The trained models were then thresholded (again by optimising informedness), and
 their predictions transformed back into networks for analysis; specifically, we
