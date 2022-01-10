@@ -8,9 +8,10 @@ predictive a model is. This is particularly true in ecological networks; the
 desired class (presence of an interaction between two species) is the one we
 care most about, and by far the least commmon. Herein lies the core challenge of
 predicting species interactions: the extreme imbalance between classes makes the
-training of predictive models difficult. The connectance of empirical networks
-is usually well under 20%, with larger networks having a lower connectance
-[@MacDonald2020RevLin]. Recent contributions [@Strydom2021RoaPre;
+training of predictive models difficult, and their validation even more so as we
+do not reliably know which negatives are true. The connectance of empirical
+networks is usually well under 20%, with larger networks having a lower
+connectance [@MacDonald2020RevLin]. Recent contributions [@Strydom2021RoaPre;
 @Becker2021OptPre] highlight that predictive models of interactions can likely
 be improved by adding information (in the form of, *e.g.* traits), but that we
 do not have robust guidelines as to how the predictive ability of these models
@@ -306,19 +307,20 @@ with a no-skill classifier.](figures/changing-connectance.png){#fig:connectance}
 These two analyses point to the following recommendations: MCC is indeed more
 appropriate than $\kappa$, as although sensitive to bias, it is sensitive in a
 consistent way. Informedness is appropriate at discriminating between different
-skills, but confounded by bias. $F_1$ is increasing with bias, and should not be
-prioritized to evalue the performance of the model. The discussion of
-sensitivity to bias should come with a domain-specific caveat: although it is
-likely that interactions documented in ecological networks are correct, a lot of
-non-interactions are simply unobserved; as predictive models are used for
-data-inflation (*i.e.* the prediction of new interactions), it is not
-necessarily a bad thing in practice to select models that predict more
-interactions than the original dataset, because the original dataset misses some
-interactions. Furthermore, the weight of positive interactions could be adjusted
-if some information about the extent of undersampling exists [*e.g.*
-@Branco2015SurPre]. In a recent large-scale imputation of interactions in the
-mammal-virus networks, @Poisot2021ImpMam for example estimated that 93% of
-interactions are yet to be documented.
+skills, but confounded by bias. As both of these measures bring valuable
+information on the model behavior, we will retain them for future analyses.
+$F_1$ is increasing with bias, and should not be prioritized to evalue the
+performance of the model. The discussion of sensitivity to bias should come with
+a domain-specific caveat: although it is likely that interactions documented in
+ecological networks are correct, a lot of non-interactions are simply
+unobserved; as predictive models are used for data-inflation (*i.e.* the
+prediction of new interactions), it is not necessarily a bad thing in practice
+to select models that predict more interactions than the original dataset,
+because the original dataset misses some interactions. Furthermore, the weight
+of positive interactions could be adjusted if some information about the extent
+of undersampling exists [*e.g.* @Branco2015SurPre]. In a recent large-scale
+imputation of interactions in the mammal-virus networks, @Poisot2021ImpMam for
+example estimated that 93% of interactions are yet to be documented.
 
 # Numerical experiments on training strategy
 
@@ -447,11 +449,17 @@ the dataset from about 0.4 to 0.75 to be maximized, with the amount of bias
 required decreasing only slightly with the connectance of the original network.
 MCC and PR-AUC required values of training set bias from 0.75 to almost 1 to be
 optimized, which is in line with the results of the previous section, *i.e.*
-they are more stringent tests of model performance. 
+they are more stringent tests of model performance. These results suggest that
+learning from a dataset with very low connectance can be a different task than
+for more connected networks: it becomes increasingly important to caputre the
+mechanisms that make an interaction *exist*, and therefore having a slightly
+more biased training dataset might be beneficial. As connectance increases, the
+need for biased training sets is less prominent, as learning the rules for which
+interactions *do not* exist starts gaining importance.
 
 ![TODO](figures/optim_perf.png){#fig:optimperf}
 
-When trained at their optimal training set bias, performance still had a
+When trained at their optimal training set bias, connectance still had a
 significant impact on the performance of some machines [@fig:optimperf].
 Notably, Decision Tree, Random Forest, and Ridge Regression had low values of
 PR-AUC. In all cases, the Boosted Regression Tree was reaching very good
@@ -579,12 +587,14 @@ here may respond in different ways.
 
 **Acknowledgements:** We acknowledge that this study was conducted on land
 within the traditional unceded territory of the Saint Lawrence Iroquoian,
-Anishinabewaki, Mohawk, Huron-Wendat, and Omàmiwininiwak nations. This research
-was enabled in part by support provided by Calcul Québec (www.calculquebec.ca)
-and Compute Canada (www.computecanada.ca) through the Narval general purpose
-cluster. TP is supported by a NSERC Discovery Grant and Discovery Acceleration
-Supplement, by funding to the Viral Emergence Research Initiative (VERENA)
-consortium including NSF BII 2021909, and by a grant from the Institut de
-Valorisation des Données (IVADO).
+Anishinabewaki, Mohawk, Huron-Wendat, and Omàmiwininiwak nations. We thank Colin
+J. Carlson, Michael D. Catchen, Giulio Valentino Dalla Riva, and Tanya Strydom
+for inputs on earlier versions of this manuscript. This research was enabled in
+part by support provided by Calcul Québec (www.calculquebec.ca) and Compute
+Canada (www.computecanada.ca) through the Narval general purpose cluster. TP is
+supported by a NSERC Discovery Grant and Discovery Acceleration Supplement, by
+funding to the Viral Emergence Research Initiative (VERENA) consortium including
+NSF BII 2021909, and by a grant from the Institut de Valorisation des Données
+(IVADO).
 
 # References
