@@ -451,7 +451,7 @@ In this section, we will assume a network of connectance \(\rho\),
 richness), and \((1-\rho) S^2\) non-interactions. Therefore, the vector
 describing the \emph{true} state of the network (assumed to be an
 unweighted, directed network) is a column vector
-\(\mathbf{o}^T = [\rho (1-\rho)]\) (we can safely drop the \(S^2\)
+\(\mathbf{o}^T = [\rho, (1-\rho)]\) (we can safely drop the \(S^2\)
 terms, as we will work on the confusion matrix, which ends up expressing
 \emph{relative} values). We will apply skill and bias to this matrix,
 and measure how a selection of performance metrics respond to changes in
@@ -470,7 +470,8 @@ random, \emph{i.e.} it will guess interactions with a probability
 \(\rho\). The predictions of a no-skill classifier can be expressed as a
 row vector \(\mathbf{p} = [\rho (1-\rho)]\). The confusion matrix
 \(\mathbf{M}\) for a no-skill classifier is given by the element-wise
-product of these vectors \(\mathbf{o} \odot \mathbf{p}\), \emph{i.e.}
+(Hadamard, outer) product of these vectors
+\(\mathbf{o} \odot \mathbf{p}\), \emph{i.e.}
 
 \[
 \mathbf{M} = \begin{pmatrix}
