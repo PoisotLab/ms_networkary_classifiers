@@ -1,6 +1,5 @@
-Associate Editor Comments to Author:
-Associate Editor
-Comments to the Author:
+# Associate Editor Comments to Author:
+
 Thank you for submitting your manuscript to Methods in Ecology and Evolution, and also to the reviewers for their hard work. I found this manuscript very interesting, but like the reviewers I found it difficult to follow in places. Below I have a number of recommendations, many of which build on the reviewers' suggestions. I urge the author to carefully read through all the reviewers' suggestions, in particular the major comments raised by R2 and R3, every one of which I feel are very important to be addressed.
 
 This article is unusual, in that it is more of an essay than a standard intro/methods/results/discussion paper. There is nothing wrong with that (in fact I applaud it for that), but more needs to be done to make it easy for the reader to understand everything. There are many places in the article where it is unclear exactly what the author has done, what the back-up for statements the author has made is, and (perhaps most importantly) what the author's motivation is in choosing a particular approach. I encourage the author to write for a broad audience - motivate the biology for those who are already familiar with the ML, and bring the biologist along for the ride with the ML itself. I can envisage this being a classic graduate-level ML class reading paper, but only if the reader is brought along for the ride so they can follow the argument. This article could have a wide readership and broad impact, but to do that it needs to be clearer. The article feels like a labour of love, and I think if the labour is made a little clearer others will love it and engage with it rather than being unable to understand it fully.
@@ -9,24 +8,25 @@ More broadly, I encourage the author to introduce a broader, more engaging openi
 
 More specific comments and examples of places where clarity could be improved:
 
-* Please release the code underlying this work; doing so might also help the author in terms of how much methodological information they have to include in the main text. If the author is very concerned about the flow of the text (although, I emphasise, at present there is a lack of clarity so more methodological detail is needed in the main text) perhaps supplementary materials could be used to help keep things streamlined in the main text.
-* "which is within the range of usually observed connectance values for empirical food webs" (line 135). "there is an almost 1:1 relationship between 𝜉 and connectance" (lines 173-174). Where is the evidence for these statements? In places such as these the author makes statements that I sense they know to be true because of their depth of understanding of the field; please add citations even if these statements seem trivial to you.
-* "this works without loss of generality on unipartite networks" (lines 168-169). In places the author makes claims, such as this one, where it is not clear where there is literature support. If this is an obvious mathematical derivation or fact, please spell it out.
-* "tp is the number of interactions predicted as positive (line 18). This is a good example of where terminology is not helping the reader - the author misses an opportunity here to explain that this term is called 'tp' because it is related to '*t*rue *p*ositives'. The author hints at it just before the matrix definition but doesn't spell it out - there is so much going on for a reader who is new to the field that the author must be crystal clear I think.
-* "This model is easy to learn" (line 176). I recognise that the author means "easy for the ML model to predict", but I would use a different phrase as it will come across to the non-specialist at first-glance as "there's nothing hard about the maths in this paper" which will be a bit intimidating because the maths is quite tricky here!
+Please release the code underlying this work; doing so might also help the author in terms of how much methodological information they have to include in the main text. If the author is very concerned about the flow of the text (although, I emphasise, at present there is a lack of clarity so more methodological detail is needed in the main text) perhaps supplementary materials could be used to help keep things streamlined in the main text.
 
-Reviewer(s)' Comments to Author:
-Reviewer: 1
+"which is within the range of usually observed connectance values for empirical food webs" (line 135). "there is an almost 1:1 relationship between 𝜉 and connectance" (lines 173-174). Where is the evidence for these statements? In places such as these the author makes statements that I sense they know to be true because of their depth of understanding of the field; please add citations even if these statements seem trivial to you.
 
-Comments to the Corresponding Author
+"this works without loss of generality on unipartite networks" (lines 168-169). In places the author makes claims, such as this one, where it is not clear where there is literature support. If this is an obvious mathematical derivation or fact, please spell it out.
+
+"tp is the number of interactions predicted as positive (line 18). This is a good example of where terminology is not helping the reader - the author misses an opportunity here to explain that this term is called 'tp' because it is related to '*t*rue *p*ositives'. The author hints at it just before the matrix definition but doesn't spell it out - there is so much going on for a reader who is new to the field that the author must be crystal clear I think.
+
+"This model is easy to learn" (line 176). I recognise that the author means "easy for the ML model to predict", but I would use a different phrase as it will come across to the non-specialist at first-glance as "there's nothing hard about the maths in this paper" which will be a bit intimidating because the maths is quite tricky here!
+
+# Reviewer 1
+
 This manuscript examines various performance metrics of machine learning algorithms applied to species interactions networks. It is clearly written and succinct. I do not work on species interaction networks (and I highly recommend that another reviewer with this expertise also evaluates the manuscript) but I was able to understand what the author set out to do. The discussion of how the various performance metrics measure different things and what the pros and cons are how they relate species interaction networks seems like an important contribution to the field but I have insufficient background knowledge to comment on the novelty. Many of the findings are relevant to tradeoffs and performance metrics used in machine learning in general. If I were to make one general suggestion that could perhaps improve the study is to use a wider range of simulation conditions. The author notes that he found the ensemble method better than component models but this is not what other model comparisons found. The author says that the findings described here should not be generalized to say that ensemble models are always better but the relationship between ensemble performance and the various metrics explored is not clear to me. If it is possible that under more general simulation conditions the ensemble would not be the best-performing, is it also possible that some of the observations about the metrics would not hold either? Something to think about. I include the manuscript text with additional minor comments and typos corrected where I caught them.
 
-Reviewer: 2
+# Reviewer 2
 
-Comments to the Corresponding Author
 In “Guidelines for the validation of machine learning of predictions of species interactions” Prof. Poisot addresses an important challenge in network-ecology: how to model and assess predictions on species-interaction data that is typically dominated by absences. Using mathematical arguments, and with references to other fields, the author convincingly shows how commonly used indicators of prediction accuracy (e.g. ROC-AUC) will be biased in cases where absences of interactions are dominant. In the second part of the paper the author uses simulations to show how different types of machine learning methods perform by assessing their classification accuracy with different metrics and finally by assessing the ability of different models to predict the structure of entire network. In the final section the author lays out a series of guidelines for modelling species interactions: MCC and PR-AUC should be the preferred model assessment criteria, and training-data should be biased to increase the amount of presences available for training models. Overall I think the paper has the potential to be an important contribution to network modelling and prediction. I think some parts of the manuscript need a bit more elaboration and have made some comments and suggested edits below that I hope you will find useful.
 
-General comments
+## General comments
 
 (1) The use of machine learning is gaining momentum in the study of species interactions and the article is likely to be of interest to quite a wide audience working on different systems. It might be useful to (a) outline different types of interactions and how resulting interaction networks might differ in relation to the simulations in this study, (b) outline how the suggested guidelines would work then predicting across networks, and (c) outline how the biasing of testing data differs from other methods of data-thinning applied in e.g. SDMs.
 
@@ -34,7 +34,7 @@ General comments
 
 (3) I was surprised to see that RF models performed so poorly compared to BRT, because this contrasts what other studies have found. I think it would be useful to elaborate more on this – particularly since in Figure 7 it seems that the RF model is perform on par, or perhaps even better, than the BRT.
 
-Specific comments:
+## Specific comments:
 
 L9: Add a brief definition of connectance.
 
@@ -58,12 +58,14 @@ L168-179: Would it be possible to include a figure showing how interactions depe
 
 L180: I attempted to write the simulations in R but didn’t understand how “we use [vi,hj] as a feature vector […]” would influence the input in the models. Using a data frame with the columns: Interaction, vi, and hj, RF models in R reached almost perfect PR-AUCs and ROC-AUCs – indicating that I’m missing something. i.e.:
 
+~~~
 vi <- rbeta(100,6,8)
 hj <- rbeta(100,2,8)
 allPotentialSpeciesInteractions <- expand.grid(vi,hj)
 fn.connectanceOnInteraction <- function(x)data.frame(Interaction = allPotentialSpeciesInteractions[,1]-x/2 <= allPotentialSpeciesInteractions[,2] & allPotentialSpeciesInteractions[,2] <= allPotentialSpeciesInteractions[,1]+x/2, Connectance = x, vi = allPotentialSpeciesInteractions[,1], hj = allPotentialSpeciesInteractions[,2])
 
 SimData <- fn.connectanceOnInteraction(0.16)
+~~~
 
 SimData is a data frame with 10 000 rows, containing four columns: logical vector for the presence of interactions, numeric vector for connectance; numeric vector for vi; and numeric vector for hj. From the SimData I then created training datasets (n = 3000) with varying proportions of interaction-occurrences (bias), for building models and predicted onto the remaining 7000 rows. But I suspect I missed something here, and am hoping it’s not just me who would do so. Would it be possible to include a table in the manuscript, maybe just in the appendix, showing what the dataset used for the training and testing the models looked like (e.g. first 5 rows w column names)?
 
@@ -97,11 +99,11 @@ L293: That network structure doesn’t necessarily relate to processes generatin
 
 L287: In the guidelines section I think it could be useful to discuss different approaches for increasing ‘bias’ in the training data. One approach, as done in this paper, is to increasing the proportion of ‘presences’ in the training data at the expense of the proportion of presences in the testing data. An alternative would be to split the data into testing and training, e.g. with initially equal proportions of presences, and then apply different degrees of thinning to the training data by randomly removing rows with absences of interactions – thereby increasing the proportion of interaction occurrences without affecting the structure of the testing data.
 
-Tables
+## Tables
 
 Table 1: spell out the network metrices in the table legend.
 
-Figures
+## Figures
 
 Figure 1: there seems to be a mix of terminologies used for the same metrics. It would help the reader if the same terminology is used in the figure legend as in the figure labels, and that figures appear in the same order as they are mentioned in the legend.
 
@@ -113,9 +115,8 @@ Figure 4: Consider mentioning PR-AUC before ROC-AUC so that the order is the sam
 
 Figures 5-6: should these be in colour? Also the smoothed lines sometimes fall outside the contour-lines. Perhaps add a brief explanation of what the smoothed lines and contours represent.
 
-Reviewer: 3
+# Reviewer 3
 
-Comments to the Corresponding Author
 The manuscript uses machine learning methods to predict interspecific interactions in ecological networks. As we gain scientific understanding of natural, our ability to predict them should also increase. During the last decades we have gained increasing undestanding of the structure and dynamics of ecological interaction networks (the networks depicting the interactions among species in ecological communities), our ability to predict interactions remains limited. This manuscript offers a methodological toolkit that could help increase our predictive ability.
 
 I value the work reported in this manuscript and I view machine learning methods as a promising approach to the prediction of species interactions. At the same time, I think the manuscript would need substantial revision before it can represent a useful set of guidelines for ecologists interested in applying machine learning methods for predicting the structure of ecological networks. Among the main limitations I found, I think the manuscript lacks of a proper setup for readers to understand the context in which these methods can be applied, the presentation of methods is often unclear, and the guidelines for validating machine learning predictions are difficult to identify.
