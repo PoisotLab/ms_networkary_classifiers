@@ -65,9 +65,9 @@ derivation or fact, please spell it out.
 "tp is the number of interactions predicted as positive (line 18). This is
 a good example of where terminology is not helping the reader - the author
 misses an opportunity here to explain that this term is called 'tp' because it
-is related to '*t*rue *p*ositives'. The author hints at it just before the
-matrix definition but doesn't spell it out - there is so much going on for
-a reader who is new to the field that the author must be crystal clear I think.
+is related to 'true positives'. The author hints at it just before the matrix
+definition but doesn't spell it out - there is so much going on for a reader
+who is new to the field that the author must be crystal clear I think.
 
 "This model is easy to learn" (line 176). I recognise that the author means
 "easy for the ML model to predict", but I would use a different phrase as it
@@ -125,11 +125,15 @@ you will find useful.
 
 (1) The use of machine learning is gaining momentum in the study of species
 interactions and the article is likely to be of interest to quite a wide
-audience working on different systems. It might be useful to (a) outline
-different types of interactions and how resulting interaction networks might
-differ in relation to the simulations in this study, (b) outline how the
-suggested guidelines would work then predicting across networks, and (c)
-outline how the biasing of testing data differs from other methods of
+audience working on different systems.
+
+(a) outline different types of interactions and how resulting interaction
+networks might differ in relation to the simulations in this study,
+
+(b) outline how the suggested guidelines would work then predicting across
+networks
+
+(c) outline how the biasing of testing data differs from other methods of
 data-thinning applied in e.g. SDMs.
 
 (2) Consider adding a motivation for the choice of the different indices and
@@ -145,7 +149,11 @@ the RF model is perform on par, or perhaps even better, than the BRT.
 
 L9: Add a brief definition of connectance.
 
+> Added
+
 L31: Should the definition of Informedness also be written as an equation?
+
+> Added
 
 L35-38: An additional approach that might be worthwhile considering for
 assessing overall performance would be to estimate the logistic regression
@@ -167,23 +175,36 @@ a valuable reference for how spatial thinning affects different models’
 performances as well as provide a basis for discussing the ‘biasing’ approach
 adopted in the article
 
+> This is an excellent suggestion - I have added a discussion of this article
+at TODO
+
 L80: Please check the bracketing around the Jordano, 2016a,b reference
+
+> Fixed
 
 L134: perhaps specify why grid exploration was performed on logit(x)
 transformed values, and add that logit(x) = -10 corresponds to e.g. skill or
 bias close to zero, and 10 is close to one
 
+> This is an excellent suggestion - fixed.
+
 L135: could you add a reference to the statement that connectance of ]0,0.5] is
 within the range of typical connectance in empirical food webs
+
+> TODO
 
 L170: Intuitively I would think that the norm would be to use as much data as
 one can spare to train models, before validating on the remaining testing data.
 Could you add a motivation for using a 30/70 and not a 70/30, training/testing
 split
 
+> I have added a discussion of the specific reasons at TODO
+
 L171-172: Please spell out the B’s in B(6,8) and B(2,8), e.g.: “[…]
 beta-distributions with alpha-parameter values of 6 and 2, and beta parameter
 values of 8, for vi and hj, respectively”
+
+> Fixed
 
 L168-179: Would it be possible to include a figure showing how interactions
 depend on the combination of infectiousness rate for e.g. 5 levels of the

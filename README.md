@@ -3,22 +3,24 @@ education, and lies in the fact that, when the desired class is rare, a model
 that gets less and less performant will become more and more accurate and
 useful, simply by (i) underpredicting true positive cases and (ii)
 over-predicting false negatives. In other words, accuracy, defined as the
-proportion of predictions that are correct, is often useless as a measure of how
-predictive a model is. This is particularly true in ecological networks; the
-desired class (presence of an interaction between two species) is the one we
-care most about, and by far the least commmon. Herein lies the core challenge of
-predicting species interactions: the extreme imbalance between classes makes the
-training of predictive models difficult, and their validation even more so as we
-do not reliably know which negatives are true. The connectance of empirical
-networks is usually well under 20%, with larger networks having a lower
-connectance [@MacDonald2020RevLin]. Recent contributions [@Strydom2021RoaPre;
+proportion of predictions that are correct, is often useless as a measure of
+how predictive a model is. This is particularly true in ecological networks;
+the desired class (presence of an interaction between two species) is the one
+we care most about, and by far the least commmon. Herein lies the core
+challenge of predicting species interactions: the extreme imbalance between
+classes makes the training of predictive models difficult, and their validation
+even more so as we do not reliably know which negatives are true. The
+connectance (the proportion of realized interactions, usually the number of
+interactions divided by the number of species pairs) of empirical networks is
+usually well under 20%, with larger networks having a lower connectance
+[@MacDonald2020RevLin]. Recent contributions [@Strydom2021RoaPre;
 @Becker2021OptPre] highlight that predictive models of interactions can likely
 be improved by adding information (in the form of, *e.g.* traits), but that we
 do not have robust guidelines as to how the predictive ability of these models
 should be evaluated, nor about how the models should be trained. Here, by
-relying on simple derivations and a series of simulations, we formulate a number
-of such guidelines, specifically for the case of binary classifiers derived from
-thresholded values.
+relying on simple derivations and a series of simulations, we formulate
+a number of such guidelines, specifically for the case of binary classifiers
+derived from thresholded values.
 
 Binary classifiers are usually assessed by measuring properties of their
 confusion matrix, *i.e.* the contingency table reporting true/false
@@ -52,11 +54,14 @@ $$
 2\frac{tp\times tn - fn\times fp}{(tp+fp)\times (fp+tn)+(tn+fp)\times (tn+fn)} \,.
 $$
 
-Informedness [@Youden1950IndRat] (also
-known as bookmaker informedness or the True Skill Statistic) is
-$\text{TPR}+\text{TNR}-1$, where $\text{TPR}= tp/(tp+fn)$ and $\text{TNR} =
-tn/(tn+fp)$; informedness can be used to find the optimal cutpoint in
-thresholding analyses [@Schisterman2005OptCut]. The MCC is defined as 
+Informedness [@Youden1950IndRat] (also known as bookmaker informedness or the
+True Skill Statistic) is $\text{TPR}+\text{TNR}-1$, where $\text{TPR}=
+tp/(tp+fn)$ and $\text{TNR} = tn/(tn+fp)$; informedness can be used to find the
+optimal cutpoint in thresholding analyses [@Schisterman2005OptCut]. The formula for informedness is
+
+$$\frac{tp}{tp+fn}+\frac{tn}{tn+fp}-1\,.$$
+
+The MCC is defined as 
 
 $$
 \frac{tp\times tn - fn\times fp}{\sqrt{(tp+fp)\times (tp+fn)\times (tn+fp)\times (tn+fn)}} \,.
@@ -95,27 +100,32 @@ short, it is more sensitive to the correct positive predictions. In a context of
 strong imbalance, PR-AUC is therefore a more stringent test of model
 performance.
 
-The same approach is used to evaluate *e.g.* species distribution models (SDMs).
-Indeed, the training and evaluation of SDMs as binary classifiers suffers from
-the same issue of low prevalence; this is not surprising that the two fields
-(SDMs and network predictions) would share methods and their attached conceptual
-issues, as they suffer from data limitations, class imbalance, and the
-conversion of quantitative prediction into a binary classification. In previous
-work, @Allouche2006AssAcc suggested that $\kappa$ was a better test of model
-performance than the True Skill Statistic (TSS; which we refer to as Youden's
-informedness); these conclusions were later criticized by @Somodi2017PreDep, who
-emphasized that informedness' relationship to prevalence depends on assumptions
-about bias in the model, and therefore recommend the use of $\kappa$ as a
-validation of classification performance. Although this work offers
-recommendations about the comparison of models, it doesn't establishes baselines
-or good practices for training on imbalanced ecological data. Within the context
-of networks, there are three specific issues that need to be adressed. First,
-what values of performance measures are we expecting for a classifier that has
-poor performance? This is particularly important as it can evaluate whether low
+The same approach is used to evaluate *e.g.* species distribution models
+(SDMs). Indeed, the training and evaluation of SDMs as binary classifiers
+suffers from the same issue of low prevalence; this is not surprising that the
+two fields (SDMs and network predictions) would share methods and their
+attached conceptual issues, as they suffer from data limitations, class
+imbalance, and the conversion of quantitative prediction into a binary
+classification. In previous work, @Allouche2006AssAcc suggested that $\kappa$
+was a better test of model performance than the True Skill Statistic (TSS;
+which we refer to as Youden's informedness); these conclusions were later
+criticized by @Somodi2017PreDep, who emphasized that informedness' relationship
+to prevalence depends on assumptions about bias in the model, and therefore
+recommend the use of $\kappa$ as a validation of classification performance.
+Although this work offers recommendations about the comparison of models, it
+doesn't establishes baselines or good practices for training on imbalanced
+ecological data. @Steen2021SpaThi show that, when applying spatial thinning (a
+process that has no analogue in networks), the best approach to train ML-based
+SDMs varies according to the balancing of the dataset, and the evaluation
+measures used. This suggests that there is no single "recipe" that is
+guaranteed to give the best model. Within the context of networks, there are
+three specific issues that need to be adressed. First, what values of
+performance measures are we expecting for a classifier that has poor
+performance? This is particularly important as it can evaluate whether low
 prevalence can lull us into a false sense of predictive accuracy. Second,
 independently of the question of model evaluation, is low prevalence an issue
-for *training*, and can we remedy it? Finally, because the low amount of data on
-interaction makes a lot of imbalance correction methods [see *e.g.*
+for *training*, and can we remedy it? Finally, because the low amount of data
+on interaction makes a lot of imbalance correction methods [see *e.g.*
 @Branco2015SurPre] hard to apply, which indicators can be optimized with the
 least amount of positive interaction data?
 
@@ -124,19 +134,20 @@ application to life sciences is focused on genomics [which has very specific
 challenges, see a recent discussion by @Whalen2021NavPit]; this sub-field has
 generated largely different recommendations. @Chicco2020AdvMat suggest using
 Matthews correlation coefficient (MCC) over $F_1$, as a protection against
-over-inflation of predicted results; @Delgado2019WhyCoh advocate against the use
-of Cohen's $\kappa$, again in favor of MCC, as the relative nature of $\kappa$
-means that a worse classifier can be picked over a better one; similarly,
-@Boughorbel2017OptCla recommend MCC over other measures of performance for
-imbalanced data, as it has more desirable statistical properties. More recently,
-@Chicco2021MatCor temper the apparent supremacy of the MCC, by suggesting it
-should be replaced by Youden's informedness (also known as $J$, bookmaker's
-accuracy, and the True-Skill Statistic) when the imbalance in the dataset may
-not be representative [which is the case as networks are under-sampled;
-@Jordano2016SamNet; @Jordano2016ChaEco], when classifiers need to be compared
-across different datasets [for example when predicting a system in space, where
-undersampling varies locally; @McLeod2021SamAsy], and when comparing the results
-to a no-skill (baseline) classifier is important. As these conditions are likely
+over-inflation of predicted results; @Delgado2019WhyCoh advocate against the
+use of Cohen's $\kappa$, again in favor of MCC, as the relative nature of
+$\kappa$ means that a worse classifier can be picked over a better one;
+similarly, @Boughorbel2017OptCla recommend MCC over other measures of
+performance for imbalanced data, as it has more desirable statistical
+properties. More recently, @Chicco2021MatCor temper the apparent supremacy of
+the MCC, by suggesting it should be replaced by Youden's informedness (also
+known as $J$, bookmaker's accuracy, and the True-Skill Statistic) when the
+imbalance in the dataset may not be representative, which is the case as
+species interaction networks are often under-sampled [@Jordano2016SamNet;
+@Jordano2016ChaEco], when classifiers need to be compared across different
+datasets [for example when predicting a system in space, where undersampling
+varies locally; @McLeod2021SamAsy], and when comparing the results to
+a no-skill (baseline) classifier is important. As these conditions are likely
 to be met with network data, there is a need to evaluate which measures of
 classification accuracy respond in a desirable way.
 
@@ -258,17 +269,21 @@ issues are absent from balanced accuracy, but should nevertheless lead us to not
 report accuracy as the primary measure of network prediction success; moving
 forward, we will focus on other measures.
 
-In order to examine how MCC, $F_1$, $\kappa$, and informedness change w.r.t. the
-imbalance, skill, and bias, we performed a grid exploration of the values of
-$\text{logit}(s)$ and $\text{logit}(b)$ linearly from $-10$ to $10$, of $\rho$
-linearly in $]0, 0.5]$, which is within the range of usually observed
-connectance values for empirical food webs. Note that at this point, there is no
-food web model to speak of; rather, the confusion matrix we discuss can be
-obtained for any classification task. Based on the previous discussion, the
-desirable properties for a measure of classifier success should be: an increase
-with classifier skill, especially at low bias; a hump-shaped response to bias,
-especially at high skill, and ideally center around $\text{logit}(b)=0$; an
-increase with prevalence up until equiprevalence is reached.
+In order to examine how MCC, $F_1$, $\kappa$, and informedness change w.r.t.
+the imbalance, skill, and bias, we performed a grid exploration of the values
+of $\text{logit}(s)$ and $\text{logit}(b)$ linearly from $-10$ to $10$;
+$\text{logit}(x) = -10$ means that $x$ is essentially 0, and $\text{logit}(x)
+= 10$ means it is essentially 1 -- this choice was motivated by the fact that
+most responses are non-linear with regards to bias and skill. The values or
+$\rho$ were taken linearly in $]0, 0.5]$, which is within the range of usually
+observed connectance values for empirical species interaction networks. Note
+that at this point, there is no food web model to speak of; rather, the
+confusion matrix we discuss can be obtained for any classification task. Based
+on the previous discussion, the desirable properties for a measure of
+classifier success should be: an increase with classifier skill, especially at
+low bias; a hump-shaped response to bias, especially at high skill, and ideally
+center around $\text{logit}(b)=0$; an increase with prevalence up until
+equiprevalence is reached.
 
 ![Consequences of changing the classifier skills ($s$) and bias ($s$) for a
 connectance $\rho=0.15$, on accuracy, $F_1$, postive predictive value, and
@@ -325,26 +340,43 @@ example estimated that 93% of interactions are yet to be documented.
 
 # Numerical experiments on training strategy
 
-In the following section, we will generate random bipartite networks (this works
-without loss of generality on unipartite networks), and train four binary
+In the following section, we will generate random bipartite networks (this
+works without loss of generality on unipartite networks), and train four binary
 classifiers (as well as an ensemble model using the sum of ranged outputs from
-the component models) on 30% of the interaction data. Networks are generated by
-picking a random infectiousness trait $v_i$ for 100 species (from a $B(6,8)$
-distribution), and a resistance trait $h_j$ for 100 species (from a $B(2,8)$
-distribution). There is an interaction between $i$ and $j$ when $v_i-\xi/2 \le
-h_j \le v_i+\xi/2$, where $\xi$ is a constant regulating the connectance of the
-network (there is an almost 1:1 relationship between $\xi$ and connectance), and
-varies uniformly in $[0.05, 0.35]$. This model gives fully interval networks
-that are close analogues to the bacteria--phage model of @Weitz2005CoeArm, with
-both a modular structure and a non-uniform degree distribution. This model is
-easy to learn: when trained with features $[v_i, h_j, \text{abs}(v_i, h_j)] ^T$
-to predict the interactions between $i$ and $j$, all four models presented below
-were able to reach almost perfect predictions all the time (data not presented
-here) -- this is in part because the rule is fixed for all interactions. In
-order to make the problem more difficult to solve, we use $[v_i, h_j]$ as a
-feature vector (*i.e.* the traits on which the models are trained), and
-therefore the models will have to uncover that the rule for interaction is
-$\text{abs}(v_i, h_j) \le \xi$.
+the component models) on 30% of the interaction data. In practice, testing
+usually uses 70% of the total data; for ecological networks, where interactions
+are sparse *and* the  number of species is low, this may not be the best
+solution, as the testing set becomes constrained not by the *proportion* of
+interactions, but by their *number*. Preliminary experiments using different
+splits revealed no qualitative change in the results. Networks are generated by
+picking a random infectiousness trait $v_i$ for 100 species (from a beta
+distribution $B(\alpha=6,\beta=8)$ distribution), and a resistance trait $h_j$
+for 100 species (from $B(\alpha=2,\beta=8)$ distribution). There is an
+interaction between $i$ and $j$ when $v_i-\xi/2 \le h_j \le v_i+\xi/2$, where
+$\xi$ is a constant regulating the connectance of the network (there is an
+almost 1:1 relationship between $\xi$ and connectance), and varies uniformly in
+$[0.05, 0.35]$. This model gives fully interval networks that are close
+analogues to the bacteria--phage model of @Weitz2005CoeArm, with both a modular
+structure and a non-uniform degree distribution. This dataset is easy for
+almost any algorithm to learn: when trained with features $[v_i, h_j,
+\text{abs}(v_i, h_j)] ^T$ to predict the interactions between $i$ and $j$, all
+four models presented below were able to reach almost perfect predictions all
+the time (data not presented here) -- this is in part because the rule (there
+is maximum value of the distance between traits for which there is an
+interaction) is fixed for all interactions. In order to make the problem more
+difficult to solve, we use $[v_i, h_j]$ as a feature vector (*i.e.* the traits
+on which the models are trained), and therefore the models will have to uncover
+that the rule for interaction is $\text{abs}(v_i, h_j) \le \xi$. The models
+therefore all have the form
+
+$$
+\begin{bmatrix}
+           x_{1} \\
+           x_{2} \\
+           \vdots \\
+           x_{m}
+         \end{bmatrix}
+$$
 
 The training sample is composed of 30% of the $10^4$ possible entries in the
 network, *i.e.* $n=3000$. Out of these interactions, we pick a proportion $\nu$
