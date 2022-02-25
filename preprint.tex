@@ -287,16 +287,18 @@ far the least commmon. Herein lies the core challenge of predicting
 species interactions: the extreme imbalance between classes makes the
 training of predictive models difficult, and their validation even more
 so as we do not reliably know which negatives are true. The connectance
-of empirical networks is usually well under 20\%, with larger networks
-having a lower connectance (MacDonald et al., 2020). Recent
-contributions (Becker et al., 2021; Strydom et al., 2021) highlight that
-predictive models of interactions can likely be improved by adding
-information (in the form of, \emph{e.g.} traits), but that we do not
-have robust guidelines as to how the predictive ability of these models
-should be evaluated, nor about how the models should be trained. Here,
-by relying on simple derivations and a series of simulations, we
-formulate a number of such guidelines, specifically for the case of
-binary classifiers derived from thresholded values.
+(the proportion of realized interactions, usually the number of
+interactions divided by the number of species pairs) of empirical
+networks is usually well under 20\%, with larger networks having a lower
+connectance (MacDonald et al., 2020). Recent contributions (Strydom et
+al., 2021; \textbf{Becker2021OptPre?}) highlight that predictive models
+of interactions can likely be improved by adding information (in the
+form of, \emph{e.g.} traits), but that we do not have robust guidelines
+as to how the predictive ability of these models should be evaluated,
+nor about how the models should be trained. Here, by relying on simple
+derivations and a series of simulations, we formulate a number of such
+guidelines, specifically for the case of binary classifiers derived from
+thresholded values.
 
 Binary classifiers are usually assessed by measuring properties of their
 confusion matrix, \emph{i.e.} the contingency table reporting true/false
@@ -336,7 +338,11 @@ Informedness (Youden, 1950) (also known as bookmaker informedness or the
 True Skill Statistic) is \(\text{TPR}+\text{TNR}-1\), where
 \(\text{TPR}= tp/(tp+fn)\) and \(\text{TNR} = tn/(tn+fp)\); informedness
 can be used to find the optimal cutpoint in thresholding analyses
-(Schisterman et al., 2005). The MCC is defined as
+(Schisterman et al., 2005). The formula for informedness is
+
+\[\frac{tp}{tp+fn}+\frac{tn}{tn+fp}-1\,.\]
+
+The MCC is defined as
 
 \[
 \frac{tp\times tn - fn\times fp}{\sqrt{(tp+fp)\times (tp+fn)\times (tn+fp)\times (tn+fn)}} \,.
@@ -392,17 +398,22 @@ prevalence depends on assumptions about bias in the model, and therefore
 recommend the use of \(\kappa\) as a validation of classification
 performance. Although this work offers recommendations about the
 comparison of models, it doesn't establishes baselines or good practices
-for training on imbalanced ecological data. Within the context of
-networks, there are three specific issues that need to be adressed.
-First, what values of performance measures are we expecting for a
-classifier that has poor performance? This is particularly important as
-it can evaluate whether low prevalence can lull us into a false sense of
-predictive accuracy. Second, independently of the question of model
-evaluation, is low prevalence an issue for \emph{training}, and can we
-remedy it? Finally, because the low amount of data on interaction makes
-a lot of imbalance correction methods (see \emph{e.g.} Branco et al.,
-2015) hard to apply, which indicators can be optimized with the least
-amount of positive interaction data?
+for training on imbalanced ecological data. Steen et al. (2021) show
+that, when applying spatial thinning (a process that has no analogue in
+networks), the best approach to train ML-based SDMs varies according to
+the balancing of the dataset, and the evaluation measures used. This
+suggests that there is no single ``recipe'' that is guaranteed to give
+the best model. Within the context of networks, there are three specific
+issues that need to be adressed. First, what values of performance
+measures are we expecting for a classifier that has poor performance?
+This is particularly important as it can evaluate whether low prevalence
+can lull us into a false sense of predictive accuracy. Second,
+independently of the question of model evaluation, is low prevalence an
+issue for \emph{training}, and can we remedy it? Finally, because the
+low amount of data on interaction makes a lot of imbalance correction
+methods (see \emph{e.g.} Branco et al., 2015) hard to apply, which
+indicators can be optimized with the least amount of positive
+interaction data?
 
 In addition to the literature on SDMs, most of the research on machine
 learning application to life sciences is focused on genomics (which has
@@ -419,14 +430,14 @@ properties. More recently, Chicco et al. (2021) temper the apparent
 supremacy of the MCC, by suggesting it should be replaced by Youden's
 informedness (also known as \(J\), bookmaker's accuracy, and the
 True-Skill Statistic) when the imbalance in the dataset may not be
-representative (Jordano, 2016a, which is the case as networks are
-under-sampled; 2016b), when classifiers need to be compared across
-different datasets (for example when predicting a system in space, where
-undersampling varies locally; McLeod et al., 2021), and when comparing
-the results to a no-skill (baseline) classifier is important. As these
-conditions are likely to be met with network data, there is a need to
-evaluate which measures of classification accuracy respond in a
-desirable way.
+representative, which is the case as species interaction networks are
+often under-sampled (Jordano, 2016b, 2016a), when classifiers need to be
+compared across different datasets (for example when predicting a system
+in space, where undersampling varies locally; McLeod et al., 2021), and
+when comparing the results to a no-skill (baseline) classifier is
+important. As these conditions are likely to be met with network data,
+there is a need to evaluate which measures of classification accuracy
+respond in a desirable way.
 
 We establish that due to the low prevalence of interactions, even poor
 classifiers applied to food web data will reach a high accuracy; this is
@@ -562,11 +573,15 @@ prediction success; moving forward, we will focus on other measures.
 In order to examine how MCC, \(F_1\), \(\kappa\), and informedness
 change w.r.t. the imbalance, skill, and bias, we performed a grid
 exploration of the values of \(\text{logit}(s)\) and \(\text{logit}(b)\)
-linearly from \(-10\) to \(10\), of \(\rho\) linearly in \(]0, 0.5]\),
-which is within the range of usually observed connectance values for
-empirical food webs. Note that at this point, there is no food web model
-to speak of; rather, the confusion matrix we discuss can be obtained for
-any classification task. Based on the previous discussion, the desirable
+linearly from \(-10\) to \(10\); \(\text{logit}(x) = -10\) means that
+\(x\) is essentially 0, and \(\text{logit}(x) = 10\) means it is
+essentially 1 -- this choice was motivated by the fact that most
+responses are non-linear with regards to bias and skill. The values or
+\(\rho\) were taken linearly in \(]0, 0.5]\), which is within the range
+of usually observed connectance values for empirical species interaction
+networks. Note that at this point, there is no food web model to speak
+of; rather, the confusion matrix we discuss can be obtained for any
+classification task. Based on the previous discussion, the desirable
 properties for a measure of classifier success should be: an increase
 with classifier skill, especially at low bias; a hump-shaped response to
 bias, especially at high skill, and ideally center around
@@ -652,25 +667,43 @@ In the following section, we will generate random bipartite networks
 (this works without loss of generality on unipartite networks), and
 train four binary classifiers (as well as an ensemble model using the
 sum of ranged outputs from the component models) on 30\% of the
-interaction data. Networks are generated by picking a random
-infectiousness trait \(v_i\) for 100 species (from a \(B(6,8)\)
-distribution), and a resistance trait \(h_j\) for 100 species (from a
-\(B(2,8)\) distribution). There is an interaction between \(i\) and
-\(j\) when \(v_i-\xi/2 \le h_j \le v_i+\xi/2\), where \(\xi\) is a
-constant regulating the connectance of the network (there is an almost
-1:1 relationship between \(\xi\) and connectance), and varies uniformly
-in \([0.05, 0.35]\). This model gives fully interval networks that are
-close analogues to the bacteria--phage model of Weitz et al. (2005),
-with both a modular structure and a non-uniform degree distribution.
-This model is easy to learn: when trained with features
-\([v_i, h_j, \text{abs}(v_i, h_j)] ^T\) to predict the interactions
-between \(i\) and \(j\), all four models presented below were able to
-reach almost perfect predictions all the time (data not presented here)
--- this is in part because the rule is fixed for all interactions. In
-order to make the problem more difficult to solve, we use \([v_i, h_j]\)
-as a feature vector (\emph{i.e.} the traits on which the models are
-trained), and therefore the models will have to uncover that the rule
-for interaction is \(\text{abs}(v_i, h_j) \le \xi\).
+interaction data. In practice, testing usually uses 70\% of the total
+data; for ecological networks, where interactions are sparse \emph{and}
+the number of species is low, this may not be the best solution, as the
+testing set becomes constrained not by the \emph{proportion} of
+interactions, but by their \emph{number}. Preliminary experiments using
+different splits revealed no qualitative change in the results. Networks
+are generated by picking a random infectiousness trait \(v_i\) for 100
+species (from a beta distribution \(B(\alpha=6,\beta=8)\) distribution),
+and a resistance trait \(h_j\) for 100 species (from
+\(B(\alpha=2,\beta=8)\) distribution). There is an interaction between
+\(i\) and \(j\) when \(v_i-\xi/2 \le h_j \le v_i+\xi/2\), where \(\xi\)
+is a constant regulating the connectance of the network (there is an
+almost 1:1 relationship between \(\xi\) and connectance), and varies
+uniformly in \([0.05, 0.35]\). This model gives fully interval networks
+that are close analogues to the bacteria--phage model of Weitz et al.
+(2005), with both a modular structure and a non-uniform degree
+distribution. This dataset is easy for almost any algorithm to learn:
+when trained with features \([v_i, h_j, \text{abs}(v_i, h_j)] ^T\) to
+predict the interactions between \(i\) and \(j\), all four models
+presented below were able to reach almost perfect predictions all the
+time (data not presented here) -- this is in part because the rule
+(there is maximum value of the distance between traits for which there
+is an interaction) is fixed for all interactions. In order to make the
+problem more difficult to solve, we use \([v_i, h_j]\) as a feature
+vector (\emph{i.e.} the traits on which the models are trained), and
+therefore the models will have to uncover that the rule for interaction
+is \(\text{abs}(v_i, h_j) \le \xi\). The models therefore all have the
+form
+
+\[
+\begin{bmatrix}
+           x_{1} \\
+           x_{2} \\
+           \vdots \\
+           x_{m}
+         \end{bmatrix}
+\]
 
 The training sample is composed of 30\% of the \(10^4\) possible entries
 in the network, \emph{i.e.} \(n=3000\). Out of these interactions, we
@@ -1007,9 +1040,9 @@ better than the component models; even when the models were individually
 far form perfect, the ensemble was able to leverage the different biases
 expressed by the models to make an overall more accurate prediction. We
 do not expect that ensembles will \emph{always} be better than single
-models. In a recent multi-model comparison, Becker et al. (2021) found
-that the ensemble was \emph{not} the best model. There is no general
-conclusion to draw from this besides reinforcing the need to be
+models. In a recent multi-model comparison, (\textbf{Becker2021OptPre?})
+found that the ensemble was \emph{not} the best model. There is no
+general conclusion to draw from this besides reinforcing the need to be
 pragmatic about which models should be included in the ensemble, or
 whether to use an ensemble at all. In a sense, the surprising peformance
 of the ensemble model should form the basis of the last recommendation:
@@ -1045,14 +1078,6 @@ species distribution models: Prevalence, kappa and the true skill
 statistic (TSS). \emph{Journal of Applied Ecology}, \emph{43}(6),
 1223--1232. \url{https://doi.org/10.1111/j.1365-2664.2006.01214.x}
 
-\leavevmode\hypertarget{ref-Becker2021OptPre}{}%
-Becker, D., Albery, G. F., Sjodin, A. R., Poisot, T., Bergner, L.,
-Dallas, T., Eskew, E. A., Farrell, M. J., Guth, S., Han, B. A., Simmons,
-N. B., Stock, M., Teeling, E. C., \& Carlson, C. J. (2021). Optimizing
-predictive models to prioritize viral discovery in zoonotic reservoirs.
-\emph{bioRxiv}, 2020.05.22.111344.
-\url{https://doi.org/10.1101/2020.05.22.111344}
-
 \leavevmode\hypertarget{ref-Bezanson2017JulFre}{}%
 Bezanson, J., Edelman, A., Karpinski, S., \& Shah, V. (2017). Julia: A
 Fresh Approach to Numerical Computing. \emph{SIAM Review}, \emph{59}(1),
@@ -1065,9 +1090,9 @@ learning. \emph{Journal of Open Source Software}, \emph{5}(55), 2704.
 \url{https://doi.org/10.21105/joss.02704}
 
 \leavevmode\hypertarget{ref-Blaom2020FleMod}{}%
-Blaom, A. D., \& Vollmer, S. J. (2020, December 31). \emph{Flexible
-model composition in machine learning and its implementation in MLJ}.
-\url{http://arxiv.org/abs/2012.15505}
+Blaom, A. D., \& Vollmer, S. J. (2020). Flexible model composition in
+machine learning and its implementation in MLJ. \emph{arXiv:2012.15505
+{[}cs{]}}. \url{http://arxiv.org/abs/2012.15505}
 
 \leavevmode\hypertarget{ref-Boughorbel2017OptCla}{}%
 Boughorbel, S., Jarray, F., \& El-Anbari, M. (2017). Optimal classifier
@@ -1076,9 +1101,9 @@ for imbalanced data using Matthews Correlation Coefficient metric.
 \url{https://doi.org/10.1371/journal.pone.0177678}
 
 \leavevmode\hypertarget{ref-Branco2015SurPre}{}%
-Branco, P., Torgo, L., \& Ribeiro, R. (2015, May 13). \emph{A Survey of
-Predictive Modelling under Imbalanced Distributions}.
-\url{http://arxiv.org/abs/1505.01658}
+Branco, P., Torgo, L., \& Ribeiro, R. (2015). A Survey of Predictive
+Modelling under Imbalanced Distributions. \emph{arXiv:1505.01658
+{[}cs{]}}. \url{http://arxiv.org/abs/1505.01658}
 
 \leavevmode\hypertarget{ref-Chicco2020AdvMat}{}%
 Chicco, D., \& Jurman, G. (2020). The advantages of the Matthews
@@ -1111,7 +1136,7 @@ Press.
 
 \leavevmode\hypertarget{ref-Jeni2013FacImb}{}%
 Jeni, L. A., Cohn, J. F., \& De La Torre, F. (2013). Facing Imbalanced
-Data--Recommendations for the Use of Performance Metrics. \emph{2013
+DataRecommendations for the Use of Performance Metrics. \emph{2013
 Humaine Association Conference on Affective Computing and Intelligent
 Interaction}, 245--251. \url{https://doi.org/10.1109/ACII.2013.47}
 
@@ -1142,9 +1167,10 @@ asymptotic network properties of spatial multi-trophic networks.
 
 \leavevmode\hypertarget{ref-Poisot2021ImpMam}{}%
 Poisot, T., Ouellet, M.-A., Mollentze, N., Farrell, M. J., Becker, D.
-J., Albery, G. F., Gibb, R. J., Seifert, S. N., \& Carlson, C. J. (2021,
-May 31). \emph{Imputing the mammalian virome with linear filtering and
-singular value decomposition}. \url{http://arxiv.org/abs/2105.14973}
+J., Albery, G. F., Gibb, R. J., Seifert, S. N., \& Carlson, C. J.
+(2021). Imputing the mammalian virome with linear filtering and singular
+value decomposition. \emph{arXiv:2105.14973 {[}q-Bio{]}}.
+\url{http://arxiv.org/abs/2105.14973}
 
 \leavevmode\hypertarget{ref-Saito2015PrePlo}{}%
 Saito, T., \& Rehmsmeier, M. (2015). The Precision-Recall Plot Is More
@@ -1160,10 +1186,17 @@ Individuals Using Pooled Blood Samples. \emph{Epidemiology},
 \url{https://doi.org/10.1097/01.ede.0000147512.81966.ba}
 
 \leavevmode\hypertarget{ref-Somodi2017PreDep}{}%
-Somodi, I., Lepesi, N., \& Botta‐Dukát, Z. (2017). Prevalence dependence
+Somodi, I., Lepesi, N., \& Botta-Dukát, Z. (2017). Prevalence dependence
 in model goodness measures with special emphasis on true skill
 statistics. \emph{Ecology and Evolution}, \emph{7}(3), 863--872.
 \url{https://doi.org/10.1002/ece3.2654}
+
+\leavevmode\hypertarget{ref-Steen2021SpaThi}{}%
+Steen, V. A., Tingley, M. W., Paton, P. W. C., \& Elphick, C. S. (2021).
+Spatial thinning and class balancing: Key choices lead to variation in
+the performance of species distribution models with citizen science
+data. \emph{Methods in Ecology and Evolution}, \emph{12}(2), 216--226.
+\url{https://doi.org/10.1111/2041-210X.13525}
 
 \leavevmode\hypertarget{ref-Strydom2021RoaPre}{}%
 Strydom, T., Catchen, M. D., Banville, F., Caron, D., Dansereau, G.,
