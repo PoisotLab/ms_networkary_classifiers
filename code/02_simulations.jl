@@ -62,7 +62,7 @@ candidate_models = [
 ]
 
 S = 100
-_n_sims = 2000
+_n_sims = 200
 conditions_breadth = rand(_n_sims) .* 0.4 .+ 0.05
 conditions_bias = rand(_n_sims) .* 0.98 .+ 0.01
 conditions = hcat(conditions_breadth, conditions_bias)
@@ -72,14 +72,23 @@ Threads.@threads for i in 1:size(conditions, 1)
     @info i, Threads.threadid(), breadth, bias
 
     𝐗, 𝐲 = network(S, breadth)
+    _real_co = mean(𝐲)
 
-    # Training and testing sets
-    training_size = round(Int64, 0.3 * length(𝐲))
+    training_size = round(Int64, 0.5 * length(𝐲))
     n_positive = round(Int64, training_size * bias)
     idx_pos = sample(findall(iszero.(𝐲)), n_positive; replace=true)
     idx_neg = sample(findall(isone.(𝐲)), training_size - n_positive; replace=true)
     Iₚ = shuffle(vcat(idx_neg, idx_pos))
     Iₒ = setdiff(eachindex(𝐲), Iₚ)
+
+    # Tweak the testing set to have the correct connectance - this results in a SMALLER testing set
+    _test_pos = sum(𝐲[Iₒ])
+    _expected_neg = round(Int64, _test_pos/_real_co - _test_pos)
+    _observed_neg = round(Int64, length(Iₒ)-sum(𝐲[Iₒ]))
+    tst_neg = sample(findall(iszero.(𝐲[Iₒ])), max(_observed_neg - _expected_neg, 1); replace=true)
+    deleteat!(Iₒ, sort(unique(tst_neg)))
+    #
+
     m = []
     for candidate_model in candidate_models
         this_machine = machine(candidate_model.second, 𝐗, 𝐲)
