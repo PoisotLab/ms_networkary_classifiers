@@ -126,8 +126,8 @@ under the Receiving Operator Characteristic and Precision Recall curves), and
 three threshold metrics ($\kappa$, informedness, and MCC; we will briefly
 discuss $F_1$ but show early on that it has undesirable properties). 
 
- The $\kappa$ measure [@Landis1977MeaObs] establishes the extent to which two
- observers (the network and the prediction) agree, and is measured as
+The $\kappa$ measure [@Landis1977MeaObs] establishes the extent to which two
+observers (the network and the prediction) agree, and is measured as
 
 $$
 2\frac{tp\times tn - fn\times fp}{(tp+fp)\times (fp+tn)+(tn+fp)\times (tn+fn)} \,.
@@ -135,8 +135,10 @@ $$
 
 Informedness [@Youden1950IndRat] (also known as bookmaker informedness or the
 True Skill Statistic) is $\text{TPR}+\text{TNR}-1$, where $\text{TPR}=
-tp/(tp+fn)$ and $\text{TNR} = tn/(tn+fp)$; informedness can be used to find the
-optimal cutpoint in thresholding analyses [@Schisterman2005OptCut]. The formula for informedness is
+tp/(tp+fn)$ and $\text{TNR} = tn/(tn+fp)$. Informedness can be used to find the
+optimal cutpoint in thresholding analyses [@Schisterman2005OptCut]; indeed, the
+maximal informedness corresponds to the point on the ROC curve that is closest
+to the perfect classifier point. The formula for informedness is
 
 $$\frac{tp}{tp+fn}+\frac{tn}{tn+fp}-1\,.$$
 
@@ -146,9 +148,9 @@ $$
 \frac{tp\times tn - fn\times fp}{\sqrt{(tp+fp)\times (tp+fn)\times (tn+fp)\times (tn+fn)}} \,.
 $$
 
-Finally, $F_1$ is the harmonic mean of precision (the chance that a positive
-even was correctly classified) and sensitivity (the ability to correctly
-classify positive events), and is defined  as
+Finally, $F_1$ is the harmonic mean of precision (the chance that interaction
+was correctly detected as such) and sensitivity (the ability to correctly
+classify interactions), and is defined  as
 
 $$
 2\frac{tp}{2\times tp + fp + fn}\,.
@@ -186,11 +188,11 @@ In this section, we will assume a network of connectance $\rho$, *i.e.* having
 $\rho S^2$ interactions (where $S$ is the species richness), and $(1-\rho) S^2$
 non-interactions. Therefore, the vector describing the *true* state of the
 network (assumed to be an unweighted, directed network) is a column vector
-$\mathbf{o}^T = [\rho, (1-\rho)]$ (we can safely drop the $S^2$ terms, as we will
-work on the confusion matrix, which ends up expressing *relative* values). We
-will apply skill and bias to this matrix, and measure how a selection of
-performance metrics respond to changes in these values, in order to assess their
-suitability for model evaluation.
+$\mathbf{o}^T = [\rho, \qquad (1-\rho)]$ (we can safely drop the $S^2$ terms,
+as we will work on the confusion matrix, which ends up expressing *relative*
+values). We will apply skill and bias to this matrix, and measure how
+a selection of performance metrics respond to changes in these values, in order
+to assess their suitability for model evaluation.
 
 ## Confusion matrix with skill and bias
 
@@ -227,9 +229,9 @@ $$
 \end{pmatrix} \,.
 $$
 
-Note that when $s=0$, $\text{Tr}(\mathbf{M}) = 0$ (the classifier is *always*
-wrong), when $s=0.5$, the classifier is no-skill and guesses at random, and when
-$s=1$, the classifier is perfect.
+When $s=0$, $\text{Tr}(\mathbf{M}) = 0$ (the classifier is *always* wrong),
+when $s=0.5$, the classifier is no-skill and guesses at random, and when $s=1$,
+the classifier is perfect.
 
 The second element we can adjust in this hypothetical classifier is its bias,
 specifically its tendency to over-predict interactions. Like above, we can do so
@@ -250,8 +252,8 @@ $$
 \end{pmatrix}\,.
 $$
 
-The final expression for the confusion matrix in which we can regulate the skill
-and the bias is
+The final expression for the confusion matrix in which we can regulate the
+skill and the bias is
 
 $$
 \mathbf{C} = \begin{pmatrix}
@@ -261,28 +263,28 @@ $$
 $$
 
 In all further simulations, the confusion matrix $\mathbf{C}$ is transformed so
-that it sums to 1.
+that it sums to unity, *i.e.* the entries are the *proportions* of guesses.
 
 ## What are the baseline values of performance measures?
 
 In this section, we will change the values of $b$, $s$, and $\rho$, and report
 how the main measures discussed in the introduction (MCC, $F_1$, $\kappa$, and
-informedness) are responding to issues with the classifier. Before we do so, it
-is important to explain why we will not focus on accuracy too much. Accuracy is
-the number of correct predictions ($\text{Tr}(\mathbf{C})$) divided by the sum
-of the confusion matrix. For a no-skill, no-bias classifier, accuracy is equal
-to $\rho^2 + (1-\rho)^2$; for $\rho = 0.05$, this is $\approx 0.90$, and for
-$\rho = 0.01$, this is equal to $\approx 0.98$. In other words, the values of
-accuracy are expected to be so high that they are not really informatived (this
-is simply explained by the fact that for $\rho$ small, $\rho^2 \ll (1-\rho)^2$).
-More concerning is the fact that introducing bias changes the response of
-accuracy in unexpected ways. Assuming a no-skill classifier, the numerator of
-accuracy becomes $b\rho^2 + (1-b)(1-\rho)^2$, which increases when $b$ is low,
-which specifically means that at equal skill, a classifier that under-predicts
-interactions will have higher accuracy than an un-biased classifier. These
-issues are absent from balanced accuracy, but should nevertheless lead us to not
-report accuracy as the primary measure of network prediction success; moving
-forward, we will focus on other measures.
+informedness) respond. Before we do so, it is important to explain why we will
+not focus on accuracy too much. Accuracy is the number of correct predictions
+($\text{Tr}(\mathbf{C})$) divided by the sum of the confusion matrix. For
+a no-skill, no-bias classifier, accuracy is equal to $\rho^2 + (1-\rho)^2$; for
+$\rho = 0.05$, this is $\approx 0.90$, and for $\rho = 0.01$, this is equal to
+$\approx 0.98$. In other words, the values of accuracy are high enough to be
+uninformative (for $\rho$ small, $\rho^2 \ll (1-\rho)^2$). More concerning is
+the fact that introducing bias changes the response of accuracy in unexpected
+ways. Assuming a no-skill classifier, the numerator of accuracy becomes
+$b\rho^2 + (1-b)(1-\rho)^2$, which increases when $b$ is low, which
+specifically means that at equal skill, a classifier that under-predicts
+interactions will have higher accuracy than an un-biased classifier (because
+the value of accuracy is dominated by the size of tn, which will increase).
+These issues are absent from balanced accuracy, but should nevertheless lead us
+to not report accuracy as the primary measure of network prediction success;
+moving forward, we will focus on other measures.
 
 In order to examine how MCC, $F_1$, $\kappa$, and informedness change w.r.t.
 the imbalance, skill, and bias, we performed a grid exploration of the values
@@ -290,15 +292,14 @@ of $\text{logit}(s)$ and $\text{logit}(b)$ linearly from $-10$ to $10$;
 $\text{logit}(x) = -10$ means that $x$ is essentially 0, and $\text{logit}(x)
 = 10$ means it is essentially 1 -- this choice was motivated by the fact that
 most responses are non-linear with regards to bias and skill. The values or
-$\rho$ were taken linearly in $]0, 0.5]$, which is within the range of usually
-observed connectance values for empirical species interaction networks. Note
-that at this point, there is no food web model to speak of; rather, the
-confusion matrix we discuss can be obtained for any classification task. Based
-on the previous discussion, the desirable properties for a measure of
-classifier success should be: an increase with classifier skill, especially at
-low bias; a hump-shaped response to bias, especially at high skill, and ideally
-center around $\text{logit}(b)=0$; an increase with prevalence up until
-equiprevalence is reached.
+$\rho$ were taken linearly in $]0, 0.5]$, which is within the range of
+connectance for species interaction networks. Note that at this point, there is
+no network model to speak of; the confusion matrix we discuss can be
+obtained for any classification task. Based on the previous discussion, the
+desirable properties for a measure of classifier success should be: an increase
+with classifier skill, especially at low bias; a hump-shaped response to bias,
+especially at high skill, and ideally centered around $\text{logit}(b)=0$; an
+increase with prevalence up until equiprevalence is reached.
 
 ![Consequences of changing the classifier skills ($s$) and bias ($s$) for a
 connectance $\rho=0.15$, on accuracy, $F_1$, postive predictive value, and
@@ -382,14 +383,24 @@ interaction) is fixed for all interactions. In order to make the problem more
 difficult to solve, we use $[v_i, h_j]$ as a feature vector (*i.e.* the traits
 on which the models are trained), and therefore the models will have to uncover
 that the rule for interaction is $\text{abs}(v_i, h_j) \le \xi$. The models
-therefore all have the form
+therefore all have the following form, where $i_{i,j}$ is an interaction from
+species $i$ to species $j$:
 
 $$
 \begin{bmatrix}
-           x_{1} \\
-           x_{2} \\
-           \vdots \\
-           x_{m}
+    i_{1,1} \\
+    i_{1,2} \\
+    \vdots \\
+    i_{m,n-1} \\
+    i_{m,n}
+\end{bmatrix}
+\propto
+\begin{bmatrix}
+           v_{1} & h_{1} \\
+           v_{1} & h_{2} \\
+           \vdots & \vdots \\
+           v_{m} & h_{n-1} \\
+           v_{m} & h_{n}
          \end{bmatrix}
 $$
 
@@ -608,6 +619,9 @@ predicted networks, we highlight an interesting paradox: the models with the
 best performance measures are not the models with the closest reconstructed
 network structure. We discuss these results in the context of establishing
 guidelines for the prediction of ecological interactions.
+
+TODO informedness and accuracy should be easy to beat, make sure the model is
+better than them!
 
 The results presented here highlight an interesting paradox: although the Random
 Forest was ultimately able to get a correct estimate of network structure
