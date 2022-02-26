@@ -55,6 +55,39 @@
         "volume": "15"
     },
     {
+        "author": [
+            {
+                "family": "Beauchesne",
+                "given": "David"
+            },
+            {
+                "literal": "Desjardins-Proulx"
+            },
+            {
+                "family": "Archambault",
+                "given": "Philippe"
+            },
+            {
+                "family": "Gravel",
+                "given": "Dominique"
+            }
+        ],
+        "container-title": "Vie et milieu-life and enVironment",
+        "id": "Beauchesne2016ThiOut",
+        "issue": "3-4",
+        "issued": {
+            "date-parts": [
+                [
+                    2016
+                ]
+            ]
+        },
+        "page": "333-342",
+        "title": "Thinking Outside the Boxpredicting Biotic Interactions in Data-poor Environments",
+        "type": "article-journal",
+        "volume": "66"
+    },
+    {
         "DOI": "10.1137/141000671",
         "author": [
             {
@@ -331,6 +364,73 @@
         "type": "paper-conference"
     },
     {
+        "DOI": "10.7717/peerj.7566",
+        "author": [
+            {
+                "family": "Aguiar",
+                "given": "Marcus A. M.",
+                "non-dropping-particle": "de"
+            },
+            {
+                "family": "Newman",
+                "given": "Erica A."
+            },
+            {
+                "family": "Pires",
+                "given": "Mathias M."
+            },
+            {
+                "family": "Yeakel",
+                "given": "Justin D."
+            },
+            {
+                "family": "Boettiger",
+                "given": "Carl"
+            },
+            {
+                "family": "Burkle",
+                "given": "Laura A."
+            },
+            {
+                "family": "Gravel",
+                "given": "Dominique"
+            },
+            {
+                "family": "Guimar\u00e3es",
+                "given": "Paulo R."
+            },
+            {
+                "family": "O\u2019Donnell",
+                "given": "James L."
+            },
+            {
+                "family": "Poisot",
+                "given": "Timoth\u00e9e"
+            },
+            {
+                "family": "Fortin",
+                "given": "Marie-Jos\u00e9e"
+            },
+            {
+                "family": "Hembry",
+                "given": "David H."
+            }
+        ],
+        "container-title": "PeerJ",
+        "id": "deAguiar2019RevBia",
+        "issued": {
+            "date-parts": [
+                [
+                    2019
+                ]
+            ]
+        },
+        "page": "e7566",
+        "title": "Revealing biases in the sampling of ecological interaction networks",
+        "type": "article-journal",
+        "volume": "7"
+    },
+    {
         "DOI": "10.1371/journal.pone.0222916",
         "PMCID": "PMC6762152",
         "author": [
@@ -413,6 +513,107 @@
         "publisher-place": "Hoboken, New Jersey",
         "title": "Imbalanced Learning: Foundations, Algorithms, and Applications",
         "type": "book"
+    },
+    {
+        "DOI": "10.1002/ecs2.3422",
+        "author": [
+            {
+                "family": "Inman",
+                "given": "Richard"
+            },
+            {
+                "family": "Franklin",
+                "given": "Janet"
+            },
+            {
+                "family": "Esque",
+                "given": "Todd"
+            },
+            {
+                "family": "Nussear",
+                "given": "Kenneth"
+            }
+        ],
+        "container-title": "Ecosphere",
+        "id": "Inman2021ComSam",
+        "issue": "3",
+        "issued": {
+            "date-parts": [
+                [
+                    2021
+                ]
+            ]
+        },
+        "page": "e03422",
+        "title": "Comparing sample bias correction methods for species distribution modeling using virtual species",
+        "type": "article-journal",
+        "volume": "12"
+    },
+    {
+        "DOI": "10.1016/j.ecolmodel.2015.05.018",
+        "author": [
+            {
+                "family": "Iturbide",
+                "given": "Maialen"
+            },
+            {
+                "family": "Bedia",
+                "given": "Joaqu\u00edn"
+            },
+            {
+                "family": "Herrera",
+                "given": "Sixto"
+            },
+            {
+                "family": "Hierro",
+                "given": "Oscar",
+                "non-dropping-particle": "del"
+            },
+            {
+                "family": "Pinto",
+                "given": "Miriam"
+            },
+            {
+                "family": "Guti\u00e9rrez",
+                "given": "Jose Manuel"
+            }
+        ],
+        "container-title": "Ecological Modelling",
+        "id": "Iturbide2015FraSpe",
+        "issued": {
+            "date-parts": [
+                [
+                    2015
+                ]
+            ]
+        },
+        "page": "166-174",
+        "title": "A framework for species distribution modelling with improved pseudo-absence generation",
+        "type": "article-journal",
+        "volume": "312"
+    },
+    {
+        "DOI": "10.1002/9781118646106.ch8",
+        "author": [
+            {
+                "family": "Japkowicz",
+                "given": "Nathalie"
+            }
+        ],
+        "chapter-number": "8",
+        "container-title": "Imbalanced Learning",
+        "id": "Japkowicz2013AssMet",
+        "issued": {
+            "date-parts": [
+                [
+                    2013
+                ]
+            ]
+        },
+        "page": "187-206",
+        "publisher": "John Wiley & Sons, Ltd",
+        "title": "Assessment Metrics for Imbalanced Learning",
+        "type": "chapter"
     },
     {
         "DOI": "10.1109/ACII.2013.47",
@@ -598,6 +799,59 @@
         "title": "Sampling and asymptotic network properties of spatial multi-trophic networks",
         "type": "article-journal",
         "volume": "n/a"
+    },
+    {
+        "DOI": "10.1111/jbi.14127",
+        "author": [
+            {
+                "family": "Poisot",
+                "given": "Timoth\u00e9e"
+            },
+            {
+                "family": "Bergeron",
+                "given": "Gabriel"
+            },
+            {
+                "family": "Cazelles",
+                "given": "Kevin"
+            },
+            {
+                "family": "Dallas",
+                "given": "Tad"
+            },
+            {
+                "family": "Gravel",
+                "given": "Dominique"
+            },
+            {
+                "family": "MacDonald",
+                "given": "Andrew"
+            },
+            {
+                "family": "Mercier",
+                "given": "Benjamin"
+            },
+            {
+                "family": "Violet",
+                "given": "Cl\u00e9ment"
+            },
+            {
+                "family": "Vissault",
+                "given": "Steve"
+            }
+        ],
+        "container-title": "Journal of Biogeography",
+        "id": "Poisot2021GloKno",
+        "issued": {
+            "date-parts": [
+                [
+                    2021
+                ]
+            ]
+        },
+        "page": "jbi.14127",
+        "title": "Global knowledge gaps in species interaction networks data",
+        "type": "article-journal"
     },
     {
         "URL": "http://arxiv.org/abs/2105.14973",
@@ -1198,6 +1452,45 @@
         "title": "Simple rules yield complex food webs",
         "type": "article-journal",
         "volume": "404"
+    },
+    {
+        "DOI": "10.1002/ece3.1640",
+        "author": [
+            {
+                "family": "Wood",
+                "given": "Spencer A."
+            },
+            {
+                "family": "Russell",
+                "given": "Roly"
+            },
+            {
+                "family": "Hanson",
+                "given": "Dieta"
+            },
+            {
+                "family": "Williams",
+                "given": "Richard J."
+            },
+            {
+                "family": "Dunne",
+                "given": "Jennifer A."
+            }
+        ],
+        "container-title": "Ecology and Evolution",
+        "id": "Wood2015EffSpa",
+        "issue": "17",
+        "issued": {
+            "date-parts": [
+                [
+                    2015
+                ]
+            ]
+        },
+        "page": "3769-3782",
+        "title": "Effects of spatial scale of sampling on food web structure",
+        "type": "article-journal",
+        "volume": "5"
     },
     {
         "DOI": "10.1002/1097-0142(1950)3:1<32::AID-CNCR2820030106>3.0.CO;2-3",
