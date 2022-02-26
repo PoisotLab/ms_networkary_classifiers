@@ -1,8 +1,8 @@
 struct ConfusionMatrix
-    tp::Float64
-    tn::Float64
-    fp::Float64
-    fn::Float64
+    tp
+    tn
+    fp
+    fn
     function ConfusionMatrix(a,b,c,d)
         s = a+b+c+d
         return new(a/s, b/s, c/s, d/s)
@@ -10,6 +10,7 @@ struct ConfusionMatrix
 end
 
 ConfusionMatrix(A::Matrix{Float64}) = ConfusionMatrix(A[1,1], A[2,2], A[2,1], A[1,2])
+ConfusionMatrix(A::Matrix) = ConfusionMatrix(A[1,1], A[2,2], A[2,1], A[1,2])
 
 tpr(M::ConfusionMatrix) = M.tp / (M.tp + M.fn)
 tnr(M::ConfusionMatrix) = M.tn / (M.tn + M.fp)

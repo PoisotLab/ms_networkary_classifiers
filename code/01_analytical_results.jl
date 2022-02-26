@@ -39,10 +39,10 @@ data(@subset(results, :ρ .== _co)) *
     mapping(:b => logit => "logit(bias)", :value => "Measure value", layout=:measure => nonnumeric, color=:s => logit => "logit(skill)", group=:s => nonnumeric) *
     (visual(Lines, colormap=:tofino)) |> 
     plt -> draw(plt, facet=(;linkyaxes = :none)) |>
-    plt -> save(joinpath(@__DIR__, "..", "figures", "changing-bias.png"), plt, px_per_unit = 3)
+    plt -> save(joinpath(@__DIR__, "figures", "changing-bias.png"), plt, px_per_unit = 3)
 
 data(@subset(results, :b .== 0.5)) *
     mapping(:ρ => "Connectance", :value => "Measure value", layout=:measure => nonnumeric, color=:s => logit => "logit(skill)", group=:s => nonnumeric) *
     (visual(Lines, colormap=:tofino)) |> 
     plt -> draw(plt, facet=(;linkyaxes = :none)) |>
-    plt -> save(joinpath(@__DIR__, "..", "figures", "changing-connectance.png"), plt, px_per_unit = 3)
+    plt -> save(joinpath(@__DIR__, figures", "changing-connectance.png"), plt, px_per_unit = 3)
