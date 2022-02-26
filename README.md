@@ -2,19 +2,19 @@ Ecological networks are a backbone for key ecological and evolutionary
 processes; yet enumerating all of the interactions they contain is a daunting
 task, as it scales with $S^2$, *i.e.* the squared species richness TODO. Recent
 contributions to the field of ecological network prediction
-[@Strydom2021RoaPre; @Becker2021OptPre] highlight that although interactions
-can be predicted by adding ecologically relevant information (in the form of,
-*e.g.* traits), we do not have robust guidelines as to how the predictive
-ability of these models should be evaluated, nor about how the models should be
-trained. Here, by relying on simple derivations and a series of simulations, we
-formulate a number of such guidelines, specifically for the case of binary
-classifiers derived from thresholded values. Specifically, we conduct an
-investigation of the models in terms of their skill (ability to make the right
-prediction), bias (trends towards systematically over-predicting one class),
-class imbalance (the relative number of cases representing interactions), and
-show how these effects interact. We conclude on the fact that models with the
-best interaction-scale predictive score do not necessarily result in the most
-accurate representation of the network.
+[@Strydom2021RoaPre; @Becker2021OptPre; @Pichler2020MacLea] highlight that
+although interactions can be predicted by adding ecologically relevant
+information (in the form of, *e.g.* traits), we do not have robust guidelines
+as to how the predictive ability of these models should be evaluated, nor about
+how the models should be trained. Here, by relying on simple derivations and
+a series of simulations, we formulate a number of such guidelines, specifically
+for the case of binary classifiers derived from thresholded values.
+Specifically, we conduct an investigation of the models in terms of their skill
+(ability to make the right prediction), bias (trends towards systematically
+over-predicting one class), class imbalance (the relative number of cases
+representing interactions), and show how these effects interact. We conclude on
+the fact that models with the best interaction-scale predictive score do not
+necessarily result in the most accurate representation of the network.
 
 The prediction of ecological interactions shares conceptual and methodological
 issues with two fields in biology: species distribution models (SDMs), and
@@ -122,7 +122,7 @@ metrics with relevance to class-imbalanced problems is fundamental, because as
 @Japkowicz2013AssMet unambiguously concluded, "relatively robust procedures
 used for unskewed data can break down miserably when the data is skewed".
 Following @Japkowicz2013AssMet, we focus on two ranking metrics (the areas
-under the Receiving Operator Characteristic and Precision Recall curves), and
+under the Receiver Operating Characteristic and Precision Recall curves), and
 three threshold metrics ($\kappa$, informedness, and MCC; we will briefly
 discuss $F_1$ but show early on that it has undesirable properties). 
 
@@ -416,41 +416,43 @@ training set is balanced, the testing set is not, and retains (part of) the
 imbalance of the original data.
 
 The dataset used for numerical experiments is composed of 64000 such $(\xi,
-\nu)$ pairs, on which four machines are trained: a decision tree regressor, a
-boosted regression tree, a ridge regressor, and a random forest regressor. All
-models were taken from the `MLJ.jl` package [@Blaom2020MljJul; @Blaom2020FleMod]
-in Julia 1.7 [@Bezanson2017JulFre]. All machines use the default
-parameterization; this is an obvious deviation from best practices, as the
-hyperparameters of any machine require training before its application on a real
-dataset. As we use 64000 such datasets, this would require 256000 unique
-instances of tweaking the hyperparameters, which is not realistic. Therefore, we
-assume that the default parameterizations are comparable across networks. All
-machines return a quantitative prediction, usually (but not necessarily) in
+\nu)$ pairs, on which four machines are trained: a decision tree regressor,
+a boosted regression tree, a ridge regressor, and a random forest regressor.
+All models were taken from the `MLJ.jl` package [@Blaom2020MljJul;
+@Blaom2020FleMod] in Julia 1.7 [@Bezanson2017JulFre]. All machines use the
+default parameterization; this is an obvious deviation from best practices, as
+the hyperparameters of any machine require training before its application on
+a real dataset. As we use 64000 such datasets, this would require 256000 unique
+instances of tweaking the hyperparameters, which is not realistic. Therefore,
+we assume that the default parameterizations are comparable across networks.
+All machines return a quantitative prediction, usually (but not necessarily) in
 $[0,1]$, which is proportional (but not necessarily linearly) to the
-probability of an interaction between $i$ and $j$.
+probability of an interaction between $i$ and $j$. Nevertheless, the ROC-AUC
+and PR-AUC (and therefore the thresholds) can be measured by integrating over
+the domain of the values return by each machine.
 
 In order to pick the best adjacency matrix for a given trained machine, we
 performed a thresholding approach using 500 steps on predictions from the
-testing set, and picking the threshold that maximized Youden's informedness,
-which is usually the optimized target for imbalanced classification. During the
-thresholding step, we measured the area under the receiving-operator
+testing set, and picking the threshold that maximized Youden's informedness.
+During the thresholding step, we measured the area under the receiver operating
 characteristic (ROC-AUC) and precision-recall (PR-AUC) curves, as measures of
-overall performance over the range of returned values. We report the ROC-AUC and
-PR-AUC, as well as a suite of other measures as introduced in the next section,
-for the best threshold. The ensemble model was generated by summing the
-predictions of all component models on the testing set (ranged in $[0,1]$),
+overall performance over the range of returned values. We report the ROC-AUC
+and PR-AUC, as well as a suite of other measures as introduced in the next
+section, for the best threshold. The ensemble model was generated by summing
+the predictions of all component models on the testing set (ranged in $[0,1]$),
 then put through the same thresholding process. The complete code to run the
-simulations is given as an appendix; running the final simulation required 4.8
-core days (approx. 117 hours).
+simulations is available at `10.17605/OSF.IO/JKEWD`; the simulations require
+approx. 5 core days.
 
-After the simulations were completed, we removed all runs (*i.e.* pairs of $\xi$
-and $\nu$) for which at least one of the following conditions was met: the
-accuracy was 0, the true positive or true negative rates were 0, the connectance
-was larger than 0.25. This removes both the obviously failed model runs, and the
-networks that are more densely connected compared to the connectance of
-empirical food webs (and are therefore less difficult to predict, being less
-imbalanced; preliminary analyses of data with a connectance larger than 3
-revealed that all machines reached consistently high performance).
+After the simulations were completed, we removed all runs (*i.e.* pairs of
+$\xi$ and $\nu$) for which at least one of the following conditions was met:
+the accuracy was 0, the true positive or true negative rates were 0, the
+connectance was larger than 0.25. This removes both the obviously failed model
+runs, and the networks that are more densely connected compared to the
+connectance of empirical food webs (and are therefore less difficult to
+predict, being less imbalanced; preliminary analyses of data with a connectance
+larger than 0.3 revealed that all machines reached consistently high
+performance).
 
 ## Effect of training set bias on performance
 

@@ -130,7 +130,7 @@ audience working on different systems.
 (a) outline different types of interactions and how resulting interaction
 networks might differ in relation to the simulations in this study,
 
-(b) outline how the suggested guidelines would work then predicting across
+(b) outline how the suggested guidelines would work when predicting across
 networks
 
 (c) outline how the biasing of testing data differs from other methods of
@@ -176,7 +176,8 @@ performances as well as provide a basis for discussing the ‘biasing’ approac
 adopted in the article
 
 > This is an excellent suggestion - I have added a discussion of this article
-at TODO
+at TODO. More generally, I have moved the discussion of SDMs earlier in the
+introduction, to provide more ecological grounding.
 
 L80: Please check the bracketing around the Jordano, 2016a,b reference
 
@@ -226,7 +227,11 @@ fn.connectanceOnInteraction <- function(x)data.frame(Interaction = allPotentialS
 SimData <- fn.connectanceOnInteraction(0.16)
 ~~~
 
-SimData is a data frame with 10 000 rows, containing four columns: logical
+> Not being a R user, I cannot comment on the code - this being said, I have
+added a more detailed explanation of the structure of all models at TODO, and
+TODO
+
+`SimData` is a data frame with 10 000 rows, containing four columns: logical
 vector for the presence of interactions, numeric vector for connectance;
 numeric vector for vi; and numeric vector for hj. From the SimData I then
 created training datasets (n = 3000) with varying proportions of
@@ -235,6 +240,12 @@ remaining 7000 rows. But I suspect I missed something here, and am hoping it’s
 not just me who would do so. Would it be possible to include a table in the
 manuscript, maybe just in the appendix, showing what the dataset used for the
 training and testing the models looked like (e.g. first 5 rows w column names)
+
+> As mentioned in the above response, I have added an illustration of what the
+data look like for the prediction - this should clarify the overall process.
+I think that the issue in the reviewer's code is the inclusion of connectance
+as a predictor, but I have not tested this assumption as it is unlikely to be
+realized in practice.
 
 L182-187: If I understand this correctly, then you have 10K unique
 species-combination with either an interaction or lack thereof. From the 10K
@@ -247,6 +258,12 @@ increasing amount of imbalance in the testing data. I am therefore wondering if
 the testing data should be subsampled to recreate the original imbalance, to
 avoid the relative proportion of interactions in the testing data affecting the
 resulting confusion matrix and derived metrics (MCC, etc.,)
+
+> This is an excellent suggestion -- one of my issues with it is that in
+practice, these models would be applied to datasets for which the actual class
+imbalance is not the one used for training; that being said, the reviewer is
+absolutely correct in mentioning that changing the training class imbalance
+TODO 
 
 L189: Add a motivation for why these four ML methods were selected and how they
 differ – e.g. by explaining the most central ways in which they differ. I think
