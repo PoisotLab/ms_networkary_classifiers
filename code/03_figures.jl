@@ -18,8 +18,6 @@ todrop = unique(vcat([
     @subset(results, :measure .== "ACC", :value .== 0.0).runid,
     @subset(results, :measure .== "TPR", :value .== 0.0).runid,
     @subset(results, :measure .== "TNR", :value .== 0.0).runid,
-    @subset(results, :measure .== "FPR", :value .== 1.0).runid,
-    @subset(results, :measure .== "FNR", :value .== 1.0).runid,
     @subset(results, :measure .== "PRAUC", :value .<= 0.0).runid,
     @subset(results, :connectance .>= 0.25).runid,
     @subset(results, :connectance .<= 0.05).runid
@@ -44,8 +42,8 @@ results = leftjoin(results, select(connectance_values, [:runid, :midpoint]), on=
 # Dataviz
 _keepval(f) = f in ["MCC", "INF"]
 data(@subset(results, _keepval.(:measure))) *
-    mapping(:bias => "Training set bias", :value => "Value", row=:midpoint => nonnumeric, col=:model, color=:measure => "Measure") *
-    (AlgebraOfGraphics.density() * visual(Contour, color=:grey, alpha=0.3) + smooth() * visual(linewidth=2.0)) |>
+    mapping(:bias => "Training set bias", :value => "Value", row=:midpoint => nonnumeric, col=:measure => "Measure", color=:model => "Model") *
+    (smooth() * visual(linewidth=2.0)) |>
     plt -> draw(plt, facet=(;linkyaxes = :minimal)) |>
     plt -> save(joinpath(@__DIR__, "..", "figures", "bias_mcc_inf.png"), plt, px_per_unit = 3)
 
