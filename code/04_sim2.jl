@@ -58,7 +58,6 @@ candidate_models = [
 
 S = (50,80)
 
-
 𝐗, 𝐲 = network(S, 0.19)
 bias = 0.7
 

@@ -30,9 +30,7 @@ function network(S, ξ)
     𝐱ₕ = sort(rand(resistance, S))
     𝐱₁ = repeat(𝐱ᵥ; outer=length(𝐱ₕ))
     𝐱₂ = repeat(𝐱ₕ; inner=length(𝐱ᵥ))
-    𝐱₃ = abs.(𝐱₁ .- 𝐱₂)
     𝐲 = [L(𝐱₁[i], 𝐱₂[i]; r=ξ) for i in 1:(S*S)]
-    #𝐱 = table(hcat(𝐱₁, 𝐱₂, 𝐱₃))
     𝐱 = table(hcat(𝐱₁, 𝐱₂))
     return (𝐱, 𝐲)
 end
@@ -48,24 +46,42 @@ results = [DataFrame(;
     value=Float64[],
 ) for _thr in 1:Threads.nthreads()]
 
-# these regression machines go brrr as f u c k
-DecisionTree = @load DecisionTreeRegressor pkg = DecisionTree
-RandomForest = @load RandomForestRegressor pkg = DecisionTree
-BoostedRegressor = @load EvoTreeRegressor pkg = EvoTrees
-RidgeRegressor = @load RidgeRegressor pkg = MLJLinearModels
+models() do model
+    matching(model, network(10, 0.2)...) &&
+    model.package_name != "ScikitLearn" # For a strange reason, ScikitLearn machines drop the core
+end
+
+# These regression machines go brrr as f u c k
+DecisionTree = @load DecisionTreeRegressor pkg = DecisionTree verbosity=0
+RandomForest = @load RandomForestRegressor pkg = DecisionTree verbosity=0
+BoostedRegressor = @load EvoTreeRegressor pkg = EvoTrees verbosity=0
+RidgeRegressor = @load RidgeRegressor pkg = MLJLinearModels verbosity=0
+LinearRegressor = @load LinearRegressor pkg = MLJLinearModels verbosity=0
 
 candidate_models = [
     :DecTree => DecisionTree(),
     :BRT => BoostedRegressor(),
     :RF => RandomForest(),
-    :RR => RidgeRegressor()
+    :RR => RidgeRegressor(),
+    :LR => LinearRegressor()
 ]
 
+function rescaler(m, M)
+    return function f(x)
+        y = copy(x)
+        y = (y .- minimum(y))./(maximum(y)-minimum(y))
+        y = y .* (M-m) .+ m
+        return y
+    end
+end
+
 S = 100
-_n_sims = 200
-conditions_breadth = rand(_n_sims) .* 0.4 .+ 0.05
-conditions_bias = rand(_n_sims) .* 0.98 .+ 0.01
-conditions = hcat(conditions_breadth, conditions_bias)
+_n_sims = 50
+conditions_breadth = LinRange(0.05, 0.45, _n_sims)
+conditions_bias = LinRange(0.01, 0.60, _n_sims)
+# conditions = hcat(conditions_breadth, conditions_bias)
+conditions = vcat([[cbr cbi] for cbr in conditions_breadth for cbi in conditions_bias]...)
+
 
 Threads.@threads for i in 1:size(conditions, 1)
     breadth, bias = conditions[i, :]

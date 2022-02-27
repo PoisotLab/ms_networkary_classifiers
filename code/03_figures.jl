@@ -56,6 +56,34 @@ data(@subset(results, _keepval.(:measure))) *
     plt -> draw(plt, facet=(;linkyaxes = :minimal)) |>
     plt -> save(joinpath(@__DIR__, "..", "figures", "bias_roc_pr.png"), plt, px_per_unit = 3)
 
+_keepval(f) = f in ["PPV", "NPV"]
+data(@subset(results, _keepval.(:measure))) *
+    mapping(:bias => "Training set bias", :value => "Value", row=:midpoint => nonnumeric, col=:model, color=:measure => "Measure") *
+    (AlgebraOfGraphics.density() * visual(Contour, color=:grey, alpha=0.3) + smooth() * visual(linewidth=2.0)) |>
+    plt -> draw(plt, facet=(;linkyaxes = :minimal)) |>
+    plt -> save(joinpath(@__DIR__, "..", "figures", "bias_predvalues.png"), plt, px_per_unit = 3)
+
+_keepval(f) = f in ["ACC", "MKD"]
+data(@subset(results, _keepval.(:measure))) *
+    mapping(:bias => "Training set bias", :value => "Value", row=:midpoint => nonnumeric, col=:model, color=:measure => "Measure") *
+    (AlgebraOfGraphics.density() * visual(Contour, color=:grey, alpha=0.3) + smooth() * visual(linewidth=2.0)) |>
+    plt -> draw(plt, facet=(;linkyaxes = :minimal)) |>
+    plt -> save(joinpath(@__DIR__, "..", "figures", "bias_acc.png"), plt, px_per_unit = 3)
+
+_keepval(f) = f in ["FOR", "FDR"]
+data(@subset(results, _keepval.(:measure))) *
+    mapping(:bias => "Training set bias", :value => "Value", row=:midpoint => nonnumeric, col=:model, color=:measure => "Measure") *
+    (AlgebraOfGraphics.density() * visual(Contour, color=:grey, alpha=0.3) + smooth() * visual(linewidth=2.0)) |>
+    plt -> draw(plt, facet=(;linkyaxes = :minimal)) |>
+    plt -> save(joinpath(@__DIR__, "..", "figures", "bias_falserates.png"), plt, px_per_unit = 3)
+
+_keepval(f) = f in ["FPR", "FNR", "TPR", "TNR"]
+data(@subset(results, _keepval.(:measure))) *
+    mapping(:bias => "Training set bias", :value => "Value", row=:midpoint => nonnumeric, col=:model, color=:measure => "Measure") *
+    (AlgebraOfGraphics.density() * visual(Contour, color=:grey, alpha=0.3) + smooth() * visual(linewidth=2.0)) |>
+    plt -> draw(plt, facet=(;linkyaxes = :minimal)) |>
+    plt -> save(joinpath(@__DIR__, "..", "figures", "bias_components.png"), plt, px_per_unit = 3)
+
 _keepval(f) = f in ["PT"]
 data(@subset(results, _keepval.(:measure))) *
     mapping(:bias => "Training set bias", :value => "Prevalence threshold", row=:midpoint => nonnumeric, col=:model) *
@@ -74,7 +102,7 @@ data(@subset(results, _keepval.(:measure))) *
 connectance_values = unique(select(results, [:runid, :connectance]))
 connectance_values.conbin = zeros(Float64, size(connectance_values,1))
 n_connectance_bins = 100
-bins_connectance = LinRange(0.05, 0.4, n_connectance_bins+1)
+bins_connectance = LinRange(0.05, 0.25, n_connectance_bins+1)
 for i in 1:n_connectance_bins
     _idx = findall(bins_connectance[i] .<= connectance_values.connectance .< bins_connectance[i+1])
     connectance_values.conbin[_idx] .= (bins_connectance[i+1] + bins_connectance[i])/2.0
