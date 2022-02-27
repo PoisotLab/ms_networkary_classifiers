@@ -55,7 +55,7 @@ DecisionTree = @load DecisionTreeRegressor pkg = DecisionTree
 RandomForest = @load RandomForestRegressor pkg = DecisionTree
 BoostedRegressor = @load EvoTreeRegressor pkg = EvoTrees
 RidgeRegressor = @load RidgeRegressor pkg = MLJLinearModels
-LinearRegressor = @load LinearRegressor pkg = GLM
+LinearRegressor = @load LinearRegressor pkg = MLJLinearModels
 
 candidate_models = [
     Symbol("Decision tree") => DecisionTree(),
