@@ -13,7 +13,7 @@ using EcologicalNetworks
 using Random
 using Combinatorics
 
-Random.seed!(1)
+Random.seed!(3)
 
 # AUC
 function ∫(x::Array{T}, y::Array{T}) where {T<:Number}
@@ -67,7 +67,7 @@ candidate_models = [
     Symbol("Linear regression") => LinearRegressor()
 ]
 
-S = (50,80)
+S = (50,60)
 
 results = DataFrame(
     run = Int64[],
@@ -80,9 +80,9 @@ _m1 = BipartiteNetwork([true true; true true])
 _m2 = BipartiteNetwork([true false; true true])
 _m3 = BipartiteNetwork([true false; false true])
 
-for i in 1:250
+for i in 1:500
 
-    𝐗, 𝐲 = network(S, 0.19)
+    𝐗, 𝐲 = network(S, 0.20)
 
     net = BipartiteNetwork(reshape(Bool.(𝐲), S))
     push!(results, (i, :data, :Connectance, connectance(net)))
