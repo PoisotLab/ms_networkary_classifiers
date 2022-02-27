@@ -12,7 +12,7 @@ using AlgebraOfGraphics, CairoMakie
 using EcologicalNetworks
 using Random
 
-Random.seed!(1)
+Random.seed!(5)
 
 # AUC
 function ∫(x::Array{T}, y::Array{T}) where {T<:Number}
@@ -39,7 +39,7 @@ function network(S, ξ)
     𝐱₂ = repeat(𝐱ₕ; inner=length(𝐱ᵥ))
     𝐱₃ = abs.(𝐱₁ .- 𝐱₂)
     𝐲 = [L(𝐱₁[i], 𝐱₂[i]; r=ξ) for i in 1:length(𝐱₁)]
-    #𝐱 = table(hcat(𝐱₁, 𝐱₂, 𝐱₃))
+    # 𝐱 = table(hcat(𝐱₁, 𝐱₂, 𝐱₃))
     𝐱 = table(hcat(𝐱₁, 𝐱₂))
     return (𝐱, 𝐲)
 end
@@ -58,10 +58,10 @@ candidate_models = [
     Symbol("Linear regression") => LinearRegressor()
 ]
 
-S = (50,80)
+S = (50,50)
 
-𝐗, 𝐲 = network(S, 0.19)
-bias = 0.7
+𝐗, 𝐲 = network(S, 0.20)
+bias = 0.5
 
 training_size = round(Int64, 0.3 * length(𝐲))
 n_positive = round(Int64, training_size * bias)
@@ -136,24 +136,31 @@ results = DataFrame(;
     model=String[],
     prediction=Float64[],
     guess=Float64[],
+    truth = Float64[]
 )
 for j in 1:length(m)
     pr = MLJ.predict(m[j].first)
     prr = R(pr)
     thr = R(m[j].second, extrema(pr)...)
     for i in 1:length(𝐲)
-        push!(results, (𝐗.x1[i], 𝐗.x2[i], mnames[j], prr[i], prr[i] >= thr))
+        push!(results, (𝐗.x1[i], 𝐗.x2[i], mnames[j], prr[i], prr[i] >= thr, 𝐲[i]))
     end
 end
 for i in 1:length(𝐲)
-    push!(results, (𝐗.x1[i], 𝐗.x2[i], "Ensemble", ens_pred[i], ens_pred[i] >= ens_thres))
+    push!(results, (𝐗.x1[i], 𝐗.x2[i], "Ensemble", ens_pred[i], ens_pred[i] >= ens_thres, 𝐲[i]))
 end
 for i in 1:length(𝐲)
-    push!(results, (𝐗.x1[i], 𝐗.x2[i], "Dataset", 𝐲[i], 𝐲[i]))
+    push!(results, (𝐗.x1[i], 𝐗.x2[i], "Dataset", 𝐲[i], 𝐲[i], 𝐲[i]))
 end
 
 data(results) *
-    mapping(:infectivity => "Infectivity trait", :resistance => "Resistance trait", :prediction => "Interaction probability"; layout=:model => sorter("BRT", "Random Forest", "Decision tree", "Ridge regression", "Linear regression", "Ensemble", "Dataset")) *
-    visual(Heatmap, colormap=Reverse(:deep)) |>
+    mapping(:infectivity => "Infectivity trait", :resistance => "Resistance trait", :prediction => "Prediction score"; layout=:model => sorter("BRT", "Random Forest", "Decision tree", "Ridge regression", "Linear regression", "Ensemble", "Dataset")) *
+    visual(Heatmap, colormap=:Greys) |>
     plt -> draw(plt, facet=(;linkyaxes = :minimal), axis = (xticks = LinearTicks(3),)) |>
     plt -> save(joinpath(@__DIR__, "..", "figures", "valid_ensemble.png"), plt, px_per_unit = 3)
+
+data(results) *
+mapping(:prediction => "Predicted score", :truth => "Observation"; layout=:model => sorter("BRT", "Random Forest", "Decision tree", "Ridge regression", "Linear regression", "Ensemble", "Dataset")) *
+    (visual(Scatter) + smooth() * visual(linewidth=2)) |>
+    plt -> draw(plt, facet=(;linkyaxes = :minimal), axis = (xticks = LinearTicks(3), xlims=(0, 1), ylims=(0,1))) |>
+    plt -> save(joinpath(@__DIR__, "..", "figures", "valid_logistic.png"), plt, px_per_unit = 3)
