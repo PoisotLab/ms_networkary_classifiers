@@ -53,18 +53,16 @@ end
 
 R(x) = R(x, extrema(x)...)
 
-DecisionTree = @load DecisionTreeRegressor pkg = DecisionTree
-RandomForest = @load RandomForestRegressor pkg = DecisionTree
-BoostedRegressor = @load EvoTreeRegressor pkg = EvoTrees
-RidgeRegressor = @load RidgeRegressor pkg = MLJLinearModels
-LinearRegressor = @load LinearRegressor pkg = MLJLinearModels
+DecisionTree = @load DecisionTreeRegressor pkg = DecisionTree verbosity=0
+RandomForest = @load RandomForestRegressor pkg = DecisionTree verbosity=0
+BoostedRegressor = @load EvoTreeRegressor pkg = EvoTrees verbosity=0
+KNNRegressor = @load KNNRegressor pkg = NearestNeighborModels verbosity=0
 
 candidate_models = [
     Symbol("Decision tree") => DecisionTree(),
     :BRT => BoostedRegressor(),
     Symbol("Random Forest") => RandomForest(),
-    Symbol("Ridge regression") => RidgeRegressor(),
-    Symbol("Linear regression") => LinearRegressor()
+    :kNN => KNNRegressor(),
 ]
 
 S = (50,40)
@@ -89,16 +87,16 @@ function betadiv(n1, n2)
     return KGL08(βos(n1, n2))
 end
 
-for i in 1:500
+for i in 1:100
 
     𝐗, 𝐲 = network(S, 0.15)
 
     net = BipartiteNetwork(reshape(Bool.(𝐲), S))
     realnet = copy(net)
-    push!(results, (i, :data, :Connectance, connectance(net)))
-    push!(results, (i, :data, :Nestedness, η(net)))
-    push!(results, (i, :data, :Modularity, Q(brim(lp(net)...)...)))
-    push!(results, (i, :data, :Asymmetry, asymmetry(net)))
+    push!(results, (i, :data, :Co, connectance(net)))
+    push!(results, (i, :data, :Nest, η(net)))
+    push!(results, (i, :data, :Mod, Q(brim(lp(net)...)...)))
+    push!(results, (i, :data, :Asymm, asymmetry(net)))
     bias = 0.5
 
     training_size = round(Int64, 0.7 * length(𝐲))
@@ -138,6 +136,9 @@ for i in 1:500
         push!(results, (i, candidate_model.first, :PRAUC, AUPRC))
         push!(results, (i, candidate_model.first, :MCC, mcc(𝐌)))
         push!(results, (i, candidate_model.first, :INF, informedness(𝐌)))
+        push!(results, (i, candidate_model.first, :F1, informedness(𝐌)))
+        push!(results, (i, candidate_model.first, :ACC, accuracy(𝐌)))
+        push!(results, (i, candidate_model.first, :BAC, balanced(𝐌)))
 
         push!(Ms, 𝐌)
         push!(m, this_machine => thresholds[last(findmax(informedness.(M)))])
@@ -146,14 +147,13 @@ for i in 1:500
         pr = MLJ.predict(this_machine)
         thr = thresholds[last(findmax(informedness.(M)))]
         net = BipartiteNetwork(reshape(pr .>= thr, S))
-        push!(results, (i, candidate_model.first, :Connectance, connectance(net)))
-        push!(results, (i, candidate_model.first, :Nestedness, η(net)))
-        push!(results, (i, candidate_model.first, :Modularity, Q(brim(lp(net)...)...)))
-        push!(results, (i, candidate_model.first, :Asymmetry, asymmetry(net)))
+        push!(results, (i, candidate_model.first, :Co, connectance(net)))
+        push!(results, (i, candidate_model.first, :Nest, η(net)))
+        push!(results, (i, candidate_model.first, :Mod, Q(brim(lp(net)...)...)))
+        push!(results, (i, candidate_model.first, :Asymm, asymmetry(net)))
         push!(results, (i, candidate_model.first, :Betadiv, betadiv(realnet, net)))
 
     end
-
 
     # Ensemble and thresholding
     ens_pred = mean(hcat([R(MLJ.predict(m[j].first)) for j in 1:length(m)]...); dims=2)
@@ -178,12 +178,15 @@ for i in 1:500
     push!(results, (i, :ensemble, :PRAUC, AUPRC))
     push!(results, (i, :ensemble, :MCC, mcc(𝐌)))
     push!(results, (i, :ensemble, :INF, informedness(𝐌)))
+    push!(results, (i, :ensemble, :F1, f1(𝐌)))
+    push!(results, (i, :ensemble, :ACC, accuracy(𝐌)))
+    push!(results, (i, :ensemble, :BAC, balanced(𝐌)))
 
     net = BipartiteNetwork(reshape(ens_pred .>= thr, S))
-    push!(results, (i, :ensemble, :Connectance, connectance(net)))
-    push!(results, (i, :ensemble, :Nestedness, η(net)))
-    push!(results, (i, :ensemble, :Modularity, Q(brim(lp(net)...)...)))
-    push!(results, (i, :ensemble, :Asymmetry, asymmetry(net)))
+    push!(results, (i, :ensemble, :Co, connectance(net)))
+    push!(results, (i, :ensemble, :Nest, η(net)))
+    push!(results, (i, :ensemble, :Mod, Q(brim(lp(net)...)...)))
+    push!(results, (i, :ensemble, :Asymm, asymmetry(net)))
     push!(results, (i, :ensemble, :Betadiv, betadiv(realnet, net)))
 
 end
@@ -192,5 +195,5 @@ allowmissing!(results, :value)
 replace!(results.value, NaN => missing)
 dropmissing!(results)
 bmm = groupby(results, [:model, :measure])
-opt = combine(bmm, :value => (x -> round(mean(x); digits=3)) => :mean)
+opt = combine(bmm, :value => (x -> round(mean(x); digits=2)) => :mean)
 unstack(opt, :model, :measure, :mean)

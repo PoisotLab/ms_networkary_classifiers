@@ -1112,6 +1112,18 @@ git-tree-sha1 = "b086b7ea07f8e38cf122f5016af580881ac914fe"
 uuid = "77ba4419-2d1f-58cd-9bb1-8ffee604a2e3"
 version = "0.3.7"
 
+[[deps.NearestNeighborModels]]
+deps = ["Distances", "FillArrays", "InteractiveUtils", "LinearAlgebra", "MLJModelInterface", "NearestNeighbors", "Statistics", "StatsBase", "Tables"]
+git-tree-sha1 = "a50e128e77808450d421a88ad719400f1e7e68b7"
+uuid = "636a865e-7cf4-491e-846c-de09b730eb36"
+version = "0.2.0"
+
+[[deps.NearestNeighbors]]
+deps = ["Distances", "StaticArrays"]
+git-tree-sha1 = "16baacfdc8758bc374882566c9187e785e85c2f0"
+uuid = "b8a86587-4115-5ab1-83bc-aa920d37bbce"
+version = "0.4.9"
+
 [[deps.Netpbm]]
 deps = ["FileIO", "ImageCore"]
 git-tree-sha1 = "18efc06f6ec36a8b801b23f076e3c6ac7c3bf153"

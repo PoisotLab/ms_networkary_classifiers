@@ -44,18 +44,16 @@ function network(S, ξ)
     return (𝐱, 𝐲)
 end
 
-DecisionTree = @load DecisionTreeRegressor pkg = DecisionTree
-RandomForest = @load RandomForestRegressor pkg = DecisionTree
-BoostedRegressor = @load EvoTreeRegressor pkg = EvoTrees
-RidgeRegressor = @load RidgeRegressor pkg = MLJLinearModels
-LinearRegressor = @load LinearRegressor pkg = MLJLinearModels
+DecisionTree = @load DecisionTreeRegressor pkg = DecisionTree verbosity=0
+RandomForest = @load RandomForestRegressor pkg = DecisionTree verbosity=0
+BoostedRegressor = @load EvoTreeRegressor pkg = EvoTrees verbosity=0
+KNNRegressor = @load KNNRegressor pkg = NearestNeighborModels verbosity=0
 
 candidate_models = [
     Symbol("Decision tree") => DecisionTree(),
     :BRT => BoostedRegressor(),
     Symbol("Random Forest") => RandomForest(),
-    Symbol("Ridge regression") => RidgeRegressor(),
-    Symbol("Linear regression") => LinearRegressor()
+    :kNN => KNNRegressor(),
 ]
 
 S = (50,50)
@@ -128,7 +126,6 @@ AUPRC = ∫(tpr.(M), ppv.(M))
 push!(Ms, 𝐌)
 ens_thres = thresholds[last(findmax(informedness.(M)))]
 
-mnames = ["DecTree", "BRT", "RF", "RR"]
 mnames = [String(p.first) for p in candidate_models]
 results = DataFrame(;
     infectivity=Float64[],
@@ -154,13 +151,7 @@ for i in 1:length(𝐲)
 end
 
 data(results) *
-    mapping(:infectivity => "Infectivity trait", :resistance => "Resistance trait", :prediction => "Prediction score"; layout=:model => sorter("BRT", "Random Forest", "Decision tree", "Ridge regression", "Linear regression", "Ensemble", "Dataset")) *
-    visual(Heatmap, colormap=:Greys) |>
+    mapping(:infectivity => "Infectivity trait", :resistance => "Resistance trait", :prediction => "Prediction score"; layout=:model => sorter("BRT", "Random Forest", "Decision tree", "kNN", "Ensemble", "Dataset")) *
+    visual(Heatmap, colormap=Reverse(:deep)) |>
     plt -> draw(plt, facet=(;linkyaxes = :minimal), axis = (xticks = LinearTicks(3),)) |>
     plt -> save(joinpath(@__DIR__, "..", "figures", "valid_ensemble.png"), plt, px_per_unit = 3)
-
-data(results) *
-mapping(:prediction => "Predicted score", :truth => "Observation"; layout=:model => sorter("BRT", "Random Forest", "Decision tree", "Ridge regression", "Linear regression", "Ensemble", "Dataset")) *
-    (visual(Scatter) + smooth() * visual(linewidth=2)) |>
-    plt -> draw(plt, facet=(;linkyaxes = :minimal), axis = (xticks = LinearTicks(3), xlims=(0, 1), ylims=(0,1))) |>
-    plt -> save(joinpath(@__DIR__, "..", "figures", "valid_logistic.png"), plt, px_per_unit = 3)
