@@ -57,12 +57,14 @@ DecisionTree = @load DecisionTreeRegressor pkg = DecisionTree
 RandomForest = @load RandomForestRegressor pkg = DecisionTree
 BoostedRegressor = @load EvoTreeRegressor pkg = EvoTrees
 RidgeRegressor = @load RidgeRegressor pkg = MLJLinearModels
+LinearRegressor = @load LinearRegressor pkg = GLM
 
 candidate_models = [
-    :DecTree => DecisionTree(),
+    Symbol("Decision tree") => DecisionTree(),
     :BRT => BoostedRegressor(),
-    :RF => RandomForest(),
-    :RR => RidgeRegressor(),
+    Symbol("Random Forest") => RandomForest(),
+    Symbol("Ridge regression") => RidgeRegressor(),
+    Symbol("Linear regression") => LinearRegressor()
 ]
 
 S = (50,80)
