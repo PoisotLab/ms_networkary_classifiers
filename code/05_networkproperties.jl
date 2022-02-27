@@ -85,11 +85,16 @@ function asymmetry(B::BipartiteNetwork)
     return sum(C)/links(B)
 end
 
+function betadiv(n1, n2)
+    return KGL08(βos(n1, n2))
+end
+
 for i in 1:500
 
     𝐗, 𝐲 = network(S, 0.15)
 
     net = BipartiteNetwork(reshape(Bool.(𝐲), S))
+    realnet = copy(net)
     push!(results, (i, :data, :Connectance, connectance(net)))
     push!(results, (i, :data, :Nestedness, η(net)))
     push!(results, (i, :data, :Modularity, Q(brim(lp(net)...)...)))
@@ -145,6 +150,7 @@ for i in 1:500
         push!(results, (i, candidate_model.first, :Nestedness, η(net)))
         push!(results, (i, candidate_model.first, :Modularity, Q(brim(lp(net)...)...)))
         push!(results, (i, candidate_model.first, :Asymmetry, asymmetry(net)))
+        push!(results, (i, candidate_model.first, :Betadiv, betadiv(realnet, net)))
 
     end
 
@@ -178,6 +184,7 @@ for i in 1:500
     push!(results, (i, :ensemble, :Nestedness, η(net)))
     push!(results, (i, :ensemble, :Modularity, Q(brim(lp(net)...)...)))
     push!(results, (i, :ensemble, :Asymmetry, asymmetry(net)))
+    push!(results, (i, :ensemble, :Betadiv, betadiv(realnet, net)))
 
 end
 
