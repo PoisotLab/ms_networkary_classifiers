@@ -129,6 +129,7 @@ push!(Ms, 𝐌)
 ens_thres = thresholds[last(findmax(informedness.(M)))]
 
 mnames = ["DecTree", "BRT", "RF", "RR"]
+mnames = [String(p.first) for p in candidate_models]
 results = DataFrame(;
     infectivity=Float64[],
     resistance=Float64[],
@@ -152,7 +153,7 @@ for i in 1:length(𝐲)
 end
 
 data(results) *
-    mapping(:infectivity => "Infectivity trait", :resistance => "Resistance trait", :prediction => "Interaction probability"; layout=:model => sorter("BRT", "RF", "DecTree", "RR", "Ensemble", "Dataset")) *
+    mapping(:infectivity => "Infectivity trait", :resistance => "Resistance trait", :prediction => "Interaction probability"; layout=:model => sorter("BRT", "Random Forest", "Decision tree", "Ridge regression", "Linear regression", "Ensemble", "Dataset")) *
     visual(Heatmap, colormap=Reverse(:deep)) |>
     plt -> draw(plt, facet=(;linkyaxes = :minimal), axis = (xticks = LinearTicks(3),)) |>
     plt -> save(joinpath(@__DIR__, "..", "figures", "valid_ensemble.png"), plt, px_per_unit = 3)
