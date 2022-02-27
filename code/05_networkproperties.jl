@@ -67,7 +67,7 @@ candidate_models = [
     Symbol("Linear regression") => LinearRegressor()
 ]
 
-S = (50,60)
+S = (50,40)
 
 results = DataFrame(
     run = Int64[],
@@ -76,26 +76,27 @@ results = DataFrame(
     value = Float64[]
 )
 
-_m1 = BipartiteNetwork([true true; true true])
-_m2 = BipartiteNetwork([true false; true true])
-_m3 = BipartiteNetwork([true false; false true])
+function asymmetry(B::BipartiteNetwork)
+    s1 = species(B; dims=1)
+    s2 = species(B; dims=2)
+    k1 = [degree(B)[s] for s in s1]
+    k2 = [degree(B)[s] for s in s2]'
+    C = abs.(k1 .- k2) ./ (k1 .+ k2) .* adjacency(B)
+    return sum(C)/links(B)
+end
 
 for i in 1:500
 
-    𝐗, 𝐲 = network(S, 0.20)
+    𝐗, 𝐲 = network(S, 0.15)
 
     net = BipartiteNetwork(reshape(Bool.(𝐲), S))
     push!(results, (i, :data, :Connectance, connectance(net)))
     push!(results, (i, :data, :Nestedness, η(net)))
     push!(results, (i, :data, :Modularity, Q(brim(lp(net)...)...)))
-    #push!(results, (i, :data, :MotifOne, length(find_motif(net, _m1))))
-    #push!(results, (i, :data, :MotifTwo, length(find_motif(net, _m2))))
-    #push!(results, (i, :data, :MotifThree, length(find_motif(net, _m3))))
-    
+    push!(results, (i, :data, :Asymmetry, asymmetry(net)))
+    bias = 0.5
 
-    bias = 0.7
-
-    training_size = round(Int64, 0.3 * length(𝐲))
+    training_size = round(Int64, 0.7 * length(𝐲))
     n_positive = round(Int64, training_size * bias)
     idx_pos = sample(findall(iszero.(𝐲)), n_positive; replace=true)
     idx_neg = sample(findall(isone.(𝐲)), training_size - n_positive; replace=true)
@@ -143,9 +144,7 @@ for i in 1:500
         push!(results, (i, candidate_model.first, :Connectance, connectance(net)))
         push!(results, (i, candidate_model.first, :Nestedness, η(net)))
         push!(results, (i, candidate_model.first, :Modularity, Q(brim(lp(net)...)...)))
-        #push!(results, (i, candidate_model.first, :MotifOne, length(find_motif(net, _m1))))
-        #push!(results, (i, candidate_model.first, :MotifTwo, length(find_motif(net, _m2))))
-        #push!(results, (i, candidate_model.first, :MotifThree, length(find_motif(net, _m3))))
+        push!(results, (i, candidate_model.first, :Asymmetry, asymmetry(net)))
 
     end
 
@@ -178,9 +177,7 @@ for i in 1:500
     push!(results, (i, :ensemble, :Connectance, connectance(net)))
     push!(results, (i, :ensemble, :Nestedness, η(net)))
     push!(results, (i, :ensemble, :Modularity, Q(brim(lp(net)...)...)))
-    #push!(results, (i, :ensemble, :MotifOne, length(find_motif(net, _m1))))
-    #push!(results, (i, :ensemble, :MotifTwo, length(find_motif(net, _m2))))
-    #push!(results, (i, :ensemble, :MotifThree, length(find_motif(net, _m3))))
+    push!(results, (i, :ensemble, :Asymmetry, asymmetry(net)))
 
 end
 
@@ -188,5 +185,5 @@ allowmissing!(results, :value)
 replace!(results.value, NaN => missing)
 dropmissing!(results)
 bmm = groupby(results, [:model, :measure])
-opt = combine(bmm, :value => (x -> round(mean(x); digits=2)) => :mean)
+opt = combine(bmm, :value => (x -> round(mean(x); digits=3)) => :mean)
 unstack(opt, :model, :measure, :mean)
