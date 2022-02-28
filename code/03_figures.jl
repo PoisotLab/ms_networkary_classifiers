@@ -19,7 +19,7 @@ todrop = unique(vcat([
     @subset(results, :measure .== "TPR", :value .== 0.0).runid,
     @subset(results, :measure .== "TNR", :value .== 0.0).runid,
     @subset(results, :measure .== "PRAUC", :value .<= 0.0).runid,
-    @subset(results, :connectance .>= 0.25).runid,
+    @subset(results, :connectance .>= 0.50).runid,
     @subset(results, :connectance .<= 0.05).runid
 ]...))
 
@@ -30,7 +30,7 @@ tokeep(f) = !(f in todrop)
 connectance_values = unique(select(results, [:runid, :connectance]))
 connectance_values.midpoint = zeros(Float64, size(connectance_values,1))
 n_connectance_bins = 5
-bins_connectance = LinRange(0.05, 0.25, n_connectance_bins+1)
+bins_connectance = LinRange(0.05, 0.50, n_connectance_bins+1)
 for i in 1:n_connectance_bins
     _idx = findall(bins_connectance[i] .<= connectance_values.connectance .< bins_connectance[i+1])
     connectance_values.midpoint[_idx] .= round((bins_connectance[i+1] + bins_connectance[i])/2.0; digits=4)
@@ -39,10 +39,27 @@ end
 # Join the two dataframes
 results = leftjoin(results, select(connectance_values, [:runid, :midpoint]), on=:runid)
 
+# With connectance first
+_keepval(f) = f in ["INF", "ROCAUC", "MCC", "PRAUC"]
+
+dt = data(@subset(results, _keepval.(:measure)))
+mp = mapping(
+    :bias => "Training set bias",
+    :value => "Value";
+    row=:measure => "Measure",
+    col=:midpoint => nonnumeric => "Connectance",
+    color=:model => "Model",
+)
+ly = smooth() * visual(; linewidth=1.0)
+
+dt * mp * ly |>
+    plt -> draw(plt, facet=(;linkyaxes = :minimal)) |>
+    plt -> save(joinpath(@__DIR__, "..", "figures", "bias_combined.png"), plt, px_per_unit = 3)
+
 # Dataviz
 _keepval(f) = f in ["MCC", "INF"]
 data(@subset(results, _keepval.(:measure))) *
-    mapping(:bias => "Training set bias", :value => "Value", row=:midpoint => nonnumeric, col=:measure => "Measure", color=:model => "Model") *
+    mapping(:bias => "Training set bias", :value => "Value", row=:midpoint => nonnumeric, col=:model => "Model", color=:measure => "Measure") *
     (smooth() * visual(linewidth=2.0)) |>
     plt -> draw(plt, facet=(;linkyaxes = :minimal)) |>
     plt -> save(joinpath(@__DIR__, "..", "figures", "bias_mcc_inf.png"), plt, px_per_unit = 3)
