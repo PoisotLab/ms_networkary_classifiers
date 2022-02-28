@@ -46,3 +46,19 @@ function ∫(x::Array{T}, y::Array{T}) where {T<:Number}
     return .-S
 end
 
+function threshold(obs, pred; levels=500)
+    thresholds = LinRange(minimum(pred), maximum(pred), levels)
+    M = Vector{ConfusionMatrix}(undef, length(thresholds))
+    for (i, τ) in enumerate(thresholds)
+        binpred = pred .>= τ
+        tp = sum(obs .& binpred)
+        tn = sum(.!obs .& .!binpred)
+        fp = sum(.!obs .& binpred)
+        fn = sum(obs .& .!binpred)
+        M[i] = ConfusionMatrix(tp, tn, fp, fn)
+    end
+    ROCAUC = ∫(fpr.(M), tpr.(M))
+    AUPRC = ∫(tpr.(M), ppv.(M))
+    𝐌 = M[last(findmax(informedness.(M)))]
+    return 𝐌, ROCAUC, AUPRC
+end
