@@ -31,6 +31,7 @@ include(joinpath(@__DIR__, "confusionmatrix.jl"))
 function L(x::T, y::T; r::T=0.1) where {T<:Number}
     return (x - r / 2.0) ≤ y ≤ (x + r / 2.0) ? one(T) : zero(T)
 end
+
 function network(S, ξ)
     infectivity = Beta(6.0, 8.0)
     resistance = Beta(2.0, 8.0)
@@ -38,11 +39,17 @@ function network(S, ξ)
     𝐱ₕ = sort(rand(resistance, S[2]))
     𝐱₁ = repeat(𝐱ᵥ; outer=length(𝐱ₕ))
     𝐱₂ = repeat(𝐱ₕ; inner=length(𝐱ᵥ))
-    𝐱₃ = abs.(𝐱₁ .- 𝐱₂)
     𝐲 = [L(𝐱₁[i], 𝐱₂[i]; r=ξ) for i in 1:length(𝐱₁)]
-    #𝐱 = table(hcat(𝐱₁, 𝐱₂, 𝐱₃))
     𝐱 = table(hcat(𝐱₁, 𝐱₂))
     return (𝐱, 𝐲)
+end
+
+function swaps!(𝐲, s)
+    p = findall(isone, 𝐲)
+    n = findall(iszero, 𝐲)
+    𝐲[rand(p, s)] .= 0.0
+    𝐲[rand(n, s)] .= 1.0
+    return 𝐲
 end
 
 function R(x, m, M)
@@ -87,9 +94,10 @@ function betadiv(n1, n2)
     return KGL08(βos(n1, n2))
 end
 
-for i in 1:100
+for i in 1:300
 
     𝐗, 𝐲 = network(S, 0.15)
+    # swaps!(𝐲, 15)
 
     net = BipartiteNetwork(reshape(Bool.(𝐲), S))
     realnet = copy(net)
