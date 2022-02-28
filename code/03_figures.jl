@@ -11,47 +11,39 @@ allowmissing!(results, :value)
 replace!(results.value, NaN => missing)
 dropmissing!(results)
 
-# Drop the models with obviously borked classifiers
-results.runid = hash.(results.connectance .* results.breadth .* results.bias)
+bmm = groupby(results, [:model, :measure, :links, :bias])
+raw = combine(bmm, :value => mean => :value)
 
-todrop = unique(vcat([
-    @subset(results, :measure .== "ACC", :value .== 0.0).runid,
-    @subset(results, :measure .== "TPR", :value .== 0.0).runid,
-    @subset(results, :measure .== "TNR", :value .== 0.0).runid,
-    @subset(results, :measure .== "PRAUC", :value .<= 0.0).runid,
-    @subset(results, :connectance .>= 0.50).runid,
-    @subset(results, :connectance .<= 0.05).runid
-]...))
+raw.connectance = raw.links ./ (100*100)
 
-tokeep(f) = !(f in todrop)
-@subset!(results, tokeep.(:runid))
+# Give each run a UUID
+# results.runid = hash.(results.link .* results.bias .* results.bias)
 
 # Make bins for connectance to make the plotting more efficient
-connectance_values = unique(select(results, [:runid, :connectance]))
-connectance_values.midpoint = zeros(Float64, size(connectance_values,1))
-n_connectance_bins = 5
-bins_connectance = LinRange(0.05, 0.50, n_connectance_bins+1)
-for i in 1:n_connectance_bins
-    _idx = findall(bins_connectance[i] .<= connectance_values.connectance .< bins_connectance[i+1])
-    connectance_values.midpoint[_idx] .= round((bins_connectance[i+1] + bins_connectance[i])/2.0; digits=4)
-end
+# connectance_values = unique(select(results, [:runid, :connectance]))
+# connectance_values.midpoint = zeros(Float64, size(connectance_values,1))
+# n_connectance_bins = 5
+# bins_connectance = LinRange(0.01, 0.50, n_connectance_bins+1)
+# for i in 1:n_connectance_bins
+#     _idx = findall(bins_connectance[i] .<= connectance_values.connectance .< bins_connectance[i+1])
+#     connectance_values.midpoint[_idx] .= round((bins_connectance[i+1] + bins_connectance[i])/2.0; digits=4)
+# end
 
-# Join the two dataframes
-results = leftjoin(results, select(connectance_values, [:runid, :midpoint]), on=:runid)
+# # Join the two dataframes
+# results = leftjoin(results, select(connectance_values, [:runid, :midpoint]), on=:runid)
 
 # With connectance first
-_keepval(f) = f in ["INF", "ROCAUC", "MCC", "PRAUC"]
+_keepval(f) = f in ["ROC", "Y", "PR", "mcc"]
 
-dt = data(@subset(results, _keepval.(:measure)))
+dt = data(@subset(raw, _keepval.(:measure)))
 mp = mapping(
     :bias => "Training set bias",
     :value => "Value";
+    color=:connectance => "Network connectance",
     row=:measure => "Measure",
-    col=:midpoint => nonnumeric => "Connectance",
-    color=:model => "Model",
+    col=:model => "Model",
 )
-ly = smooth() * visual(; linewidth=1.0)
-
+ly = visual(Scatter, colormap = :cividis, markersize = 4)
 dt * mp * ly |>
     plt -> draw(plt, facet=(;linkyaxes = :minimal)) |>
     plt -> save(joinpath(@__DIR__, "..", "figures", "bias_combined.png"), plt, px_per_unit = 3)
