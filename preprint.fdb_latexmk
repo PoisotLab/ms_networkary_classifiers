@@ -1,5 +1,5 @@
 # Fdb version 3
-["pdflatex"] 1646003682 "preprint.tex" "preprint.pdf" "preprint" 1646003686
+["pdflatex"] 1646014141 "preprint.tex" "preprint.pdf" "preprint" 1646014144
   "/opt/texlive/texdir/texmf-dist/fonts/enc/dvips/base/8r.enc" 1165713224 4850 80dc9bab7f31fb78a000ccfed0e27cab ""
   "/opt/texlive/texdir/texmf-dist/fonts/enc/dvips/inconsolata/i4-t1-0.enc" 1558214095 7631 5169ff1acd97ff1c4ab83563c99f96f4 ""
   "/opt/texlive/texdir/texmf-dist/fonts/enc/dvips/stix2-type1/stix2-mathcal.enc" 1610747736 3356 2818ff063f8b5d0d850e1203330b9fda ""
@@ -226,15 +226,15 @@
   "/opt/texlive/texdir/texmf.cnf" 1643679533 555 bd60ff59e4d560b42d96b004436f91d3 ""
   "figures/bias_mcc_inf.png" 0 -1 0 ""
   "figures/bias_roc_pr.png" 0 -1 0 ""
-  "figures/changing-bias.png" 1646003678 291592 0ca4d111b06b1c6e8c61089bff33f896 ""
-  "figures/changing-connectance.png" 1646003678 222287 27af9ccb057fa8be040f23b11430aef4 ""
+  "figures/changing-bias.png" 1646014136 291592 0ca4d111b06b1c6e8c61089bff33f896 ""
+  "figures/changing-connectance.png" 1646014136 222287 27af9ccb057fa8be040f23b11430aef4 ""
   "figures/optim_bias.png" 0 -1 0 ""
   "figures/optim_perf.png" 0 -1 0 ""
-  "figures/valid_ensemble.png" 1646003678 130533 fd37e5b553c5ef94ead6e44fb9ab565a ""
-  "logo.png" 1646003677 48455 a63f319933b5fbf1cb3d97b6f6857e7e ""
-  "preprint.aux" 1646003685 13655 f9f300dc6308c6de5a99a877139c27cc "pdflatex"
-  "preprint.out" 1646003685 2877 1d379e9f9804e3c226db2ac5ae352d79 "pdflatex"
-  "preprint.tex" 1646003678 65074 5816a7e3d898e9cc4c2cc3b9bdac1a45 ""
+  "figures/valid_ensemble.png" 1646014136 130533 fd37e5b553c5ef94ead6e44fb9ab565a ""
+  "logo.png" 1646014136 48455 a63f319933b5fbf1cb3d97b6f6857e7e ""
+  "preprint.aux" 1646014144 13655 f9f300dc6308c6de5a99a877139c27cc "pdflatex"
+  "preprint.out" 1646014144 2877 1d379e9f9804e3c226db2ac5ae352d79 "pdflatex"
+  "preprint.tex" 1646014136 65074 5816a7e3d898e9cc4c2cc3b9bdac1a45 ""
   (generated)
   "preprint.aux"
   "preprint.log"
