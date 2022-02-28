@@ -10,35 +10,17 @@ using CSV: CSV
 using Distributions
 
 # Simulation suffix
-_suffix = get(ENV, "SLURM_ARRAY_TASK_ID", "global")
-
-# AUC
-function ∫(x::Array{T}, y::Array{T}) where {T<:Number}
-    S = zero(Float64)
-    for i in 2:length(x)
-        S += (x[i] - x[i - 1]) * (y[i] + y[i - 1]) * 0.5
-    end
-    return .-S
-end
+_jobid = get(ENV, "SLURM_ARRAY_TASK_ID", 1)
+_jobcount = get(ENV, "SLURM_ARRAY_TASK_COUNT", 1)
 
 # Confusion matrix utilities
 include(joinpath(@__DIR__, "confusionmatrix.jl"))
 
-# Network generation function
-L(x::T, y::T; r::T=0.1) where {T<:Number} = (x-r/2.0) ≤ y ≤ (x+r/2.0)  ? one(T) : zero(T)
-function network(S, ξ)
-    infectivity = Beta(6.0, 8.0)
-    resistance = Beta(2.0, 8.0)
-    𝐱ᵥ = sort(rand(infectivity, S))
-    𝐱ₕ = sort(rand(resistance, S))
-    𝐱₁ = repeat(𝐱ᵥ; outer=length(𝐱ₕ))
-    𝐱₂ = repeat(𝐱ₕ; inner=length(𝐱ᵥ))
-    𝐱₃ = abs.(𝐱₁ .- 𝐱₂)
-    𝐲 = [L(𝐱₁[i], 𝐱₂[i]; r=ξ) for i in 1:(S*S)]
-    #𝐱 = table(hcat(𝐱₁, 𝐱₂, 𝐱₃))
-    𝐱 = table(hcat(𝐱₁, 𝐱₂))
-    return (𝐱, 𝐲)
-end
+# Network simulation utilities
+include(joinpath(@__DIR__, "networksimulation.jl"))
+
+# Choice of models
+include(joinpath(@__DIR__, "modelchoice.jl"))
 
 # Prepare the results
 results = [DataFrame(;
@@ -50,26 +32,20 @@ results = [DataFrame(;
     value=Float64[],
 ) for _thr in 1:Threads.nthreads()]
 
-# these regression machines go brrr as f u c k
-DecisionTree = @load DecisionTreeRegressor pkg = DecisionTree verbosity=0
-RandomForest = @load RandomForestRegressor pkg = DecisionTree verbosity=0
-BoostedRegressor = @load EvoTreeRegressor pkg = EvoTrees verbosity=0
-KNNRegressor = @load KNNRegressor pkg = NearestNeighborModels verbosity=0
+# Block for the gridded simulations
+S = (100, 100)
 
-candidate_models = [
-    Symbol("Decision tree") => DecisionTree(),
-    :BRT => BoostedRegressor(),
-    Symbol("Random Forest") => RandomForest(),
-    :kNN => KNNRegressor(),
-]
+grid_size = 80
+links = LinRange(minimum(S)+10, round(Int64, 0.5*prod(S)), grid_size)
+biases = LinRange(0.02, 0.98, grid_size)
 
-S = 100
-_n_sims = 600
-conditions_breadth = rand(_n_sims) .* 0.4 .+ 0.05
-conditions_bias = rand(_n_sims) .* 0.98 .+ 0.01
 conditions = hcat(conditions_breadth, conditions_bias)
 
-Threads.@threads for i in 1:size(conditions, 1)
+Threads.@threads for connectance in connectances
+    # Get the network for this connectance run
+    for bias in biases
+    end
+end
     breadth, bias = conditions[i, :]
     @info i, Threads.threadid(), breadth, bias
 

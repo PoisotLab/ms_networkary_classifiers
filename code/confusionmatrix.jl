@@ -37,3 +37,12 @@ function κ(M::ConfusionMatrix)
            ((M.tp + M.fp) * (M.fp + M.tn) + (M.tp + M.fn) * (M.fn + M.tn))
 end
 mcc(M::ConfusionMatrix) = (M.tp*M.tn-M.fp*M.fn)/sqrt((M.tp+M.fp)*(M.tp+M.fn)*(M.tn+M.fp)*(M.tn+M.fn))
+
+function ∫(x::Array{T}, y::Array{T}) where {T<:Number}
+    S = zero(Float64)
+    for i in 2:length(x)
+        S += (x[i] - x[i - 1]) * (y[i] + y[i - 1]) * 0.5
+    end
+    return .-S
+end
+
