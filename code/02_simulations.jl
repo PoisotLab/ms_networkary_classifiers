@@ -36,7 +36,7 @@ results = [
 S = (100, 100)
 
 # Number of simulation blocks
-grid_size = 6
+grid_size = 25
 
 # List of conditions
 conditions = [(i, j) for i in 1:grid_size for j in 1:grid_size]
