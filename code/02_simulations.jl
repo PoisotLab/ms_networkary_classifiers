@@ -98,16 +98,17 @@ Threads.@threads for i in 1:length(conditions)
         fit!(this_machine; rows=Iₚ)
 
         # Predict on the validation set
-        prediction = MLJ.predict(this_machine; rows=Iₒ)
+        prediction = R(MLJ.predict(this_machine; rows=Iₒ))
 
         # Thresholding analysis
-        𝐌, ROC, PR = threshold(𝐲[Iₒ] .> 0.0, prediction)
+        𝐌, ROC, PR, τ = threshold(𝐲[Iₒ] .> 0.0, prediction)
 
         # Write the outputs
         if !isnan(ROC)
             predictions[model.first] = R(prediction)
             push!(results[Threads.threadid()], (link, bias, model.first, :ROC, ROC))
             push!(results[Threads.threadid()], (link, bias, model.first, :PR, PR))
+            push!(results[Threads.threadid()], (link, bias, model.first, :threshold, τ))
             for (mname, mfunc) in measures
                 push!(
                     results[Threads.threadid()], (link, bias, model.first, mname, mfunc(𝐌))
@@ -119,9 +120,10 @@ Threads.@threads for i in 1:length(conditions)
     # Ensemble model
     if !isempty(predictions)
         predictions[:Ensemble] = R(mean(hcat(collect(values(predictions))...); dims=2))
-        𝐌, ROC, PR = threshold(𝐲[Iₒ] .> 0.0, predictions[:Ensemble])
+        𝐌, ROC, PR, τ = threshold(𝐲[Iₒ] .> 0.0, predictions[:Ensemble])
         push!(results[Threads.threadid()], (link, bias, :Ensemble, :ROC, ROC))
         push!(results[Threads.threadid()], (link, bias, :Ensemble, :PR, PR))
+        push!(results[Threads.threadid()], (link, bias, :Ensemble, :threshold, τ))
         for (mname, mfunc) in measures
             push!(results[Threads.threadid()], (link, bias, :Ensemble, mname, mfunc(𝐌)))
         end

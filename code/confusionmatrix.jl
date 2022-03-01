@@ -60,5 +60,6 @@ function threshold(obs, pred; levels=500)
     ROCAUC = ∫(fpr.(M), tpr.(M))
     AUPRC = ∫(tpr.(M), ppv.(M))
     𝐌 = M[last(findmax(informedness.(M)))]
-    return 𝐌, ROCAUC, AUPRC
+    τ = thresholds[last(findmax(informedness.(M)))]
+    return 𝐌, ROCAUC, AUPRC, τ 
 end
