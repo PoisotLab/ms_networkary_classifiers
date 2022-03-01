@@ -514,7 +514,7 @@ other measures, larger connectances in the true network allowed lower biases in
 the training set. In a large number of cases, "over-correcting" by having
 training sets with more than half instances representing interactions would
 maximize the values of the model performance
-measures.](figures/optim_bias.png){#fig:optimbias}
+measures.](figures/optimal_bias.png){#fig:optimbias}
 
 The more "optimistic" measures (ROC-AUC and informedness) required a biasing of
 the dataset from about 0.4 to 0.75 to be maximized, with the amount of bias
@@ -533,7 +533,7 @@ interactions *do not* exist starts gaining importance.
 maximize their performance; this is not true for decision tree, which had a very
 low PR-AUC, and to some extent for ridge regression who had a slow increase with
 network connectance. The ensemble had a consistently high performance despite
-incorporating poor models.](figures/optim_value.png){#fig:optimvalue}
+incorporating poor models.](figures/optimal_value.png){#fig:optimvalue}
 
 When trained at their optimal training set balance, connectance still had
 a significant impact on the performance of some machines [@fig:optimvalue].
