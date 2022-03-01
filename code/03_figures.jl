@@ -21,11 +21,11 @@ raw.connectance = raw.links ./ (100*100)
 _keepval(f) = f in ["ROC", "Y", "PR", "mcc"]
 dt = data(@subset(raw, _keepval.(:measure)))
 mp = mapping(
-    :bias => "Training set bias",
+    :bias => "Training balance",
     :value => "Value";
     color = :connectance => "Network connectance",
     row = :measure => "Measure",
-    col = :model => "Model",
+    col = :model => sorter("Decision tree", "kNN", "Random Forest", "BRT", "Ensemble") => "Model"
 )
 ly = visual(Scatter, colormap = :bamako, markersize = 4)
 dt * mp * ly |>
