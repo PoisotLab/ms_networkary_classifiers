@@ -27,7 +27,7 @@ mp = mapping(
     row=:measure => "Measure",
     col=:model => "Model"
 )
-ly = visual(Scatter, colormap = :deep, markersize = 4)
+ly = visual(Scatter, colormap = :bamako, markersize = 4)
 dt * mp * ly |>
     plt -> draw(plt, facet=(;linkyaxes = :minimal)) |>
     plt -> save(joinpath(@__DIR__, "..", "figures", "bias_by_connectance.png"), plt, px_per_unit = 3)

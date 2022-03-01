@@ -109,7 +109,9 @@ Threads.@threads for i in 1:length(conditions)
             push!(results[Threads.threadid()], (link, bias, model.first, :ROC, ROC))
             push!(results[Threads.threadid()], (link, bias, model.first, :PR, PR))
             for (mname, mfunc) in measures
-                push!(results[Threads.threadid()], (link, bias, model.first, mname, mfunc(𝐌)))
+                push!(
+                    results[Threads.threadid()], (link, bias, model.first, mname, mfunc(𝐌))
+                )
             end
         end
     end
