@@ -23,9 +23,9 @@ dt = data(@subset(raw, _keepval.(:measure)))
 mp = mapping(
     :bias => "Training set bias",
     :value => "Value";
-    color=:connectance => "Network connectance",
-    row=:measure => "Measure",
-    col=:model => "Model"
+    color = :connectance => "Network connectance",
+    row = :measure => "Measure",
+    col = :model => "Model",
 )
 ly = visual(Scatter, colormap = :bamako, markersize = 4)
 dt * mp * ly |>
@@ -41,27 +41,27 @@ end
 opt = combine(bmm, [:value, :bias] => ((v,b) -> optival(v,b)) => AsTable)
 
 _keepval(f) = f in ["ROC", "Y", "PR", "mcc"]
+
 dt = data(@subset(opt, _keepval.(:measure)))
 mp = mapping(
     :connectance => "Connectance",
-    :bias => "Optimal bias";
-    row=:measure => "Measure",
-    col=:model => "Model"
+    :bias => "Optimal training balance";
+    layout = :measure => "Measure",
+    color = :model => sorter("Decision tree", "kNN", "Random Forest", "BRT", "Ensemble") => "Model"
 )
-ly = visual(Scatter, colormap = :deep, markersize = 4)
+ly = visual(ScatterLines, colormap = :deep, markersize = 4)
 dt * mp * ly |>
     plt -> draw(plt, facet=(;linkyaxes = :minimal)) |>
     plt -> save(joinpath(@__DIR__, "..", "figures", "optimal_bias.png"), plt, px_per_unit = 3)
 
-_keepval(f) = f in ["ROC", "Y", "PR", "mcc"]
 dt = data(@subset(opt, _keepval.(:measure)))
 mp = mapping(
     :connectance => "Connectance",
-    :value => "Optimal value";
-    row=:measure => "Measure",
-    col=:model => "Model"
+    :value => "Value at optimal training balance";
+    layout = :measure => "Measure",
+    color = :model => sorter("Decision tree", "kNN", "Random Forest", "BRT", "Ensemble") => "Model"
 )
-ly = visual(Scatter, colormap = :deep, markersize = 4)
+ly = visual(ScatterLines, colormap = :deep, markersize = 4)
 dt * mp * ly |>
     plt -> draw(plt, facet=(;linkyaxes = :minimal)) |>
     plt -> save(joinpath(@__DIR__, "..", "figures", "optimal_value.png"), plt, px_per_unit = 3)
