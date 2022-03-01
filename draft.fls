@@ -986,6 +986,11 @@ INPUT ./figures/changing-connectance.png
 INPUT figures/changing-connectance.png
 INPUT ./figures/changing-connectance.png
 INPUT ./figures/changing-connectance.png
+INPUT ./figures/bias_by_connectance.png
+INPUT ./figures/bias_by_connectance.png
+INPUT figures/bias_by_connectance.png
+INPUT ./figures/bias_by_connectance.png
+INPUT ./figures/bias_by_connectance.png
 INPUT ./figures/valid_ensemble.png
 INPUT ./figures/valid_ensemble.png
 INPUT figures/valid_ensemble.png

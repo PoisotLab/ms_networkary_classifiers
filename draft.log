@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.23 (TeX Live 2021) (preloaded format=pdflatex 2022.3.1)  1 MAR 2022 15:05
+This is pdfTeX, Version 3.141592653-2.6-1.40.23 (TeX Live 2021) (preloaded format=pdflatex 2022.3.1)  1 MAR 2022 15:23
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -851,59 +851,40 @@ LaTeX Font Info:    Font shape `T1/phv/m/n' will be
 [7] [8]
 \openout4 = `draft.fff'.
 
- (draft.fff) [9] [10] [11] [12] [13] [14] [15] [16] [17] [18] [19]
-[20] 
+ (draft.fff) [9] [10] [11] [12] [13] [14] [15]
+
+LaTeX Warning: Reference `fig:biasmccinf' on page 16 undefined on input line 99
+8.
+
+
+LaTeX Warning: Reference `fig:biasrocpr' on page 16 undefined on input line 100
+5.
+
+[16] [17] [18] [19] [20] 
 AED: lastpage setting LastPage
 [21] AED endfloat: Processing end Figures and Tables (./draft.fff
-<figures/changing-bias.png, id=261, 2409.0pt x 1806.75pt>
+<figures/changing-bias.png, id=254, 2409.0pt x 1806.75pt>
 File: figures/changing-bias.png Graphic file (type png)
 <use figures/changing-bias.png>
 Package pdftex.def Info: figures/changing-bias.png  used on input line 17.
 (pdftex.def)             Requested size: 489.10307pt x 366.82979pt.
  [22 <./figures/changing-bias.png>]
-<figures/changing-connectance.png, id=267, 2409.0pt x 1806.75pt>
+<figures/changing-connectance.png, id=261, 2409.0pt x 1806.75pt>
 File: figures/changing-connectance.png Graphic file (type png)
 <use figures/changing-connectance.png>
 Package pdftex.def Info: figures/changing-connectance.png  used on input line 3
 1.
 (pdftex.def)             Requested size: 489.10307pt x 366.82979pt.
  [23 <./figures/changing-connectance.png>]
+<figures/bias_by_connectance.png, id=269, 2409.0pt x 1806.75pt>
+File: figures/bias_by_connectance.png Graphic file (type png)
+<use figures/bias_by_connectance.png>
+Package pdftex.def Info: figures/bias_by_connectance.png  used on input line 48
+.
+(pdftex.def)             Requested size: 489.10307pt x 366.82979pt.
+ [24 <./figures/bias_by_connectance.png>]
 
-LaTeX Warning: File `figures/bias_mcc_inf.png' not found on input line 44.
-
-
-! Package pdftex.def Error: File `figures/bias_mcc_inf.png' not found: using dr
-aft setting.
-
-See the pdftex.def package documentation for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.44 }
-      
-Try typing  <return>  to proceed.
-If that doesn't work, type  X <return>  to quit.
-
-[24]
-
-LaTeX Warning: File `figures/bias_roc_pr.png' not found on input line 58.
-
-
-! Package pdftex.def Error: File `figures/bias_roc_pr.png' not found: using dra
-ft setting.
-
-See the pdftex.def package documentation for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.58 }
-      
-Try typing  <return>  to proceed.
-If that doesn't work, type  X <return>  to quit.
-
-[25]
-
-LaTeX Warning: File `figures/optim_bias.png' not found on input line 74.
+LaTeX Warning: File `figures/optim_bias.png' not found on input line 64.
 
 
 ! Package pdftex.def Error: File `figures/optim_bias.png' not found: using draf
@@ -913,43 +894,46 @@ See the pdftex.def package documentation for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.74 }
+l.64 }
       
 Try typing  <return>  to proceed.
 If that doesn't work, type  X <return>  to quit.
 
-[26]
+[25]
 
-LaTeX Warning: File `figures/optim_perf.png' not found on input line 88.
+LaTeX Warning: File `figures/optim_value.png' not found on input line 78.
 
 
-! Package pdftex.def Error: File `figures/optim_perf.png' not found: using draf
-t setting.
+! Package pdftex.def Error: File `figures/optim_value.png' not found: using dra
+ft setting.
 
 See the pdftex.def package documentation for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.88 }
+l.78 }
       
 Try typing  <return>  to proceed.
 If that doesn't work, type  X <return>  to quit.
 
-[27]
-<figures/valid_ensemble.png, id=298, 2409.0pt x 1806.75pt>
+[26]
+<figures/valid_ensemble.png, id=286, 2409.0pt x 1806.75pt>
 File: figures/valid_ensemble.png Graphic file (type png)
 <use figures/valid_ensemble.png>
-Package pdftex.def Info: figures/valid_ensemble.png  used on input line 103.
+Package pdftex.def Info: figures/valid_ensemble.png  used on input line 93.
 (pdftex.def)             Requested size: 489.10307pt x 366.82979pt.
-) [28 <./figures/valid_ensemble.png>] (./draft.aux)
+) [27 <./figures/valid_ensemble.png>] (./draft.aux)
+
+LaTeX Warning: There were undefined references.
+
 Package rerunfilecheck Info: File `draft.out' has not changed.
-(rerunfilecheck)             Checksum: CFEA7F8A62D5314D3D9C9CF18F9B1A4E;2872.
+(rerunfilecheck)             Checksum: A70CF849742B475371BA4AE16B4F6307;2887.
  ) 
 Here is how much of TeX's memory you used:
- 19040 strings out of 478276
- 311687 string characters out of 5848501
- 577660 words of memory out of 5000000
- 36844 multiletter control sequences out of 15000+600000
+ 18980 strings out of 478276
+ 309846 string characters out of 5848501
+ 577544 words of memory out of 5000000
+ 36790 multiletter control sequences out of 15000+600000
  570175 words of font info for 90 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  69i,12n,117p,992b,480s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -970,10 +954,10 @@ mf-dist/fonts/type1/public/stix2-type1/STIX2Text-Regular.pfb></opt/texlive/texd
 ir/texmf-dist/fonts/type1/public/ccicons/ccicons.pfb></opt/texlive/texdir/texmf
 -dist/fonts/type1/urw/helvetic/uhvb8a.pfb></opt/texlive/texdir/texmf-dist/fonts
 /type1/urw/helvetic/uhvr8a.pfb>
-Output written on draft.pdf (28 pages, 1375550 bytes).
+Output written on draft.pdf (27 pages, 1946404 bytes).
 PDF statistics:
- 383 PDF objects out of 1000 (max. 8388607)
- 322 compressed objects within 4 object streams
- 104 named destinations out of 1000 (max. 500000)
- 96 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 370 PDF objects out of 1000 (max. 8388607)
+ 310 compressed objects within 4 object streams
+ 101 named destinations out of 1000 (max. 500000)
+ 101 words of extra memory for PDF output out of 10000 (max. 10000000)
 

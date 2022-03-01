@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.23 (TeX Live 2021) (preloaded format=pdflatex 2022.3.1)  1 MAR 2022 15:06
+This is pdfTeX, Version 3.141592653-2.6-1.40.23 (TeX Live 2021) (preloaded format=pdflatex 2022.3.1)  1 MAR 2022 15:23
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1241,56 +1241,19 @@ Underfull \hbox (badness 1132) in paragraph at lines 664--664
 LaTeX Font Info:    Font shape `T1/zi4/m/n' will be
 (Font)              scaled to size 9.0pt on input line 758.
  [7]
+<figures/bias_by_connectance.png, id=114, 2409.0pt x 1806.75pt>
+File: figures/bias_by_connectance.png Graphic file (type png)
+<use figures/bias_by_connectance.png>
+Package pdftex.def Info: figures/bias_by_connectance.png  used on input line 83
+7.
+(pdftex.def)             Requested size: 386.67299pt x 289.99568pt.
 
-LaTeX Warning: File `figures/bias_mcc_inf.png' not found on input line 825.
-
-
-! Package pdftex.def Error: File `figures/bias_mcc_inf.png' not found: using dr
-aft setting.
-
-See the pdftex.def package documentation for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.825 }
-       
-Try typing  <return>  to proceed.
-If that doesn't work, type  X <return>  to quit.
-
-
-Underfull \hbox (badness 1320) in paragraph at lines 825--825
-\T1/stix2/m/n/8.21255 a fixed con-nectance (rows). Both of these
+Underfull \hbox (badness 1661) in paragraph at lines 837--837
+\T1/stix2/m/n/8.21255 ROC-AUC, and PR-AUC to changes in the
  []
 
 
-Underfull \hbox (badness 2020) in paragraph at lines 825--825
-\T1/stix2/m/n/8.21255 val-ues ap-proach 1 for a good model. In-
- []
-
-
-LaTeX Warning: File `figures/bias_roc_pr.png' not found on input line 848.
-
-
-! Package pdftex.def Error: File `figures/bias_roc_pr.png' not found: using dra
-ft setting.
-
-See the pdftex.def package documentation for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.848 }
-       
-Try typing  <return>  to proceed.
-If that doesn't work, type  X <return>  to quit.
-
-
-Underfull \hbox (badness 1565) in paragraph at lines 848--848
-[]\T1/stix2/b/n/8.21255 Figure 4 |\T1/stix2/m/n/8.21255 Re-sponse of ROC-AUC an
-d PR-
- []
-
-
-LaTeX Warning: File `figures/optim_bias.png' not found on input line 888.
+LaTeX Warning: File `figures/optim_bias.png' not found on input line 876.
 
 
 ! Package pdftex.def Error: File `figures/optim_bias.png' not found: using draf
@@ -1300,77 +1263,81 @@ See the pdftex.def package documentation for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.888 }
+l.876 }
        
 Try typing  <return>  to proceed.
 If that doesn't work, type  X <return>  to quit.
 
 
-Underfull \hbox (badness 1337) in paragraph at lines 888--888
-\T1/stix2/m/n/8.21255 bias for the dif-fer-ent mod-els and mea-sures
- []
-
-
-Underfull \hbox (badness 1466) in paragraph at lines 888--888
+Underfull \hbox (badness 1466) in paragraph at lines 876--876
 \T1/stix2/m/n/8.21255 anced train-ing sets, and kept this be-hav-ior
  []
 
-[8]
 
-LaTeX Warning: File `figures/optim_perf.png' not found on input line 916.
+LaTeX Warning: File `figures/optim_value.png' not found on input line 904.
 
 
-! Package pdftex.def Error: File `figures/optim_perf.png' not found: using draf
-t setting.
+! Package pdftex.def Error: File `figures/optim_value.png' not found: using dra
+ft setting.
 
 See the pdftex.def package documentation for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.916 }
+l.904 }
        
 Try typing  <return>  to proceed.
 If that doesn't work, type  X <return>  to quit.
 
-<figures/valid_ensemble.png, id=133, 2409.0pt x 1806.75pt>
+[8 <./figures/bias_by_connectance.png>]
+<figures/valid_ensemble.png, id=127, 2409.0pt x 1806.75pt>
 File: figures/valid_ensemble.png Graphic file (type png)
 <use figures/valid_ensemble.png>
-Package pdftex.def Info: figures/valid_ensemble.png  used on input line 956.
+Package pdftex.def Info: figures/valid_ensemble.png  used on input line 946.
 (pdftex.def)             Requested size: 386.67299pt x 289.99568pt.
-[9 <./figures/valid_ensemble.png>]
-Overfull \hbox (386.67299pt too wide) detected at line 991
+
+Overfull \hbox (386.67299pt too wide) detected at line 982
 []
  []
 
 
-Underfull \hbox (badness 10000) in alignment at lines 985--996
+Underfull \hbox (badness 10000) in alignment at lines 976--987
 [] [] [] [] [] [] [] []
  []
 
 
-Underfull \hbox (badness 10000) in alignment at lines 996--1001
+Underfull \hbox (badness 10000) in alignment at lines 987--992
 [] [] [] [] [] [] [] []
  []
 
 
-Underfull \hbox (badness 10000) in alignment at lines 1001--1014
+Underfull \hbox (badness 10000) in alignment at lines 992--1005
 [] [] [] [] [] [] [] []
  []
 
-[10]
-Overfull \hbox (27.14615pt too wide) in paragraph at lines 1110--1122
+[9] [10 <./figures/valid_ensemble.png>]
+
+LaTeX Warning: Reference `fig:biasmccinf' on page 11 undefined on input line 10
+56.
+
+
+LaTeX Warning: Reference `fig:biasrocpr' on page 11 undefined on input line 106
+3.
+
+
+Overfull \hbox (27.14615pt too wide) in paragraph at lines 1101--1113
 \T1/stix2/m/n/9 by sup-port pro-vided by Cal-cul Québec (www.calculquebec.ca) a
 nd Com-pute Canada (www.computecanada.ca)
  []
 
-
-Overfull \hbox (1.94629pt too wide) in paragraph at lines 1157--1162
+[11]
+Overfull \hbox (1.94629pt too wide) in paragraph at lines 1148--1153
 [][]\T1/stix2/m/n/9 Boughorbel, S., Jar-ray, F., & El-Anbari, M. (2017). Op-ti-
 mal clas-si-fier for im-bal-anced data us-ing Matthews
  []
 
-[11] [12]
-Overfull \hbox (38.48262pt too wide) in paragraph at lines 1315--1320
+[12]
+Overfull \hbox (38.48262pt too wide) in paragraph at lines 1306--1311
 \T1/stix2/m/n/9 chine learn-ing in ge-nomics. \T1/stix2/m/it/9 Na-ture Re-views
  Ge-net-ics\T1/stix2/m/n/9 , 1--13. [][]$\T1/zi4/m/n/9 https : / / doi . org / 
 10 . 1038 / s41576-[]021-[]00434-[]9$[][] 
@@ -1379,14 +1346,17 @@ Overfull \hbox (38.48262pt too wide) in paragraph at lines 1315--1320
 
 AED: lastpage setting LastPage
 [13] (./preprint.aux)
+
+LaTeX Warning: There were undefined references.
+
 Package rerunfilecheck Info: File `preprint.out' has not changed.
-(rerunfilecheck)             Checksum: 1D379E9F9804E3C226DB2AC5AE352D79;2877.
+(rerunfilecheck)             Checksum: A1A44EB8BA3B4404C70366DE522F7BCE;2892.
  ) 
 Here is how much of TeX's memory you used:
- 30952 strings out of 478276
- 564484 string characters out of 5848501
- 840301 words of memory out of 5000000
- 48522 multiletter control sequences out of 15000+600000
+ 30893 strings out of 478276
+ 562651 string characters out of 5848501
+ 839190 words of memory out of 5000000
+ 48468 multiletter control sequences out of 15000+600000
  624295 words of font info for 141 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  108i,12n,117p,993b,643s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -1407,10 +1377,10 @@ mf-dist/fonts/type1/public/stix2-type1/STIX2Text-Regular.pfb></opt/texlive/texd
 ir/texmf-dist/fonts/type1/public/ccicons/ccicons.pfb></opt/texlive/texdir/texmf
 -dist/fonts/type1/urw/helvetic/uhvb8a.pfb></opt/texlive/texdir/texmf-dist/fonts
 /type1/urw/helvetic/uhvr8a.pfb>
-Output written on preprint.pdf (13 pages, 1419351 bytes).
+Output written on preprint.pdf (13 pages, 1990412 bytes).
 PDF statistics:
- 333 PDF objects out of 1000 (max. 8388607)
- 289 compressed objects within 3 object streams
- 88 named destinations out of 1000 (max. 500000)
- 113 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 326 PDF objects out of 1000 (max. 8388607)
+ 281 compressed objects within 3 object streams
+ 86 named destinations out of 1000 (max. 500000)
+ 118 words of extra memory for PDF output out of 10000 (max. 10000000)
 

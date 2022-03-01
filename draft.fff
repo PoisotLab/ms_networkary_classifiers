@@ -33,28 +33,18 @@ classifier.}\label{fig:connectance}
 \efloatseparator
  
 \begin{figure}
-\hypertarget{fig:biasmccinf}{%
+\hypertarget{fig:biasco}{%
 \centering
-\includegraphics{figures/bias_mcc_inf.png}
-\caption{Response of MCC and Informedness to changes in the training set
-bias for a fixed connectance (rows). Both of these values approach 1 for
-a good model. Informedness is consistently high, and by contrast, MCC
-increases with additional training set bias. Across all models, training
-on a more connected network is easier.}\label{fig:biasmccinf}
-}
-\end{figure}
-\efloatseparator
- 
-\begin{figure}
-\hypertarget{fig:biasrocpr}{%
-\centering
-\includegraphics{figures/bias_roc_pr.png}
-\caption{Response of ROC-AUC and PR-AUC to changes in the training set
-bias for a fixed connectance (rows). ROC-AUC is consistently high, and
-therefore not properly able to separate good from poor classifiers. On
-the other hand, PR-AUC responds to changes in the training set. As in
-fig.~\ref{fig:biasmccinf}, training on more connected networks is
-easier.}\label{fig:biasrocpr}
+\includegraphics{figures/bias_by_connectance.png}
+\caption{Response of MCC, Informedness, ROC-AUC, and PR-AUC to changes
+in the training set balance (on the \(x\) axis) for a series of
+increasing connectances (color). All of these values approach 1 for a
+good model, but should be lower when the prediction is more difficult.
+Informedness is consistently high, and by contrast, MCC increases with
+additional training set balance. Across all models, training on a more
+connected network is easier. ROC-AUC is consistently high, and therefore
+not properly able to separate good from poor classifiers. On the other
+hand, PR-AUC responds to changes in the training set.}\label{fig:biasco}
 }
 \end{figure}
 \efloatseparator
@@ -63,28 +53,28 @@ easier.}\label{fig:biasrocpr}
 \hypertarget{fig:optimbias}{%
 \centering
 \includegraphics{figures/optim_bias.png}
-\caption{Value of the optimal training set bias for the different models
-and measures evaluated here, over a range of connectances. Informedness
-was reliably maximized for balanced training sets, and kept this
-behavior across models. For other measures, larger connectances in the
-true network allowed lower biases in the training set. In a large number
-of cases, ``over-correcting'' by having training sets with more than
-half instances representing interactions would maximize the values of
-the model performance measures.}\label{fig:optimbias}
+\caption{Value of the optimal training set balance for the different
+models and measures evaluated here, over a range of connectances.
+Informedness was reliably maximized for balanced training sets, and kept
+this behavior across models. For other measures, larger connectances in
+the true network allowed lower biases in the training set. In a large
+number of cases, ``over-correcting'' by having training sets with more
+than half instances representing interactions would maximize the values
+of the model performance measures.}\label{fig:optimbias}
 }
 \end{figure}
 \efloatseparator
  
 \begin{figure}
-\hypertarget{fig:optimperf}{%
+\hypertarget{fig:optimvalue}{%
 \centering
-\includegraphics{figures/optim_perf.png}
+\includegraphics{figures/optim_value.png}
 \caption{When trained on their optimally biased training set, most
 models were able to maximize their performance; this is not true for
 decision tree, which had a very low PR-AUC, and to some extent for ridge
 regression who had a slow increase with network connectance. The
 ensemble had a consistently high performance despite incorporating poor
-models.}\label{fig:optimperf}
+models.}\label{fig:optimvalue}
 }
 \end{figure}
 \efloatseparator
