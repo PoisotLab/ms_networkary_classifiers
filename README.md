@@ -565,13 +565,13 @@ analysis: whereas all models return a network with interactions laying mostly
 on the diagonal (as expected), the Ridge Regression is quite obviously biased.
 Despite this, we can see that the ensemble is close to the initial dataset.
 
-![Visualisation of the models predictions for one instance of a network
-prediction problem (shown in the "Dataset" panel). This figure reveals how
-inspecting the details of the prediction is important: indeed, although the
-performance measures hint at the fact that ridge regression is mediocre, this
-figure reveals that it is making predictions that correspond to a network with
-an entirely different topology (namely, nested as opposed to
-diagonal).](figures/valid_ensemble.png){#fig:ecovalid}
+![Visualisation of the raw (un-thresholded) models predictions for one instance
+of a network prediction problem (shown in the "Dataset" panel). Increasing the
+value of the $\xi$ parameter would make the diagonal structure "broader",
+leading to more interactions. A visual inspection of the results is important,
+as it highlights how some models can "miss" parts of the network; by combining
+them in an ensemble, these gaps compensate one another, and lead (in this case)
+to a better prediction.](figures/valid_ensemble.png){#fig:ecovalid}
 
 The trained models were then thresholded (again by optimising informedness),
 and their predictions transformed back into networks for analysis;
@@ -611,7 +611,29 @@ values in **bold** indicate the best value for each column (including ties).
 Because the values have been rounded, values of 1.0 for the ROC-AUC column
 indicate an average $\ge 0.99$. {#tbl:comparison}
 
-# Guidelines for the assesment of network predictive models
+# Guidelines for the assessment of network predictive models
+
+It is noteworthy that the ensemble model was systematically better
+than the component models. We do not expect that ensembles will *always* be
+better than single models. Networks with different structures than the one we
+simulated here may respond in different ways, especially if the rules are
+fuzzier than the simple rule we used here. In a recent multi-model comparison
+involving supervised and unsupervised learning, @Becker2022OptPre found that
+the ensemble was *not* the best model. There is no general conclusion to draw
+from this besides reinforcing the need to be pragmatic about which models
+should be included in the ensemble, or whether to use an ensemble at all. In
+a sense, the surprising performance of the ensemble model should form the basis
+of the last recommendation: optimal training set balance and its interaction
+with connectance and the specific binary classifier used is, in a sense, an
+hyperparameter that should be assessed. The distribution of results in
+@fig:optimbias and @fig:optimvalue show that there are variations around the
+trend. TODO fix this sentence
+
+@Xie2017ComCom - most networks have SBM structure --- @Valdovinos2019MutNet
+matching + forbidden [@Olesen2011MisFor], coming up with matching rules that
+allow/forbid links can make predictions easier [@Strona2017ForPer]; but valid
+for most type of interactions as long as we can match yes/no to numeric
+predictors
 
 We establish that due to the low prevalence of interactions, even poor
 classifiers applied to food web data will reach a high accuracy; this is because
@@ -676,22 +698,6 @@ least amount of information to train the model) will give the best validation
 potential, and is probably the informedness [maximizing informedness is the
 generally accepted default for imbalanced classification;
 @Schisterman2005OptCut].
-
-Finally, it is noteworthy that the ensemble model was systematically better than
-the component models; even when the models were individually far form perfect,
-the ensemble was able to leverage the different biases expressed by the models
-to make an overall more accurate prediction. We do not expect that ensembles
-will *always* be better than single models. In a recent multi-model comparison,
-@Becker2022OptPre found that the ensemble was *not* the best model. There is no
-general conclusion to draw from this besides reinforcing the need to be
-pragmatic about which models should be included in the ensemble, or whether to
-use an ensemble at all. In a sense, the surprising peformance of the ensemble
-model should form the basis of the last recommendation: optimal training set
-bias and its interaction with connectance and binary classifier is, in a sense,
-an hyperparameter that should be assessed. The distribution of results in
-@fig:optimbias and @fig:optimvalue show that there are variations around the
-trend; furthermore, networks with different structures than the one we simulated
-here may respond in different ways.
 
 **Acknowledgements:** We acknowledge that this study was conducted on land
 within the traditional unceded territory of the Saint Lawrence Iroquoian,

@@ -149,6 +149,14 @@ performance metrics used in machine learning in general. If I were to make one
 general suggestion that could perhaps improve the study is to use a wider range
 of simulation conditions.
 
+> I thank the reviewer for their kind words about the manuscript. I have added
+a broader range of simulations (and increased the number of simulated networks
+to 612500, so that each point is the average of 500 independent replicates.
+This gives much clearer results, while also avoiding issues with binning
+connectances for some of the later sections. Please also note that the models
+have been changed, to better reflect what would probably be the immedidate
+picks for ecological network predictions.
+
 The author notes that he found the ensemble method better than component models
 but this is not what other model comparisons found. The author says that the
 findings described here should not be generalized to say that ensemble models
@@ -156,8 +164,19 @@ are always better but the relationship between ensemble performance and the
 various metrics explored is not clear to me. If it is possible that under more
 general simulation conditions the ensemble would not be the best-performing, is
 it also possible that some of the observations about the metrics would not hold
-either? Something to think about. I include the manuscript text with additional
-minor comments and typos corrected where I caught them.
+either? Something to think about.
+
+> I too am wondering about why the ensemble is out-performing the other models.
+If I had to take a guess, I would simply accept it as a "happy accident" due to
+the type of simulated data, and as I mention in the paper, I do not think this
+is a general feature; I have added  the discussion of the ensemble at the
+beginning of the "guidelines" section, and emphasized that there is no general
+conclusion to draw here.
+
+I include the manuscript text with additional minor comments and typos
+corrected where I caught them.
+
+> These have been fixed, thank you!
 
 # Reviewer 2
 
@@ -189,20 +208,32 @@ audience working on different systems.
 (a) outline different types of interactions and how resulting interaction
 networks might differ in relation to the simulations in this study,
 
+> This is a good point -- I have added a section in the guidelines regarding
+different types of interactions (TODO).
+
 (b) outline how the suggested guidelines would work when predicting across
 networks
 
+> TODO
+
 (c) outline how the biasing of testing data differs from other methods of
 data-thinning applied in e.g. SDMs.
+
+> This is a good point -- I have added a discussion of this point in the
+introduction, specifically at TODO.
 
 (2) Consider adding a motivation for the choice of the different indices and
 machine learning methods that are assessed and compared in the paper e.g. by
 referring to their use in recent studies of species-interactions.
 
+> TODO clarify
+
 (3) I was surprised to see that RF models performed so poorly compared to BRT,
 because this contrasts what other studies have found. I think it would be
 useful to elaborate more on this – particularly since in Figure 7 it seems that
 the RF model is perform on par, or perhaps even better, than the BRT.
+
+> TODO fixed with new validation set
 
 ## Specific comments
 
@@ -271,6 +302,8 @@ depend on the combination of infectiousness rate for e.g. 5 levels of the
 resistance trait, just to give the reader a visual impression of how species
 niches are simulated
 
+> TODO figure legend
+
 L180: I attempted to write the simulations in R but didn’t understand how “we
 use [vi,hj] as a feature vector […]” would influence the input in the models.
 Using a data frame with the columns: Interaction, vi, and hj, RF models in
@@ -332,11 +365,15 @@ but I struggle a bit with why ridge regression and not e.g. SVM was used – or
 the other methods assessed in Pichler et al., Methods Ecol Evol.
 2020;11:281–293 doi: 10.1111/2041-210X.13329.
 
+> TODO
+
 L191: Earlier on you focus on classifiers but here I get the impression that
 you used random forest regression, and not a classifier. If using a regressor
 instead of a classifier (and then using class probabilities), It might be
 worthwhile specifying why this choice was made and perhaps it would be
 meaningful to compare the two?
+
+> TODO
 
 L192: Although the comparison between different models is not the main focus of
 the paper, it does take up a central place. Ideally such a comparison would’ve
@@ -352,6 +389,9 @@ optimal tuning then I think it should be stated if, and how, the models differ
 in their sensitivity to tuning, and how this might influence results further
 down.
 
+> TODO specificy the models BUT point at very high performance, and simple
+problem that makes the search less useful
+
 L205: I struggle a bit with understanding how the ensemble model relates to the
 four underlying models contribute to the ensemble model. From Figures 3-4 it
 seems to me that the predicted probabilities of interactions must vary
@@ -362,9 +402,13 @@ interpretation of the ensemble model, I wondering if if would it be possible to
 identify the unique contribution of each underlying model to the predicted
 output from the ensemble model?
 
+> TODO
+
 L209-214: please specify if you removed failed (i.e. meeting one of your
 criteria) connectance-bias-combinations across all models, or just for the
 model(s) which had failed.
+
+> TODO
 
 L223: ‘stared’ - > started
 
@@ -378,6 +422,8 @@ this is complicated by the way the subsampling was designeds: training data
 having fewer and fewer ‘absences’ of interactions as connectance and bias
 increases, while the testing data will have an increasing dominance of
 ‘absences’.
+
+> TODO fixed
 
 L260: Because model predictions were summed when generating the ensemble,
 models that underpredict occurrences of interactions at certain levels of bias
