@@ -91,11 +91,14 @@ the main text. If the author is very concerned about the flow of the text
 methodological detail is needed in the main text) perhaps supplementary
 materials could be used to help keep things streamlined in the main text.
 
-> This was an oversight on my part, and I do apologize for this. The code was
-linked to the preprint version, and I did not checked that it was also linked
-in the main text. The code is accessible on GitHub, as well as on OSF.io (a DOI
-is given in the main text). Following the changes requested by the reviewers,
-I have done a lot of refactoring, so the code should be easier to read.
+> This was an oversight on my part, and I do apologize for this. The code
+(under the FOSS MIT license) was linked to the preprint version, and I did not
+checked that it was also linked in the main text. The code is accessible on
+GitHub, as well as on OSF.io (a DOI is given in the main text). Following the
+changes requested by the reviewers, I have done a lot of refactoring, so the
+code should be easier to read. In addition, the code is now more efficient,
+although this does not remove the need for a cluster to reproduce the full
+experiments.
 
 "which is within the range of usually observed connectance values for empirical
 food webs" (line 135). "there is an almost 1:1 relationship between 𝜉 and
@@ -113,7 +116,10 @@ In places the author makes claims, such as this one, where it is not clear
 where there is literature support. If this is an obvious mathematical
 derivation or fact, please spell it out.
 
-> I have rephrased this sentence at TODO.
+> I have rephrased this sentence -- essentially, the methods are agnostic to
+the shape of the network, so as long as there is a vector of features and
+a value representing the interaction, they would work equally well on
+unipartite or bipartite networks.
 
 "tp is the number of interactions predicted as positive (line 18). This is
 a good example of where terminology is not helping the reader - the author
@@ -154,7 +160,7 @@ a broader range of simulations (and increased the number of simulated networks
 to 612500, so that each point is the average of 500 independent replicates.
 This gives much clearer results, while also avoiding issues with binning
 connectances for some of the later sections. Please also note that the models
-have been changed, to better reflect what would probably be the immedidate
+have been changed, to better reflect what would probably be the immediate
 picks for ecological network predictions.
 
 The author notes that he found the ensemble method better than component models
@@ -205,35 +211,50 @@ you will find useful.
 interactions and the article is likely to be of interest to quite a wide
 audience working on different systems.
 
+> Thank you for the kind words -- I have expanded the introduction (and added
+some references to the discussion) to highlight some articles showing exactly
+that.
+
 (a) outline different types of interactions and how resulting interaction
 networks might differ in relation to the simulations in this study,
 
 > This is a good point -- I have added a section in the guidelines regarding
-different types of interactions (TODO).
+different types of interactions, in the context of forbidden/allowed links,
+matching rules, and multi-layers networks.
 
 (b) outline how the suggested guidelines would work when predicting across
 networks
 
-> TODO
+> I do feel like this would be very speculative; in Strydom et al. 2021, we
+discuss the current tools for spatial (and temporal) predictions, and there are
+data limitations that would need to be solved before we can generalize
+guidelines to multi-network comparison. No changes were made.
 
 (c) outline how the biasing of testing data differs from other methods of
 data-thinning applied in e.g. SDMs.
 
 > This is a good point -- I have added a discussion of this point in the
-introduction, specifically at TODO.
+introduction, specifically at TODO. In brief, thinning does not really have an
+analogue process in networks, which means that a large swath of the literature
+on SDM that specifically assesses thinning as a remedy for class imbalance does
+not really translate well to networks.
 
 (2) Consider adding a motivation for the choice of the different indices and
 machine learning methods that are assessed and compared in the paper e.g. by
 referring to their use in recent studies of species-interactions.
 
-> TODO clarify
+> I have expanded the choice of models at TODO -- the main rationale for these
+models and indices is that they are standard practice in ML, as is now
+clarified in the introduction (TODO); the main indices are explained in great
+detail in Strydom et al. 2021, as mentioned in TODO. Because of the word count
+constraints, I have not reproduced a detailed explanation here.
 
 (3) I was surprised to see that RF models performed so poorly compared to BRT,
 because this contrasts what other studies have found. I think it would be
 useful to elaborate more on this – particularly since in Figure 7 it seems that
 the RF model is perform on par, or perhaps even better, than the BRT.
 
-> TODO fixed with new validation set
+> TODO
 
 ## Specific comments
 
@@ -256,6 +277,14 @@ match the data along the range of predicted values, (2) you don’t have as many
 moving parts (tp, fp) as when estimating AUC and PR-AUC, (3) and you can
 estimate the variation in observed interactions that is explained by your
 predictions
+
+> This is a possible diagnostic plot, but I do believe it loses information
+compared to the more accurate decomposition provided by the confusion table. It
+is not a given that all scores can be logit-transformed. I do understand the
+point of estimating the variation, but the method suggested by the reviewer is
+not allowing this estimation; instead, methods that predict on probabilities
+(for example Gaussian BRTs) are far more appropriate. No changes were made to
+the manuscript.
 
 L53: The comparison with SDMs is interesting. In SDMs the imbalance between
 occurrences/absences can be huge when e.g. pseudo-absences/background data are
@@ -282,7 +311,7 @@ bias close to zero, and 10 is close to one
 L135: could you add a reference to the statement that connectance of ]0,0.5] is
 within the range of typical connectance in empirical food webs
 
-> TODO
+> Fixed
 
 L170: Intuitively I would think that the norm would be to use as much data as
 one can spare to train models, before validating on the remaining testing data.
@@ -302,7 +331,9 @@ depend on the combination of infectiousness rate for e.g. 5 levels of the
 resistance trait, just to give the reader a visual impression of how species
 niches are simulated
 
-> TODO figure legend
+> Due to the limits on the number of figures, I have not implemented this
+suggestion; nevertheless, I have modified the legend of figure TODO, to explain
+how changing $\xi$ would affect the shape of the network.
 
 L180: I attempted to write the simulations in R but didn’t understand how “we
 use [vi,hj] as a feature vector […]” would influence the input in the models.
@@ -310,7 +341,7 @@ Using a data frame with the columns: Interaction, vi, and hj, RF models in
 R reached almost perfect PR-AUCs and ROC-AUCs – indicating that I’m missing
 something. i.e.
 
-~~~
+~~~r
 vi <- rbeta(100,6,8)
 hj <- rbeta(100,2,8)
 allPotentialSpeciesInteractions <- expand.grid(vi,hj)
@@ -319,9 +350,13 @@ fn.connectanceOnInteraction <- function(x)data.frame(Interaction = allPotentialS
 SimData <- fn.connectanceOnInteraction(0.16)
 ~~~
 
-> Not being a R user, I cannot comment on the code - this being said, I have
+> Not being a `R` user, I cannot comment on the code - this being said, I have
 added a more detailed explanation of the structure of all models at TODO, and
-TODO
+TODO. One thing that happen is severe over-fitting of the data; depending on
+the `R` package used, this is a real risk, and maybe adequately pruned trees
+would not yield perfect predictions. As I now note at TODO, I checked that the
+accuracy on the training and testing set never differed by more than 5%, which
+would suggest overfitting.
 
 `SimData` is a data frame with 10 000 rows, containing four columns: logical
 vector for the presence of interactions, numeric vector for connectance;
@@ -354,8 +389,12 @@ resulting confusion matrix and derived metrics (MCC, etc.,)
 > This is an excellent suggestion -- one of my issues with it is that in
 practice, these models would be applied to datasets for which the actual class
 imbalance is not the one used for training; that being said, the reviewer is
-absolutely correct in mentioning that changing the training class imbalance
-TODO 
+absolutely correct in mentioning that changing the training class imbalance is
+an issue. The solution I implemented is to use a 50/50 split, where the balance
+in the training set is a parameter, but the balance in the testing set is
+always set to the exact connectance of the network (see TODO); this ensures
+that the models are evaluated in the environment where they will have to make
+the prediction, which seems like a more rigorous test of their performance.
 
 L189: Add a motivation for why these four ML methods were selected and how they
 differ – e.g. by explaining the most central ways in which they differ. I think
@@ -365,7 +404,15 @@ but I struggle a bit with why ridge regression and not e.g. SVM was used – or
 the other methods assessed in Pichler et al., Methods Ecol Evol.
 2020;11:281–293 doi: 10.1111/2041-210X.13329.
 
-> TODO
+> The initial motivation for RR was to use an obviously wrong model, but I came
+to realize that this would risk establishing a bad example. I have replaced it
+by a trait-based k-NN. The reason neural networks were not used is that they
+demand a lot of tweaking, and take longer to train; SVMs were not used because
+they do not behave much differently from the other models used here. The
+heuristics implemented in `MLJ.jl` give about 60 different machines compatible
+with this prediction problem, and as I now clarify at TODO, the point of the
+manuscript is not to find the best algorithm -- this is a problem-specific
+question.
 
 L191: Earlier on you focus on classifiers but here I get the impression that
 you used random forest regression, and not a classifier. If using a regressor
@@ -373,7 +420,15 @@ instead of a classifier (and then using class probabilities), It might be
 worthwhile specifying why this choice was made and perhaps it would be
 meaningful to compare the two?
 
-> TODO
+> This information was already present in the manuscript, immediately after the
+description of the performance measures; because, as mentioned in the response
+to the previous point, the idea is not to make recommendations about which
+algorithms should be used, I have not added these models. On a more general
+note (and this is something we discuss in depth in a manuscript currently in
+review, a preprint of which is accessible at `10.32942/osf.io/vyzgr`, it is
+often a good decision to transform a discrete and sparse problem into a dense
+and continuous one; this motivated the choice of regression-based approaches to
+interaction prediction.
 
 L192: Although the comparison between different models is not the main focus of
 the paper, it does take up a central place. Ideally such a comparison would’ve
@@ -389,8 +444,11 @@ optimal tuning then I think it should be stated if, and how, the models differ
 in their sensitivity to tuning, and how this might influence results further
 down.
 
-> TODO specificy the models BUT point at very high performance, and simple
-problem that makes the search less useful
+> This would be an extremely important point if the problem to solve were more
+complex -- as I now specify at TODO, and as is clear from notably fig. TODO,
+all models perform extremely well; there is no *need* to tune the
+hyper-parameters in this situation. Note that the increase in the number of
+simulations would have made this work even more difficult regardless.
 
 L205: I struggle a bit with understanding how the ensemble model relates to the
 four underlying models contribute to the ensemble model. From Figures 3-4 it
@@ -402,20 +460,30 @@ interpretation of the ensemble model, I wondering if if would it be possible to
 identify the unique contribution of each underlying model to the predicted
 output from the ensemble model?
 
-> TODO
+> This would be a feasible analysis at the scale of a single network. Indeed,
+Becker et al. 2022 have done some of this work, to understand why the ensemble
+under-performs the best models. I do certainly appreciate the question of "why
+do ensembles sometimes fail?", but this is in my opinion an entirely different
+article. No changes were made to the manuscript.
 
 L209-214: please specify if you removed failed (i.e. meeting one of your
 criteria) connectance-bias-combinations across all models, or just for the
 model(s) which had failed.
 
-> TODO
+> Only within a model, this is now clarified at TODO
 
 L223: ‘stared’ - > started
+
+> Fixed
 
 L228: “classifiers” please check that the wording is correct, i.e. if models
 used clafficiation trees or regression trees.
 
+> As explained above, the wording is correct
+
 L239: ‘withold’ -> ‘requires one to withhold […]’
+
+> Fixed
 
 L254: “[…] interactions do not exist starts gaining importance […]” I think
 this is complicated by the way the subsampling was designeds: training data
@@ -434,7 +502,12 @@ connectance. Here regression slopes from logistic GLMs on the occurrence of
 interactions in the testing data as a function of the logit(predicted
 probability of interaction) could be useful.
 
+> This information is given by the positive/negative predictive values; visual
+analysis of the results show that they do not differ across models. TODO
+
 L273: it seems like there are some references missing here.
+
+> TODO
 
 L284: Olito & Fox, Oikos 124: 428–436, 2015 doi: 10.1111/oik.01439 might be
 a useful reference here.
@@ -444,6 +517,8 @@ pairwise-interactions is also discussed in Olito & Fox, Oikos 124: 428–436,
 2015 doi: 10.1111/oik.01439 and Dormann et al., (2017). Identifying causes of
 patterns in ecological networks: opportunities and limitations. Annual Review
 of Ecology, Evolution, and Systematics, 48, 559-584.
+
+> TODO
 
 L287: In the guidelines section I think it could be useful to discuss different
 approaches for increasing ‘bias’ in the training data. One approach, as done in
@@ -455,9 +530,13 @@ thinning to the training data by randomly removing rows with absences of
 interactions – thereby increasing the proportion of interaction occurrences
 without affecting the structure of the testing data.
 
+> TODO
+
 ## Tables
 
 Table 1: spell out the network metrices in the table legend.
+
+> TODO
 
 ## Figures
 
