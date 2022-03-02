@@ -8,6 +8,35 @@ suggestions. I urge the author to carefully read through all the reviewers'
 suggestions, in particular the major comments raised by R2 and R3, every one of
 which I feel are very important to be addressed.
 
+> Thank you for the opportunity to submit a revised manuscript. Yours and the
+reviewers' comments helped immensely in making the text more accessible, and
+I hope that the revised version will meet the standards of Methods in Ecology
+& Evolution. I have provided a point-by-point response to all comments, but
+I would like to summarize the most significant changes:
+
+> First, the introduction was almost entirely re-written, to ensure that the
+context (*i.e.* ecological networks) comes first; the section that was
+initially the introduction is now a short primer on the evaluation of binary
+classifiers, which should provide readers with the necessary background to
+assess the results.
+
+> Second, the models in the manuscript have changed; the point of including
+ridge regression, as in the original submission, was to show that a model can
+appear to perform well but miss the actual data structure. Some comments by the
+reviewers made me reconsider this, and I think it would have been setting
+a misleading example to put a poor model in an ensemble. I have replaced ridge
+regression by a k-NN trained on *traits*, which performs well. Note that this
+still allows to have a discussion on the fact that good validation metrics and
+good network predictions are not necessarily one and the same.
+
+> Finally, I have changed the training strategy a little, in a way that
+addresses multiple comments at once. The nature and extent of changes are
+outlined in the responses to the respective comments, but the main consequence
+is that the last section of the manuscript is now a little bit more
+"normative", as adopting the proper training strategy reveals generalities that
+I had missed in the previous version. For the comments that led to this
+decision, I am particularly grateful.
+
 This article is unusual, in that it is more of an essay than a standard
 intro/methods/results/discussion paper. There is nothing wrong with that (in
 fact I applaud it for that), but more needs to be done to make it easy for the
@@ -23,6 +52,12 @@ the argument. This article could have a wide readership and broad impact, but
 to do that it needs to be clearer. The article feels like a labour of love, and
 I think if the labour is made a little clearer others will love it and engage
 with it rather than being unable to understand it fully.
+
+> This is a fair point -- I have added a number of references throughout, and
+now start with a discussion that is grounded in ecology (networks, then the
+parallels with SDMs, then switching into machine learning). Following the
+revisions to the code, the text has been updated in ways that I think will
+clarify what exactly has been done.
 
 More broadly, I encourage the author to introduce a broader, more engaging
 opening that bring in the motivation for the work (see R3's comments on this in
@@ -41,6 +76,12 @@ there some future directions. The opening pages (particularly lines 120-132)
 which contain more maths are actually clearer in terms of general take-homes --
 that level of clarity for the later sections would help I think.
 
+> As mentioned in the first paragraph of the response, the changes to the
+manuscript led to a series of stronger recommendations in the last section.
+I still stand by the point that we should not adopt a cookbook approach to
+network prediction, but I have nevertheless identified guiding principles and
+possible caveats.
+
 More specific comments and examples of places where clarity could be improved:
 
 Please release the code underlying this work; doing so might also help the
@@ -50,6 +91,12 @@ the main text. If the author is very concerned about the flow of the text
 methodological detail is needed in the main text) perhaps supplementary
 materials could be used to help keep things streamlined in the main text.
 
+> This was an oversight on my part, and I do apologize for this. The code was
+linked to the preprint version, and I did not checked that it was also linked
+in the main text. The code is accessible on GitHub, as well as on OSF.io (a DOI
+is given in the main text). Following the changes requested by the reviewers,
+I have done a lot of refactoring, so the code should be easier to read.
+
 "which is within the range of usually observed connectance values for empirical
 food webs" (line 135). "there is an almost 1:1 relationship between 𝜉 and
 connectance" (lines 173-174). Where is the evidence for these statements? In
@@ -57,10 +104,16 @@ places such as these the author makes statements that I sense they know to be
 true because of their depth of understanding of the field; please add citations
 even if these statements seem trivial to you.
 
+> These have been clarified in the text. The relationship with $\xi$ was simply
+revealed by looking at the inputs and outputs of the network generating
+function.
+
 "this works without loss of generality on unipartite networks" (lines 168-169).
 In places the author makes claims, such as this one, where it is not clear
 where there is literature support. If this is an obvious mathematical
 derivation or fact, please spell it out.
+
+> I have rephrased this sentence at TODO.
 
 "tp is the number of interactions predicted as positive (line 18). This is
 a good example of where terminology is not helping the reader - the author
@@ -69,11 +122,17 @@ is related to 'true positives'. The author hints at it just before the matrix
 definition but doesn't spell it out - there is so much going on for a reader
 who is new to the field that the author must be crystal clear I think.
 
+> I have rephrased this section (TODO), and I hope that it will clarify what
+each of the entries in the matrix represent.
+
 "This model is easy to learn" (line 176). I recognise that the author means
 "easy for the ML model to predict", but I would use a different phrase as it
 will come across to the non-specialist at first-glance as "there's nothing hard
 about the maths in this paper" which will be a bit intimidating because the
 maths is quite tricky here!
+
+> This is a good point - I have remove this sentence, to focus on the fact that
+the relationships in the data are simple for a good model to pick-up on.
 
 # Reviewer 1
 
