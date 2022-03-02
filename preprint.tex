@@ -759,23 +759,38 @@ the simulated networks are bipartite, the algorithms have no
 species; therefore, the approach outlined here would also work for
 unipartite networks.
 
-The dataset used for numerical experiments is composed of 64000 such
-\((\xi, \nu)\) pairs, on which four machines are trained: a decision
-tree regressor, a boosted regression tree, a ridge regressor, and a
-random forest regressor. All models were taken from the \texttt{MLJ.jl}
-package (Blaom et al., 2020; Blaom \& Vollmer, 2020) in Julia 1.7
-(Bezanson et al., 2017). All machines use the default parameterization;
-this is an obvious deviation from best practices, as the hyperparameters
-of any machine require training before its application on a real
-dataset. As we use 64000 such datasets, this would require 256000 unique
-instances of tweaking the hyperparameters, which is not realistic.
-Therefore, we assume that the default parameterizations are comparable
-across networks. All machines return a quantitative prediction, usually
-(but not necessarily) in \([0,1]\), which is proportional (but not
-necessarily linearly) to the probability of an interaction between \(i\)
-and \(j\). Nevertheless, the ROC-AUC and PR-AUC (and therefore the
-thresholds) can be measured by integrating over the domain of the values
-return by each machine.
+The dataset used for numerical experiments is composed of a grid of 35
+values of connectance (from 0.011 to 0.5) and 35 values of \(\nu\) (from
+0.02 to 0.98); for each pair of values, 500 networks are generated and
+predicted. For each network, we train four machines: a trait-based k-NN
+(\emph{e.g.} \textbf{Desjardins-Proulx2017EcoInt?}), a regression tree,
+a regression random forest, and a boosted regression tree. Following
+results from Pichler et al. (2020), linear models have not been
+considered (in any way, the relationship in the simulated networks is
+non-linear). The point of these numerical experiments is \emph{not} to
+recommend the best model (this is likely problem-specific), but to
+highlight a series of recommendations that would work for supervised
+learning tasks. All models were taken from the \texttt{MLJ.jl} package
+(Blaom et al., 2020; Blaom \& Vollmer, 2020) in Julia 1.7 (Bezanson et
+al., 2017). All machines use the default parameterization; this is an
+obvious deviation from best practices, as the hyperparameters of any
+machine require training before its application on a real dataset. As we
+use 612500 such datasets, this would require over 2 millions unique
+instances of tweaking the hyperparameters, which is prohibitive from a
+computing time point of view. An important thing to keep in mind is that
+the problem we simulate has been designed to be simple to solve: we
+expect all machines with sensible default parameters to fare well ---
+the results presented in the later sections show that this assumption is
+warranted, and we further checked that the models do not overfit by
+ensuring that there is never more than 5\% of difference between the
+accuracy on the training and testing sets. All machines return a
+quantitative prediction, usually (but not necessarily) in \([0,1]\),
+which is proportional (but not necessarily linearly) to the probability
+of an interaction between \(i\) and \(j\). The ROC-AUC and PR-AUC (and
+therefore the thresholds) can be measured by integrating over the domain
+of the values return by each machine, but in order to make the
+average-based ensemble model more meaningful, all predictions are
+expressed in \([0,1]\).
 
 In order to pick the best adjacency matrix for a given trained machine,
 we performed a thresholding approach using 500 steps on predictions from
@@ -791,9 +806,9 @@ put through the same thresholding process. The complete code to run the
 simulations is available at \texttt{10.17605/OSF.IO/JKEWD}.
 
 After the simulations were completed, we removed all runs (\emph{i.e.}
-pairs of \(\xi\) and \(\nu\)) for which at least one of the following
-conditions was met: the accuracy was 0, the true positive or true
-negative rates were 0, the connectance was larger than 0.25. This
+triples of model, \(\xi\), and \(\nu\)) for which at least one of the
+following conditions was met: the accuracy was 0, the true positive or
+true negative rates were 0, the connectance was larger than 0.25. This
 removes both the obviously failed model runs, and the networks that are
 more densely connected compared to the connectance of empirical food
 webs (and are therefore less difficult to predict, being less
@@ -858,7 +873,7 @@ performance}\label{required-amount-of-positives-to-get-the-best-performance}}
 The previous results revealed that the measure of classification
 performance responds both to the bias in the training set \emph{and} to
 the connectance of the network; from a practical point of view,
-assembling a training set requires to withold positive information,
+assembling a training set requires one to withhold positive information,
 which in ecological networks are very scarce (and typically more
 valuable than negatives, on which there is a doubt). For this reason,
 across all values of connectance, we measured the training set balance
@@ -1033,13 +1048,6 @@ in a sense, an hyperparameter that should be assessed. The distribution
 of results in fig.~\ref{fig:optimbias} and fig.~\ref{fig:optimvalue}
 show that there are variations around the trend. TODO fix this sentence
 
-(\textbf{Xie2017ComCom?}) - most networks have SBM structure ---
-(\textbf{Valdovinos2019MutNet?}) matching + forbidden
-(\textbf{Olesen2011MisFor?}), coming up with matching rules that
-allow/forbid links can make predictions easier
-(\textbf{Strona2017ForPer?}); but valid for most type of interactions as
-long as we can match yes/no to numeric predictors
-
 We establish that due to the low prevalence of interactions, even poor
 classifiers applied to food web data will reach a high accuracy; this is
 because the measure is dominated by the accidentally correct predictions
@@ -1111,6 +1119,26 @@ information to train the model) will give the best validation potential,
 and is probably the informedness (maximizing informedness is the
 generally accepted default for imbalanced classification; Schisterman et
 al., 2005).
+
+One key element for real-life data that can make the prediction exercise
+more tractable is that some interactions can safely be assumed to be
+impossible; indeed, a lot of networks admit a stochastic block model as
+a good approximation (\emph{e.g.} \textbf{Xie2017ComCom?}). In
+ecological networks, this can be due to spatial constrains
+(\textbf{Valdovinos2019MutNet?}), or to the long-standing knowledge that
+some links are ``forbidden'' due to traits (\textbf{Olesen2011MisFor?})
+or abundances (\textbf{Canard2014EmpEva?}). The matching rules
+(\textbf{Strona2017ForPer?}) can be incorporated in the model either by
+adding compatibility traits, or by \emph{only} training the model on
+pairs of species that are not likely to be forbidden links. Besides
+forbidden links, a real-life case that may arise is multi-interaction or
+multi-layer networks (\textbf{Pilosof2017MulNat?}). These can be studied
+using the same general approach outlined here, either by assuming that
+pairs of species can interact in more than one way (wherein one would
+train a model for each type of interaction, based on the relevant
+predictors), or by assuming that pairs of species can only have one type
+of interaction (wherein this becomes a multi-label classification
+problem).
 
 \textbf{Acknowledgements:} We acknowledge that this study was conducted
 on land within the traditional unceded territory of the Saint Lawrence
