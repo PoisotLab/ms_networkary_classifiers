@@ -83,12 +83,13 @@ models.}\label{fig:optimvalue}
 \hypertarget{fig:ecovalid}{%
 \centering
 \includegraphics{figures/valid_ensemble.png}
-\caption{Visualisation of the models predictions for one instance of a
-network prediction problem (shown in the ``Dataset'' panel). This figure
-reveals how inspecting the details of the prediction is important:
-indeed, although the performance measures hint at the fact that ridge
-regression is mediocre, this figure reveals that it is making
-predictions that correspond to a network with an entirely different
-topology (namely, nested as opposed to diagonal).}\label{fig:ecovalid}
+\caption{Visualisation of the raw (un-thresholded) models predictions
+for one instance of a network prediction problem (shown in the
+``Dataset'' panel). Increasing the value of the \(\xi\) parameter would
+make the diagonal structure ``broader,'' leading to more interactions. A
+visual inspection of the results is important, as it highlights how some
+models can ``miss'' parts of the network; by combining them in an
+ensemble, these gaps compensate one another, and lead (in this case) to
+a better prediction.}\label{fig:ecovalid}
 }
 \end{figure}
