@@ -1,5 +1,86 @@
 [
     {
+        "DOI": "10.1038/s41559-019-0950-y",
+        "author": [
+            {
+                "family": "Albouy",
+                "given": "Camille"
+            },
+            {
+                "family": "Archambault",
+                "given": "Philippe"
+            },
+            {
+                "family": "Appeltans",
+                "given": "Ward"
+            },
+            {
+                "family": "Ara\u00fajo",
+                "given": "Miguel B."
+            },
+            {
+                "family": "Beauchesne",
+                "given": "David"
+            },
+            {
+                "family": "Cazelles",
+                "given": "Kevin"
+            },
+            {
+                "family": "Cirtwill",
+                "given": "Alyssa R."
+            },
+            {
+                "family": "Fortin",
+                "given": "Marie-Jos\u00e9e"
+            },
+            {
+                "family": "Galiana",
+                "given": "Nuria"
+            },
+            {
+                "family": "Leroux",
+                "given": "Shawn J."
+            },
+            {
+                "family": "Pellissier",
+                "given": "Lo\u00efc"
+            },
+            {
+                "family": "Poisot",
+                "given": "Timoth\u00e9e"
+            },
+            {
+                "family": "Stouffer",
+                "given": "Daniel B."
+            },
+            {
+                "family": "Wood",
+                "given": "Spencer A."
+            },
+            {
+                "family": "Gravel",
+                "given": "Dominique"
+            }
+        ],
+        "container-title": "Nature Ecology & Evolution",
+        "id": "Albouy2019MarFis",
+        "issue": "8",
+        "issued": {
+            "date-parts": [
+                [
+                    2019,
+                    8,
+                    1
+                ]
+            ]
+        },
+        "page": "1153-1161",
+        "title": "The marine fish food web is globally connected",
+        "type": "article-journal",
+        "volume": "3"
+    },
+    {
         "DOI": "10.1111/j.1365-2664.2006.01214.x",
         "author": [
             {
@@ -21,7 +102,9 @@
         "issued": {
             "date-parts": [
                 [
-                    2006
+                    2006,
+                    12,
+                    1
                 ]
             ]
         },
@@ -45,12 +128,14 @@
         "issued": {
             "date-parts": [
                 [
-                    2020
+                    2020,
+                    10,
+                    7
                 ]
             ]
         },
         "page": "e0240215",
-        "title": "Prevalence threshold (\\Phie) and the geometry of screening curves",
+        "title": "Prevalence threshold (\u03c6e) and the geometry of screening curves",
         "type": "article-journal",
         "volume": "15"
     },
@@ -83,9 +168,95 @@
             ]
         },
         "page": "333-342",
-        "title": "Thinking Outside the Boxpredicting Biotic Interactions in Data-poor Environments",
+        "title": "Thinking Outside the Box\u2013predicting Biotic Interactions in Data-poor Environments",
         "type": "article-journal",
         "volume": "66"
+    },
+    {
+        "DOI": "10.1016/S2666-5247(21)00245-7",
+        "author": [
+            {
+                "family": "Becker",
+                "given": "Daniel J"
+            },
+            {
+                "family": "Albery",
+                "given": "Gregory F"
+            },
+            {
+                "family": "Sjodin",
+                "given": "Anna R"
+            },
+            {
+                "family": "Poisot",
+                "given": "Timoth\u00e9e"
+            },
+            {
+                "family": "Bergner",
+                "given": "Laura M"
+            },
+            {
+                "family": "Chen",
+                "given": "Binqi"
+            },
+            {
+                "family": "Cohen",
+                "given": "Lily E"
+            },
+            {
+                "family": "Dallas",
+                "given": "Tad A"
+            },
+            {
+                "family": "Eskew",
+                "given": "Evan A"
+            },
+            {
+                "family": "Fagre",
+                "given": "Anna C"
+            },
+            {
+                "family": "Farrell",
+                "given": "Maxwell J"
+            },
+            {
+                "family": "Guth",
+                "given": "Sarah"
+            },
+            {
+                "family": "Han",
+                "given": "Barbara A"
+            },
+            {
+                "family": "Simmons",
+                "given": "Nancy B"
+            },
+            {
+                "family": "Stock",
+                "given": "Michiel"
+            },
+            {
+                "family": "Teeling",
+                "given": "Emma C"
+            },
+            {
+                "family": "Carlson",
+                "given": "Colin J"
+            }
+        ],
+        "container-title": "The Lancet Microbe",
+        "id": "Becker2022OptPre",
+        "issued": {
+            "date-parts": [
+                [
+                    2022,
+                    1,
+                    10
+                ]
+            ]
+        },
+        "title": "Optimising predictive models to prioritise viral discovery in zoonotic reservoirs",
+        "type": "article-journal"
     },
     {
         "DOI": "10.1137/141000671",
@@ -113,7 +284,9 @@
         "issued": {
             "date-parts": [
                 [
-                    2017
+                    2017,
+                    1,
+                    1
                 ]
             ]
         },
@@ -134,17 +307,18 @@
                 "given": "Sebastian J."
             }
         ],
-        "container-title": "arXiv:2012.15505 [cs]",
         "id": "Blaom2020FleMod",
         "issued": {
             "date-parts": [
                 [
-                    2020
+                    2020,
+                    12,
+                    31
                 ]
             ]
         },
         "title": "Flexible model composition in machine learning and its implementation in MLJ",
-        "type": "article-journal"
+        "type": "manuscript"
     },
     {
         "DOI": "10.21105/joss.02704",
@@ -180,7 +354,9 @@
         "issued": {
             "date-parts": [
                 [
-                    2020
+                    2020,
+                    11,
+                    7
                 ]
             ]
         },
@@ -237,17 +413,62 @@
                 "given": "Rita"
             }
         ],
-        "container-title": "arXiv:1505.01658 [cs]",
         "id": "Branco2015SurPre",
         "issued": {
             "date-parts": [
                 [
-                    2015
+                    2015,
+                    5,
+                    13
                 ]
             ]
         },
         "title": "A Survey of Predictive Modelling under Imbalanced Distributions",
-        "type": "article-journal"
+        "type": "manuscript"
+    },
+    {
+        "DOI": "10.1086/675363",
+        "author": [
+            {
+                "family": "Canard",
+                "given": "E. F."
+            },
+            {
+                "family": "Mouquet",
+                "given": "N."
+            },
+            {
+                "family": "Mouillot",
+                "given": "D."
+            },
+            {
+                "family": "Stanko",
+                "given": "M."
+            },
+            {
+                "family": "Miklisova",
+                "given": "D."
+            },
+            {
+                "family": "Gravel",
+                "given": "D."
+            }
+        ],
+        "container-title": "The American Naturalist",
+        "id": "Canard2014EmpEva",
+        "issue": "4",
+        "issued": {
+            "date-parts": [
+                [
+                    2014,
+                    4
+                ]
+            ]
+        },
+        "page": "468-479",
+        "title": "Empirical evaluation of neutral interactions in host-parasite networks",
+        "type": "article-journal",
+        "volume": "183"
     },
     {
         "DOI": "10.1186/s12864-019-6413-7",
@@ -268,7 +489,9 @@
         "issued": {
             "date-parts": [
                 [
-                    2020
+                    2020,
+                    1,
+                    2
                 ]
             ]
         },
@@ -299,7 +522,9 @@
         "issued": {
             "date-parts": [
                 [
-                    2021
+                    2021,
+                    2,
+                    4
                 ]
             ]
         },
@@ -307,6 +532,36 @@
         "title": "The Matthews correlation coefficient (MCC) is more reliable than balanced accuracy, bookmaker informedness, and markedness in two-class confusion matrix evaluation",
         "type": "article-journal",
         "volume": "14"
+    },
+    {
+        "DOI": "10.4236/oje.2014.411055",
+        "author": [
+            {
+                "family": "Corso",
+                "given": "Gilberto"
+            },
+            {
+                "family": "Britton",
+                "given": "N. F."
+            }
+        ],
+        "container-title": "Open Journal of Ecology",
+        "id": "Corso2014ComCon",
+        "issue": "11, 11",
+        "issued": {
+            "date-parts": [
+                [
+                    2014,
+                    8,
+                    14
+                ]
+            ]
+        },
+        "page": "720-726",
+        "publisher": "Scientific Research Publishing",
+        "title": "Comparisons and Contrasts between Asymmetry and Nestedness in Interacting Ecological Networks",
+        "type": "article-journal",
+        "volume": "4"
     },
     {
         "DOI": "10.1111/oik.02305",
@@ -326,7 +581,9 @@
         "issued": {
             "date-parts": [
                 [
-                    2015
+                    2015,
+                    9,
+                    25
                 ]
             ]
         },
@@ -353,7 +610,9 @@
         "issued": {
             "date-parts": [
                 [
-                    2006
+                    2006,
+                    6,
+                    25
                 ]
             ]
         },
@@ -421,7 +680,9 @@
         "issued": {
             "date-parts": [
                 [
-                    2019
+                    2019,
+                    9,
+                    2
                 ]
             ]
         },
@@ -459,6 +720,40 @@
         "volume": "14"
     },
     {
+        "DOI": "10.7717/peerj.3644",
+        "author": [
+            {
+                "family": "Desjardins-Proulx",
+                "given": "Philippe"
+            },
+            {
+                "family": "Laigle",
+                "given": "Idaline"
+            },
+            {
+                "family": "Poisot",
+                "given": "Timoth\u00e9e"
+            },
+            {
+                "family": "Gravel",
+                "given": "Dominique"
+            }
+        ],
+        "container-title": "PeerJ",
+        "id": "Desjardins-Proulx2017EcoInt",
+        "issue": "e3644",
+        "issued": {
+            "date-parts": [
+                [
+                    2017
+                ]
+            ]
+        },
+        "title": "Ecological interactions and the Netflix problem",
+        "type": "article-journal",
+        "volume": "5"
+    },
+    {
         "DOI": "10.1016/j.patrec.2008.08.010",
         "author": [
             {
@@ -480,7 +775,9 @@
         "issued": {
             "date-parts": [
                 [
-                    2009
+                    2009,
+                    1,
+                    1
                 ]
             ]
         },
@@ -505,7 +802,9 @@
         "issued": {
             "date-parts": [
                 [
-                    2013
+                    2013,
+                    7,
+                    1
                 ]
             ]
         },
@@ -583,7 +882,9 @@
         "issued": {
             "date-parts": [
                 [
-                    2015
+                    2015,
+                    9,
+                    24
                 ]
             ]
         },
@@ -600,7 +901,6 @@
                 "given": "Nathalie"
             }
         ],
-        "chapter-number": "8",
         "container-title": "Imbalanced Learning",
         "id": "Japkowicz2013AssMet",
         "issued": {
@@ -632,16 +932,18 @@
             }
         ],
         "container-title": "2013 Humaine Association Conference on Affective Computing and Intelligent Interaction",
+        "event": "2013 Humaine Association Conference on Affective Computing and Intelligent Interaction",
         "id": "Jeni2013FacImb",
         "issued": {
             "date-parts": [
                 [
-                    2013
+                    2013,
+                    9
                 ]
             ]
         },
         "page": "245-251",
-        "title": "Facing Imbalanced DataRecommendations for the Use of Performance Metrics",
+        "title": "Facing Imbalanced Data\u2013Recommendations for the Use of Performance Metrics",
         "type": "paper-conference"
     },
     {
@@ -658,7 +960,9 @@
         "issued": {
             "date-parts": [
                 [
-                    2016
+                    2016,
+                    9,
+                    15
                 ]
             ]
         },
@@ -680,7 +984,8 @@
         "issued": {
             "date-parts": [
                 [
-                    2016
+                    2016,
+                    9
                 ]
             ]
         },
@@ -689,6 +994,7 @@
     },
     {
         "DOI": "10.2307/2529310",
+        "URL": "http://www.jstor.org/stable/2529310",
         "author": [
             {
                 "family": "Landis",
@@ -737,7 +1043,9 @@
         "issued": {
             "date-parts": [
                 [
-                    2020
+                    2020,
+                    7,
+                    29
                 ]
             ]
         },
@@ -745,6 +1053,29 @@
         "title": "Revisiting the Links-Species Scaling Relationship in Food Webs",
         "type": "article-journal",
         "volume": "1"
+    },
+    {
+        "URL": "http://www.jstor.org/stable/2462337",
+        "author": [
+            {
+                "family": "Martinez",
+                "given": "N\u00e9o D"
+            }
+        ],
+        "container-title": "The American Naturalist",
+        "id": "Martinez1992ConCon",
+        "issue": "6",
+        "issued": {
+            "date-parts": [
+                [
+                    1992
+                ]
+            ]
+        },
+        "page": "1208-1218",
+        "title": "Constant Connectance in Community Food Webs",
+        "type": "article-journal",
+        "volume": "139"
     },
     {
         "DOI": "10.1111/oik.08650",
@@ -801,6 +1132,151 @@
         "volume": "n/a"
     },
     {
+        "DOI": "10.1038/s41587-022-01213-5",
+        "author": [
+            {
+                "family": "Metsky",
+                "given": "Hayden C."
+            },
+            {
+                "family": "Welch",
+                "given": "Nicole L."
+            },
+            {
+                "family": "Pillai",
+                "given": "Priya P."
+            },
+            {
+                "family": "Haradhvala",
+                "given": "Nicholas J."
+            },
+            {
+                "family": "Rumker",
+                "given": "Laurie"
+            },
+            {
+                "family": "Mantena",
+                "given": "Sreekar"
+            },
+            {
+                "family": "Zhang",
+                "given": "Yibin B."
+            },
+            {
+                "family": "Yang",
+                "given": "David K."
+            },
+            {
+                "family": "Ackerman",
+                "given": "Cheri M."
+            },
+            {
+                "family": "Weller",
+                "given": "Juliane"
+            },
+            {
+                "family": "Blainey",
+                "given": "Paul C."
+            },
+            {
+                "family": "Myhrvold",
+                "given": "Cameron"
+            },
+            {
+                "family": "Mitzenmacher",
+                "given": "Michael"
+            },
+            {
+                "family": "Sabeti",
+                "given": "Pardis C."
+            }
+        ],
+        "container-title": "Nature Biotechnology",
+        "id": "Metsky2022DesSen",
+        "issued": {
+            "date-parts": [
+                [
+                    2022,
+                    3,
+                    3
+                ]
+            ]
+        },
+        "page": "1-9",
+        "publisher": "Nature Publishing Group",
+        "title": "Designing sensitive viral diagnostics with machine learning",
+        "type": "article-journal"
+    },
+    {
+        "DOI": "10.1098/rspb.2010.1371",
+        "author": [
+            {
+                "family": "Olesen",
+                "given": "Jens M."
+            },
+            {
+                "family": "Bascompte",
+                "given": "Jordi"
+            },
+            {
+                "family": "Dupont",
+                "given": "Yoko L."
+            },
+            {
+                "family": "Elberling",
+                "given": "Heidi"
+            },
+            {
+                "family": "Rasmussen",
+                "given": "Claus"
+            },
+            {
+                "family": "Jordano",
+                "given": "Pedro"
+            }
+        ],
+        "container-title": "Proc. R. Soc. B",
+        "id": "Olesen2011MisFor",
+        "issue": "1706",
+        "issued": {
+            "date-parts": [
+                [
+                    2011,
+                    3
+                ]
+            ]
+        },
+        "page": "725-732",
+        "title": "Missing and forbidden links in mutualistic networks",
+        "type": "article-journal",
+        "volume": "278"
+    },
+    {
+        "author": [
+            {
+                "family": "Olito",
+                "given": "Colin"
+            },
+            {
+                "family": "Fox",
+                "given": "Jeremy W."
+            }
+        ],
+        "container-title": "Oikos",
+        "id": "Olito2015SpeTra",
+        "issued": {
+            "date-parts": [
+                [
+                    2015
+                ]
+            ]
+        },
+        "page": "428-436",
+        "title": "Species traits and abundances predict metrics of plant\u2013pollinator network structure, but not pairwise interactions",
+        "type": "article-journal",
+        "volume": "124"
+    },
+    {
         "DOI": "10.1111/2041-210X.13329",
         "author": [
             {
@@ -813,7 +1289,7 @@
             },
             {
                 "family": "Klein",
-                "given": "Alexandra-Maria"
+                "given": "Alexandra\u2010Maria"
             },
             {
                 "family": "Schleuning",
@@ -836,14 +1312,51 @@
         "issued": {
             "date-parts": [
                 [
-                    2020
+                    2020,
+                    2
                 ]
             ]
         },
         "page": "281-293",
-        "title": "Machine learning algorithms to infer trait-matching and predict species interactions in ecological networks",
+        "title": "Machine learning algorithms to infer trait\u2010matching and predict species interactions in ecological networks",
         "type": "article-journal",
         "volume": "11"
+    },
+    {
+        "DOI": "10.1038/s41559-017-0101",
+        "author": [
+            {
+                "family": "Pilosof",
+                "given": "Shai"
+            },
+            {
+                "family": "Porter",
+                "given": "Mason A."
+            },
+            {
+                "family": "Pascual",
+                "given": "Mercedes"
+            },
+            {
+                "family": "K\u00e9fi",
+                "given": "Sonia"
+            }
+        ],
+        "container-title": "Nature Ecology & Evolution",
+        "id": "Pilosof2017MulNat",
+        "issued": {
+            "date-parts": [
+                [
+                    2017,
+                    3,
+                    23
+                ]
+            ]
+        },
+        "page": "0101",
+        "title": "The multilayer nature of ecological networks",
+        "type": "article-journal",
+        "volume": "1"
     },
     {
         "DOI": "10.1111/jbi.14127",
@@ -890,7 +1403,9 @@
         "issued": {
             "date-parts": [
                 [
-                    2021
+                    2021,
+                    4,
+                    29
                 ]
             ]
         },
@@ -938,17 +1453,18 @@
                 "given": "Colin J."
             }
         ],
-        "container-title": "arXiv:2105.14973 [q-bio]",
         "id": "Poisot2021ImpMam",
         "issued": {
             "date-parts": [
                 [
-                    2021
+                    2021,
+                    5,
+                    31
                 ]
             ]
         },
         "title": "Imputing the mammalian virome with linear filtering and singular value decomposition",
-        "type": "article-journal"
+        "type": "manuscript"
     },
     {
         "DOI": "10.1111/2041-210X.13125",
@@ -972,7 +1488,6 @@
         ],
         "container-title": "Methods in Ecology and Evolution",
         "id": "Pomeranz2018InfPre",
-        "issue": "ja",
         "issued": {
             "date-parts": [
                 [
@@ -1002,7 +1517,9 @@
         "issued": {
             "date-parts": [
                 [
-                    2015
+                    2015,
+                    3,
+                    4
                 ]
             ]
         },
@@ -1037,7 +1554,8 @@
         "issued": {
             "date-parts": [
                 [
-                    2005
+                    2005,
+                    1
                 ]
             ]
         },
@@ -1059,7 +1577,7 @@
                 "given": "Nikolett"
             },
             {
-                "family": "Botta-Duk\u00e1t",
+                "family": "Botta\u2010Duk\u00e1t",
                 "given": "Zolt\u00e1n"
             }
         ],
@@ -1069,7 +1587,9 @@
         "issued": {
             "date-parts": [
                 [
-                    2017
+                    2017,
+                    1,
+                    12
                 ]
             ]
         },
@@ -1100,7 +1620,9 @@
         "issued": {
             "date-parts": [
                 [
-                    2013
+                    2013,
+                    1,
+                    22
                 ]
             ]
         },
@@ -1142,7 +1664,8 @@
         "issued": {
             "date-parts": [
                 [
-                    2021
+                    2021,
+                    2
                 ]
             ]
         },
@@ -1169,11 +1692,12 @@
         ],
         "container-title": "Entropy",
         "id": "Stock2021DisInf",
-        "issue": "6",
+        "issue": "6, 6",
         "issued": {
             "date-parts": [
                 [
-                    2021
+                    2021,
+                    6
                 ]
             ]
         },
@@ -1182,6 +1706,35 @@
         "title": "Disentangling the Information in Species Interaction Networks",
         "type": "article-journal",
         "volume": "23"
+    },
+    {
+        "DOI": "10.1002/ece3.3102",
+        "author": [
+            {
+                "family": "Strona",
+                "given": "Giovanni"
+            },
+            {
+                "family": "Veech",
+                "given": "Joseph A."
+            }
+        ],
+        "container-title": "Ecology and Evolution",
+        "id": "Strona2017ForPer",
+        "issue": "14",
+        "issued": {
+            "date-parts": [
+                [
+                    2017,
+                    7,
+                    1
+                ]
+            ]
+        },
+        "page": "5476-5481",
+        "title": "Forbidden versus permitted interactions: Disentangling processes from patterns in ecological network analysis",
+        "type": "article-journal",
+        "volume": "7"
     },
     {
         "DOI": "10.32942/osf.io/y7sdz",
@@ -1243,13 +1796,15 @@
         "issued": {
             "date-parts": [
                 [
-                    2021
+                    2021,
+                    8,
+                    12
                 ]
             ]
         },
         "publisher": "EcoEvoRxiv",
         "title": "Food web reconstruction through phylogenetic transfer of low-rank network representation",
-        "type": ""
+        "type": "article-journal"
     },
     {
         "DOI": "10.1098/rstb.2021.0063",
@@ -1313,7 +1868,9 @@
         "issued": {
             "date-parts": [
                 [
-                    2021
+                    2021,
+                    11,
+                    8
                 ]
             ]
         },
@@ -1354,6 +1911,7 @@
     },
     {
         "DOI": "10.2307/3546998",
+        "URL": "http://www.jstor.org/stable/3546998",
         "author": [
             {
                 "family": "Thompson",
@@ -1398,15 +1956,39 @@
         "issued": {
             "date-parts": [
                 [
-                    2004
+                    2004,
+                    9,
+                    1
                 ]
             ]
         },
         "page": "595-608",
         "publisher": "Taylor & Francis",
-        "title": "Land-use influences on New Zealand stream communities: Effects on species composition, functional organisation, and food-web structure",
+        "title": "Land\u2010use influences on New Zealand stream communities: Effects on species composition, functional organisation, and food\u2010web structure",
         "type": "article-journal",
         "volume": "38"
+    },
+    {
+        "DOI": "10.1111/ele.13279",
+        "author": [
+            {
+                "family": "Valdovinos",
+                "given": "Fernanda S."
+            }
+        ],
+        "container-title": "Ecology Letters",
+        "id": "Valdovinos2019MutNet",
+        "issue": "0",
+        "issued": {
+            "date-parts": [
+                [
+                    2019
+                ]
+            ]
+        },
+        "title": "Mutualistic networks: Moving closer to a predictive theory",
+        "type": "article-journal",
+        "volume": "0"
     },
     {
         "DOI": "10.1073/pnas.0504062102",
@@ -1430,7 +2012,9 @@
         "issued": {
             "date-parts": [
                 [
-                    2005
+                    2005,
+                    5,
+                    7
                 ]
             ]
         },
@@ -1464,7 +2048,9 @@
         "issued": {
             "date-parts": [
                 [
-                    2021
+                    2021,
+                    11,
+                    26
                 ]
             ]
         },
@@ -1473,6 +2059,7 @@
         "type": "article-journal"
     },
     {
+        "URL": "http://userwww.sfsu.edu/%0020parker/bio840/pdfs/WilliamsMartinez2000.pdf",
         "author": [
             {
                 "family": "Williams",
@@ -1485,7 +2072,6 @@
         ],
         "container-title": "Nature",
         "id": "Williams2000SimRul",
-        "issue": "March",
         "issued": {
             "date-parts": [
                 [
@@ -1536,6 +2122,43 @@
         "title": "Effects of spatial scale of sampling on food web structure",
         "type": "article-journal",
         "volume": "5"
+    },
+    {
+        "DOI": "10.1038/s41598-017-05585-6",
+        "author": [
+            {
+                "family": "Xie",
+                "given": "Jia-Rong"
+            },
+            {
+                "family": "Zhang",
+                "given": "Pan"
+            },
+            {
+                "family": "Zhang",
+                "given": "Hai-Feng"
+            },
+            {
+                "family": "Wang",
+                "given": "Bing-Hong"
+            }
+        ],
+        "container-title": "Scientific Reports",
+        "id": "Xie2017ComCom",
+        "issue": "1",
+        "issued": {
+            "date-parts": [
+                [
+                    2017,
+                    7,
+                    13
+                ]
+            ]
+        },
+        "page": "5269",
+        "title": "Completeness of Community Structure in Networks",
+        "type": "article-journal",
+        "volume": "7"
     },
     {
         "DOI": "10.1002/1097-0142(1950)3:1<32::AID-CNCR2820030106>3.0.CO;2-3",

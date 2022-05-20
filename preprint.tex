@@ -277,22 +277,22 @@ context of the low volume of data.%
 Ecological networks are a backbone for key ecological and evolutionary
 processes; yet enumerating all of the interactions between \(S\) species
 is a daunting task, as it scales with \(S^2\), \emph{i.e.} the squared
-species richness (\textbf{Martinez1992ConCon?}). Recent contributions to
-the field of ecological network prediction (Pichler et al., 2020;
-Strydom et al., 2021; \textbf{Becker2022OptPre?}) highlight that
-although interactions can be predicted by adding ecologically relevant
-information (in the form of, \emph{e.g.} traits), we do not have robust
-guidelines as to how the predictive ability of these models should be
-evaluated, nor about how the models should be trained. Here, by relying
-on simple derivations and a series of simulations, we formulate a number
-of such guidelines, specifically for the case of binary classifiers
-derived from thresholded values. Specifically, we conduct an
-investigation of the models in terms of their skill (ability to make the
-right prediction), bias (trends towards systematically over-predicting
-one class), class imbalance (the relative number of cases representing
-interactions), and show how these effects interact. We conclude on the
-fact that models with the best interaction-scale predictive score do not
-necessarily result in the most accurate representation of the network.
+species richness (Martinez, 1992). Recent contributions to the field of
+ecological network prediction (Becker et al., 2022; Pichler et al.,
+2020; Strydom et al., 2021) highlight that although interactions can be
+predicted by adding ecologically relevant information (in the form of,
+\emph{e.g.} traits), we do not have robust guidelines as to how the
+predictive ability of these models should be evaluated, nor about how
+the models should be trained. Here, by relying on simple derivations and
+a series of simulations, we formulate a number of such guidelines,
+specifically for the case of binary classifiers derived from thresholded
+values. Specifically, we conduct an investigation of the models in terms
+of their skill (ability to make the right prediction), bias (trends
+towards systematically over-predicting one class), class imbalance (the
+relative number of cases representing interactions), and show how these
+effects interact. We conclude on the fact that models with the best
+interaction-scale predictive score do not necessarily result in the most
+accurate representation of the network.
 
 The prediction of ecological interactions shares conceptual and
 methodological issues with two fields in biology: species distribution
@@ -335,8 +335,8 @@ should be replaced by Youden's informedness (also known as \(J\),
 bookmaker's accuracy, and the True-Skill Statistic) when the imbalance
 in the dataset may not be representative of the actual imbalance.
 
-Species interaction networks are often under-sampled (Jordano, 2016b,
-2016a), and this under-sampling is structured taxonomically (Beauchesne
+Species interaction networks are often under-sampled (Jordano, 2016a,
+2016b), and this under-sampling is structured taxonomically (Beauchesne
 et al., 2016), structurally (de Aguiar et al., 2019) and spatially
 (Poisot, Bergeron, et al., 2021; Wood et al., 2015). As a consequence,
 networks suffer from data deficiencies both within and between datasets.
@@ -618,17 +618,17 @@ increase with prevalence up until equiprevalence is reached.
 \centering
 \includegraphics{figures/changing-bias.png}
 \caption{Consequences of changing the classifier skills (\(s\)) and bias
-(\(s\)) for a connectance \(\rho=0.15\), on accuracy, \(F_1\), postive
-predictive value, and \(\kappa\). Accuracy increases with skill, but
-also increases when the bias tends towards estimating \emph{fewer}
-interactions. The \(F_1\) score increases with skill but also increases
-when the bias tends towards estimating \emph{more} interactions; PPV
-behaves in the same way. Interestingly, \(\kappa\) responds as expected
-to skill (being negative whenever \(s < 0.5\)), and peaks for values of
-\(b \approx 0.5\); nevertheless, the value of bias for which \(\kappa\)
-is maximized in \emph{not} \(b=0.5\), but instead increases with
-classifier skill. In other words, at equal skill, maximizing \(\kappa\)
-would lead to select a \emph{more} biased classifier.}\label{fig:bias}
+(\(s\)) for a connectance \(\rho=0.15\), on \(F_1\), informedness, MCC,
+and \(\kappa\). Accuracy increases with skill, but also increases when
+the bias tends towards estimating \emph{fewer} interactions. The \(F_1\)
+score increases with skill but also increases when the bias tends
+towards estimating \emph{more} interactions. Interestingly, \(\kappa\)
+responds as expected to skill (being negative whenever \(s < 0.5\)), and
+peaks for values of \(b \approx 0.5\); nevertheless, the value of bias
+for which \(\kappa\) is maximized in \emph{not} \(b=0.5\), but instead
+increases with classifier skill. In other words, at equal skill,
+maximizing \(\kappa\) would lead to select a \emph{more} biased
+classifier.}\label{fig:bias}
 }
 \end{figure}
 
@@ -639,7 +639,7 @@ account for true negatives, and the increase in positive detection masks
 the over-prediction of interactions. Informedness varies with skill,
 reaching 0 for a no-skill classifier, but is entirely unsensitive to
 bias. Both MCC and \(\kappa\) have the same behavior, whereby they
-increase with skill. \(\kappa\) peaks at increasing values of biass for
+increase with skill. \(\kappa\) peaks at increasing values of bias for
 increasing skill, \emph{i.e.} is likely to lead to the selection of a
 classifier that over-predicts interactions. By contract, MCC peaks at
 the same value, regardless of skill, but this value is not
@@ -763,8 +763,8 @@ The dataset used for numerical experiments is composed of a grid of 35
 values of connectance (from 0.011 to 0.5) and 35 values of \(\nu\) (from
 0.02 to 0.98); for each pair of values, 500 networks are generated and
 predicted. For each network, we train four machines: a trait-based k-NN
-(\emph{e.g.} \textbf{Desjardins-Proulx2017EcoInt?}), a regression tree,
-a regression random forest, and a boosted regression tree. Following
+(\emph{e.g.} Desjardins-Proulx et al., 2017), a regression tree, a
+regression random forest, and a boosted regression tree. Following
 results from Pichler et al. (2020), linear models have not been
 considered (in any way, the relationship in the simulated networks is
 non-linear). The point of these numerical experiments is \emph{not} to
@@ -919,22 +919,21 @@ exist starts gaining importance.
 \includegraphics{figures/optimal_value.png}
 \caption{When trained on their optimally biased training set, most
 models were able to maximize their performance; this is not true for
-decision tree, which had a very low PR-AUC, and to some extent for ridge
-regression who had a slow increase with network connectance. The
-ensemble had a consistently high performance despite incorporating poor
+decision tree, k-NN, and to a lower extent RF. The ensemble had a
+consistently high performance despite incorporating poor
 models.}\label{fig:optimvalue}
 }
 \end{figure}
 
 When trained at their optimal training set balance, connectance still
 had a significant impact on the performance of some machines
-fig.~\ref{fig:optimvalue}. Notably, Decision Tree, Random Forest, and
-Ridge Regression had low values of PR-AUC. In all cases, the Boosted
-Regression Tree was reaching very good predictions (especially for
-connectances larger than 0.1), and the ensemble was almost always
-scoring perfectly. This suggests that all the models are biased in
-different ways, and that the averaging in the ensemble is able to
-correct these biases. We do not expect this last result to have any
+fig.~\ref{fig:optimvalue}. Notably, Decision Tree, and k-NN, as well as
+Random forest to a lower extent, had low values of PR-AUC. In all cases,
+the Boosted Regression Tree was reaching very good predictions
+(especially for connectances larger than 0.1), and the ensemble was
+almost always scoring perfectly. This suggests that all the models are
+biased in different ways, and that the averaging in the ensemble is able
+to correct these biases. We do not expect this last result to have any
 generality, and provide a discussion of a recent example in which the
 ensemble was performing worse than its components models.
 
@@ -948,11 +947,6 @@ before, with \(S_1, S_2 = 50, 80\) species, a connectance of
 \(0.5\), as fig.~\ref{fig:optimbias} suggests this is the optimal
 training set balance for this range of connectance. The prediction made
 on the complete dataset is presented in fig.~\ref{fig:ecovalid}.
-Visualizing the results this way highlights the importance of
-exploratory data analysis: whereas all models return a network with
-interactions laying mostly on the diagonal (as expected), the Ridge
-Regression is quite obviously biased. Despite this, we can see that the
-ensemble is close to the initial dataset.
 
 \begin{figure}
 \hypertarget{fig:ecovalid}{%
@@ -1019,8 +1013,7 @@ BRT & \textbf{0.90} & 0.90 & 0.98 & 0.86 & 0.23 & 0.82 &
 0.27\tabularnewline
 Random Forest & \textbf{0.90} & \textbf{0.96} & \textbf{1.00} & 0.27 &
 \textbf{0.20} & \textbf{0.72} & \textbf{0.32}\tabularnewline
-Ridge Regression & 0.80 & 0.91 & 0.95 & 0.58 & 0.24 & 1.0 &
-0.18\tabularnewline
+k-NN & 0.80 & 0.91 & 0.95 & 0.58 & 0.24 & 1.0 & 0.18\tabularnewline
 Ensemble & 0.88 & 0.94 & \textbf{1.00} & \textbf{0.96} & \textbf{0.20} &
 0.75 & 0.31\tabularnewline
 Data & & & & & 0.18 & 0.66 & 0.34\tabularnewline
@@ -1037,8 +1030,8 @@ be better than single models. Networks with different structures than
 the one we simulated here may respond in different ways, especially if
 the rules are fuzzier than the simple rule we used here. In a recent
 multi-model comparison involving supervised and unsupervised learning,
-(\textbf{Becker2022OptPre?}) found that the ensemble was \emph{not} the
-best model. There is no general conclusion to draw from this besides
+Becker et al. (2022) found that the ensemble was \emph{not} the best
+model. There is no general conclusion to draw from this besides
 reinforcing the need to be pragmatic about which models should be
 included in the ensemble, or whether to use an ensemble at all. In a
 sense, the surprising performance of the ensemble model should form the
@@ -1118,27 +1111,28 @@ measure (\emph{i.e.} the one requiring to discard the least amount of
 information to train the model) will give the best validation potential,
 and is probably the informedness (maximizing informedness is the
 generally accepted default for imbalanced classification; Schisterman et
-al., 2005).
+al., 2005). This last result suggests that the amount of bias \emph{is}
+an hyper-parameter that must be fine-tuned, as using the wrong bias can
+lead to under-performing models.
 
 One key element for real-life data that can make the prediction exercise
 more tractable is that some interactions can safely be assumed to be
 impossible; indeed, a lot of networks admit a stochastic block model as
-a good approximation (\emph{e.g.} \textbf{Xie2017ComCom?}). In
-ecological networks, this can be due to spatial constrains
-(\textbf{Valdovinos2019MutNet?}), or to the long-standing knowledge that
-some links are ``forbidden'' due to traits (\textbf{Olesen2011MisFor?})
-or abundances (\textbf{Canard2014EmpEva?}). The matching rules
-(\textbf{Strona2017ForPer?}) can be incorporated in the model either by
-adding compatibility traits, or by \emph{only} training the model on
-pairs of species that are not likely to be forbidden links. Besides
-forbidden links, a real-life case that may arise is multi-interaction or
-multi-layer networks (\textbf{Pilosof2017MulNat?}). These can be studied
-using the same general approach outlined here, either by assuming that
-pairs of species can interact in more than one way (wherein one would
-train a model for each type of interaction, based on the relevant
-predictors), or by assuming that pairs of species can only have one type
-of interaction (wherein this becomes a multi-label classification
-problem).
+a good approximation (\emph{e.g.} Xie et al., 2017). In ecological
+networks, this can be due to spatial constrains (Valdovinos, 2019), or
+to the long-standing knowledge that some links are ``forbidden'' due to
+traits (Olesen et al., 2011) or abundances (Canard et al., 2014). The
+matching rules (Olito \& Fox, 2015; Strona \& Veech, 2017) can be
+incorporated in the model either by adding compatibility traits, or by
+\emph{only} training the model on pairs of species that are not likely
+to be forbidden links. Besides forbidden links, a real-life case that
+may arise is multi-interaction or multi-layer networks (Pilosof et al.,
+2017). These can be studied using the same general approach outlined
+here, either by assuming that pairs of species can interact in more than
+one way (wherein one would train a model for each type of interaction,
+based on the relevant predictors), or by assuming that pairs of species
+can only have one type of interaction (wherein this becomes a
+multi-label classification problem).
 
 \textbf{Acknowledgements:} We acknowledge that this study was conducted
 on land within the traditional unceded territory of the Saint Lawrence
@@ -1167,9 +1161,17 @@ statistic (TSS). \emph{Journal of Applied Ecology}, \emph{43}(6),
 
 \leavevmode\hypertarget{ref-Beauchesne2016ThiOut}{}%
 Beauchesne, D., Desjardins-Proulx, Archambault, P., \& Gravel, D.
-(2016). Thinking Outside the Boxpredicting Biotic Interactions in
+(2016). Thinking Outside the Box--predicting Biotic Interactions in
 Data-poor Environments. \emph{Vie Et Milieu-Life and enVironment},
 \emph{66}(3-4), 333--342.
+
+\leavevmode\hypertarget{ref-Becker2022OptPre}{}%
+Becker, D. J., Albery, G. F., Sjodin, A. R., Poisot, T., Bergner, L. M.,
+Chen, B., Cohen, L. E., Dallas, T. A., Eskew, E. A., Fagre, A. C.,
+Farrell, M. J., Guth, S., Han, B. A., Simmons, N. B., Stock, M.,
+Teeling, E. C., \& Carlson, C. J. (2022). Optimising predictive models
+to prioritise viral discovery in zoonotic reservoirs. \emph{The Lancet
+Microbe}. \url{https://doi.org/10.1016/S2666-5247(21)00245-7}
 
 \leavevmode\hypertarget{ref-Bezanson2017JulFre}{}%
 Bezanson, J., Edelman, A., Karpinski, S., \& Shah, V. (2017). Julia: A
@@ -1183,9 +1185,9 @@ learning. \emph{Journal of Open Source Software}, \emph{5}(55), 2704.
 \url{https://doi.org/10.21105/joss.02704}
 
 \leavevmode\hypertarget{ref-Blaom2020FleMod}{}%
-Blaom, A. D., \& Vollmer, S. J. (2020). Flexible model composition in
-machine learning and its implementation in MLJ. \emph{arXiv:2012.15505
-{[}cs{]}}. \url{http://arxiv.org/abs/2012.15505}
+Blaom, A. D., \& Vollmer, S. J. (2020). \emph{Flexible model composition
+in machine learning and its implementation in MLJ}.
+\url{http://arxiv.org/abs/2012.15505}
 
 \leavevmode\hypertarget{ref-Boughorbel2017OptCla}{}%
 Boughorbel, S., Jarray, F., \& El-Anbari, M. (2017). Optimal classifier
@@ -1194,9 +1196,15 @@ for imbalanced data using Matthews Correlation Coefficient metric.
 \url{https://doi.org/10.1371/journal.pone.0177678}
 
 \leavevmode\hypertarget{ref-Branco2015SurPre}{}%
-Branco, P., Torgo, L., \& Ribeiro, R. (2015). A Survey of Predictive
-Modelling under Imbalanced Distributions. \emph{arXiv:1505.01658
-{[}cs{]}}. \url{http://arxiv.org/abs/1505.01658}
+Branco, P., Torgo, L., \& Ribeiro, R. (2015). \emph{A Survey of
+Predictive Modelling under Imbalanced Distributions}.
+\url{http://arxiv.org/abs/1505.01658}
+
+\leavevmode\hypertarget{ref-Canard2014EmpEva}{}%
+Canard, E. F., Mouquet, N., Mouillot, D., Stanko, M., Miklisova, D., \&
+Gravel, D. (2014). Empirical evaluation of neutral interactions in
+host-parasite networks. \emph{The American Naturalist}, \emph{183}(4),
+468--479. \url{https://doi.org/10.1086/675363}
 
 \leavevmode\hypertarget{ref-Chicco2020AdvMat}{}%
 Chicco, D., \& Jurman, G. (2020). The advantages of the Matthews
@@ -1222,6 +1230,11 @@ biases in the sampling of ecological interaction networks. \emph{PeerJ},
 Delgado, R., \& Tibau, X.-A. (2019). Why Cohen's Kappa should be avoided
 as performance measure in classification. \emph{PloS One}, \emph{14}(9),
 e0222916. \url{https://doi.org/10.1371/journal.pone.0222916}
+
+\leavevmode\hypertarget{ref-Desjardins-Proulx2017EcoInt}{}%
+Desjardins-Proulx, P., Laigle, I., Poisot, T., \& Gravel, D. (2017).
+Ecological interactions and the Netflix problem. \emph{PeerJ},
+\emph{5}(e3644). \url{https://doi.org/10.7717/peerj.3644}
 
 \leavevmode\hypertarget{ref-Ferri2009ExpCom}{}%
 Ferri, C., Hernández-Orallo, J., \& Modroiu, R. (2009). An experimental
@@ -1254,7 +1267,7 @@ Japkowicz, N. (2013). Assessment Metrics for Imbalanced Learning. In
 
 \leavevmode\hypertarget{ref-Jeni2013FacImb}{}%
 Jeni, L. A., Cohn, J. F., \& De La Torre, F. (2013). Facing Imbalanced
-DataRecommendations for the Use of Performance Metrics. \emph{2013
+Data--Recommendations for the Use of Performance Metrics. \emph{2013
 Humaine Association Conference on Affective Computing and Intelligent
 Interaction}, 245--251. \url{https://doi.org/10.1109/ACII.2013.47}
 
@@ -1277,18 +1290,40 @@ MacDonald, A. A. M., Banville, F., \& Poisot, T. (2020). Revisiting the
 Links-Species Scaling Relationship in Food Webs. \emph{Patterns},
 \emph{1}(0). \url{https://doi.org/10.1016/j.patter.2020.100079}
 
+\leavevmode\hypertarget{ref-Martinez1992ConCon}{}%
+Martinez, N. D. (1992). Constant Connectance in Community Food Webs.
+\emph{The American Naturalist}, \emph{139}(6), 1208--1218.
+\url{http://www.jstor.org/stable/2462337}
+
 \leavevmode\hypertarget{ref-McLeod2021SamAsy}{}%
 McLeod, A., Leroux, S. J., Gravel, D., Chu, C., Cirtwill, A. R., Fortin,
 M.-J., Galiana, N., Poisot, T., \& Wood, S. A. (2021). Sampling and
 asymptotic network properties of spatial multi-trophic networks.
 \emph{Oikos}, \emph{n/a}(n/a). \url{https://doi.org/10.1111/oik.08650}
 
+\leavevmode\hypertarget{ref-Olesen2011MisFor}{}%
+Olesen, J. M., Bascompte, J., Dupont, Y. L., Elberling, H., Rasmussen,
+C., \& Jordano, P. (2011). Missing and forbidden links in mutualistic
+networks. \emph{Proc. R. Soc. B}, \emph{278}(1706), 725--732.
+\url{https://doi.org/10.1098/rspb.2010.1371}
+
+\leavevmode\hypertarget{ref-Olito2015SpeTra}{}%
+Olito, C., \& Fox, J. W. (2015). Species traits and abundances predict
+metrics of plant--pollinator network structure, but not pairwise
+interactions. \emph{Oikos}, \emph{124}, 428--436.
+
 \leavevmode\hypertarget{ref-Pichler2020MacLea}{}%
-Pichler, M., Boreux, V., Klein, A.-M., Schleuning, M., \& Hartig, F.
-(2020). Machine learning algorithms to infer trait-matching and predict
+Pichler, M., Boreux, V., Klein, A., Schleuning, M., \& Hartig, F.
+(2020). Machine learning algorithms to infer trait‐matching and predict
 species interactions in ecological networks. \emph{Methods in Ecology
 and Evolution}, \emph{11}(2), 281--293.
 \url{https://doi.org/10.1111/2041-210X.13329}
+
+\leavevmode\hypertarget{ref-Pilosof2017MulNat}{}%
+Pilosof, S., Porter, M. A., Pascual, M., \& Kéfi, S. (2017). The
+multilayer nature of ecological networks. \emph{Nature Ecology \&
+Evolution}, \emph{1}, 0101.
+\url{https://doi.org/10.1038/s41559-017-0101}
 
 \leavevmode\hypertarget{ref-Poisot2021GloKno}{}%
 Poisot, T., Bergeron, G., Cazelles, K., Dallas, T., Gravel, D.,
@@ -1299,9 +1334,8 @@ Biogeography}, jbi.14127. \url{https://doi.org/10.1111/jbi.14127}
 \leavevmode\hypertarget{ref-Poisot2021ImpMam}{}%
 Poisot, T., Ouellet, M.-A., Mollentze, N., Farrell, M. J., Becker, D.
 J., Albery, G. F., Gibb, R. J., Seifert, S. N., \& Carlson, C. J.
-(2021). Imputing the mammalian virome with linear filtering and singular
-value decomposition. \emph{arXiv:2105.14973 {[}q-Bio{]}}.
-\url{http://arxiv.org/abs/2105.14973}
+(2021). \emph{Imputing the mammalian virome with linear filtering and
+singular value decomposition}. \url{http://arxiv.org/abs/2105.14973}
 
 \leavevmode\hypertarget{ref-Saito2015PrePlo}{}%
 Saito, T., \& Rehmsmeier, M. (2015). The Precision-Recall Plot Is More
@@ -1317,7 +1351,7 @@ Individuals Using Pooled Blood Samples. \emph{Epidemiology},
 \url{https://doi.org/10.1097/01.ede.0000147512.81966.ba}
 
 \leavevmode\hypertarget{ref-Somodi2017PreDep}{}%
-Somodi, I., Lepesi, N., \& Botta-Dukát, Z. (2017). Prevalence dependence
+Somodi, I., Lepesi, N., \& Botta‐Dukát, Z. (2017). Prevalence dependence
 in model goodness measures with special emphasis on true skill
 statistics. \emph{Ecology and Evolution}, \emph{7}(3), 863--872.
 \url{https://doi.org/10.1002/ece3.2654}
@@ -1329,6 +1363,12 @@ the performance of species distribution models with citizen science
 data. \emph{Methods in Ecology and Evolution}, \emph{12}(2), 216--226.
 \url{https://doi.org/10.1111/2041-210X.13525}
 
+\leavevmode\hypertarget{ref-Strona2017ForPer}{}%
+Strona, G., \& Veech, J. A. (2017). Forbidden versus permitted
+interactions: Disentangling processes from patterns in ecological
+network analysis. \emph{Ecology and Evolution}, \emph{7}(14),
+5476--5481. \url{https://doi.org/10.1002/ece3.3102}
+
 \leavevmode\hypertarget{ref-Strydom2021RoaPre}{}%
 Strydom, T., Catchen, M. D., Banville, F., Caron, D., Dansereau, G.,
 Desjardins-Proulx, P., Forero-Muñoz, N. R., Higino, G., Mercier, B.,
@@ -1337,6 +1377,11 @@ towards predicting species interaction networks (across space and time).
 \emph{Philosophical Transactions of the Royal Society B: Biological
 Sciences}, \emph{376}(1837), 20210063.
 \url{https://doi.org/10.1098/rstb.2021.0063}
+
+\leavevmode\hypertarget{ref-Valdovinos2019MutNet}{}%
+Valdovinos, F. S. (2019). Mutualistic networks: Moving closer to a
+predictive theory. \emph{Ecology Letters}, \emph{0}(0).
+\url{https://doi.org/10.1111/ele.13279}
 
 \leavevmode\hypertarget{ref-Weitz2005CoeArm}{}%
 Weitz, J. S., Hartman, H., \& Levin, S. A. (2005). Coevolutionary arms
@@ -1356,6 +1401,11 @@ Wood, S. A., Russell, R., Hanson, D., Williams, R. J., \& Dunne, J. A.
 (2015). Effects of spatial scale of sampling on food web structure.
 \emph{Ecology and Evolution}, \emph{5}(17), 3769--3782.
 \url{https://doi.org/10.1002/ece3.1640}
+
+\leavevmode\hypertarget{ref-Xie2017ComCom}{}%
+Xie, J.-R., Zhang, P., Zhang, H.-F., \& Wang, B.-H. (2017). Completeness
+of Community Structure in Networks. \emph{Scientific Reports},
+\emph{7}(1), 5269. \url{https://doi.org/10.1038/s41598-017-05585-6}
 
 \leavevmode\hypertarget{ref-Youden1950IndRat}{}%
 Youden, W. J. (1950). Index for rating diagnostic tests. \emph{Cancer},

@@ -3,17 +3,17 @@
 \centering
 \includegraphics{figures/changing-bias.png}
 \caption{Consequences of changing the classifier skills (\(s\)) and bias
-(\(s\)) for a connectance \(\rho=0.15\), on accuracy, \(F_1\), postive
-predictive value, and \(\kappa\). Accuracy increases with skill, but
-also increases when the bias tends towards estimating \emph{fewer}
-interactions. The \(F_1\) score increases with skill but also increases
-when the bias tends towards estimating \emph{more} interactions; PPV
-behaves in the same way. Interestingly, \(\kappa\) responds as expected
-to skill (being negative whenever \(s < 0.5\)), and peaks for values of
-\(b \approx 0.5\); nevertheless, the value of bias for which \(\kappa\)
-is maximized in \emph{not} \(b=0.5\), but instead increases with
-classifier skill. In other words, at equal skill, maximizing \(\kappa\)
-would lead to select a \emph{more} biased classifier.}\label{fig:bias}
+(\(s\)) for a connectance \(\rho=0.15\), on \(F_1\), informedness, MCC,
+and \(\kappa\). Accuracy increases with skill, but also increases when
+the bias tends towards estimating \emph{fewer} interactions. The \(F_1\)
+score increases with skill but also increases when the bias tends
+towards estimating \emph{more} interactions. Interestingly, \(\kappa\)
+responds as expected to skill (being negative whenever \(s < 0.5\)), and
+peaks for values of \(b \approx 0.5\); nevertheless, the value of bias
+for which \(\kappa\) is maximized in \emph{not} \(b=0.5\), but instead
+increases with classifier skill. In other words, at equal skill,
+maximizing \(\kappa\) would lead to select a \emph{more} biased
+classifier.}\label{fig:bias}
 }
 \end{figure}
 \efloatseparator
@@ -71,9 +71,8 @@ of the model performance measures.}\label{fig:optimbias}
 \includegraphics{figures/optimal_value.png}
 \caption{When trained on their optimally biased training set, most
 models were able to maximize their performance; this is not true for
-decision tree, which had a very low PR-AUC, and to some extent for ridge
-regression who had a slow increase with network connectance. The
-ensemble had a consistently high performance despite incorporating poor
+decision tree, k-NN, and to a lower extent RF. The ensemble had a
+consistently high performance despite incorporating poor
 models.}\label{fig:optimvalue}
 }
 \end{figure}
