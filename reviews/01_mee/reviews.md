@@ -91,14 +91,14 @@ the main text. If the author is very concerned about the flow of the text
 methodological detail is needed in the main text) perhaps supplementary
 materials could be used to help keep things streamlined in the main text.
 
-> This was an oversight on my part, and I do apologize for this. The code
-(under the FOSS MIT license) was linked to the preprint version, and I did not
-checked that it was also linked in the main text. The code is accessible on
-GitHub, as well as on OSF.io (a DOI is given in the main text). Following the
-changes requested by the reviewers, I have done a lot of refactoring, so the
-code should be easier to read. In addition, the code is now more efficient,
-although this does not remove the need for a cluster to reproduce the full
-experiments.
+> This was an oversight on my part, and I do apologize for this. The code (under
+the FOSS MIT license) was linked to the preprint version, and I did not checked
+that it was also linked in the main text. The code is accessible on GitHub, as
+well as on OSF.io (a DOI is given in the main text -- `https://osf.io/jkewd/`).
+Following the changes requested by the reviewers, I have done a lot of
+refactoring, so the code should be easier to read. In addition, the code is now
+more efficient, although this does not remove the need for a cluster to
+reproduce the full experiments.
 
 "which is within the range of usually observed connectance values for empirical
 food webs" (line 135). "there is an almost 1:1 relationship between 𝜉 and
@@ -137,7 +137,7 @@ will come across to the non-specialist at first-glance as "there's nothing hard
 about the maths in this paper" which will be a bit intimidating because the
 maths is quite tricky here!
 
-> This is a good point - I have remove this sentence, to focus on the fact that
+> This is a good point - I have removed this sentence, to focus on the fact that
 the relationships in the data are simple for a good model to pick-up on.
 
 # Reviewer 1
@@ -244,9 +244,9 @@ machine learning methods that are assessed and compared in the paper e.g. by
 referring to their use in recent studies of species-interactions.
 
 > I have expanded the choice of models at TODO -- the main rationale for these
-models and indices is that they are standard practice in ML, as is now
-clarified in the introduction (TODO); the main indices are explained in great
-detail in Strydom et al. 2021, as mentioned in TODO. Because of the word count
+models and indices is that they are standard practice in ML, as is now clarified
+in the introduction (TODO); the main indices are explained in great detail in
+Strydom et al. 2021, as mentioned in TODO. Because of the word count
 constraints, I have not reproduced a detailed explanation here.
 
 (3) I was surprised to see that RF models performed so poorly compared to BRT,
@@ -254,7 +254,12 @@ because this contrasts what other studies have found. I think it would be
 useful to elaborate more on this – particularly since in Figure 7 it seems that
 the RF model is perform on par, or perhaps even better, than the BRT.
 
-> TODO
+> In the revised simulations, RF have a clear disadvantage when connectance
+> increases (notably visible with the PR-AUC; Figure 5). I have updated this
+> information in the text and the legend of Figure 5. The reason for which the
+> models behave this way are not necessarilly important -- models are bound to
+> show some idiosynchracies on different datasets, and the *comparison* of
+> models is more informative.
 
 ## Specific comments
 
@@ -294,9 +299,9 @@ a valuable reference for how spatial thinning affects different models’
 performances as well as provide a basis for discussing the ‘biasing’ approach
 adopted in the article
 
-> This is an excellent suggestion - I have added a discussion of this article
-at TODO. More generally, I have moved the discussion of SDMs earlier in the
-introduction, to provide more ecological grounding.
+> This is an excellent suggestion - I have added a discussion of this article.
+More generally, I have moved the discussion of SDMs earlier in the introduction,
+to provide more ecological grounding.
 
 L80: Please check the bracketing around the Jordano, 2016a,b reference
 
@@ -318,7 +323,9 @@ one can spare to train models, before validating on the remaining testing data.
 Could you add a motivation for using a 30/70 and not a 70/30, training/testing
 split
 
-> I have added a discussion of the specific reasons at TODO
+> In the revised "Numerical experiments on training strategy", I now use a 50/50
+> split, and discuss how the small number of interactions in realistically-sized
+> networks can constrain the size of the train/test set.
 
 L171-172: Please spell out the B’s in B(6,8) and B(2,8), e.g.: “[…]
 beta-distributions with alpha-parameter values of 6 and 2, and beta parameter
@@ -332,8 +339,8 @@ resistance trait, just to give the reader a visual impression of how species
 niches are simulated
 
 > Due to the limits on the number of figures, I have not implemented this
-suggestion; nevertheless, I have modified the legend of figure TODO, to explain
-how changing $\xi$ would affect the shape of the network.
+suggestion; nevertheless, I have modified the legend of figure 6, to explain how
+changing $\xi$ would affect the shape of the network.
 
 L180: I attempted to write the simulations in R but didn’t understand how “we
 use [vi,hj] as a feature vector […]” would influence the input in the models.
@@ -351,12 +358,13 @@ SimData <- fn.connectanceOnInteraction(0.16)
 ~~~
 
 > Not being a `R` user, I cannot comment on the code - this being said, I have
-added a more detailed explanation of the structure of all models at TODO, and
-TODO. One thing that happen is severe over-fitting of the data; depending on
-the `R` package used, this is a real risk, and maybe adequately pruned trees
-would not yield perfect predictions. As I now note at TODO, I checked that the
-accuracy on the training and testing set never differed by more than 5%, which
-would suggest overfitting.
+added a more detailed explanation of the structure of all models in the
+"Numerical experiments on training strategy" section. One thing that may happen
+is severe over-fitting of the data; depending on the `R` package used, this is a
+real risk, and maybe adequately pruned trees would not yield perfect
+predictions. As I now note in the manuscript, I checked that the accuracy on the
+training and testing set never differed by more than 5%, which is a coarse but
+effective check on overfitting.
 
 `SimData` is a data frame with 10 000 rows, containing four columns: logical
 vector for the presence of interactions, numeric vector for connectance;
@@ -391,10 +399,10 @@ practice, these models would be applied to datasets for which the actual class
 imbalance is not the one used for training; that being said, the reviewer is
 absolutely correct in mentioning that changing the training class imbalance is
 an issue. The solution I implemented is to use a 50/50 split, where the balance
-in the training set is a parameter, but the balance in the testing set is
-always set to the exact connectance of the network (see TODO); this ensures
-that the models are evaluated in the environment where they will have to make
-the prediction, which seems like a more rigorous test of their performance.
+in the training set is a parameter, but the balance in the testing set is always
+set to the exact connectance of the network; this ensures that the models are
+evaluated in the environment where they will have to make the prediction, which
+seems like a more rigorous test of their performance.
 
 L189: Add a motivation for why these four ML methods were selected and how they
 differ – e.g. by explaining the most central ways in which they differ. I think
@@ -408,11 +416,12 @@ the other methods assessed in Pichler et al., Methods Ecol Evol.
 to realize that this would risk establishing a bad example. I have replaced it
 by a trait-based k-NN. The reason neural networks were not used is that they
 demand a lot of tweaking, and take longer to train; SVMs were not used because
-they do not behave much differently from the other models used here. The
-heuristics implemented in `MLJ.jl` give about 60 different machines compatible
-with this prediction problem, and as I now clarify at TODO, the point of the
-manuscript is not to find the best algorithm -- this is a problem-specific
-question.
+they do not behave much differently from the other models used here (especially
+BRTs) for a much higher computational cost. The heuristics implemented in
+`MLJ.jl` give about 60 different machines compatible with this prediction
+problem, and as I now clarify in the paragraph on algorithm selection, the point
+of the manuscript is not to find the best algorithm -- this is a
+problem-specific question, and particularly one that requires empirical data.
 
 L191: Earlier on you focus on classifiers but here I get the impression that
 you used random forest regression, and not a classifier. If using a regressor
@@ -423,11 +432,11 @@ meaningful to compare the two?
 > This information was already present in the manuscript, immediately after the
 description of the performance measures; because, as mentioned in the response
 to the previous point, the idea is not to make recommendations about which
-algorithms should be used, I have not added these models. On a more general
-note (and this is something we discuss in depth in a manuscript currently in
-review, a preprint of which is accessible at `10.32942/osf.io/vyzgr`, it is
-often a good decision to transform a discrete and sparse problem into a dense
-and continuous one; this motivated the choice of regression-based approaches to
+algorithms should be used, I have not added these models. On a more general note
+(and this is something we discuss in depth in a manuscript currently in review,
+a preprint of which is accessible at `10.32942/osf.io/vyzgr`), it is often a
+good decision to transform a discrete and sparse problem into a dense and
+continuous one; this motivated the choice of regression-based approaches to
 interaction prediction.
 
 L192: Although the comparison between different models is not the main focus of
@@ -445,10 +454,13 @@ in their sensitivity to tuning, and how this might influence results further
 down.
 
 > This would be an extremely important point if the problem to solve were more
-complex -- as I now specify at TODO, and as is clear from notably fig. TODO,
-all models perform extremely well; there is no *need* to tune the
-hyper-parameters in this situation. Note that the increase in the number of
-simulations would have made this work even more difficult regardless.
+complex -- as I now specify in the model description, and as is clear from
+notably fig. 6, all models perform extremely well; there is no *need* to tune
+the hyper-parameters in this situation. Note that the increase in the number of
+simulations would have made this work even more difficult regardless. Performing
+a fine-gridded tuning of hyper-parameters would require (probably) 100
+simulations for each prediction, which would accrue a runtime of a few
+core-years.
 
 L205: I struggle a bit with understanding how the ensemble model relates to the
 four underlying models contribute to the ensemble model. From Figures 3-4 it
@@ -470,7 +482,7 @@ L209-214: please specify if you removed failed (i.e. meeting one of your
 criteria) connectance-bias-combinations across all models, or just for the
 model(s) which had failed.
 
-> Only within a model, this is now clarified at TODO
+> Only within a model, this is now clarified
 
 L223: ‘stared’ - > started
 
@@ -491,7 +503,8 @@ having fewer and fewer ‘absences’ of interactions as connectance and bias
 increases, while the testing data will have an increasing dominance of
 ‘absences’.
 
-> TODO fixed
+> This has been fixed by using a 50/50 split, but ensuring the correct
+> connectance in the test set
 
 L260: Because model predictions were summed when generating the ensemble,
 models that underpredict occurrences of interactions at certain levels of bias
@@ -503,14 +516,18 @@ interactions in the testing data as a function of the logit(predicted
 probability of interaction) could be useful.
 
 > This information is given by the positive/negative predictive values; visual
-analysis of the results show that they do not differ across models. TODO
+analysis of the results show that they do not differ across models, and the
+models were ranged and thresholded independently before averaging in the
+ensemble.
 
 L273: it seems like there are some references missing here.
 
-> TODO
+> Fixed
 
 L284: Olito & Fox, Oikos 124: 428–436, 2015 doi: 10.1111/oik.01439 might be
 a useful reference here.
+
+> Added
 
 L293: That network structure doesn’t necessarily relate to processes generating
 pairwise-interactions is also discussed in Olito & Fox, Oikos 124: 428–436,
@@ -518,7 +535,7 @@ pairwise-interactions is also discussed in Olito & Fox, Oikos 124: 428–436,
 patterns in ecological networks: opportunities and limitations. Annual Review
 of Ecology, Evolution, and Systematics, 48, 559-584.
 
-> TODO
+> Added
 
 L287: In the guidelines section I think it could be useful to discuss different
 approaches for increasing ‘bias’ in the training data. One approach, as done in
@@ -530,13 +547,14 @@ thinning to the training data by randomly removing rows with absences of
 interactions – thereby increasing the proportion of interaction occurrences
 without affecting the structure of the testing data.
 
-> TODO
+> Fixed -- note that this is the strategy employed in the new version of the
+> manuscript
 
 ## Tables
 
 Table 1: spell out the network metrices in the table legend.
 
-> TODO
+> Fixed
 
 ## Figures
 
@@ -545,18 +563,28 @@ It would help the reader if the same terminology is used in the figure legend
 as in the figure labels, and that figures appear in the same order as they are
 mentioned in the legend.
 
+> This has been fixed to the best of my knowledge, please do bring up specific
+> examples if some remain
+
 Figure 2: the figures appear in another order than in the legend.
+
+> Fixed 
 
 Figure 3: Consider mentioning Informedness before MCC so that the order is the
 same in the legend as in the ‘legend-box’
 
+> The figures have been remade
+
 Figure 4: Consider mentioning PR-AUC before ROC-AUC so that the order is the
 same in the legend as in the ‘legend-box’
+
+> The figures have been remade
 
 Figures 5-6: should these be in colour? Also the smoothed lines sometimes fall
 outside the contour-lines. Perhaps add a brief explanation of what the smoothed
 lines and contours represent.
 
+> The figures have been remade
 # Reviewer 3
 
 The manuscript uses machine learning methods to predict interspecific
@@ -578,6 +606,9 @@ setup for readers to understand the context in which these methods can be
 applied, the presentation of methods is often unclear, and the guidelines for
 validating machine learning predictions are difficult to identify.
 
+> Following the comments of reviewers 1 and 2, I do hope that the presentation
+> of the methods is now more accessible.
+
 First, the manuscript lacks a proper introduction, which in my opinion would
 make it very difficult for many readers to understand the ecological problem
 that the author is trying to solve and its relevance for our understanding of
@@ -596,6 +627,11 @@ paradox, which I agree represents a key idea for the current work, but it
 almost seems as if the manuscript were missing a couple of pages that help the
 reader get to this paradox (I actually checked several times if I hadn't
 overlooked those introductory pages).
+
+> The introduction has been entirely re-written, which should adress the
+> comments made the reviewer. I would like to note that a review of the field of
+> network/interaction prediction has been published only last year, and due to
+> size constraints, it is cited in the introduction but not summarized.
 
 Second, I found the presentation of the different measures of performance a bit
 confusing and difficult to follow. You mention (line 26) three threshold
@@ -618,6 +654,12 @@ why is it that the predictions of a no-skill classifier conform to p = rho (1
 o and p, the skill adjusted confusion matrix is the Hadamard product of M and
 S, accuracy is Tr(c)/sum(M), etc.?
 
+> I am not sure how to handle this comment -- the equations are now all
+> out-of-line, and I have expanded the description of the calculations. But
+> there is no "proof" to give of how accuracy is measured. The definition of the
+> confusion matrix is an *ansatz*, everything else is common practice in ML (and
+> has been reviewed in Strydom et al. 2021 Phil Trans B).
+
 Third, the numerical experiments on training strategy are also difficult to
 follow. For example, what does it mean that networks are generated by picking
 a random infectiousness trait and a resistance trait (line 170-172)?
@@ -627,11 +669,15 @@ to predict? What is an "adjacency matrix" (a key concept to understand what the
 author is talking about!)? Also, if connectance is a proportion, how can it be
 greater than 3 (lines 213-214)?
 
+> Following comments by reviewers 1 and 2, this section has been thoroughly revised, so that the comments of reviewers 3 should now be adressed.
+
 Fourth, the results are also sometimes obscure and difficult to follow. For
 example, in Fig. 1, the legend states that it shows "Consequences of changing
 the classifier skills (s) and bias (s)" on "accuracy, F1 , postive predictive
 value, and K", but the panels show F1, informedness, MCC and K; where are
 accuracy and positive predictive value shown?
+
+> The figure has been updated
 
 Fifth, I also had a hard time identifying and understanding the guidelines for
 the assesment of network predictive models offered in the last section of the
@@ -639,6 +685,10 @@ manuscript. All the four "guidelines" look more as conclusions full of caveats,
 from which the readers may, or may not, derive their own, unstated guidelines
 about how to proceed. I think the author needs to make a greater effort here in
 presenting more clearly identified guidelines.
+
+> The presence of caveats in the face of uncertainty is not an issue, it is good
+> scholarship. That being said, after greatly expanding the simulations, the
+> guidelines are, *where justifiable*, more prescriptive.
 
 So I think that the manuscript needs an introduction, more clarity in the
 presentation of the methods and results, and a clearer presentation of the
@@ -651,33 +701,59 @@ this manuscript. And I would also find informative if the manuscript included
 a section with an example with a real network, so that readers can see how
 these methods would apply to real-world data.
 
+> These are preferences of the reviewer, which I respect, but essentially an entirely different manuscript, which I will not write. Expanding on constructive criticism from reviewer 1 and 2, I am confident that the manuscript is now more accessible.
+
 In addition to the above general comments, here go a few additional specific
 suggestions:
 
 Line 25: You say you will focus on five measure to evaluation classification
 tasks. Why this particular set of measures?
 
+> Explained in the revised introduction
+
 Lines 29-35: Please add the left hand side of the equality of each equation
 (for example, add "x = " for the first equation), and number all equations, so
 all readers can navigate more easily through the text and the equations.
 
+> Will defer to the editor for this decision
+
 Line 33: "event"
+
+> Fixed
 
 Line 49: "latter"
 
+> Fixed
+
 Line 95: Baseline values of what? Please use a more self explanatory title.
+
+> Fixed
 
 Line 96: Please define connectance, as not all readers will be familiar with
 this concept.
 
+> Fixed
+
 Line 135: Please reverse opening square bracket.
+
+> Unclear why, no change
 
 Line 146: "bias"
 
+> Fixed
+
 Line 259: "especially"
+
+> Fixed
 
 Line 262: "example"
 
+> Fixed
+
 Line 263: "Does"
 
+> Fixed
+
 Line 273: missing references
+
+> Fixed

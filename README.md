@@ -303,16 +303,15 @@ especially at high skill, and ideally centered around $\text{logit}(b)=0$; an
 increase with prevalence up until equiprevalence is reached.
 
 ![Consequences of changing the classifier skills ($s$) and bias ($s$) for a
-connectance $\rho=0.15$, on accuracy, $F_1$, postive predictive value, and
-$\kappa$. Accuracy increases with skill, but also increases when the bias tends
-towards estimating *fewer* interactions. The $F_1$ score increases with skill
-but also increases when the bias tends towards estimating *more* interactions;
-PPV behaves in the same way. Interestingly, $\kappa$ responds as expected to
-skill (being negative whenever $s < 0.5$), and peaks for values of $b \approx
-0.5$; nevertheless, the value of bias for which $\kappa$ is maximized in *not*
-$b=0.5$, but instead increases with classifier skill. In other words, at equal
-skill, maximizing $\kappa$ would lead to select a *more* biased
-classifier.](figures/changing-bias.png){#fig:bias}
+connectance $\rho=0.15$, on $F_1$, informedness, MCC, and $\kappa$. Accuracy
+increases with skill, but also increases when the bias tends towards estimating
+*fewer* interactions. The $F_1$ score increases with skill but also increases
+when the bias tends towards estimating *more* interactions. Interestingly,
+$\kappa$ responds as expected to skill (being negative whenever $s < 0.5$), and
+peaks for values of $b \approx 0.5$; nevertheless, the value of bias for which
+$\kappa$ is maximized in *not* $b=0.5$, but instead increases with classifier
+skill. In other words, at equal skill, maximizing $\kappa$ would lead to select
+a *more* biased classifier.](figures/changing-bias.png){#fig:bias}
 
 In @fig:bias, we show that none of the four measures satisfy all the
 considerations at once: $F_1$ increases with skill, and increases monotonously
@@ -320,7 +319,7 @@ with bias; this is because $F_1$ does not account for true negatives, and the
 increase in positive detection masks the over-prediction of interactions.
 Informedness varies with skill, reaching 0 for a no-skill classifier, but is
 entirely unsensitive to bias. Both MCC and $\kappa$ have the same behavior,
-whereby they increase with skill. $\kappa$ peaks at increasing values of biass
+whereby they increase with skill. $\kappa$ peaks at increasing values of bias
 for increasing skill, *i.e.* is likely to lead to the selection of a classifier
 that over-predicts interactions. By contract, MCC peaks at the same value,
 regardless of skill, but this value is not $\text{logit}(b)=0$: unless at very
@@ -551,33 +550,28 @@ need for biased training sets is less prominent, as learning the rules for which
 interactions *do not* exist starts gaining importance.
 
 ![When trained on their optimally biased training set, most models were able to
-maximize their performance; this is not true for decision tree, which had a very
-low PR-AUC, and to some extent for ridge regression who had a slow increase with
-network connectance. The ensemble had a consistently high performance despite
+maximize their performance; this is not true for decision tree, k-NN, and to a
+lower extent RF. The ensemble had a consistently high performance despite
 incorporating poor models.](figures/optimal_value.png){#fig:optimvalue}
 
-When trained at their optimal training set balance, connectance still had
-a significant impact on the performance of some machines [@fig:optimvalue].
-Notably, Decision Tree, Random Forest, and Ridge Regression had low values of
-PR-AUC. In all cases, the Boosted Regression Tree was reaching very good
-predictions (especially for connectances larger than 0.1), and the ensemble was
-almost always scoring perfectly. This suggests that all the models are biased
-in different ways, and that the averaging in the ensemble is able to correct
-these biases. We do not expect this last result to have any generality, and
-provide a discussion of a recent example in which the ensemble was performing
-worse than its components models.
+When trained at their optimal training set balance, connectance still had a
+significant impact on the performance of some machines [@fig:optimvalue].
+Notably, Decision Tree, and k-NN, as well as Random forest to a lower extent,
+had low values of PR-AUC. In all cases, the Boosted Regression Tree was reaching
+very good predictions (especially for connectances larger than 0.1), and the
+ensemble was almost always scoring perfectly. This suggests that all the models
+are biased in different ways, and that the averaging in the ensemble is able to
+correct these biases. We do not expect this last result to have any generality,
+and provide a discussion of a recent example in which the ensemble was
+performing worse than its components models.
 
 # Do better classification accuracy result in more realistic networks?
 
-In this last section, we generate a network using the same model as before,
-with $S_1, S_2 = 50, 80$ species, a connectance of $\approx 0.16$ ($\xi
-= 0.19$), and a training set balance of $0.5$, as @fig:optimbias suggests this
-is the optimal training set balance for this range of connectance. The
-prediction made on the complete dataset is presented in @fig:ecovalid.
-Visualizing the results this way highlights the importance of exploratory data
-analysis: whereas all models return a network with interactions laying mostly
-on the diagonal (as expected), the Ridge Regression is quite obviously biased.
-Despite this, we can see that the ensemble is close to the initial dataset.
+In this last section, we generate a network using the same model as before, with
+$S_1, S_2 = 50, 80$ species, a connectance of $\approx 0.16$ ($\xi = 0.19$), and
+a training set balance of $0.5$, as @fig:optimbias suggests this is the optimal
+training set balance for this range of connectance. The prediction made on the
+complete dataset is presented in @fig:ecovalid.
 
 ![Visualisation of the raw (un-thresholded) models predictions for one instance
 of a network prediction problem (shown in the "Dataset" panel). Increasing the
@@ -610,14 +604,14 @@ have the same value. That ROC-AUC is consistently larger than PR-AUC may be
 a case of this measure masking models that are not, individually, strong
 predictors [@Jeni2013FacImb].
 
-|            Model |   MCC    |   Inf.   | ROC-AUC  |  PR-AUC  |  Conn.   |  $\eta$  |   $Q$    |
-| ---------------: | :------: | :------: | :------: | :------: | :------: | :------: | :------: |
-|    Decision tree |   0.85   |   0.92   |   0.97   |   0.12   |   0.21   |   0.76   |   0.31   |
-|              BRT | **0.90** |   0.90   |   0.98   |   0.86   |   0.23   |   0.82   |   0.27   |
-|    Random Forest | **0.90** | **0.96** | **1.00** |   0.27   | **0.20** | **0.72** | **0.32** |
-| Ridge Regression |   0.80   |   0.91   |   0.95   |   0.58   |   0.24   |   1.0    |   0.18   |
-|         Ensemble |   0.88   |   0.94   | **1.00** | **0.96** | **0.20** |   0.75   |   0.31   |
-|             Data |          |          |          |          |   0.18   |   0.66   |   0.34   |
+|         Model |   MCC    |   Inf.   | ROC-AUC  |  PR-AUC  |  Conn.   |  $\eta$  |   $Q$    |
+| ------------: | :------: | :------: | :------: | :------: | :------: | :------: | :------: |
+| Decision tree |   0.85   |   0.92   |   0.97   |   0.12   |   0.21   |   0.76   |   0.31   |
+|           BRT | **0.90** |   0.90   |   0.98   |   0.86   |   0.23   |   0.82   |   0.27   |
+| Random Forest | **0.90** | **0.96** | **1.00** |   0.27   | **0.20** | **0.72** | **0.32** |
+|          k-NN |   0.80   |   0.91   |   0.95   |   0.58   |   0.24   |   1.0    |   0.18   |
+|      Ensemble |   0.88   |   0.94   | **1.00** | **0.96** | **0.20** |   0.75   |   0.31   |
+|          Data |          |          |          |          |   0.18   |   0.66   |   0.34   |
 
 : Values of four performance metrics, and five network structure metrics, for
 500 independent predictions similar to the ones presented in @fig:ecovalid. The
@@ -698,29 +692,31 @@ high ROC-AUC is not informative, as it can be associated to a low PR-AUC (see
 other fields [@Saito2015PrePlo; @Jeni2013FacImb].
 
 Thirdly, regardless of network connectance, maximizing informedness required a
-training set balance of about 0.5, and maximizing the MCC required a training set
-bias of 0.7 and more. This has an important consequence in ecological networks,
-for which the pool of positive cases (interactions) to draw from is typically
-small: the most parsimonious measure (*i.e.* the one requiring to discard the
-least amount of information to train the model) will give the best validation
-potential, and is probably the informedness [maximizing informedness is the
-generally accepted default for imbalanced classification;
-@Schisterman2005OptCut].
+training set balance of about 0.5, and maximizing the MCC required a training
+set bias of 0.7 and more. This has an important consequence in ecological
+networks, for which the pool of positive cases (interactions) to draw from is
+typically small: the most parsimonious measure (*i.e.* the one requiring to
+discard the least amount of information to train the model) will give the best
+validation potential, and is probably the informedness [maximizing informedness
+is the generally accepted default for imbalanced classification;
+@Schisterman2005OptCut]. This last result suggests that the amount of bias *is*
+an hyper-parameter that must be fine-tuned, as using the wrong bias can lead to
+under-performing models. 
 
 One key element for real-life data that can make the prediction exercise more
 tractable is that some interactions can safely be assumed to be impossible;
-indeed, a lot of networks admit a stochastic block model as a good
-approximation [*e.g.* @Xie2017ComCom]. In ecological networks, this can be due
-to spatial constrains [@Valdovinos2019MutNet], or to the long-standing
-knowledge that some links are "forbidden" due to traits [@Olesen2011MisFor] or
-abundances [@Canard2014EmpEva]. The matching rules [@Strona2017ForPer] can be
-incorporated in the model either by adding compatibility traits, or by *only*
-training the model on pairs of species that are not likely to be forbidden
-links. Besides forbidden links, a real-life case that may arise is
+indeed, a lot of networks admit a stochastic block model as a good approximation
+[*e.g.* @Xie2017ComCom]. In ecological networks, this can be due to spatial
+constrains [@Valdovinos2019MutNet], or to the long-standing knowledge that some
+links are "forbidden" due to traits [@Olesen2011MisFor] or abundances
+[@Canard2014EmpEva]. The matching rules [@Strona2017ForPer; @Olito2015SpeTra]
+can be incorporated in the model either by adding compatibility traits, or by
+*only* training the model on pairs of species that are not likely to be
+forbidden links. Besides forbidden links, a real-life case that may arise is
 multi-interaction or multi-layer networks [@Pilosof2017MulNat]. These can be
 studied using the same general approach outlined here, either by assuming that
-pairs of species can interact in more than one way (wherein one would train
-a model for each type of interaction, based on the relevant predictors), or by
+pairs of species can interact in more than one way (wherein one would train a
+model for each type of interaction, based on the relevant predictors), or by
 assuming that pairs of species can only have one type of interaction (wherein
 this becomes a multi-label classification problem). 
 
