@@ -736,7 +736,7 @@ this concept.
 
 Line 135: Please reverse opening square bracket.
 
-> Unclear why, no change
+> Not required as far as I can tell, no change.
 
 Line 146: "bias"
 
