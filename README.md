@@ -776,11 +776,10 @@ within the traditional unceded territory of the Saint Lawrence Iroquoian,
 Anishinabewaki, Mohawk, Huron-Wendat, and Omàmiwininiwak nations. We thank Colin
 J. Carlson, Michael D. Catchen, Giulio Valentino Dalla Riva, and Tanya Strydom
 for inputs on earlier versions of this manuscript. This research was enabled in
-part by support provided by Calcul Québec (www.calculquebec.ca) and Compute
-Canada (www.computecanada.ca) through the Narval general purpose cluster. TP is
-supported by the Fondation Courtois, a NSERC Discovery Grant and Discovery
-Acceleration Supplement, by funding to the Viral Emergence Research Initiative
-(VERENA) consortium including NSF BII 2021909, and by a grant from the Institut
-de Valorisation des Données (IVADO).
+part by support provided by Calcul Québec (www.calculquebec.ca) through the
+Narval general purpose cluster. TP is supported by the Fondation Courtois, a
+NSERC Discovery Grant and Discovery Acceleration Supplement, by funding to the
+Viral Emergence Research Initiative (VERENA) consortium including NSF BII
+2021909, and by a grant from the Institut de Valorisation des Données (IVADO).
 
 # References
