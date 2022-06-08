@@ -581,28 +581,34 @@ as it highlights how some models can "miss" parts of the network; by combining
 them in an ensemble, these gaps compensate one another, and lead (in this case)
 to a better prediction.](figures/valid_ensemble.png){#fig:ecovalid}
 
-The trained models were then thresholded (again by optimising informedness),
-and their predictions transformed back into networks for analysis;
-specifically, we measured the connectance, nestedness (REF), modularity (REF),
-asymmetry, and network dissimilarity (REF). This process was repeated 250
-times, and the results are presented in @tbl:comparison. The random forest
-model is an interesting instance here: it produces the network that looks the
-most like the original dataset, despite having a very low PR-AUC, suggesting it
-hits high recall at the cost of low precision. Although the ensemble was able
-to reach a very high PR-AUC (and a very high ROC-AUC), this did not necessarily
-translate into more accurate reconstructions of the structure of the network.
-This result bears elaborating. Measures of model performance capture how much
-of the interactions and non-interactions are correctly identified. As long as
-these predictions are not perfect, some interactions will be predicted at the
-"wrong" position in the network; these measures cannot describe the structural
-effect of these mistakes. On the other hand, measures of network structure can
-have the same value with interactions that fall at drastically different
-positions; this is in part because a lot of these measures covary with
-connectance, and in part because as long as these values are not 0 or their
-respective maximum, there is a large number of network configurations that can
-have the same value. That ROC-AUC is consistently larger than PR-AUC may be
-a case of this measure masking models that are not, individually, strong
-predictors [@Jeni2013FacImb].
+The trained models were then thresholded (again by optimising informedness), and
+their predictions transformed back into networks for analysis; specifically, we
+measured the connectance, nestedness [$\eta$; @Bastolla2009ArcMut], modularity
+[$Q$; @Barber2007ModCom], asymmetry [$A$; @Delmas2018AnaEco], and Jaccard
+network dissimilarity [@Canard2014EmpEva]. This process was repeated 250 times,
+and the results are presented in @tbl:comparison. The k-NN model is an
+interesting instance here: it produces the network that looks the most like the
+original dataset, despite having the lowest PR-AUC, suggesting it hits high
+recall at the cost of low precision. The ensemble was able to reach a very high
+PR-AUC (and a very high ROC-AUC), which translated into more accurate
+reconstructions of the structure of the network (with the exception of
+modulairty, which is underestimated by $0.03$). This result bears elaborating.
+Measures of model performance capture how much of the interactions and
+non-interactions are correctly identified. As long as these predictions are not
+perfect, some interactions will be predicted at the "wrong" position in the
+network; these measures cannot describe the structural effect of these mistakes.
+On the other hand, measures of network structure can have the same value with
+interactions that fall at drastically different positions; this is in part
+because a lot of these measures covary with connectance, and in part because as
+long as these values are not 0 or their respective maximum, there is a large
+number of network configurations that can have the same value. That ROC-AUC is
+consistently larger than PR-AUC may be a case of this measure masking models
+that are not, individually, strong predictors [@Jeni2013FacImb]. In this specif
+example, the combination of individually "adequate" models resulted in an
+extremely strong ensemble, suggesting that the correct prediction of
+interactions (as measured by MCC, Inf., ROC-AUC, and PR-AUC) *and* network
+properties is indeed a feasible task under appropriately hyper-parameterized
+models.
 
 |         Model |   MCC    |   Inf.   | ROC-AUC |  PR-AUC  |  Conn.   |  $\eta$  |   $Q$    |   $A$    | Jaccard  |
 | ------------: | :------: | :------: | :-----: | :------: | :------: | :------: | :------: | :------: | :------: |
