@@ -627,22 +627,6 @@ indicate an average $\ge 0.99$. {#tbl:comparison}
 
 # Guidelines for the assessment of network predictive models
 
-It is noteworthy that the ensemble model was systematically better
-than the component models. We do not expect that ensembles will *always* be
-better than single models. Networks with different structures than the one we
-simulated here may respond in different ways, especially if the rules are
-fuzzier than the simple rule we used here. In a recent multi-model comparison
-involving supervised and unsupervised learning, @Becker2022OptPre found that
-the ensemble was *not* the best model. There is no general conclusion to draw
-from this besides reinforcing the need to be pragmatic about which models
-should be included in the ensemble, or whether to use an ensemble at all. In
-a sense, the surprising performance of the ensemble model should form the basis
-of the last recommendation: optimal training set balance and its interaction
-with connectance and the specific binary classifier used is, in a sense, an
-hyperparameter that should be assessed. The distribution of results in
-@fig:optimbias and @fig:optimvalue show that there are variations around the
-trend. TODO fix this sentence
-
 We establish that due to the low prevalence of interactions, even poor
 classifiers applied to food web data will reach a high accuracy; this is because
 the measure is dominated by the accidentally correct predictions of negatives.
@@ -650,83 +634,121 @@ On simulated confusion matrices with ranges of imbalance that are credible for
 ecological networks, MCC had the most desirable behavior, and informedness is a
 linear measure of classifier skill. By performing simulations with four models
 and an ensemble, we show that informedness and ROC-AUC are consistently high on
-network data, and that MCC and PR-AUC are more accurate measures of the
-effective performance of the classifier. Finally, by measuring the structure of
-predicted networks, we highlight an interesting paradox: the models with the
-best performance measures are not necessarilly the models with the closest
+network data, whereas MCC and PR-AUC are more accurate measures of the effective
+performance of the classifier. Finally, by measuring the structure of predicted
+networks, we highlight an interesting paradox: the models with the best
+performance measures are not necessarilly the models with the closest
 reconstructed network structure. We discuss these results in the context of
 establishing guidelines for the prediction of ecological interactions.
 
-The results presented here highlight an interesting paradox: although the Random
-Forest was ultimately able to get a correct estimate of network structure
+It is noteworthy that the ensemble model was systematically better than the
+component models. We do not expect that ensembles will *always* be better than
+single models. Networks with different structures than the one we simulated here
+may respond in different ways, especially if the rules are fuzzier than the
+simple rule we used here. In a recent multi-model comparison involving
+supervised and unsupervised learning, @Becker2022OptPre found that the ensemble
+was *not* the best model, and was specifically under-performing compared to
+models using biological traits. This may be because the dataset of
+@Becker2022OptPre was known to be under-sampled, and so the network itself
+contained less information than the network and species traits. There is no
+general conclusion to draw from either these results or ours, besides
+reinforcing the need to be pragmatic about which models should be included in
+the ensemble, and whether to use an ensemble at all. In a sense, the surprising
+performance of the ensemble model should form the basis of the first broad
+recommendation: optimal training set balance and its interaction with
+connectance and the specific binary classifier used is, in a sense, an
+hyperparameter that should be assessed. The distribution of results in
+@fig:optimbias and @fig:optimvalue show that there are variations around the
+trend, and multiple models should probably be trained on their "optimal"
+training/testing set, as opposed to the same ones.
+
+The results presented here highlight an interesting paradox: although the k-NN
+model was ultimately able to get a correct estimate of network structure
 [@tbl:comparison], it ultimately remains a poor classifier, as evidenced by its
 low PR-AUC. This suggests that the goal of predicting *interactions* and
-predicting *networks* may not be solvable in the same way -- of course a perfect
-classifier of interactions would make a perfect network prediction; but even the
-best scoring predictor of interactions (the ensemble model) had not necessarily
-the best prediction of network structure. The tasks of predicting networks
-structure and of predicting interactions within networks are essentially two
-different ones. For some applications (*.e.g.* comparison of network structure
-across gradients), one may care more about a robust estimate of the structure,
-at the cost at putting some interactions at the wrong place. For other
-applications (*e.g.* identifying pairs of interacting species), one may
-conversely care more about getting as many pairs right, even though the mistakes
-accumulate in the form of a slightly worse estimate of network structure. How
-these two approaches can be reconciled is undoubtedly a task for further
-research. Despite this apparent tension at the heart of the predictive exercise,
-we can use the results presented here to suggest a number of guidelines.
+predicting *networks* may not always be solvable in the same way -- of course a
+perfect classifier of interactions would make a perfect network prediction;
+indeed, the best scoring predictor of interactions (the ensemble model) had the
+best prediction of network structure. The tasks of predicting networks structure
+and of predicting interactions within networks are essentially two different
+ones. For some applications (*.e.g.* comparison of network structure across
+gradients), one may care more about a robust estimate of the structure, at the
+cost at putting some interactions at the wrong place. For other applications
+(*e.g.* identifying pairs of interacting species), one may conversely care more
+about getting as many pairs right, even though the mistakes accumulate in the
+form of a slightly worse estimate of network structure. How these two approaches
+can be reconciled is something to evaluate on a case-by-case basis, especially
+since there is no guarantee that an esemble model will always be the most
+precise one. Despite this apparent tension at the heart of the predictive
+exercise, we can use the results presented here to suggest a number of
+guidelines.
 
-First, because we should have more trust in reported interactions than in
-reported absences of interactions, we can draw on previous literature to
-recommend informedness as a measure to decide on a threshold
-[@Chicco2021MatCor]; this being said, because informedness is insensitive to
-bias, the model performance is better evaluated through the use of MCC
+First, because we have more trust in reported interactions than in reported
+absences of interactions (which are overwhelmingly *pseudo*-absences), we can
+draw on previous literature to recommend informedness as a measure to decide on
+a threshold for binary classification [@Chicco2021MatCor]; this being said,
+because informedness is insensitive to bias (although it is a linear measure of
+skill), the overall model performance is better evaluated through the use of MCC
 [@fig:biasmccinf]. Because $F_1$ is monotonously sensitive to classifier bias
 [@fig:bias] and network connectance [@fig:connectance], MCC should be prefered
-as a measure of model evaluation and comparison.
+as a measure of model evaluation and comparison. When dealing with multiple
+models, we therefore suggest to find the optimal threshold using informedness,
+and to pick the best model using MCC (assuming one does not want to use an
+ensemble model).
 
-Second, because the PR-AUC responds more to network connectance [@fig:optimvalue]
-and training set imbalance [@fig:biasrocpr], it should be used as a measure of
-model performance over the ROC-AUC. This is not to say that ROC-AUC should be
-discarded (in fact, a low ROC-AUC is a sign of an issue with the model), but
-that its interpretation should be guided by the PR-AUC value. Specifically, a
-high ROC-AUC is not informative, as it can be associated to a low PR-AUC (see
-*e.g.* Random Forest in @tbl:comparison) This again echoes recommendations from
-other fields [@Saito2015PrePlo; @Jeni2013FacImb].
+Second, accuracy alone should not be the main measure of model performance, but
+rather an expectation of how well the model should behave given the class
+balance in the set on which predictions are made; this is because, as derived
+earlier, the expected accuracy for a no-skill no-bias classifier is $\rho^2 +
+(1-\rho)^2$ (where $\rho$ is the class balance), which will most often be large.
+This pitfall is notably illustrated in a recent food-web model
+[@Caron2022AddElt] wherein the authors, using a training set of $n = 10^4$ with
+only 100 positive interactions (representing 0.1% of the total interactions),
+reached a good accuracy. Reporting a good accuracy is not informative,
+especially when accuracy isn't (i) compared to the baseline expected value under
+the given class balance, and (ii) interpreted in the context of a measure that
+is not sensitive to the chance prediction of many negatives (like MCC).
 
-Third, for the same reasons that should give more weight to PR-AUC than ROC-AUC,
-accuracy alone should not be used as a measure of model performance, but rather
-as an expectation of how well the model should behave given the balance in the
-set on which predictions are made; this is because, as derived earlier, the
-expected accuracy for a no-skill no-bias classifier is $\rho^2 + (1-\rho)^2$
-(where $\rho$ is the class balance), which will very easily by large. This
-pitfall is notably illustrated in a recent model [@Caron2022AddElt] wherein the
-authors claim that using a training set of $n = 10^4$ with only 100 positive
-interactions (representing 0.1% of the total interactions) reached a good
-accuracy. Reporting a good accuracy isn't informative is this accuracy isn't (i)
-compared to the baseline expected value under the class balance, and (ii)
-interpreted in the context of a measure that isn't sensitive to true negatives
-(like MCC).
+Third, because the PR-AUC responds more to network connectance [@fig:optimvalue]
+and training set imbalance [@fig:biasrocpr] than ROC-AUC, it should be used as a
+measure of model performance over the ROC-AUC. This is not to say that ROC-AUC
+should be discarded (in fact, a low ROC-AUC is undoubtedly a sign of an issue
+with the model), but that its interpretation should be guided by the PR-AUC
+value. Specifically, a high ROC-AUC is not informative, as it can be associated
+to a low PR-AUC (see *e.g.* Random Forest in @tbl:comparison) This again echoes
+recommendations from other fields [@Saito2015PrePlo; @Jeni2013FacImb]. We
+therefore expect to see high ROC-AUC values, and then to pick the model that
+maximizes the PR-AUC value. Taken together with the previous two guidelines, we
+strongly encourage to (i) ensure that accuracy and ROC-AUC are high (in the case
+of accuracy, higher than expected under no-skill no-bias situation), and (ii) to
+discuss the performance of the model in terms of the most discriminant measures,
+*i.e.* PR-AUC and MCC.
 
 Finally, network connectance (*i.e.* the empirical class imbalance) should
-inform the composition of the training and testing set. In the approach outlined
-here, we treat the class imbalance as an hyper-parameter, but *test* the model
-on a set that has the same class imbalance as the actual dataset. This is an
-important change to the overall methodology so far, as it ensure that the
-prediction environment matches the testing environment, and so the values on the
-testing set can be directly compared to the values for the actual prediction. A
-striking result [@fig:optimbias] is that Informedness was almost always maximal
-at 50/50 balance (regardless of connectance), whereas MCC required *more*
-positives to be maximized when connectance *increases*. This has an important
-consequence in ecological networks, for which the pool of positive cases
-(interactions) to draw from is typically small: the most parsimonious measure
-(*i.e.* the one requiring to discard the least amount of information to train
-the model) will give the best validation potential, and is probably the
-informedness [maximizing informedness is the generally accepted default for
-imbalanced classification; @Schisterman2005OptCut]. This last result further
-strengthens the assumption that the amount of bias *is* an hyper-parameter that
-must be fine-tuned, as using the wrong bias can lead to models with excess biass
-or lower skill.
+inform the composition of the training and testing set, because it is an
+ecologically relevant value. In the approach outlined here, we treat the class
+imbalance of the training set as an hyper-parameter, but *test* the model on a
+set that has the same class imbalance as the actual dataset. This is an
+important distinction, as it ensure that the prediction environment matches the
+testing environment (as we cannot manipulate the connectance of the empirical
+dataset on which the predictions will be made), and so the values measured on
+the testing set (or validation set if the data volume allows one to exists) can
+be directly compared to the values for the actual prediction. A striking result
+[@fig:optimbias] is that Informedness was almost always maximal at 50/50 balance
+(regardless of connectance), whereas MCC required *more* positives to be
+maximized when connectance *increases*, matching the idea that it is a more
+stringent measure of performance. This has an important consequence in
+ecological networks, for which the pool of positive cases (interactions) to draw
+from is typically small: the most parsimonious measure (*i.e.* the one requiring
+to discard the least amount of interactions to train the model) will give the
+best validation potential, and in this light is very likely informedness
+[maximizing informedness is, in fact, the generally accepted default for
+imbalanced classification regardless of the problem domain;
+@Schisterman2005OptCut]. This last result further strengthens the assumption
+that the amount of bias *is* an hyper-parameter that must be fine-tuned, as
+using the wrong bias can lead to models with lower performance; for this reason,
+it makes sense to not train all models on the same training/testing set, but
+rather to optimize the set composition for each of them.
 
 One key element for real-life data that can make the prediction exercise more
 tractable is that some interactions can safely be assumed to be impossible;
@@ -755,9 +777,9 @@ J. Carlson, Michael D. Catchen, Giulio Valentino Dalla Riva, and Tanya Strydom
 for inputs on earlier versions of this manuscript. This research was enabled in
 part by support provided by Calcul Québec (www.calculquebec.ca) and Compute
 Canada (www.computecanada.ca) through the Narval general purpose cluster. TP is
-supported by a NSERC Discovery Grant and Discovery Acceleration Supplement, by
-funding to the Viral Emergence Research Initiative (VERENA) consortium including
-NSF BII 2021909, and by a grant from the Institut de Valorisation des Données
-(IVADO).
+supported by the Fondation Courtois, a NSERC Discovery Grant and Discovery
+Acceleration Supplement, by funding to the Viral Emergence Research Initiative
+(VERENA) consortium including NSF BII 2021909, and by a grant from the Institut
+de Valorisation des Données (IVADO).
 
 # References
