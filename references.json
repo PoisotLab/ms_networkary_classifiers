@@ -471,6 +471,41 @@
         "volume": "183"
     },
     {
+        "DOI": "10.1111/ele.13966",
+        "author": [
+            {
+                "family": "Caron",
+                "given": "Dominique"
+            },
+            {
+                "family": "Maiorano",
+                "given": "Luigi"
+            },
+            {
+                "family": "Thuiller",
+                "given": "Wilfried"
+            },
+            {
+                "family": "Pollock",
+                "given": "Laura J."
+            }
+        ],
+        "container-title": "Ecology Letters",
+        "id": "Caron2022AddElt",
+        "issue": "4",
+        "issued": {
+            "date-parts": [
+                [
+                    2022
+                ]
+            ]
+        },
+        "page": "889-899",
+        "title": "Addressing the Eltonian shortfall with trait-based interaction models",
+        "type": "article-journal",
+        "volume": "25"
+    },
+    {
         "DOI": "10.1186/s12864-019-6413-7",
         "PMCID": "PMC6941312",
         "author": [

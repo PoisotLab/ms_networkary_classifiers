@@ -339,81 +339,95 @@
             <th style="text-align: center;">Conn.</th>
             <th style="text-align: center;"><span class="math inline"><em>η</em></span></th>
             <th style="text-align: center;"><span class="math inline"><em>Q</em></span></th>
+            <th style="text-align: center;"><span class="math inline"><em>A</em></span></th>
+            <th style="text-align: center;">Jaccard</th>
             </tr>
             </thead>
             <tbody>
             <tr class="odd">
             <td style="text-align: right;">Decision tree</td>
-            <td style="text-align: center;">0.85</td>
-            <td style="text-align: center;">0.92</td>
+            <td style="text-align: center;">0.59</td>
+            <td style="text-align: center;">0.94</td>
             <td style="text-align: center;">0.97</td>
-            <td style="text-align: center;">0.12</td>
-            <td style="text-align: center;">0.21</td>
-            <td style="text-align: center;">0.76</td>
-            <td style="text-align: center;">0.31</td>
+            <td style="text-align: center;">0.04</td>
+            <td style="text-align: center;">0.17</td>
+            <td style="text-align: center;">0.64</td>
+            <td style="text-align: center;">0.37</td>
+            <td style="text-align: center;"><strong>0.42</strong></td>
+            <td style="text-align: center;">0.1</td>
             </tr>
             <tr class="even">
             <td style="text-align: right;">BRT</td>
-            <td style="text-align: center;"><strong>0.90</strong></td>
-            <td style="text-align: center;">0.90</td>
-            <td style="text-align: center;">0.98</td>
-            <td style="text-align: center;">0.86</td>
-            <td style="text-align: center;">0.23</td>
-            <td style="text-align: center;">0.82</td>
-            <td style="text-align: center;">0.27</td>
+            <td style="text-align: center;">0.46</td>
+            <td style="text-align: center;">0.91</td>
+            <td style="text-align: center;">0.97</td>
+            <td style="text-align: center;">0.36</td>
+            <td style="text-align: center;">0.2</td>
+            <td style="text-align: center;">0.78</td>
+            <td style="text-align: center;">0.29</td>
+            <td style="text-align: center;">0.41</td>
+            <td style="text-align: center;">0.19</td>
             </tr>
             <tr class="odd">
             <td style="text-align: right;">Random Forest</td>
-            <td style="text-align: center;"><strong>0.90</strong></td>
-            <td style="text-align: center;"><strong>0.96</strong></td>
-            <td style="text-align: center;"><strong>1.00</strong></td>
-            <td style="text-align: center;">0.27</td>
-            <td style="text-align: center;"><strong>0.20</strong></td>
-            <td style="text-align: center;"><strong>0.72</strong></td>
-            <td style="text-align: center;"><strong>0.32</strong></td>
+            <td style="text-align: center;">0.72</td>
+            <td style="text-align: center;"><strong>0.98</strong></td>
+            <td style="text-align: center;">0.99</td>
+            <td style="text-align: center;">0.1</td>
+            <td style="text-align: center;"><strong>0.16</strong></td>
+            <td style="text-align: center;"><strong>0.61</strong></td>
+            <td style="text-align: center;">0.38</td>
+            <td style="text-align: center;"><strong>0.42</strong></td>
+            <td style="text-align: center;"><strong>0.06</strong></td>
             </tr>
             <tr class="even">
             <td style="text-align: right;">k-NN</td>
-            <td style="text-align: center;">0.80</td>
-            <td style="text-align: center;">0.91</td>
-            <td style="text-align: center;">0.95</td>
-            <td style="text-align: center;">0.58</td>
-            <td style="text-align: center;">0.24</td>
-            <td style="text-align: center;">1.0</td>
-            <td style="text-align: center;">0.18</td>
+            <td style="text-align: center;">0.71</td>
+            <td style="text-align: center;"><strong>0.98</strong></td>
+            <td style="text-align: center;">0.99</td>
+            <td style="text-align: center;">0.02</td>
+            <td style="text-align: center;"><strong>0.16</strong></td>
+            <td style="text-align: center;"><strong>0.61</strong></td>
+            <td style="text-align: center;"><strong>0.39</strong></td>
+            <td style="text-align: center;"><strong>0.42</strong></td>
+            <td style="text-align: center;"><strong>0.06</strong></td>
             </tr>
             <tr class="odd">
-            <td style="text-align: right;">Ensemble</td>
-            <td style="text-align: center;">0.88</td>
-            <td style="text-align: center;">0.94</td>
-            <td style="text-align: center;"><strong>1.00</strong></td>
-            <td style="text-align: center;"><strong>0.96</strong></td>
-            <td style="text-align: center;"><strong>0.20</strong></td>
-            <td style="text-align: center;">0.75</td>
-            <td style="text-align: center;">0.31</td>
+            <td style="text-align: right;"><em>Ensemble</em></td>
+            <td style="text-align: center;"><strong>0.74</strong></td>
+            <td style="text-align: center;"><strong>0.98</strong></td>
+            <td style="text-align: center;"><strong>1.0</strong></td>
+            <td style="text-align: center;"><strong>0.79</strong></td>
+            <td style="text-align: center;"><strong>0.16</strong></td>
+            <td style="text-align: center;"><strong>0.61</strong></td>
+            <td style="text-align: center;">0.38</td>
+            <td style="text-align: center;"><strong>0.42</strong></td>
+            <td style="text-align: center;"><strong>0.06</strong></td>
             </tr>
             <tr class="even">
-            <td style="text-align: right;">Data</td>
+            <td style="text-align: right;"><em>Data</em></td>
             <td style="text-align: center;"></td>
             <td style="text-align: center;"></td>
             <td style="text-align: center;"></td>
             <td style="text-align: center;"></td>
-            <td style="text-align: center;">0.18</td>
-            <td style="text-align: center;">0.66</td>
-            <td style="text-align: center;">0.34</td>
+            <td style="text-align: center;">0.16</td>
+            <td style="text-align: center;">0.56</td>
+            <td style="text-align: center;">0.41</td>
+            <td style="text-align: center;">0.42</td>
+            <td style="text-align: center;">0.0</td>
             </tr>
             </tbody>
             </table>
             </div>
             <h1 id="guidelines-for-the-assessment-of-network-predictive-models">Guidelines for the assessment of network predictive models</h1>
             <p>It is noteworthy that the ensemble model was systematically better than the component models. We do not expect that ensembles will <em>always</em> be better than single models. Networks with different structures than the one we simulated here may respond in different ways, especially if the rules are fuzzier than the simple rule we used here. In a recent multi-model comparison involving supervised and unsupervised learning, <span class="citation" data-cites="Becker2022OptPre">Becker et al. (2022)</span> found that the ensemble was <em>not</em> the best model. There is no general conclusion to draw from this besides reinforcing the need to be pragmatic about which models should be included in the ensemble, or whether to use an ensemble at all. In a sense, the surprising performance of the ensemble model should form the basis of the last recommendation: optimal training set balance and its interaction with connectance and the specific binary classifier used is, in a sense, an hyperparameter that should be assessed. The distribution of results in fig. 4 and fig. 5 show that there are variations around the trend. TODO fix this sentence</p>
-            <p>We establish that due to the low prevalence of interactions, even poor classifiers applied to food web data will reach a high accuracy; this is because the measure is dominated by the accidentally correct predictions of negatives. On simulated confusion matrices with ranges of imbalance that are credible for ecological networks, MCC had the most desirable behavior, and informedness is a linear measure of classifier skill. By performing simulations with four models and an ensemble, we show that informedness and ROC-AUC are consistently high on network data, and that MCC and PR-AUC are more accurate measures of the effective performance of the classifier. Finally, by measuring the structure of predicted networks, we highlight an interesting paradox: the models with the best performance measures are not the models with the closest reconstructed network structure. We discuss these results in the context of establishing guidelines for the prediction of ecological interactions.</p>
-            <p>TODO informedness and accuracy should be easy to beat, make sure the model is better than them!</p>
+            <p>We establish that due to the low prevalence of interactions, even poor classifiers applied to food web data will reach a high accuracy; this is because the measure is dominated by the accidentally correct predictions of negatives. On simulated confusion matrices with ranges of imbalance that are credible for ecological networks, MCC had the most desirable behavior, and informedness is a linear measure of classifier skill. By performing simulations with four models and an ensemble, we show that informedness and ROC-AUC are consistently high on network data, and that MCC and PR-AUC are more accurate measures of the effective performance of the classifier. Finally, by measuring the structure of predicted networks, we highlight an interesting paradox: the models with the best performance measures are not necessarilly the models with the closest reconstructed network structure. We discuss these results in the context of establishing guidelines for the prediction of ecological interactions.</p>
             <p>The results presented here highlight an interesting paradox: although the Random Forest was ultimately able to get a correct estimate of network structure tbl. 1, it ultimately remains a poor classifier, as evidenced by its low PR-AUC. This suggests that the goal of predicting <em>interactions</em> and predicting <em>networks</em> may not be solvable in the same way – of course a perfect classifier of interactions would make a perfect network prediction; but even the best scoring predictor of interactions (the ensemble model) had not necessarily the best prediction of network structure. The tasks of predicting networks structure and of predicting interactions within networks are essentially two different ones. For some applications (<em>.e.g.</em> comparison of network structure across gradients), one may care more about a robust estimate of the structure, at the cost at putting some interactions at the wrong place. For other applications (<em>e.g.</em> identifying pairs of interacting species), one may conversely care more about getting as many pairs right, even though the mistakes accumulate in the form of a slightly worse estimate of network structure. How these two approaches can be reconciled is undoubtedly a task for further research. Despite this apparent tension at the heart of the predictive exercise, we can use the results presented here to suggest a number of guidelines.</p>
-            <p>First, because we should have more trust in reported interactions than in reported absences of interactions, we can draw on previous literature to recommend informedness as a measure to decide on a threshold <span class="citation" data-cites="Chicco2021MatCor">(Chicco et al., 2021)</span>; this being said, because informedness is insensitive to bias, the model performance is better evaluated through the use of MCC fig. <strong>¿fig:biasmccinf?</strong>. Because <span class="math inline"><em>F</em><sub>1</sub></span> is monotonously sensitive to classifier bias fig. 1 and network connectance fig. 2, MCC should be prefered as a measure of model evaluation.</p>
+            <p>First, because we should have more trust in reported interactions than in reported absences of interactions, we can draw on previous literature to recommend informedness as a measure to decide on a threshold <span class="citation" data-cites="Chicco2021MatCor">(Chicco et al., 2021)</span>; this being said, because informedness is insensitive to bias, the model performance is better evaluated through the use of MCC fig. <strong>¿fig:biasmccinf?</strong>. Because <span class="math inline"><em>F</em><sub>1</sub></span> is monotonously sensitive to classifier bias fig. 1 and network connectance fig. 2, MCC should be prefered as a measure of model evaluation and comparison.</p>
             <p>Second, because the PR-AUC responds more to network connectance fig. 5 and training set imbalance fig. <strong>¿fig:biasrocpr?</strong>, it should be used as a measure of model performance over the ROC-AUC. This is not to say that ROC-AUC should be discarded (in fact, a low ROC-AUC is a sign of an issue with the model), but that its interpretation should be guided by the PR-AUC value. Specifically, a high ROC-AUC is not informative, as it can be associated to a low PR-AUC (see <em>e.g.</em> Random Forest in tbl. 1) This again echoes recommendations from other fields <span class="citation" data-cites="Saito2015PrePlo Jeni2013FacImb">(Jeni et al., 2013; Saito &amp; Rehmsmeier, 2015)</span>.</p>
-            <p>Thirdly, regardless of network connectance, maximizing informedness required a training set balance of about 0.5, and maximizing the MCC required a training set bias of 0.7 and more. This has an important consequence in ecological networks, for which the pool of positive cases (interactions) to draw from is typically small: the most parsimonious measure (<em>i.e.</em> the one requiring to discard the least amount of information to train the model) will give the best validation potential, and is probably the informedness <span class="citation" data-cites="Schisterman2005OptCut">(maximizing informedness is the generally accepted default for imbalanced classification; Schisterman et al., 2005)</span>. This last result suggests that the amount of bias <em>is</em> an hyper-parameter that must be fine-tuned, as using the wrong bias can lead to under-performing models.</p>
-            <p>One key element for real-life data that can make the prediction exercise more tractable is that some interactions can safely be assumed to be impossible; indeed, a lot of networks admit a stochastic block model as a good approximation <span class="citation" data-cites="Xie2017ComCom">(<em>e.g.</em> Xie et al., 2017)</span>. In ecological networks, this can be due to spatial constrains <span class="citation" data-cites="Valdovinos2019MutNet">(Valdovinos, 2019)</span>, or to the long-standing knowledge that some links are “forbidden” due to traits <span class="citation" data-cites="Olesen2011MisFor">(Olesen et al., 2011)</span> or abundances <span class="citation" data-cites="Canard2014EmpEva">(Canard et al., 2014)</span>. The matching rules <span class="citation" data-cites="Strona2017ForPer Olito2015SpeTra">(Olito &amp; Fox, 2015; Strona &amp; Veech, 2017)</span> can be incorporated in the model either by adding compatibility traits, or by <em>only</em> training the model on pairs of species that are not likely to be forbidden links. Besides forbidden links, a real-life case that may arise is multi-interaction or multi-layer networks <span class="citation" data-cites="Pilosof2017MulNat">(Pilosof et al., 2017)</span>. These can be studied using the same general approach outlined here, either by assuming that pairs of species can interact in more than one way (wherein one would train a model for each type of interaction, based on the relevant predictors), or by assuming that pairs of species can only have one type of interaction (wherein this becomes a multi-label classification problem).</p>
+            <p>Third, for the same reasons that should give more weight to PR-AUC than ROC-AUC, accuracy alone should not be used as a measure of model performance, but rather as an expectation of how well the model should behave given the balance in the set on which predictions are made; this is because, as derived earlier, the expected accuracy for a no-skill no-bias classifier is <span class="math inline"><em>ρ</em><sup>2</sup> + (1 − <em>ρ</em>)<sup>2</sup></span> (where <span class="math inline"><em>ρ</em></span> is the class balance), which will very easily by large. This pitfall is notably illustrated in a recent model <span class="citation" data-cites="Caron2022AddElt">(Caron et al., 2022)</span> wherein the authors claim that using a training set of <span class="math inline"><em>n</em> = 10<sup>4</sup></span> with only 100 positive interactions (representing 0.1% of the total interactions) reached a good accuracy. Reporting a good accuracy isn’t informative is this accuracy isn’t (i) compared to the baseline expected value under the class balance, and (ii) interpreted in the context of a measure that isn’t sensitive to true negatives (like MCC).</p>
+            <p>Finally, network connectance (<em>i.e.</em> the empirical class imbalance) should inform the composition of the training and testing set. In the approach outlined here, we treat the class imbalance as an hyper-parameter, but <em>test</em> the model on a set that has the same class imbalance as the actual dataset. This is an important change to the overall methodology so far, as it ensure that the prediction environment matches the testing environment, and so the values on the testing set can be directly compared to the values for the actual prediction. A striking result fig. 4 is that Informedness was almost always maximal at 50/50 balance (regardless of connectance), whereas MCC required <em>more</em> positives to be maximized when connectance <em>increases</em>. This has an important consequence in ecological networks, for which the pool of positive cases (interactions) to draw from is typically small: the most parsimonious measure (<em>i.e.</em> the one requiring to discard the least amount of information to train the model) will give the best validation potential, and is probably the informedness <span class="citation" data-cites="Schisterman2005OptCut">(maximizing informedness is the generally accepted default for imbalanced classification; Schisterman et al., 2005)</span>. This last result further strengthens the assumption that the amount of bias <em>is</em> an hyper-parameter that must be fine-tuned, as using the wrong bias can lead to models with excess biass or lower skill.</p>
+            <p>One key element for real-life data that can make the prediction exercise more tractable is that some interactions can safely be assumed to be impossible; indeed, a lot of networks admit a stochastic block model as a good approximation <span class="citation" data-cites="Xie2017ComCom">(<em>e.g.</em> Xie et al., 2017)</span>. In ecological networks, this can be due to spatial constrains <span class="citation" data-cites="Valdovinos2019MutNet">(Valdovinos, 2019)</span>, or to the long-standing knowledge that some links are “forbidden” due to traits <span class="citation" data-cites="Olesen2011MisFor">(Olesen et al., 2011)</span> or abundances <span class="citation" data-cites="Canard2014EmpEva">(Canard et al., 2014)</span>. The matching rules <span class="citation" data-cites="Strona2017ForPer Olito2015SpeTra">(Olito &amp; Fox, 2015; Strona &amp; Veech, 2017)</span> can be incorporated in the model either by adding compatibility traits, or by <em>only</em> training the model on pairs of species that are not likely to be forbidden links; having this information would allow to assemble training/testing sets that have true negatives, and in this situation, it may be possible to use the more usual 70/30 split. Besides forbidden links, a real-life case that may arise is multi-interaction or multi-layer networks <span class="citation" data-cites="Pilosof2017MulNat">(Pilosof et al., 2017)</span>. These can be studied using the same general approach outlined here, either by assuming that pairs of species can interact in more than one way (wherein one would train a model for each type of interaction, based on the relevant predictors), or by assuming that pairs of species can only have one type of interaction (wherein this becomes a multi-label classification problem).</p>
             <p><strong>Acknowledgements:</strong> We acknowledge that this study was conducted on land within the traditional unceded territory of the Saint Lawrence Iroquoian, Anishinabewaki, Mohawk, Huron-Wendat, and Omàmiwininiwak nations. We thank Colin J. Carlson, Michael D. Catchen, Giulio Valentino Dalla Riva, and Tanya Strydom for inputs on earlier versions of this manuscript. This research was enabled in part by support provided by Calcul Québec (www.calculquebec.ca) and Compute Canada (www.computecanada.ca) through the Narval general purpose cluster. TP is supported by a NSERC Discovery Grant and Discovery Acceleration Supplement, by funding to the Viral Emergence Research Initiative (VERENA) consortium including NSF BII 2021909, and by a grant from the Institut de Valorisation des Données (IVADO).</p>
             <h1 class="unnumbered" id="references">References</h1>
             <div id="refs" class="references csl-bib-body hanging-indent" data-line-spacing="2" role="doc-bibliography">
@@ -443,6 +457,9 @@
             </div>
             <div id="ref-Canard2014EmpEva" class="csl-entry" role="doc-biblioentry">
             Canard, E. F., Mouquet, N., Mouillot, D., Stanko, M., Miklisova, D., &amp; Gravel, D. (2014). Empirical evaluation of neutral interactions in host-parasite networks. <em>The American Naturalist</em>, <em>183</em>(4), 468–479. <a href="https://doi.org/10.1086/675363">https://doi.org/10.1086/675363</a>
+            </div>
+            <div id="ref-Caron2022AddElt" class="csl-entry" role="doc-biblioentry">
+            Caron, D., Maiorano, L., Thuiller, W., &amp; Pollock, L. J. (2022). Addressing the Eltonian shortfall with trait-based interaction models. <em>Ecology Letters</em>, <em>25</em>(4), 889–899. <a href="https://doi.org/10.1111/ele.13966">https://doi.org/10.1111/ele.13966</a>
             </div>
             <div id="ref-Chicco2020AdvMat" class="csl-entry" role="doc-biblioentry">
             Chicco, D., &amp; Jurman, G. (2020). The advantages of the Matthews correlation coefficient (MCC) over F1 score and accuracy in binary classification evaluation. <em>BMC Genomics</em>, <em>21</em>(1), 6. <a href="https://doi.org/10.1186/s12864-019-6413-7">https://doi.org/10.1186/s12864-019-6413-7</a>
