@@ -604,14 +604,14 @@ have the same value. That ROC-AUC is consistently larger than PR-AUC may be
 a case of this measure masking models that are not, individually, strong
 predictors [@Jeni2013FacImb].
 
-|         Model |   MCC    |   Inf.   | ROC-AUC  |  PR-AUC  |  Conn.   |  $\eta$  |   $Q$    |
-| ------------: | :------: | :------: | :------: | :------: | :------: | :------: | :------: |
-| Decision tree |   0.85   |   0.92   |   0.97   |   0.12   |   0.21   |   0.76   |   0.31   |
-|           BRT | **0.90** |   0.90   |   0.98   |   0.86   |   0.23   |   0.82   |   0.27   |
-| Random Forest | **0.90** | **0.96** | **1.00** |   0.27   | **0.20** | **0.72** | **0.32** |
-|          k-NN |   0.80   |   0.91   |   0.95   |   0.58   |   0.24   |   1.0    |   0.18   |
-|      Ensemble |   0.88   |   0.94   | **1.00** | **0.96** | **0.20** |   0.75   |   0.31   |
-|          Data |          |          |          |          |   0.18   |   0.66   |   0.34   |
+|         Model |   MCC    |   Inf.   | ROC-AUC |  PR-AUC  |  Conn.   |  $\eta$  |   $Q$    |   $A$    | Jaccard  |
+| ------------: | :------: | :------: | :-----: | :------: | :------: | :------: | :------: | :------: | :------: |
+| Decision tree |   0.59   |   0.94   |  0.97   |   0.04   |   0.17   |   0.64   |   0.37   | **0.42** |   0.1    |
+|           BRT |   0.46   |   0.91   |  0.97   |   0.36   |   0.2    |   0.78   |   0.29   |   0.41   |   0.19   |
+| Random Forest |   0.72   | **0.98** |  0.99   |   0.1    | **0.16** | **0.61** |   0.38   | **0.42** | **0.06** |
+|          k-NN |   0.71   | **0.98** |  0.99   |   0.02   | **0.16** | **0.61** | **0.39** | **0.42** | **0.06** |
+|    *Ensemble* | **0.74** | **0.98** | **1.0** | **0.79** | **0.16** | **0.61** |   0.38   | **0.42** | **0.06** |
+|        *Data* |          |          |         |          |   0.16   |   0.56   |   0.41   |   0.42   |   0.0    |
 
 : Values of four performance metrics, and five network structure metrics, for
 500 independent predictions similar to the ones presented in @fig:ecovalid. The
@@ -647,12 +647,9 @@ and an ensemble, we show that informedness and ROC-AUC are consistently high on
 network data, and that MCC and PR-AUC are more accurate measures of the
 effective performance of the classifier. Finally, by measuring the structure of
 predicted networks, we highlight an interesting paradox: the models with the
-best performance measures are not the models with the closest reconstructed
-network structure. We discuss these results in the context of establishing
-guidelines for the prediction of ecological interactions.
-
-TODO informedness and accuracy should be easy to beat, make sure the model is
-better than them!
+best performance measures are not necessarilly the models with the closest
+reconstructed network structure. We discuss these results in the context of
+establishing guidelines for the prediction of ecological interactions.
 
 The results presented here highlight an interesting paradox: although the Random
 Forest was ultimately able to get a correct estimate of network structure
@@ -680,7 +677,7 @@ recommend informedness as a measure to decide on a threshold
 bias, the model performance is better evaluated through the use of MCC
 [@fig:biasmccinf]. Because $F_1$ is monotonously sensitive to classifier bias
 [@fig:bias] and network connectance [@fig:connectance], MCC should be prefered
-as a measure of model evaluation.
+as a measure of model evaluation and comparison.
 
 Second, because the PR-AUC responds more to network connectance [@fig:optimvalue]
 and training set imbalance [@fig:biasrocpr], it should be used as a measure of
@@ -691,17 +688,39 @@ high ROC-AUC is not informative, as it can be associated to a low PR-AUC (see
 *e.g.* Random Forest in @tbl:comparison) This again echoes recommendations from
 other fields [@Saito2015PrePlo; @Jeni2013FacImb].
 
-Thirdly, regardless of network connectance, maximizing informedness required a
-training set balance of about 0.5, and maximizing the MCC required a training
-set bias of 0.7 and more. This has an important consequence in ecological
-networks, for which the pool of positive cases (interactions) to draw from is
-typically small: the most parsimonious measure (*i.e.* the one requiring to
-discard the least amount of information to train the model) will give the best
-validation potential, and is probably the informedness [maximizing informedness
-is the generally accepted default for imbalanced classification;
-@Schisterman2005OptCut]. This last result suggests that the amount of bias *is*
-an hyper-parameter that must be fine-tuned, as using the wrong bias can lead to
-under-performing models. 
+Third, for the same reasons that should give more weight to PR-AUC than ROC-AUC,
+accuracy alone should not be used as a measure of model performance, but rather
+as an expectation of how well the model should behave given the balance in the
+set on which predictions are made; this is because, as derived earlier, the
+expected accuracy for a no-skill no-bias classifier is $\rho^2 + (1-\rho)^2$
+(where $\rho$ is the class balance), which will very easily by large. This
+pitfall is notably illustrated in a recent model [@Caron2022AddElt] wherein the
+authors claim that using a training set of $n = 10^4$ with only 100 positive
+interactions (representing 0.1% of the total interactions) reached a good
+accuracy. Reporting a good accuracy isn't informative is this accuracy isn't (i)
+compared to the baseline expected value under the class balance, and (ii)
+interpreted in the context of a measure that isn't sensitive to true negatives
+(like MCC).
+
+Finally, network connectance (*i.e.* the empirical class imbalance) should
+inform the composition of the training and testing set. In the approach outlined
+here, we treat the class imbalance as an hyper-parameter, but *test* the model
+on a set that has the same class imbalance as the actual dataset. This is an
+important change to the overall methodology so far, as it ensure that the
+prediction environment matches the testing environment, and so the values on the
+testing set can be directly compared to the values for the actual prediction. A
+striking result [@fig:optimbias] is that Informedness was almost always maximal
+at 50/50 balance (regardless of connectance), whereas MCC required *more*
+positives to be maximized when connectance *increases*. This has an important
+consequence in ecological networks, for which the pool of positive cases
+(interactions) to draw from is typically small: the most parsimonious measure
+(*i.e.* the one requiring to discard the least amount of information to train
+the model) will give the best validation potential, and is probably the
+informedness [maximizing informedness is the generally accepted default for
+imbalanced classification; @Schisterman2005OptCut]. This last result further
+strengthens the assumption that the amount of bias *is* an hyper-parameter that
+must be fine-tuned, as using the wrong bias can lead to models with excess biass
+or lower skill.
 
 One key element for real-life data that can make the prediction exercise more
 tractable is that some interactions can safely be assumed to be impossible;
@@ -712,13 +731,16 @@ links are "forbidden" due to traits [@Olesen2011MisFor] or abundances
 [@Canard2014EmpEva]. The matching rules [@Strona2017ForPer; @Olito2015SpeTra]
 can be incorporated in the model either by adding compatibility traits, or by
 *only* training the model on pairs of species that are not likely to be
-forbidden links. Besides forbidden links, a real-life case that may arise is
-multi-interaction or multi-layer networks [@Pilosof2017MulNat]. These can be
-studied using the same general approach outlined here, either by assuming that
-pairs of species can interact in more than one way (wherein one would train a
-model for each type of interaction, based on the relevant predictors), or by
-assuming that pairs of species can only have one type of interaction (wherein
-this becomes a multi-label classification problem). 
+forbidden links; having this information would allow to assemble
+training/testing sets that have true negatives, and in this situation, it may be
+possible to use the more usual 70/30 split. Besides forbidden links, a real-life
+case that may arise is multi-interaction or multi-layer networks
+[@Pilosof2017MulNat]. These can be studied using the same general approach
+outlined here, either by assuming that pairs of species can interact in more
+than one way (wherein one would train a model for each type of interaction,
+based on the relevant predictors), or by assuming that pairs of species can only
+have one type of interaction (wherein this becomes a multi-label classification
+problem).
 
 **Acknowledgements:** We acknowledge that this study was conducted on land
 within the traditional unceded territory of the Saint Lawrence Iroquoian,
