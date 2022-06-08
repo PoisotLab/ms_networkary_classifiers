@@ -550,9 +550,10 @@ need for biased training sets is less prominent, as learning the rules for which
 interactions *do not* exist starts gaining importance.
 
 ![When trained on their optimally biased training set, most models were able to
-maximize their performance; this is not true for decision tree, k-NN, and to a
-lower extent RF. The ensemble had a consistently high performance despite
-incorporating poor models.](figures/optimal_value.png){#fig:optimvalue}
+maximize their performance; this is not true when measuring PR-AUC for decision
+tree, k-NN, and to a lower extent RF. The ensemble had a consistently high
+performance despite incorporating low-performing
+models.](figures/optimal_value.png){#fig:optimvalue}
 
 When trained at their optimal training set balance, connectance still had a
 significant impact on the performance of some machines [@fig:optimvalue].
@@ -690,11 +691,11 @@ a threshold for binary classification [@Chicco2021MatCor]; this being said,
 because informedness is insensitive to bias (although it is a linear measure of
 skill), the overall model performance is better evaluated through the use of MCC
 [@fig:biasmccinf]. Because $F_1$ is monotonously sensitive to classifier bias
-[@fig:bias] and network connectance [@fig:connectance], MCC should be prefered
-as a measure of model evaluation and comparison. When dealing with multiple
-models, we therefore suggest to find the optimal threshold using informedness,
-and to pick the best model using MCC (assuming one does not want to use an
-ensemble model).
+[@fig:bias] and network connectance @fig:connectance, MCC should be prefered as
+a measure of model evaluation and comparison. When dealing with multiple models,
+we therefore suggest to find the optimal threshold using informedness, and to
+pick the best model using MCC (assuming one does not want to use an ensemble
+model).
 
 Second, accuracy alone should not be the main measure of model performance, but
 rather an expectation of how well the model should behave given the class
