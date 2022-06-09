@@ -620,15 +620,14 @@ increase with prevalence up until equiprevalence is reached.
 \caption{Consequences of changing the classifier skills (\(s\)) and bias
 (\(s\)) for a connectance \(\rho=0.15\), on \(F_1\), informedness, MCC,
 and \(\kappa\). Accuracy increases with skill, but also increases when
-the bias tends towards estimating \emph{fewer} interactions. The \(F_1\)
-score increases with skill but also increases when the bias tends
-towards estimating \emph{more} interactions. Interestingly, \(\kappa\)
-responds as expected to skill (being negative whenever \(s < 0.5\)), and
-peaks for values of \(b \approx 0.5\); nevertheless, the value of bias
-for which \(\kappa\) is maximized in \emph{not} \(b=0.5\), but instead
-increases with classifier skill. In other words, at equal skill,
-maximizing \(\kappa\) would lead to select a \emph{more} biased
-classifier.}\label{fig:bias}
+the bias tends towards estimating \emph{fewer} interactions (this
+follows from the derivations in the text, not shown in the figure).
+Interestingly, \(\kappa\) responds as expected to skill (being negative
+whenever \(s < 0.5\)), and peaks for values of \(b \approx 0.5\);
+nevertheless, the value of bias for which \(\kappa\) is maximized in
+\emph{not} \(b=0.5\), but instead increases with classifier skill. In
+other words, at equal skill, maximizing \(\kappa\) would lead to select
+a \emph{more} biased classifier.}\label{fig:bias}
 }
 \end{figure}
 
@@ -792,7 +791,7 @@ of the values return by each machine, but in order to make the
 average-based ensemble model more meaningful, all predictions are
 expressed in \([0,1]\).
 
-In order to pick the best adjacency matrix for a given trained machine,
+In order to pick the best confusion matrix for a given trained machine,
 we performed a thresholding approach using 500 steps on predictions from
 the testing set, and picking the threshold that maximized Youden's
 informedness. During the thresholding step, we measured the area under
