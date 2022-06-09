@@ -140,6 +140,75 @@
         "volume": "15"
     },
     {
+        "DOI": "10.1103/PhysRevE.76.066102",
+        "author": [
+            {
+                "family": "Barber",
+                "given": "Michael J."
+            }
+        ],
+        "container-title": "Physical Review E",
+        "id": "Barber2007ModCom",
+        "issue": "6",
+        "issued": {
+            "date-parts": [
+                [
+                    2007,
+                    12,
+                    7
+                ]
+            ]
+        },
+        "page": "066102",
+        "title": "Modularity and community detection in bipartite networks",
+        "type": "article-journal",
+        "volume": "76"
+    },
+    {
+        "DOI": "10.1038/nature07950",
+        "author": [
+            {
+                "family": "Bastolla",
+                "given": "Ugo"
+            },
+            {
+                "family": "Fortuna",
+                "given": "Miguel A."
+            },
+            {
+                "family": "Pascual-Garc\u00eda",
+                "given": "Alberto"
+            },
+            {
+                "family": "Ferrera",
+                "given": "Antonio"
+            },
+            {
+                "family": "Luque",
+                "given": "Bartolo"
+            },
+            {
+                "family": "Bascompte",
+                "given": "Jordi"
+            }
+        ],
+        "container-title": "Nature",
+        "id": "Bastolla2009ArcMut",
+        "issue": "7241",
+        "issued": {
+            "date-parts": [
+                [
+                    2009,
+                    4
+                ]
+            ]
+        },
+        "page": "1018-1020",
+        "title": "The architecture of mutualistic networks minimizes competition and increases biodiversity",
+        "type": "article-journal",
+        "volume": "458"
+    },
+    {
         "author": [
             {
                 "family": "Beauchesne",
@@ -753,6 +822,81 @@
         "title": "Why Cohen\u2019s Kappa should be avoided as performance measure in classification",
         "type": "article-journal",
         "volume": "14"
+    },
+    {
+        "DOI": "10.1111/brv.12433",
+        "author": [
+            {
+                "family": "Delmas",
+                "given": "Eva"
+            },
+            {
+                "family": "Besson",
+                "given": "Mathilde"
+            },
+            {
+                "family": "Brice",
+                "given": "Marie-H\u00e9l\u00e8ne"
+            },
+            {
+                "family": "Burkle",
+                "given": "Laura A."
+            },
+            {
+                "family": "Dalla Riva",
+                "given": "Giulio V."
+            },
+            {
+                "family": "Fortin",
+                "given": "Marie-Jos\u00e9e"
+            },
+            {
+                "family": "Gravel",
+                "given": "Dominique"
+            },
+            {
+                "family": "Guimar\u00e3es",
+                "given": "Paulo R."
+            },
+            {
+                "family": "Hembry",
+                "given": "David H."
+            },
+            {
+                "family": "Newman",
+                "given": "Erica A."
+            },
+            {
+                "family": "Olesen",
+                "given": "Jens M."
+            },
+            {
+                "family": "Pires",
+                "given": "Mathias M."
+            },
+            {
+                "family": "Yeakel",
+                "given": "Justin D."
+            },
+            {
+                "family": "Poisot",
+                "given": "Timoth\u00e9e"
+            }
+        ],
+        "container-title": "Biological Reviews",
+        "id": "Delmas2018AnaEco",
+        "issued": {
+            "date-parts": [
+                [
+                    2018,
+                    6,
+                    20
+                ]
+            ]
+        },
+        "page": "112540",
+        "title": "Analysing ecological networks of species interactions",
+        "type": "article-journal"
     },
     {
         "DOI": "10.7717/peerj.3644",

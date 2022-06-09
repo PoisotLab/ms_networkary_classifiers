@@ -828,7 +828,7 @@ the other hand, PR-AUC shows very strong responses, increasing with
 training set balance. It is notable here that two classifiers that
 seemed to be performing well (Decision Tree and Random Forest) based on
 their MCC are not able to reach a high PR-AUC even at higher
-connectances.All models reached a higher performance on more connected
+connectances. All models reached a higher performance on more connected
 networks, and using more balanced training sets. In all cases,
 informedness was extremely high, which is an expected consequence of the
 fact that this is the value we optimized to determine the cutoff. MCC
@@ -927,9 +927,9 @@ low-performing models.}\label{fig:optimvalue}
 
 When trained at their optimal training set balance, connectance still
 had a significant impact on the performance of some machines
-fig.~\ref{fig:optimvalue}. Notably, Decision Tree, and k-NN, as well as
-Random forest to a lower extent, had low values of PR-AUC. In all cases,
-the Boosted Regression Tree was reaching very good predictions
+(fig.~\ref{fig:optimvalue}). Notably, Decision Tree, and k-NN, as well
+as Random forest to a lower extent, had low values of PR-AUC. In all
+cases, the Boosted Regression Tree was reaching very good predictions
 (especially for connectances larger than 0.1), and the ensemble was
 almost always scoring perfectly. This suggests that all the models are
 biased in different ways, and that the averaging in the ensemble is able
@@ -966,35 +966,34 @@ a better prediction.}\label{fig:ecovalid}
 The trained models were then thresholded (again by optimising
 informedness), and their predictions transformed back into networks for
 analysis; specifically, we measured the connectance, nestedness
-(\(\eta\); \textbf{Bastolla2009ArcMut?}), modularity (\(Q\);
-\textbf{Barber2007ModCom?}), asymmetry (\(A\);
-\textbf{Delmas2018AnaEco?}), and Jaccard network dissimilarity (Canard
-et al., 2014). This process was repeated 250 times, and the results are
-presented in tbl.~\ref{tbl:comparison}. The k-NN model is an interesting
-instance here: it produces the network that looks the most like the
-original dataset, despite having the lowest PR-AUC, suggesting it hits
-high recall at the cost of low precision. The ensemble was able to reach
-a very high PR-AUC (and a very high ROC-AUC), which translated into more
-accurate reconstructions of the structure of the network (with the
-exception of modulairty, which is underestimated by \(0.03\)). This
-result bears elaborating. Measures of model performance capture how much
-of the interactions and non-interactions are correctly identified. As
-long as these predictions are not perfect, some interactions will be
-predicted at the ``wrong'' position in the network; these measures
-cannot describe the structural effect of these mistakes. On the other
-hand, measures of network structure can have the same value with
-interactions that fall at drastically different positions; this is in
-part because a lot of these measures covary with connectance, and in
-part because as long as these values are not 0 or their respective
-maximum, there is a large number of network configurations that can have
-the same value. That ROC-AUC is consistently larger than PR-AUC may be a
-case of this measure masking models that are not, individually, strong
-predictors (Jeni et al., 2013). In this specif example, the combination
-of individually ``adequate'' models resulted in an extremely strong
-ensemble, suggesting that the correct prediction of interactions (as
-measured by MCC, Inf., ROC-AUC, and PR-AUC) \emph{and} network
-properties is indeed a feasible task under appropriately
-hyper-parameterized models.
+(\(\eta\); Bastolla et al., 2009), modularity (\(Q\); Barber, 2007),
+asymmetry (\(A\); Delmas et al., 2018), and Jaccard network
+dissimilarity (Canard et al., 2014). This process was repeated 250
+times, and the results are presented in tbl.~\ref{tbl:comparison}. The
+k-NN model is an interesting instance here: it produces the network that
+looks the most like the original dataset, despite having the lowest
+PR-AUC, suggesting it hits high recall at the cost of low precision. The
+ensemble was able to reach a very high PR-AUC (and a very high ROC-AUC),
+which translated into more accurate reconstructions of the structure of
+the network (with the exception of modulairty, which is underestimated
+by \(0.03\)). This result bears elaborating. Measures of model
+performance capture how much of the interactions and non-interactions
+are correctly identified. As long as these predictions are not perfect,
+some interactions will be predicted at the ``wrong'' position in the
+network; these measures cannot describe the structural effect of these
+mistakes. On the other hand, measures of network structure can have the
+same value with interactions that fall at drastically different
+positions; this is in part because a lot of these measures covary with
+connectance, and in part because as long as these values are not 0 or
+their respective maximum, there is a large number of network
+configurations that can have the same value. That ROC-AUC is
+consistently larger than PR-AUC may be a case of this measure masking
+models that are not, individually, strong predictors (Jeni et al.,
+2013). In this specif example, the combination of individually
+``adequate'' models resulted in an extremely strong ensemble, suggesting
+that the correct prediction of interactions (as measured by MCC, Inf.,
+ROC-AUC, and PR-AUC) \emph{and} network properties is indeed a feasible
+task under appropriately hyper-parameterized models.
 
 \hypertarget{tbl:comparison}{}
 \begin{longtable}[]{@{}rccccccccc@{}}
@@ -1075,26 +1074,26 @@ trend, and multiple models should probably be trained on their
 
 The results presented here highlight an interesting paradox: although
 the k-NN model was ultimately able to get a correct estimate of network
-structure tbl.~\ref{tbl:comparison}, it ultimately remains a poor
-classifier, as evidenced by its low PR-AUC. This suggests that the goal
-of predicting \emph{interactions} and predicting \emph{networks} may not
-always be solvable in the same way -- of course a perfect classifier of
-interactions would make a perfect network prediction; indeed, the best
-scoring predictor of interactions (the ensemble model) had the best
-prediction of network structure. The tasks of predicting networks
-structure and of predicting interactions within networks are essentially
-two different ones. For some applications (\emph{.e.g.} comparison of
-network structure across gradients), one may care more about a robust
-estimate of the structure, at the cost at putting some interactions at
-the wrong place. For other applications (\emph{e.g.} identifying pairs
-of interacting species), one may conversely care more about getting as
-many pairs right, even though the mistakes accumulate in the form of a
-slightly worse estimate of network structure. How these two approaches
-can be reconciled is something to evaluate on a case-by-case basis,
-especially since there is no guarantee that an esemble model will always
-be the most precise one. Despite this apparent tension at the heart of
-the predictive exercise, we can use the results presented here to
-suggest a number of guidelines.
+structure (see tbl.~\ref{tbl:comparison} and fig.~\ref{fig:ecovalid}),
+it ultimately remains a poor classifier, as evidenced by its low PR-AUC.
+This suggests that the goal of predicting \emph{interactions} and
+predicting \emph{networks} may not always be solvable in the same way --
+of course a perfect classifier of interactions would make a perfect
+network prediction; indeed, the best scoring predictor of interactions
+(the ensemble model) had the best prediction of network structure. The
+tasks of predicting networks structure and of predicting interactions
+within networks are essentially two different ones. For some
+applications (\emph{.e.g.} comparison of network structure across
+gradients), one may care more about a robust estimate of the structure,
+at the cost at putting some interactions at the wrong place. For other
+applications (\emph{e.g.} identifying pairs of interacting species), one
+may conversely care more about getting as many pairs right, even though
+the mistakes accumulate in the form of a slightly worse estimate of
+network structure. How these two approaches can be reconciled is
+something to evaluate on a case-by-case basis, especially since there is
+no guarantee that an esemble model will always be the most precise one.
+Despite this apparent tension at the heart of the predictive exercise,
+we can use the results presented here to suggest a number of guidelines.
 
 First, because we have more trust in reported interactions than in
 reported absences of interactions (which are overwhelmingly
@@ -1103,13 +1102,13 @@ informedness as a measure to decide on a threshold for binary
 classification (Chicco et al., 2021); this being said, because
 informedness is insensitive to bias (although it is a linear measure of
 skill), the overall model performance is better evaluated through the
-use of MCC fig.~\ref{fig:biasmccinf}. Because \(F_1\) is monotonously
-sensitive to classifier bias fig.~\ref{fig:bias} and network connectance
-fig.~\ref{fig:connectance}, MCC should be prefered as a measure of model
-evaluation and comparison. When dealing with multiple models, we
-therefore suggest to find the optimal threshold using informedness, and
-to pick the best model using MCC (assuming one does not want to use an
-ensemble model).
+use of MCC (figs.~\ref{fig:optimbias}, \ref{fig:optimvalue}). Because
+\(F_1\) is monotonously sensitive to classifier bias fig.~\ref{fig:bias}
+and network connectance fig.~\ref{fig:connectance}, MCC should be
+prefered as a measure of model evaluation and comparison. When dealing
+with multiple models, we therefore suggest to find the optimal threshold
+using informedness, and to pick the best model using MCC (assuming one
+does not want to use an ensemble model).
 
 Second, accuracy alone should not be the main measure of model
 performance, but rather an expectation of how well the model should
@@ -1127,9 +1126,9 @@ of a measure that is not sensitive to the chance prediction of many
 negatives (like MCC).
 
 Third, because the PR-AUC responds more to network connectance
-fig.~\ref{fig:optimvalue} and training set imbalance
-fig.~\ref{fig:biasrocpr} than ROC-AUC, it should be used as a measure of
-model performance over the ROC-AUC. This is not to say that ROC-AUC
+(fig.~\ref{fig:optimvalue}) and training set imbalance
+(fig.~\ref{fig:optimbias}) than ROC-AUC, it should be used as a measure
+of model performance over the ROC-AUC. This is not to say that ROC-AUC
 should be discarded (in fact, a low ROC-AUC is undoubtedly a sign of an
 issue with the model), but that its interpretation should be guided by
 the PR-AUC value. Specifically, a high ROC-AUC is not informative, as it
@@ -1155,8 +1154,8 @@ manipulate the connectance of the empirical dataset on which the
 predictions will be made), and so the values measured on the testing set
 (or validation set if the data volume allows one to exists) can be
 directly compared to the values for the actual prediction. A striking
-result fig.~\ref{fig:optimbias} is that Informedness was almost always
-maximal at 50/50 balance (regardless of connectance), whereas MCC
+result from fig.~\ref{fig:optimbias} is that Informedness was almost
+always maximal at 50/50 balance (regardless of connectance), whereas MCC
 required \emph{more} positives to be maximized when connectance
 \emph{increases}, matching the idea that it is a more stringent measure
 of performance. This has an important consequence in ecological
@@ -1218,6 +1217,17 @@ Allouche, O., Tsoar, A., \& Kadmon, R. (2006). Assessing the accuracy of
 species distribution models: Prevalence, kappa and the true skill
 statistic (TSS). \emph{Journal of Applied Ecology}, \emph{43}(6),
 1223--1232. \url{https://doi.org/10.1111/j.1365-2664.2006.01214.x}
+
+\leavevmode\hypertarget{ref-Barber2007ModCom}{}%
+Barber, M. J. (2007). Modularity and community detection in bipartite
+networks. \emph{Physical Review E}, \emph{76}(6), 066102.
+\url{https://doi.org/10.1103/PhysRevE.76.066102}
+
+\leavevmode\hypertarget{ref-Bastolla2009ArcMut}{}%
+Bastolla, U., Fortuna, M. A., Pascual-García, A., Ferrera, A., Luque,
+B., \& Bascompte, J. (2009). The architecture of mutualistic networks
+minimizes competition and increases biodiversity. \emph{Nature},
+\emph{458}(7241), 1018--1020. \url{https://doi.org/10.1038/nature07950}
 
 \leavevmode\hypertarget{ref-Beauchesne2016ThiOut}{}%
 Beauchesne, D., Desjardins-Proulx, Archambault, P., \& Gravel, D.
@@ -1296,6 +1306,13 @@ biases in the sampling of ecological interaction networks. \emph{PeerJ},
 Delgado, R., \& Tibau, X.-A. (2019). Why Cohen's Kappa should be avoided
 as performance measure in classification. \emph{PloS One}, \emph{14}(9),
 e0222916. \url{https://doi.org/10.1371/journal.pone.0222916}
+
+\leavevmode\hypertarget{ref-Delmas2018AnaEco}{}%
+Delmas, E., Besson, M., Brice, M.-H., Burkle, L. A., Dalla Riva, G. V.,
+Fortin, M.-J., Gravel, D., Guimarães, P. R., Hembry, D. H., Newman, E.
+A., Olesen, J. M., Pires, M. M., Yeakel, J. D., \& Poisot, T. (2018).
+Analysing ecological networks of species interactions. \emph{Biological
+Reviews}, 112540. \url{https://doi.org/10.1111/brv.12433}
 
 \leavevmode\hypertarget{ref-Desjardins-Proulx2017EcoInt}{}%
 Desjardins-Proulx, P., Laigle, I., Poisot, T., \& Gravel, D. (2017).
