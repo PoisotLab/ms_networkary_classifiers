@@ -483,7 +483,7 @@ vary with training set balance. On the other hand, PR-AUC shows very strong
 responses, increasing with training set balance. It is notable here that two
 classifiers that seemed to be performing well (Decision Tree and Random Forest)
 based on their MCC are not able to reach a high PR-AUC even at higher
-connectances.All models reached a higher performance on more connected
+connectances. All models reached a higher performance on more connected
 networks, and using more balanced training sets. In all cases, informedness was
 extremely high, which is an expected consequence of the fact that this is the
 value we optimized to determine the cutoff. MCC increased with training set
@@ -556,7 +556,7 @@ performance despite incorporating low-performing
 models.](figures/optimal_value.png){#fig:optimvalue}
 
 When trained at their optimal training set balance, connectance still had a
-significant impact on the performance of some machines [@fig:optimvalue].
+significant impact on the performance of some machines (@fig:optimvalue).
 Notably, Decision Tree, and k-NN, as well as Random forest to a lower extent,
 had low values of PR-AUC. In all cases, the Boosted Regression Tree was reaching
 very good predictions (especially for connectances larger than 0.1), and the
@@ -664,25 +664,25 @@ trend, and multiple models should probably be trained on their "optimal"
 training/testing set, as opposed to the same ones.
 
 The results presented here highlight an interesting paradox: although the k-NN
-model was ultimately able to get a correct estimate of network structure
-[@tbl:comparison], it ultimately remains a poor classifier, as evidenced by its
-low PR-AUC. This suggests that the goal of predicting *interactions* and
-predicting *networks* may not always be solvable in the same way -- of course a
-perfect classifier of interactions would make a perfect network prediction;
-indeed, the best scoring predictor of interactions (the ensemble model) had the
-best prediction of network structure. The tasks of predicting networks structure
-and of predicting interactions within networks are essentially two different
-ones. For some applications (*.e.g.* comparison of network structure across
-gradients), one may care more about a robust estimate of the structure, at the
-cost at putting some interactions at the wrong place. For other applications
-(*e.g.* identifying pairs of interacting species), one may conversely care more
-about getting as many pairs right, even though the mistakes accumulate in the
-form of a slightly worse estimate of network structure. How these two approaches
-can be reconciled is something to evaluate on a case-by-case basis, especially
-since there is no guarantee that an esemble model will always be the most
-precise one. Despite this apparent tension at the heart of the predictive
-exercise, we can use the results presented here to suggest a number of
-guidelines.
+model was ultimately able to get a correct estimate of network structure (see
+@tbl:comparison and @fig:ecovalid), it ultimately remains a poor classifier, as
+evidenced by its low PR-AUC. This suggests that the goal of predicting
+*interactions* and predicting *networks* may not always be solvable in the same
+way -- of course a perfect classifier of interactions would make a perfect
+network prediction; indeed, the best scoring predictor of interactions (the
+ensemble model) had the best prediction of network structure. The tasks of
+predicting networks structure and of predicting interactions within networks are
+essentially two different ones. For some applications (*.e.g.* comparison of
+network structure across gradients), one may care more about a robust estimate
+of the structure, at the cost at putting some interactions at the wrong place.
+For other applications (*e.g.* identifying pairs of interacting species), one
+may conversely care more about getting as many pairs right, even though the
+mistakes accumulate in the form of a slightly worse estimate of network
+structure. How these two approaches can be reconciled is something to evaluate
+on a case-by-case basis, especially since there is no guarantee that an esemble
+model will always be the most precise one. Despite this apparent tension at the
+heart of the predictive exercise, we can use the results presented here to
+suggest a number of guidelines.
 
 First, because we have more trust in reported interactions than in reported
 absences of interactions (which are overwhelmingly *pseudo*-absences), we can
@@ -690,12 +690,12 @@ draw on previous literature to recommend informedness as a measure to decide on
 a threshold for binary classification [@Chicco2021MatCor]; this being said,
 because informedness is insensitive to bias (although it is a linear measure of
 skill), the overall model performance is better evaluated through the use of MCC
-[@fig:biasmccinf]. Because $F_1$ is monotonously sensitive to classifier bias
-[@fig:bias] and network connectance @fig:connectance, MCC should be prefered as
-a measure of model evaluation and comparison. When dealing with multiple models,
-we therefore suggest to find the optimal threshold using informedness, and to
-pick the best model using MCC (assuming one does not want to use an ensemble
-model).
+([@fig:optimbias; @fig:optimvalue]). Because $F_1$ is monotonously sensitive to
+classifier bias [@fig:bias] and network connectance @fig:connectance, MCC should
+be prefered as a measure of model evaluation and comparison. When dealing with
+multiple models, we therefore suggest to find the optimal threshold using
+informedness, and to pick the best model using MCC (assuming one does not want
+to use an ensemble model).
 
 Second, accuracy alone should not be the main measure of model performance, but
 rather an expectation of how well the model should behave given the class
@@ -710,8 +710,8 @@ especially when accuracy isn't (i) compared to the baseline expected value under
 the given class balance, and (ii) interpreted in the context of a measure that
 is not sensitive to the chance prediction of many negatives (like MCC).
 
-Third, because the PR-AUC responds more to network connectance [@fig:optimvalue]
-and training set imbalance [@fig:biasrocpr] than ROC-AUC, it should be used as a
+Third, because the PR-AUC responds more to network connectance (@fig:optimvalue)
+and training set imbalance (@fig:optimbias) than ROC-AUC, it should be used as a
 measure of model performance over the ROC-AUC. This is not to say that ROC-AUC
 should be discarded (in fact, a low ROC-AUC is undoubtedly a sign of an issue
 with the model), but that its interpretation should be guided by the PR-AUC
@@ -735,8 +735,8 @@ testing environment (as we cannot manipulate the connectance of the empirical
 dataset on which the predictions will be made), and so the values measured on
 the testing set (or validation set if the data volume allows one to exists) can
 be directly compared to the values for the actual prediction. A striking result
-[@fig:optimbias] is that Informedness was almost always maximal at 50/50 balance
-(regardless of connectance), whereas MCC required *more* positives to be
+from @fig:optimbias is that Informedness was almost always maximal at 50/50
+balance (regardless of connectance), whereas MCC required *more* positives to be
 maximized when connectance *increases*, matching the idea that it is a more
 stringent measure of performance. This has an important consequence in
 ecological networks, for which the pool of positive cases (interactions) to draw
