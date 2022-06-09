@@ -70,10 +70,10 @@ of the model performance measures.}\label{fig:optimbias}
 \centering
 \includegraphics{figures/optimal_value.png}
 \caption{When trained on their optimally biased training set, most
-models were able to maximize their performance; this is not true for
-decision tree, k-NN, and to a lower extent RF. The ensemble had a
-consistently high performance despite incorporating poor
-models.}\label{fig:optimvalue}
+models were able to maximize their performance; this is not true when
+measuring PR-AUC for decision tree, k-NN, and to a lower extent RF. The
+ensemble had a consistently high performance despite incorporating
+low-performing models.}\label{fig:optimvalue}
 }
 \end{figure}
 \efloatseparator
