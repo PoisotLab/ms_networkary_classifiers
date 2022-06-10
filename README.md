@@ -189,7 +189,7 @@ In this section, we will assume a network of connectance $\rho$, *i.e.* having
 $\rho S^2$ interactions (where $S$ is the species richness), and $(1-\rho) S^2$
 non-interactions. Therefore, the vector describing the *true* state of the
 network (assumed to be an unweighted, directed network) is a column vector
-$\mathbf{o}^T = [\rho, \qquad (1-\rho)]$ (we can safely drop the $S^2$ terms,
+$\mathbf{o}^T = [\rho, (1-\rho)]$ (we can safely drop the $S^2$ terms,
 as we will work on the confusion matrix, which ends up expressing *relative*
 values). We will apply skill and bias to this matrix, and measure how
 a selection of performance metrics respond to changes in these values, in order
@@ -203,8 +203,8 @@ Skill, here, refers to the propensity of the classifier to get the correct
 answer (*i.e.* to assign interactions where they are, and to not assign them
 where they are not). A no-skill classifier guesses at random, *i.e.* it will
 guess interactions with a probability $\rho$. The predictions of a no-skill
-classifier can be expressed as a row vector $\mathbf{p} = [\rho (1-\rho)]$. The
-confusion matrix $\mathbf{M}$ for a no-skill classifier is given by the
+classifier can be expressed as a row vector $\mathbf{p}^T = [\rho, (1-\rho)]$.
+The confusion matrix $\mathbf{M}$ for a no-skill classifier is given by the
 element-wise (Hadamard, outer) product of these vectors $\mathbf{o} \odot
 \mathbf{p}$, *i.e.*
 
@@ -217,8 +217,10 @@ $$
 
 In order to regulate the skill of this classifier, we can define a skill matrix
 $\mathbf{S}$ with diagonal elements equal to $s$, and off-diagonal elements
-equal to $(1-s)$, and re-express the skill-adjusted confusion matrix as
-$\mathbf{M} \odot \mathbf{S}$, *i.e.*
+equal to $(1-s)$, which allows to regulate how many predictions are wrong, under
+the assumption that the bias is the same (*i.e.* the classifier is as likely to
+make a false positive or a false negative). The skill-adjusted confusion matrix
+is $\mathbf{M} \odot \mathbf{S}$, *i.e.*
 
 $$
 \begin{pmatrix}
