@@ -428,12 +428,11 @@ In this section, we will assume a network of connectance \(\rho\),
 richness), and \((1-\rho) S^2\) non-interactions. Therefore, the vector
 describing the \emph{true} state of the network (assumed to be an
 unweighted, directed network) is a column vector
-\(\mathbf{o}^T = [\rho, \qquad (1-\rho)]\) (we can safely drop the
-\(S^2\) terms, as we will work on the confusion matrix, which ends up
-expressing \emph{relative} values). We will apply skill and bias to this
-matrix, and measure how a selection of performance metrics respond to
-changes in these values, in order to assess their suitability for model
-evaluation.
+\(\mathbf{o}^T = [\rho, (1-\rho)]\) (we can safely drop the \(S^2\)
+terms, as we will work on the confusion matrix, which ends up expressing
+\emph{relative} values). We will apply skill and bias to this matrix,
+and measure how a selection of performance metrics respond to changes in
+these values, in order to assess their suitability for model evaluation.
 
 \hypertarget{confusion-matrix-with-skill-and-bias}{%
 \subsection{Confusion matrix with skill and
@@ -446,7 +445,7 @@ correct answer (\emph{i.e.} to assign interactions where they are, and
 to not assign them where they are not). A no-skill classifier guesses at
 random, \emph{i.e.} it will guess interactions with a probability
 \(\rho\). The predictions of a no-skill classifier can be expressed as a
-row vector \(\mathbf{p} = [\rho (1-\rho)]\). The confusion matrix
+row vector \(\mathbf{p}^T = [\rho, (1-\rho)]\). The confusion matrix
 \(\mathbf{M}\) for a no-skill classifier is given by the element-wise
 (Hadamard, outer) product of these vectors
 \(\mathbf{o} \odot \mathbf{p}\), \emph{i.e.}
@@ -460,9 +459,11 @@ row vector \(\mathbf{p} = [\rho (1-\rho)]\). The confusion matrix
 
 In order to regulate the skill of this classifier, we can define a skill
 matrix \(\mathbf{S}\) with diagonal elements equal to \(s\), and
-off-diagonal elements equal to \((1-s)\), and re-express the
-skill-adjusted confusion matrix as \(\mathbf{M} \odot \mathbf{S}\),
-\emph{i.e.}
+off-diagonal elements equal to \((1-s)\), which allows to regulate how
+many predictions are wrong, under the assumption that the bias is the
+same (\emph{i.e.} the classifier is as likely to make a false positive
+or a false negative). The skill-adjusted confusion matrix is
+\(\mathbf{M} \odot \mathbf{S}\), \emph{i.e.}
 
 \[
 \begin{pmatrix}
