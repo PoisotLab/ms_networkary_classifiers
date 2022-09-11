@@ -1,59 +1,68 @@
-Ecological networks are a backbone for key ecological and evolutionary
-processes; yet enumerating all of the interactions between $S$ species is
-a daunting task, as it scales with $S^2$, *i.e.* the squared species richness
-[@Martinez1992ConCon]. Recent contributions to the field of ecological network
-prediction [@Strydom2021RoaPre; @Becker2022OptPre; @Pichler2020MacLea]
-highlight that although interactions can be predicted by adding ecologically
-relevant information (in the form of, *e.g.* traits), we do not have robust
-guidelines as to how the predictive ability of these models should be
-evaluated, nor about how the models should be trained. Here, by relying on
-simple derivations and a series of simulations, we formulate a number of such
-guidelines, specifically for the case of binary classifiers derived from
-thresholded values. Specifically, we conduct an investigation of the models in
-terms of their skill (ability to make the right prediction), bias (trends
-towards systematically over-predicting one class), class imbalance (the
-relative number of cases representing interactions), and show how these effects
-interact. We conclude on the fact that models with the best interaction-scale
-predictive score do not necessarily result in the most accurate representation
-of the network.
+Species interactions, forming ecological networks, are a backbone for key
+ecological and evolutionary processes; yet enumerating all of the interactions
+between $S$ species is a daunting task, as it scales with $S^2$, *i.e.* the
+squared species richness [@Martinez1992ConCon]. Recent contributions to the
+field of ecological network prediction [@Strydom2021RoaPre; @Becker2022OptPre;
+@Pichler2020MacLea] highlight that although interactions can be predicted by
+adding ecologically relevant information (in the form of, *e.g.* traits), we do
+not have robust guidelines as to how the predictive ability of models
+recommending species interactions should be evaluated, nor about how these
+models should be trained. Here, by relying on simple derivations and a series of
+simulations, we formulate a number of such guidelines, specifically for the case
+of binary classifiers derived from thresholded values. Specifically, we conduct
+an investigation of the models in terms of their skill (ability to make the
+right prediction), bias (trends towards systematically over-predicting one
+class), class imbalance (the relative number of cases representing
+interactions), and show how these effects interact. We conclude on the fact that
+models with the best interaction-scale predictive score do not necessarily
+result in the most accurate representation of the true network.
 
 The prediction of ecological interactions shares conceptual and methodological
-issues with two fields in biology: species distribution models (SDMs), and
-genomics. SDMs suffers from issues affecting interactions prediction, namely
-low prevalence (due to sparsity of observations/interactions) and data
-aggregation (due to bias in sampling some locations/species). In previous work,
-@Allouche2006AssAcc suggested that $\kappa$ was a better test of model
-performance than the True Skill Statistic (TSS; which we refer to as Youden's
-informedness); these conclusions were later criticized by @Somodi2017PreDep,
-who emphasized that informedness' is affected both by prevalence and bias.
-Although this work offers recommendations about the comparison of models, it
-doesn't establishes baselines or good practices for training on imbalanced
-ecological data, or ways to remedy the imbalance. @Steen2021SpaThi show that,
-when applying spatial thinning (a process that has no analogue in networks),
-the best approach to train ML-based SDMs varies according to the balancing of
-the dataset, and the evaluation measures used. This suggests that there is no
+issues with two fields in biology: species distribution modelling (SDMs), and
+genomics. SDMs suffers from issues affecting interactions prediction, namely low
+prevalence (due to sparsity of observations/interactions) and data aggregation
+(due to bias in sampling some locations/species). An important challenge lies in
+the fact that the best measure to quantify the performance of a model is not
+necessarilly a point of consensus (these methods, their interpretation, and the
+way they are measured, are covered in depth in the next section). In previous
+work, @Allouche2006AssAcc suggested that Cohen's $\kappa$ agreement score
+($\kappa$ thereafter) was a better test of model performance than the True Skill
+Statistic (TSS; which we refer to as Youden's informedness thereafter); these
+conclusions were later criticized by @Somodi2017PreDep, who emphasized that
+informedness is affected both by prevalence and bias. Although this work offers
+recommendations about the comparison of models, it doesn't establishes baselines
+or good practices for training on imbalanced ecological data, or ways to remedy
+the imbalance. @Steen2021SpaThi show that, when applying spatial thinning
+(artificially re-balancing observation data in space to avoid artifacts due to
+auto-correlation), the best approach to train ML-based SDMs varies according to
+the balancing of the dataset, and the evaluation measures used; there is no
 single "recipe" that is guaranteed to give the best model. By contrast to
 networks, SDMs have the advantage of being able to both thin datasets to remove
 some of the sampling bias [*e.g.* @Inman2021ComSam], but also to create
 pseudo-absences to inflate the number of supposed negatives in the dataset
-[*e.g.* @Iturbide2015FraSpe].
+[*e.g.* @Iturbide2015FraSpe]. These powerful ways to remove data bias often have
+no analogue in networks, removing one potential tool from our methodological
+toolkit, and making the task of network prediction through classification
+potentially more demanding, and more prone to underlying data biases.
 
 An immense body of research on machine learning application to life sciences is
-focused on genomics [which has very specific challenges, see a recent
-discussion by @Whalen2021NavPit]; this sub-field has generated recommendations
-that do not necessarily match the current best-practices for SDMs, and
-therefore hint at the importance of domain-specific guidelines.
-@Chicco2020AdvMat suggest using Matthews correlation coefficient (MCC) over
-$F_1$, as a protection against over-inflation of predicted results;
-@Delgado2019WhyCoh advocate against the use of Cohen's $\kappa$, again in favor
-of MCC, as the relative nature of $\kappa$ means that a worse classifier can be
-picked over a better one; similarly, @Boughorbel2017OptCla recommend MCC over
-other measures of performance for imbalanced data, as it has more desirable
-statistical properties. More recently, @Chicco2021MatCor temper the apparent
-supremacy of the MCC, by suggesting it should be replaced by Youden's
-informedness (also known as $J$, bookmaker's accuracy, and the True-Skill
-Statistic) when the imbalance in the dataset may not be representative of the
-actual imbalance.
+focused on genomics [which has very specific challenges, see a recent discussion
+by @Whalen2021NavPit]; this sub-field has generated recommendations that do not
+necessarily match the current best-practices for SDMs, and therefore hint at the
+importance of domain-specific guidelines. @Chicco2020AdvMat suggest using
+Matthews correlation coefficient (MCC) over $F_1$, as a protection against
+over-inflation of predicted results; @Delgado2019WhyCoh advocate against the use
+of Cohen's $\kappa$, again in favor of MCC, as the relative nature of $\kappa$
+means that a worse classifier can be picked over a better one; similarly,
+@Boughorbel2017OptCla recommend MCC over other measures of performance for
+imbalanced data, as it has more desirable statistical properties. More recently,
+@Chicco2021MatCor temper the apparent supremacy of the MCC, by suggesting it
+should be replaced by Youden's informedness (also known as $J$, bookmaker's
+accuracy, and the True-Skill Statistic) when the imbalance in the dataset may
+not be representative of the actual imbalance. In a way, the measures themselves
+need not be a strong focus for network prediction, as they are routinely used in
+other field; the discipline-specific question we seek to address is: 'which
+metric should be employed when predicting networks, and how to optimize it?'.
 
 Species interaction networks are often under-sampled [@Jordano2016SamNet;
 @Jordano2016ChaEco], and this under-sampling is structured taxonomically
@@ -72,60 +81,80 @@ can lull us into a false sense of predictive accuracy. Second, independently of
 the question of model evaluation, is low prevalence an issue for *training* or
 *testing*, and can we remedy it? Finally, because the low amount of data on
 interaction makes a lot of imbalance correction methods [see *e.g.*
-@Branco2015SurPre] hard to apply, which indicators can be optimized by
-sacrificing least amount of positive interaction data?
+@Branco2015SurPre] hard to apply, which measures of model performance can be
+optimized by sacrificing least amount of positive interaction data?
 
-It may sound counter-intuitive to care so deeply about how good a classifier
-with no-skill is, as by definition, is has no skill. The necessity of this
-exercise has its roots in the paradox of accuracy: when the desired class ("two
-species interact") is rare, a model that gets less ecologically performant by
-only predicting the opposite class ("these two species do not interact") sees
-its accuracy increase; because most of the guesses have "these two species do
-not interact" as a correct answer, a model that never predicts interactions
-would be right an overwhelming majority of the time; it would also be utterly
-useless. Herein lies the core challenge of predicting species interactions: the
-extreme imbalance between classes makes the training of predictive models
-difficult, and their validation even more so as we do not reliably know which
-negatives are true. The connectance (the proportion of realized interactions,
-usually the number of interactions divided by the number of species pairs) of
-empirical networks is usually well under 20%, with larger networks having
-a lower connectance [@MacDonald2020RevLin], and therefore being increasingly
-difficult to predict.
+A preliminary question is to examin the baseline performance of these measures,
+*i.e.* the values they would take on hypothetical networks based on a classifier
+that has no-skill. It may sound counter-intuitive to care so deeply about how
+good a classifier with no-skill is, as by definition, is has no skill. The
+necessity of this exercise has its roots in the paradox of accuracy: when the
+desired class ("two species interact") is rare, a model that gets less
+ecologically performant by only predicting the opposite class ("these two
+species do not interact") sees its accuracy increase; because most of the
+guesses have "these two species do not interact" as a correct answer, a model
+that never predicts interactions would be right an overwhelming majority of the
+time; it would also be utterly useless. Herein lies the core challenge of
+predicting species interactions: the extreme imbalance between classes makes the
+training of predictive models difficult, and their validation even more so as we
+do not reliably know which negatives are true. The connectance (the proportion
+of realized interactions, usually the number of interactions divided by the
+number of species pairs) of empirical networks is usually well under 20%, with
+larger networks having a lower connectance [@MacDonald2020RevLin], and therefore
+being increasingly difficult to predict.
 
 # A primer on binary classifier evaluation
 
-Binary classifiers, which it to say, machine learning algorithms whose answer
-is a categorical value, are usually assessed by measuring properties of their
-confusion matrix, *i.e.* the contingency table reporting true/false
-positive/negative hits. A confusion matrix is laid out as
+Binary classifiers, which it to say, machine learning algorithms whose answer is
+a binary value, are usually assessed by measuring properties of their confusion
+matrix, *i.e.* the contingency table reporting true/false positive/negative
+hits. A confusion matrix is laid out as
 
 $$\begin{pmatrix}
     \text{tp} & \text{fp} \\
     \text{fn} & \text{tn}
 \end{pmatrix} \,.$$
 
-In this matrix, tp is the number of times the model predicts an interaction
-that exists in the network (true positive), fp is the number of times the model
+In this matrix, tp is the number of times the model predicts an interaction that
+exists in the network (true positive), fp is the number of times the model
 predicts an interaction that does not exist in the network (false positive), fn
 is the number of times the model fails to predict an interaction that actually
-exists in the network (false negatives), and tn is the number of times the
-model correctly predicts that an interaction does not exist (true negatives).
-From these values, we can derive a number of measures of model performance [see
+exists in the network (false negatives), and tn is the number of times the model
+correctly predicts that an interaction does not exist (true negatives). From
+these values, we can derive a number of measures of model performance [see
 @Strydom2021RoaPre for a review of their interpretation in the context of
 networks]. At a coarse scale, a classifier is *accurate* when the trace of the
 matrix divided by the sum of the matrix is close to 1, with other measures
 informing us on how the predictions fail.
 
+A lot of binary classifiers are built by using a regressor (whose task is to
+guess the value of the interaction, and can therefore return a value considered
+to be a pseudo-probability); in this case, the optimal value below which
+predictions are assumed to be negative (*i.e.* the interaction does not exist)
+can be determined by picking a threshold maximizing some value on the ROC or the
+PR curve. The area under these curves (ROC-AUC and PR-AUC henceforth) give ideas
+on the overall goodness of the classifier, and the ideal threshold is the point
+on these curves that minimizes the tradeoff represented in these curves.
+@Saito2015PrePlo established that the ROC-AUC is biased towards over-estimating
+performance for imbalanced data; on the contrary, the PR-AUC is able to identify
+classifiers that are less able to detect positive interactions correctly, with
+the additional advantage of having a baseline value equal to prevalence.
+Therefore, it is important to assess whether these two measures return different
+results when applied to ecological network prediction. The ROC curve is defined
+by the false positive rate on the $x$ axis, and the true positive rate on the
+$y$ axis, and the PR curve is defined by the true positive rate on the $x$ axis,
+and the positive predictive value on the $y$ axis.
+
 There is an immense diversity of measures to evaluate the performance of
-classification tasks [@Ferri2009ExpCom]. Here we will focus on five of them
-with high relevance for imbalanced learning [@He2013ImbLea]. The choice of
-metrics with relevance to class-imbalanced problems is fundamental, because as
-@Japkowicz2013AssMet unambiguously concluded, "relatively robust procedures
-used for unskewed data can break down miserably when the data is skewed".
-Following @Japkowicz2013AssMet, we focus on two ranking metrics (the areas
-under the Receiver Operating Characteristic and Precision Recall curves), and
-three threshold metrics ($\kappa$, informedness, and MCC; we will briefly
-discuss $F_1$ but show early on that it has undesirable properties). 
+classification tasks [@Ferri2009ExpCom]. Here we will focus on five of them with
+high relevance for imbalanced learning [@He2013ImbLea]. The choice of metrics
+with relevance to class-imbalanced problems is fundamental, because as
+@Japkowicz2013AssMet unambiguously concluded, "relatively robust procedures used
+for unskewed data can break down miserably when the data is skewed". Following
+@Japkowicz2013AssMet, we focus on two ranking metrics (the areas under the
+Receiver Operating Characteristic and Precision Recall curves), and three
+threshold metrics ($\kappa$, informedness, and MCC; we will briefly discuss
+$F_1$ but show early on that it has undesirable properties).
 
 The $\kappa$ measure [@Landis1977MeaObs] establishes the extent to which two
 observers (the network and the prediction) agree, and is measured as
@@ -157,41 +186,24 @@ $$
 2\frac{tp}{2\times tp + fp + fn}\,.
 $$
 
-A lot of binary classifiers are built by using a regressor (whose task is to
-guess the value of the interaction, and can therefore return a value considered
-to be a pseudo-probability); in this case, the optimal value below which
-predictions are assumed to be negative (*i.e.* the interaction does not exist)
-can be determined by picking a threshold maximizing some value on the ROC or
-the PR curve. The area under these curves (ROC-AUC and PR-AUC henceforth) give
-ideas on the overall goodness of the classifier, and the ideal threshold is the
-point on these curves that minimizes the tradeoff represented in these curves.
-@Saito2015PrePlo established that the ROC-AUC is biased towards over-estimating
-performance for imbalanced data; on the contrary, the PR-AUC is able to
-identify classifiers that are less able to detect positive interactions
-correctly, with the additional advantage of having a baseline value equal to
-prevalence. Therefore, it is important to assess whether these two measures
-return different results when applied to ecological network prediction. The ROC
-curve is defined by the false positive rate on the $x$ axis, and the true
-positive rate on the $y$ axis, and the PR curve is defined by the true positive
-rate on the $x$ axis, and the positive predictive value on the $y$ axis. By
-comparison with the previous paragraph, it is obvious that $F_1$ and MCC have
-ties to the PR curve (being close to the expected PR-AUC), and that
-informedness has ties to the ROC curve (whereby the threshold maximizing
-informedness is also the point of maximal inflection on the ROC curve). One
-important difference between ROC and PR is that the later does not prominently
-account for the size of the true negative compartments: in short, it is more
-sensitive to the correct positive predictions. In a context of strong
-imbalance, PR-AUC is therefore a more stringent test of model performance.
+One noteworthy fact is that $F_1$ and MCC have ties to the PR curve (being close
+to the expected PR-AUC), and that informedness has ties to the ROC curve
+(whereby the threshold maximizing informedness is also the point of maximal
+inflection on the ROC curve). One important difference between ROC and PR is
+that the later does not prominently account for the size of the true negative
+compartments: in short, it is more sensitive to the correct positive
+predictions. In a context of strong imbalance, PR-AUC is therefore a more
+stringent test of model performance.
 
 # Baseline values for the threshold metrics
 
-In this section, we will assume a network of connectance $\rho$, *i.e.* having
-$\rho S^2$ interactions (where $S$ is the species richness), and $(1-\rho) S^2$
-non-interactions. Therefore, the vector describing the *true* state of the
-network (assumed to be an unweighted, directed network) is a column vector
-$\mathbf{o}^T = [\rho, (1-\rho)]$ (we can safely drop the $S^2$ terms,
-as we will work on the confusion matrix, which ends up expressing *relative*
-values). We will apply skill and bias to this matrix, and measure how
+In this section, we will assume a network with connectance equal to a scalar
+$\rho$, *i.e.* having $\rho S^2$ interactions (where $S$ is the species
+richness), and $(1-\rho) S^2$ non-interactions. Therefore, the vector describing
+the *true* state of the network (assumed to be an unweighted, directed network)
+is a column vector $\mathbf{o}^T = [\rho, (1-\rho)]$ (we can safely drop the
+$S^2$ terms, as we will work on the confusion matrix, which ends up expressing
+*relative* values). We will apply skill and bias to this matrix, and measure how
 a selection of performance metrics respond to changes in these values, in order
 to assess their suitability for model evaluation.
 
@@ -407,51 +419,54 @@ $$
          \end{bmatrix}
 $$
 
-The training sample is composed of 50% of the $10^4$ possible entries in the
-network, *i.e.* $n=5000$. Out of these interactions, we pick a proportion $\nu$
-(the training set balance) to be positive, so that the training set has $\nu n$
-interactions, and $(1-\nu) n$ non-interactions. We vary $\nu$ uniformly in
-$]0,1[$. This allows to evaluate how the measures of binary classification
-performance respond to artificially rebalanced dataset for a given network
-connectance. The rest of the dataset is used as a testing set, on which all
-further measures are calculated. Note that although the training set is
-balanced arbitrarily, the testing set is assembled so that it has the exact
+The training sample is composed of a random pick of up to 50% of the $10^4$
+possible entries in the network, *i.e.* $n=5000$. Out of these interactions, we
+pick a proportion $\nu$ (the training set balance) to be positive, so that the
+training set has $\nu n$ interactions, and $(1-\nu) n$ non-interactions. We vary
+$\nu$ uniformly in $]0,1[$. This allows to evaluate how the measures of binary
+classification performance respond to artificially rebalanced dataset for a
+given network connectance. The rest of the dataset is used as a testing set, on
+which all further measures are calculated. Note that although the training set
+is balanced arbitrarily, the testing set is assembled so that it has the exact
 connectance of the entire network; this ensures that the model is evaluated
-under the class imbalance where the predictions will be made, which represents
-a more meaningful evaluation. Note also that although the simulated networks
+under the class imbalance where the predictions will be made, which represents a
+more meaningful evaluation. Furthermore, to avoid artifacts due to different
+sizes of the training and testing set within a single network, the number of
+entries in both sets are equal. Note also that although the simulated networks
 are bipartite, the algorithms have no "knowledge" of the network structure, and
 simply look at pairs of species; therefore, the approach outlined here would
 also work for unipartite networks.
 
-The dataset used for numerical experiments is composed of a grid of 35 values
-of connectance (from 0.011 to 0.5) and 35 values of $\nu$ (from 0.02 to 0.98);
-for each pair of values, 500 networks are generated and predicted. For each
-network, we train four machines: a trait-based k-NN [*e.g.*
+The dataset used for numerical experiments is composed of a grid of 35 values of
+connectance (from 0.011 to 0.5) and 35 values of $\nu$ (from 0.02 to 0.98); for
+each pair of values, 500 networks are generated and predicted. For each network,
+we train four machines: a trait-based k-NN [*e.g.*
 @Desjardins-Proulx2017EcoInt], a regression tree, a regression random forest,
-and a boosted regression tree. Following results from @Pichler2020MacLea,
-linear models have not been considered (in any way, the relationship in the
-simulated networks is non-linear). The point of these numerical experiments is
-*not* to recommend the best model (this is likely problem-specific), but to
-highlight a series of recommendations that would work for supervised learning
-tasks. All models were taken from the `MLJ.jl` package [@Blaom2020MljJul;
-@Blaom2020FleMod] in Julia 1.7 [@Bezanson2017JulFre]. All machines use the
-default parameterization; this is an obvious deviation from best practices, as
-the hyperparameters of any machine require training before its application on
-a real dataset. As we use 612500 such datasets, this would require over
-2 millions unique instances of tweaking the hyperparameters, which is
-prohibitive from a computing time point of view. An important thing to keep in
-mind is that the problem we simulate has been designed to be simple to solve:
+and a boosted regression tree; the later three methods are turned into
+classifiers using thresholding, which oftentimes provides better results than
+classification when faced with class imbalance [@Hong2016DeaCla]. Following
+results from @Pichler2020MacLea, linear models have not been considered (in any
+way, the relationship in the simulated networks is non-linear). The point of
+these numerical experiments is *not* to recommend the best model (this is likely
+problem-specific), but to highlight a series of recommendations that would work
+for supervised learning tasks. All models were taken from the `MLJ.jl` package
+[@Blaom2020MljJul; @Blaom2020FleMod] in Julia 1.7 [@Bezanson2017JulFre]. All
+machines use the default parameterization; this is an obvious deviation from
+best practices, as the hyperparameters of any machine require training before
+its application on a real dataset. As we use 612500 such datasets, this would
+require over 2 millions unique instances of tweaking the hyperparameters, which
+is prohibitive from a computing time point of view. An important thing to keep
+in mind is that the problem we simulate has been designed to be simple to solve:
 we expect all machines with sensible default parameters to fare well --- the
 results presented in the later sections show that this assumption is warranted,
 and we further checked that the models do not overfit by ensuring that there is
 never more than 5% of difference between the accuracy on the training and
 testing sets. All machines return a quantitative prediction, usually (but not
-necessarily) in $[0,1]$, which is proportional (but not necessarily linearly)
-to the probability of an interaction between $i$ and $j$. The ROC-AUC and
-PR-AUC (and therefore the thresholds) can be measured by integrating over the
-domain of the values return by each machine, but in order to make the
-average-based ensemble model more meaningful, all predictions are expressed in
-$[0,1]$.
+necessarily) in $[0,1]$, which is proportional (but not necessarily linearly) to
+the probability of an interaction between $i$ and $j$. The ROC-AUC and PR-AUC
+(and therefore the thresholds) can be measured by integrating over the domain of
+the values return by each machine, but in order to make the average-based
+ensemble model more meaningful, all predictions are expressed in $[0,1]$.
 
 In order to pick the best confusion matrix for a given trained machine, we
 performed a thresholding approach using 500 steps on predictions from the
@@ -652,18 +667,19 @@ simple rule we used here. In a recent multi-model comparison involving
 supervised and unsupervised learning, @Becker2022OptPre found that the ensemble
 was *not* the best model, and was specifically under-performing compared to
 models using biological traits. This may be because the dataset of
-@Becker2022OptPre was known to be under-sampled, and so the network itself
-contained less information than the network and species traits. There is no
-general conclusion to draw from either these results or ours, besides
-reinforcing the need to be pragmatic about which models should be included in
-the ensemble, and whether to use an ensemble at all. In a sense, the surprising
-performance of the ensemble model should form the basis of the first broad
-recommendation: optimal training set balance and its interaction with
+@Becker2022OptPre was known to be under-sampled, and so the network alone
+contained less information than the combination of the network and species
+traits. There is no general conclusion to draw from either these results or
+ours, besides reinforcing the need to be pragmatic about which models should be
+included in the ensemble, and whether to use an ensemble at all. In a sense, the
+surprising performance of the ensemble model should form the basis of the first
+broad recommendation: optimal training set balance and its interaction with
 connectance and the specific binary classifier used is, in a sense, an
-hyperparameter that should be assessed. The distribution of results in
-@fig:optimbias and @fig:optimvalue show that there are variations around the
-trend, and multiple models should probably be trained on their "optimal"
-training/testing set, as opposed to the same ones.
+hyperparameter that should be assessed following the approach outlined in this
+manuscript. The distribution of results in @fig:optimbias and @fig:optimvalue
+show that there are variations around the trend, and multiple models should
+probably be trained on their "optimal" training/testing set, as opposed to the
+same ones.
 
 The results presented here highlight an interesting paradox: although the k-NN
 model was ultimately able to get a correct estimate of network structure (see
@@ -674,14 +690,14 @@ way -- of course a perfect classifier of interactions would make a perfect
 network prediction; indeed, the best scoring predictor of interactions (the
 ensemble model) had the best prediction of network structure. The tasks of
 predicting networks structure and of predicting interactions within networks are
-essentially two different ones. For some applications (*.e.g.* comparison of
+essentially two different ones. For some applications (*e.g.* comparison of
 network structure across gradients), one may care more about a robust estimate
 of the structure, at the cost at putting some interactions at the wrong place.
 For other applications (*e.g.* identifying pairs of interacting species), one
 may conversely care more about getting as many pairs right, even though the
 mistakes accumulate in the form of a slightly worse estimate of network
 structure. How these two approaches can be reconciled is something to evaluate
-on a case-by-case basis, especially since there is no guarantee that an esemble
+on a case-by-case basis, especially since there is no guarantee that an ensemble
 model will always be the most precise one. Despite this apparent tension at the
 heart of the predictive exercise, we can use the results presented here to
 suggest a number of guidelines.
@@ -693,9 +709,9 @@ a threshold for binary classification [@Chicco2021MatCor]; this being said,
 because informedness is insensitive to bias (although it is a linear measure of
 skill), the overall model performance is better evaluated through the use of MCC
 ([@fig:optimbias; @fig:optimvalue]). Because $F_1$ is monotonously sensitive to
-classifier bias [@fig:bias] and network connectance @fig:connectance, MCC should
-be prefered as a measure of model evaluation and comparison. When dealing with
-multiple models, we therefore suggest to find the optimal threshold using
+classifier bias (@fig:bias) and network connectance (@fig:connectance), MCC
+should be prefered as a measure of model evaluation and comparison. When dealing
+with multiple models, we therefore suggest to find the optimal threshold using
 informedness, and to pick the best model using MCC (assuming one does not want
 to use an ensemble model).
 
@@ -755,17 +771,18 @@ rather to optimize the set composition for each of them.
 
 One key element for real-life data that can make the prediction exercise more
 tractable is that some interactions can safely be assumed to be impossible;
-indeed, a lot of networks admit a stochastic block model as a good approximation
-[*e.g.* @Xie2017ComCom]. In ecological networks, this can be due to spatial
-constrains [@Valdovinos2019MutNet], or to the long-standing knowledge that some
-links are "forbidden" due to traits [@Olesen2011MisFor] or abundances
+indeed, a lot of networks can be reasonably well described using a stochastic
+block model [*e.g.* @Xie2017ComCom]. In ecological networks, this can be due to
+spatial constraints [@Valdovinos2019MutNet], or to the long-standing knowledge
+that some links are "forbidden" due to traits [@Olesen2011MisFor] or abundances
 [@Canard2014EmpEva]. The matching rules [@Strona2017ForPer; @Olito2015SpeTra]
 can be incorporated in the model either by adding compatibility traits, or by
 *only* training the model on pairs of species that are not likely to be
-forbidden links; having this information would allow to assemble
+forbidden links. Knowledge of true negative interactions could be propagated in
 training/testing sets that have true negatives, and in this situation, it may be
-possible to use the more usual 70/30 split. Besides forbidden links, a real-life
-case that may arise is multi-interaction or multi-layer networks
+possible to use the more usual 70/30 split for training/testing folds as the
+need to protect against potential unbalance is lowered. Besides forbidden links,
+a real-life case that may arise is multi-interaction or multi-layer networks
 [@Pilosof2017MulNat]. These can be studied using the same general approach
 outlined here, either by assuming that pairs of species can interact in more
 than one way (wherein one would train a model for each type of interaction,
