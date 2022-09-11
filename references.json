@@ -993,6 +993,36 @@
         "type": "book"
     },
     {
+        "DOI": "10.48550/arXiv.1607.02705",
+        "URL": "http://arxiv.org/abs/1607.02705",
+        "author": [
+            {
+                "family": "Hong",
+                "given": "Charmgil"
+            },
+            {
+                "family": "Ghosh",
+                "given": "Rumi"
+            },
+            {
+                "family": "Srinivasan",
+                "given": "Soundar"
+            }
+        ],
+        "id": "Hong2016DeaCla",
+        "issued": {
+            "date-parts": [
+                [
+                    2016,
+                    7,
+                    10
+                ]
+            ]
+        },
+        "title": "Dealing with Class Imbalance using Thresholding",
+        "type": "manuscript"
+    },
+    {
         "DOI": "10.1002/ecs2.3422",
         "author": [
             {
