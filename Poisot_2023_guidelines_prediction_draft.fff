@@ -84,7 +84,7 @@ low-performing models.}\label{fig:optimvalue}
 \caption{Visualisation of the raw (un-thresholded) models predictions
 for one instance of a network prediction problem (shown in the
 ``Dataset'' panel). Increasing the value of the \(\xi\) parameter would
-make the diagonal structure ``broader,'' leading to more interactions. A
+make the diagonal structure ``broader'', leading to more interactions. A
 visual inspection of the results is important, as it highlights how some
 models can ``miss'' parts of the network; by combining them in an
 ensemble, these gaps compensate one another, and lead (in this case) to

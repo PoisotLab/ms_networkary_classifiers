@@ -12,6 +12,8 @@
 
 \usepackage{lastpage}
 
+\usepackage{gensymb}
+
 \usepackage{setspace}
 
 \usepackage{ccicons}
@@ -120,7 +122,7 @@ urlcolor=blue}
 \setlength{\cslhangindent}{1.5em}
 \newlength{\csllabelwidth}
 \setlength{\csllabelwidth}{3em}
-\newenvironment{CSLReferences}[3] % #1 hanging-ident, #2 entry spacing
+\newenvironment{CSLReferences}[2] % #1 hanging-ident, #2 entry spacing
  {% don't indent paragraphs
   \setlength{\parindent}{0pt}
   % turn on hanging indent if param 1 is 1
@@ -175,27 +177,21 @@ Sciences
 Timothée Poisot --- \texttt{timothee.poisot@umontreal.ca}\\
 
 \vfill
-This work is released by its authors under a CC-BY 4.0 license\hfill\ccby\\
-Last revision: \emph{\today}
 
-\clearpage
-\thispagestyle{empty}
-
-\vfill
 
 \begin{enumerate}
-    \item The prediction of species interactions is gaining momentum as
-a way to circumvent limitations in data volume. Yet, ecological networks
+    \itemThe prediction of species interactions is gaining momentum as a
+way to circumvent limitations in data volume. Yet, ecological networks
 are challenging to predict because they are typically small and sparse.
 Dealing with extreme class imbalance is a challenge for most binary
 classifiers, and there are currently no guidelines as to how predictive
 models can be trained for this specific problem.%
-    \item Using simple mathematical arguments and numerical experiments
+    \itemUsing simple mathematical arguments and numerical experiments
 in which a variety of classifiers (for supervised learning) are trained
 on simulated networks, we develop a series of guidelines related to the
 choice of measures to use for model selection, and the ways to assemble
 the training dataset.%
-    \item Neither classifier accuracy nor the area under the receiver
+    \itemNeither classifier accuracy nor the area under the receiver
 operating characteristic curve (ROC-AUC) are informative measures for
 the performance of interaction prediction. The area under the
 precision-recall curve (PR-AUC) is a fairer assessment of performance.
@@ -204,13 +200,23 @@ biased classifier because the effect of connectance is strong. The
 amount of correction to apply to the training dataset depends on network
 connectance, on the measure to be optimized, and only weakly on the
 classifier.%
-    \item These results reveal that training machines to predict
-networks is a challenging task, and that in virtually all cases, the
-composition of the training set needs to be fine-tuned before performing
-the actual training. We discuss these consequences in the context of the
-low volume of data.%
+    \itemThese results reveal that training machines to predict networks
+is a challenging task, and that in virtually all cases, the composition
+of the training set needs to be fine-tuned before performing the actual
+training. We discuss these consequences in the context of the low volume
+of data.%
 \end{enumerate}
 
+
+
+\vfill
+This work is released by its authors under a CC-BY 4.0 license\hfill\ccby\\
+Last revision: \emph{\today}
+
+\clearpage
+\thispagestyle{empty}
+
+\vfill
 
 \vfill
 
@@ -291,7 +297,7 @@ in the dataset may not be representative of the actual imbalance. In a
 way, the measures themselves need not be a strong focus for network
 prediction, as they are routinely used in other field; the
 discipline-specific question we seek to address is: `which metric should
-be employed when predicting networks, and how to optimize it?'
+be employed when predicting networks, and how to optimize it?'.
 
 Species interaction networks are often under-sampled (Jordano, 2016a,
 2016b), and this under-sampling is structured taxonomically (Beauchesne
@@ -390,7 +396,7 @@ them with high relevance for imbalanced learning (He \& Ma, 2013). The
 choice of metrics with relevance to class-imbalanced problems is
 fundamental, because as Japkowicz (2013) unambiguously concluded,
 ``relatively robust procedures used for unskewed data can break down
-miserably when the data is skewed.'' Following Japkowicz (2013), we
+miserably when the data is skewed''. Following Japkowicz (2013), we
 focus on two ranking metrics (the areas under the Receiver Operating
 Characteristic and Precision Recall curves), and three threshold metrics
 (\(\kappa\), informedness, and MCC; we will briefly discuss \(F_1\) but
@@ -920,7 +926,7 @@ on the complete dataset is presented in fig.~\ref{fig:ecovalid}.
 \caption{Visualisation of the raw (un-thresholded) models predictions
 for one instance of a network prediction problem (shown in the
 ``Dataset'' panel). Increasing the value of the \(\xi\) parameter would
-make the diagonal structure ``broader,'' leading to more interactions. A
+make the diagonal structure ``broader'', leading to more interactions. A
 visual inspection of the results is important, as it highlights how some
 models can ``miss'' parts of the network; by combining them in an
 ensemble, these gaps compensate one another, and lead (in this case) to
@@ -931,12 +937,12 @@ a better prediction.}\label{fig:ecovalid}
 The trained models were then thresholded (again by optimising
 informedness), and their predictions transformed back into networks for
 analysis; specifically, we measured the connectance, nestedness
-(\(\eta\); Bastolla et al., 2009), modularity (\(Q\); Barber, 2007),
-asymmetry (\(A\); Delmas et al., 2018), and Jaccard network
-dissimilarity (Canard et al., 2014). This process was repeated 250
-times, and the results are presented in tbl.~\ref{tbl:comparison}. The
-k-NN model is an interesting instance here: it produces the network that
-looks the most like the original dataset, despite having the lowest
+{[}\(\eta\); Bastolla et al. (2009){]}, modularity {[}\(Q\); Barber
+(2007){]}, asymmetry {[}\(A\); Delmas et al. (2018){]}, and Jaccard
+network dissimilarity (Canard et al., 2014). This process was repeated
+250 times, and the results are presented in tbl.~\ref{tbl:comparison}.
+The k-NN model is an interesting instance here: it produces the network
+that looks the most like the original dataset, despite having the lowest
 PR-AUC, suggesting it hits high recall at the cost of low precision. The
 ensemble was able to reach a very high PR-AUC (and a very high ROC-AUC),
 which translated into more accurate reconstructions of the structure of
@@ -961,37 +967,83 @@ ROC-AUC, and PR-AUC) \emph{and} network properties is indeed a feasible
 task under appropriately hyper-parameterized models.
 
 \hypertarget{tbl:comparison}{}
-\begin{longtable}[]{@{}rccccccccc@{}}
+\begin{longtable}[]{@{}
+  >{\raggedleft\arraybackslash}p{(\columnwidth - 18\tabcolsep) * \real{0.1548}}
+  >{\centering\arraybackslash}p{(\columnwidth - 18\tabcolsep) * \real{0.0952}}
+  >{\centering\arraybackslash}p{(\columnwidth - 18\tabcolsep) * \real{0.0952}}
+  >{\centering\arraybackslash}p{(\columnwidth - 18\tabcolsep) * \real{0.0833}}
+  >{\centering\arraybackslash}p{(\columnwidth - 18\tabcolsep) * \real{0.0952}}
+  >{\centering\arraybackslash}p{(\columnwidth - 18\tabcolsep) * \real{0.0952}}
+  >{\centering\arraybackslash}p{(\columnwidth - 18\tabcolsep) * \real{0.0952}}
+  >{\centering\arraybackslash}p{(\columnwidth - 18\tabcolsep) * \real{0.0952}}
+  >{\centering\arraybackslash}p{(\columnwidth - 18\tabcolsep) * \real{0.0952}}
+  >{\centering\arraybackslash}p{(\columnwidth - 18\tabcolsep) * \real{0.0952}}@{}}
 \caption{\label{tbl:comparison}Values of four performance metrics, and
 five network structure metrics, for 500 independent predictions similar
 to the ones presented in fig.~\ref{fig:ecovalid}. The values in
 \textbf{bold} indicate the best value for each column (including ties).
 Because the values have been rounded, values of 1.0 for the ROC-AUC
 column indicate an average \(\ge 0.99\).}\tabularnewline
-\toprule
-Model & MCC & Inf. & ROC-AUC & PR-AUC & Conn. & \(\eta\) & \(Q\) & \(A\)
-& Jaccard\tabularnewline
-\midrule
+\toprule()
+\begin{minipage}[b]{\linewidth}\raggedleft
+Model
+\end{minipage} & \begin{minipage}[b]{\linewidth}\centering
+MCC
+\end{minipage} & \begin{minipage}[b]{\linewidth}\centering
+Inf.
+\end{minipage} & \begin{minipage}[b]{\linewidth}\centering
+ROC-AUC
+\end{minipage} & \begin{minipage}[b]{\linewidth}\centering
+PR-AUC
+\end{minipage} & \begin{minipage}[b]{\linewidth}\centering
+Conn.
+\end{minipage} & \begin{minipage}[b]{\linewidth}\centering
+\(\eta\)
+\end{minipage} & \begin{minipage}[b]{\linewidth}\centering
+\(Q\)
+\end{minipage} & \begin{minipage}[b]{\linewidth}\centering
+\(A\)
+\end{minipage} & \begin{minipage}[b]{\linewidth}\centering
+Jaccard
+\end{minipage} \\
+\midrule()
 \endfirsthead
-\toprule
-Model & MCC & Inf. & ROC-AUC & PR-AUC & Conn. & \(\eta\) & \(Q\) & \(A\)
-& Jaccard\tabularnewline
-\midrule
+\toprule()
+\begin{minipage}[b]{\linewidth}\raggedleft
+Model
+\end{minipage} & \begin{minipage}[b]{\linewidth}\centering
+MCC
+\end{minipage} & \begin{minipage}[b]{\linewidth}\centering
+Inf.
+\end{minipage} & \begin{minipage}[b]{\linewidth}\centering
+ROC-AUC
+\end{minipage} & \begin{minipage}[b]{\linewidth}\centering
+PR-AUC
+\end{minipage} & \begin{minipage}[b]{\linewidth}\centering
+Conn.
+\end{minipage} & \begin{minipage}[b]{\linewidth}\centering
+\(\eta\)
+\end{minipage} & \begin{minipage}[b]{\linewidth}\centering
+\(Q\)
+\end{minipage} & \begin{minipage}[b]{\linewidth}\centering
+\(A\)
+\end{minipage} & \begin{minipage}[b]{\linewidth}\centering
+Jaccard
+\end{minipage} \\
+\midrule()
 \endhead
 Decision tree & 0.59 & 0.94 & 0.97 & 0.04 & 0.17 & 0.64 & 0.37 &
-\textbf{0.42} & 0.1\tabularnewline
-BRT & 0.46 & 0.91 & 0.97 & 0.36 & 0.2 & 0.78 & 0.29 & 0.41 &
-0.19\tabularnewline
+\textbf{0.42} & 0.1 \\
+BRT & 0.46 & 0.91 & 0.97 & 0.36 & 0.2 & 0.78 & 0.29 & 0.41 & 0.19 \\
 Random Forest & 0.72 & \textbf{0.98} & 0.99 & 0.1 & \textbf{0.16} &
-\textbf{0.61} & 0.38 & \textbf{0.42} & \textbf{0.06}\tabularnewline
+\textbf{0.61} & 0.38 & \textbf{0.42} & \textbf{0.06} \\
 k-NN & 0.71 & \textbf{0.98} & 0.99 & 0.02 & \textbf{0.16} &
-\textbf{0.61} & \textbf{0.39} & \textbf{0.42} &
-\textbf{0.06}\tabularnewline
+\textbf{0.61} & \textbf{0.39} & \textbf{0.42} & \textbf{0.06} \\
 \emph{Ensemble} & \textbf{0.74} & \textbf{0.98} & \textbf{1.0} &
 \textbf{0.79} & \textbf{0.16} & \textbf{0.61} & 0.38 & \textbf{0.42} &
-\textbf{0.06}\tabularnewline
-\emph{Data} & & & & & 0.16 & 0.56 & 0.41 & 0.42 & 0.0\tabularnewline
-\bottomrule
+\textbf{0.06} \\
+\emph{Data} & & & & & 0.16 & 0.56 & 0.41 & 0.42 & 0.0 \\
+\bottomrule()
 \end{longtable}
 
 \hypertarget{guidelines-for-the-assessment-of-network-predictive-models}{%
@@ -1130,10 +1182,10 @@ networks, for which the pool of positive cases (interactions) to draw
 from is typically small: the most parsimonious measure (\emph{i.e.} the
 one requiring to discard the least amount of interactions to train the
 model) will give the best validation potential, and in this light is
-very likely informedness (maximizing informedness is, in fact, the
+very likely informedness {[}maximizing informedness is, in fact, the
 generally accepted default for imbalanced classification regardless of
-the problem domain; Schisterman et al., 2005). This last result further
-strengthens the assumption that the amount of bias \emph{is} an
+the problem domain; Schisterman et al. (2005){]}. This last result
+further strengthens the assumption that the amount of bias \emph{is} an
 hyper-parameter that must be fine-tuned, as using the wrong bias can
 lead to models with lower performance; for this reason, it makes sense
 to not train all models on the same training/testing set, but rather to
@@ -1181,30 +1233,30 @@ Emergence Research Initiative (VERENA) consortium including NSF BII
 
 \hypertarget{refs}{}
 \begin{CSLReferences}{1}{0}
-\leavevmode\hypertarget{ref-Allouche2006AssAcc}{}%
+\leavevmode\vadjust pre{\hypertarget{ref-Allouche2006AssAcc}{}}%
 Allouche, O., Tsoar, A., \& Kadmon, R. (2006). Assessing the accuracy of
 species distribution models: Prevalence, kappa and the true skill
 statistic (TSS). \emph{Journal of Applied Ecology}, \emph{43}(6),
 1223--1232. \url{https://doi.org/10.1111/j.1365-2664.2006.01214.x}
 
-\leavevmode\hypertarget{ref-Barber2007ModCom}{}%
+\leavevmode\vadjust pre{\hypertarget{ref-Barber2007ModCom}{}}%
 Barber, M. J. (2007). Modularity and community detection in bipartite
 networks. \emph{Physical Review E}, \emph{76}(6), 066102.
 \url{https://doi.org/10.1103/PhysRevE.76.066102}
 
-\leavevmode\hypertarget{ref-Bastolla2009ArcMut}{}%
+\leavevmode\vadjust pre{\hypertarget{ref-Bastolla2009ArcMut}{}}%
 Bastolla, U., Fortuna, M. A., Pascual-García, A., Ferrera, A., Luque,
 B., \& Bascompte, J. (2009). The architecture of mutualistic networks
 minimizes competition and increases biodiversity. \emph{Nature},
 \emph{458}(7241), 1018--1020. \url{https://doi.org/10.1038/nature07950}
 
-\leavevmode\hypertarget{ref-Beauchesne2016ThiOut}{}%
+\leavevmode\vadjust pre{\hypertarget{ref-Beauchesne2016ThiOut}{}}%
 Beauchesne, D., Desjardins-Proulx, Archambault, P., \& Gravel, D.
 (2016). Thinking Outside the Box--predicting Biotic Interactions in
 Data-poor Environments. \emph{Vie Et Milieu-Life and enVironment},
 \emph{66}(3-4), 333--342.
 
-\leavevmode\hypertarget{ref-Becker2022OptPre}{}%
+\leavevmode\vadjust pre{\hypertarget{ref-Becker2022OptPre}{}}%
 Becker, D. J., Albery, G. F., Sjodin, A. R., Poisot, T., Bergner, L. M.,
 Chen, B., Cohen, L. E., Dallas, T. A., Eskew, E. A., Fagre, A. C.,
 Farrell, M. J., Guth, S., Han, B. A., Simmons, N. B., Stock, M.,
@@ -1212,221 +1264,221 @@ Teeling, E. C., \& Carlson, C. J. (2022). Optimising predictive models
 to prioritise viral discovery in zoonotic reservoirs. \emph{The Lancet
 Microbe}. \url{https://doi.org/10.1016/S2666-5247(21)00245-7}
 
-\leavevmode\hypertarget{ref-Bezanson2017JulFre}{}%
+\leavevmode\vadjust pre{\hypertarget{ref-Bezanson2017JulFre}{}}%
 Bezanson, J., Edelman, A., Karpinski, S., \& Shah, V. (2017). Julia: A
 Fresh Approach to Numerical Computing. \emph{SIAM Review}, \emph{59}(1),
 65--98. \url{https://doi.org/10.1137/141000671}
 
-\leavevmode\hypertarget{ref-Blaom2020MljJul}{}%
+\leavevmode\vadjust pre{\hypertarget{ref-Blaom2020MljJul}{}}%
 Blaom, A. D., Kiraly, F., Lienart, T., Simillides, Y., Arenas, D., \&
 Vollmer, S. J. (2020). MLJ: A Julia package for composable machine
 learning. \emph{Journal of Open Source Software}, \emph{5}(55), 2704.
 \url{https://doi.org/10.21105/joss.02704}
 
-\leavevmode\hypertarget{ref-Blaom2020FleMod}{}%
+\leavevmode\vadjust pre{\hypertarget{ref-Blaom2020FleMod}{}}%
 Blaom, A. D., \& Vollmer, S. J. (2020). \emph{Flexible model composition
 in machine learning and its implementation in MLJ}.
 \url{http://arxiv.org/abs/2012.15505}
 
-\leavevmode\hypertarget{ref-Boughorbel2017OptCla}{}%
+\leavevmode\vadjust pre{\hypertarget{ref-Boughorbel2017OptCla}{}}%
 Boughorbel, S., Jarray, F., \& El-Anbari, M. (2017). Optimal classifier
 for imbalanced data using Matthews Correlation Coefficient metric.
 \emph{PloS One}, \emph{12}(6), e0177678.
 \url{https://doi.org/10.1371/journal.pone.0177678}
 
-\leavevmode\hypertarget{ref-Branco2015SurPre}{}%
+\leavevmode\vadjust pre{\hypertarget{ref-Branco2015SurPre}{}}%
 Branco, P., Torgo, L., \& Ribeiro, R. (2015). \emph{A Survey of
 Predictive Modelling under Imbalanced Distributions}.
 \url{http://arxiv.org/abs/1505.01658}
 
-\leavevmode\hypertarget{ref-Canard2014EmpEva}{}%
+\leavevmode\vadjust pre{\hypertarget{ref-Canard2014EmpEva}{}}%
 Canard, E. F., Mouquet, N., Mouillot, D., Stanko, M., Miklisova, D., \&
 Gravel, D. (2014). Empirical evaluation of neutral interactions in
 host-parasite networks. \emph{The American Naturalist}, \emph{183}(4),
 468--479. \url{https://doi.org/10.1086/675363}
 
-\leavevmode\hypertarget{ref-Caron2022AddElt}{}%
+\leavevmode\vadjust pre{\hypertarget{ref-Caron2022AddElt}{}}%
 Caron, D., Maiorano, L., Thuiller, W., \& Pollock, L. J. (2022).
 Addressing the Eltonian shortfall with trait-based interaction models.
 \emph{Ecology Letters}, \emph{25}(4), 889--899.
 \url{https://doi.org/10.1111/ele.13966}
 
-\leavevmode\hypertarget{ref-Chicco2020AdvMat}{}%
+\leavevmode\vadjust pre{\hypertarget{ref-Chicco2020AdvMat}{}}%
 Chicco, D., \& Jurman, G. (2020). The advantages of the Matthews
 correlation coefficient (MCC) over F1 score and accuracy in binary
 classification evaluation. \emph{BMC Genomics}, \emph{21}(1), 6.
 \url{https://doi.org/10.1186/s12864-019-6413-7}
 
-\leavevmode\hypertarget{ref-Chicco2021MatCor}{}%
+\leavevmode\vadjust pre{\hypertarget{ref-Chicco2021MatCor}{}}%
 Chicco, D., Tötsch, N., \& Jurman, G. (2021). The Matthews correlation
 coefficient (MCC) is more reliable than balanced accuracy, bookmaker
 informedness, and markedness in two-class confusion matrix evaluation.
 \emph{BioData Mining}, \emph{14}, 13.
 \url{https://doi.org/10.1186/s13040-021-00244-z}
 
-\leavevmode\hypertarget{ref-deAguiar2019RevBia}{}%
+\leavevmode\vadjust pre{\hypertarget{ref-deAguiar2019RevBia}{}}%
 de Aguiar, M. A. M., Newman, E. A., Pires, M. M., Yeakel, J. D.,
 Boettiger, C., Burkle, L. A., Gravel, D., Guimarães, P. R., O'Donnell,
 J. L., Poisot, T., Fortin, M.-J., \& Hembry, D. H. (2019). Revealing
 biases in the sampling of ecological interaction networks. \emph{PeerJ},
 \emph{7}, e7566. \url{https://doi.org/10.7717/peerj.7566}
 
-\leavevmode\hypertarget{ref-Delgado2019WhyCoh}{}%
+\leavevmode\vadjust pre{\hypertarget{ref-Delgado2019WhyCoh}{}}%
 Delgado, R., \& Tibau, X.-A. (2019). Why Cohen's Kappa should be avoided
 as performance measure in classification. \emph{PloS One}, \emph{14}(9),
 e0222916. \url{https://doi.org/10.1371/journal.pone.0222916}
 
-\leavevmode\hypertarget{ref-Delmas2018AnaEco}{}%
+\leavevmode\vadjust pre{\hypertarget{ref-Delmas2018AnaEco}{}}%
 Delmas, E., Besson, M., Brice, M.-H., Burkle, L. A., Dalla Riva, G. V.,
 Fortin, M.-J., Gravel, D., Guimarães, P. R., Hembry, D. H., Newman, E.
 A., Olesen, J. M., Pires, M. M., Yeakel, J. D., \& Poisot, T. (2018).
 Analysing ecological networks of species interactions. \emph{Biological
 Reviews}, 112540. \url{https://doi.org/10.1111/brv.12433}
 
-\leavevmode\hypertarget{ref-Desjardins-Proulx2017EcoInt}{}%
+\leavevmode\vadjust pre{\hypertarget{ref-Desjardins-Proulx2017EcoInt}{}}%
 Desjardins-Proulx, P., Laigle, I., Poisot, T., \& Gravel, D. (2017).
 Ecological interactions and the Netflix problem. \emph{PeerJ},
 \emph{5}(e3644). \url{https://doi.org/10.7717/peerj.3644}
 
-\leavevmode\hypertarget{ref-Ferri2009ExpCom}{}%
+\leavevmode\vadjust pre{\hypertarget{ref-Ferri2009ExpCom}{}}%
 Ferri, C., Hernández-Orallo, J., \& Modroiu, R. (2009). An experimental
 comparison of performance measures for classification. \emph{Pattern
 Recognition Letters}, \emph{30}(1), 27--38.
 \url{https://doi.org/10.1016/j.patrec.2008.08.010}
 
-\leavevmode\hypertarget{ref-He2013ImbLea}{}%
+\leavevmode\vadjust pre{\hypertarget{ref-He2013ImbLea}{}}%
 He, H., \& Ma, Y. (Eds.). (2013). \emph{Imbalanced Learning:
 Foundations, Algorithms, and Applications} (1st edition). Wiley-IEEE
 Press.
 
-\leavevmode\hypertarget{ref-Hong2016DeaCla}{}%
+\leavevmode\vadjust pre{\hypertarget{ref-Hong2016DeaCla}{}}%
 Hong, C., Ghosh, R., \& Srinivasan, S. (2016). \emph{Dealing with Class
 Imbalance using Thresholding}.
 \url{https://doi.org/10.48550/arXiv.1607.02705}
 
-\leavevmode\hypertarget{ref-Inman2021ComSam}{}%
+\leavevmode\vadjust pre{\hypertarget{ref-Inman2021ComSam}{}}%
 Inman, R., Franklin, J., Esque, T., \& Nussear, K. (2021). Comparing
 sample bias correction methods for species distribution modeling using
 virtual species. \emph{Ecosphere}, \emph{12}(3), e03422.
 \url{https://doi.org/10.1002/ecs2.3422}
 
-\leavevmode\hypertarget{ref-Iturbide2015FraSpe}{}%
+\leavevmode\vadjust pre{\hypertarget{ref-Iturbide2015FraSpe}{}}%
 Iturbide, M., Bedia, J., Herrera, S., del Hierro, O., Pinto, M., \&
 Gutiérrez, J. M. (2015). A framework for species distribution modelling
 with improved pseudo-absence generation. \emph{Ecological Modelling},
 \emph{312}, 166--174.
 \url{https://doi.org/10.1016/j.ecolmodel.2015.05.018}
 
-\leavevmode\hypertarget{ref-Japkowicz2013AssMet}{}%
+\leavevmode\vadjust pre{\hypertarget{ref-Japkowicz2013AssMet}{}}%
 Japkowicz, N. (2013). Assessment Metrics for Imbalanced Learning. In
 \emph{Imbalanced Learning} (pp. 187--206). John Wiley \& Sons, Ltd.
 \url{https://doi.org/10.1002/9781118646106.ch8}
 
-\leavevmode\hypertarget{ref-Jeni2013FacImb}{}%
+\leavevmode\vadjust pre{\hypertarget{ref-Jeni2013FacImb}{}}%
 Jeni, L. A., Cohn, J. F., \& De La Torre, F. (2013). Facing Imbalanced
 Data--Recommendations for the Use of Performance Metrics. \emph{2013
 Humaine Association Conference on Affective Computing and Intelligent
 Interaction}, 245--251. \url{https://doi.org/10.1109/ACII.2013.47}
 
-\leavevmode\hypertarget{ref-Jordano2016ChaEco}{}%
+\leavevmode\vadjust pre{\hypertarget{ref-Jordano2016ChaEco}{}}%
 Jordano, P. (2016a). Chasing Ecological Interactions. \emph{PLOS Biol},
 \emph{14}(9), e1002559.
 \url{https://doi.org/10.1371/journal.pbio.1002559}
 
-\leavevmode\hypertarget{ref-Jordano2016SamNet}{}%
+\leavevmode\vadjust pre{\hypertarget{ref-Jordano2016SamNet}{}}%
 Jordano, P. (2016b). Sampling networks of ecological interactions.
 \emph{Functional Ecology}. \url{https://doi.org/10.1111/1365-2435.12763}
 
-\leavevmode\hypertarget{ref-Landis1977MeaObs}{}%
+\leavevmode\vadjust pre{\hypertarget{ref-Landis1977MeaObs}{}}%
 Landis, J. R., \& Koch, G. G. (1977). The Measurement of Observer
 Agreement for Categorical Data. \emph{Biometrics}, \emph{33}(1),
 159--174. \url{https://doi.org/10.2307/2529310}
 
-\leavevmode\hypertarget{ref-MacDonald2020RevLin}{}%
+\leavevmode\vadjust pre{\hypertarget{ref-MacDonald2020RevLin}{}}%
 MacDonald, A. A. M., Banville, F., \& Poisot, T. (2020). Revisiting the
 Links-Species Scaling Relationship in Food Webs. \emph{Patterns},
 \emph{1}(0). \url{https://doi.org/10.1016/j.patter.2020.100079}
 
-\leavevmode\hypertarget{ref-Martinez1992ConCon}{}%
+\leavevmode\vadjust pre{\hypertarget{ref-Martinez1992ConCon}{}}%
 Martinez, N. D. (1992). Constant Connectance in Community Food Webs.
 \emph{The American Naturalist}, \emph{139}(6), 1208--1218.
-\url{http://www.jstor.org/stable/2462337}
+\url{https://www.jstor.org/stable/2462337}
 
-\leavevmode\hypertarget{ref-McLeod2021SamAsy}{}%
+\leavevmode\vadjust pre{\hypertarget{ref-McLeod2021SamAsy}{}}%
 McLeod, A., Leroux, S. J., Gravel, D., Chu, C., Cirtwill, A. R., Fortin,
 M.-J., Galiana, N., Poisot, T., \& Wood, S. A. (2021). Sampling and
 asymptotic network properties of spatial multi-trophic networks.
 \emph{Oikos}, \emph{n/a}(n/a). \url{https://doi.org/10.1111/oik.08650}
 
-\leavevmode\hypertarget{ref-Olesen2011MisFor}{}%
+\leavevmode\vadjust pre{\hypertarget{ref-Olesen2011MisFor}{}}%
 Olesen, J. M., Bascompte, J., Dupont, Y. L., Elberling, H., Rasmussen,
 C., \& Jordano, P. (2011). Missing and forbidden links in mutualistic
 networks. \emph{Proc. R. Soc. B}, \emph{278}(1706), 725--732.
 \url{https://doi.org/10.1098/rspb.2010.1371}
 
-\leavevmode\hypertarget{ref-Olito2015SpeTra}{}%
+\leavevmode\vadjust pre{\hypertarget{ref-Olito2015SpeTra}{}}%
 Olito, C., \& Fox, J. W. (2015). Species traits and abundances predict
 metrics of plant--pollinator network structure, but not pairwise
 interactions. \emph{Oikos}, \emph{124}, 428--436.
 
-\leavevmode\hypertarget{ref-Pichler2020MacLea}{}%
+\leavevmode\vadjust pre{\hypertarget{ref-Pichler2020MacLea}{}}%
 Pichler, M., Boreux, V., Klein, A., Schleuning, M., \& Hartig, F.
 (2020). Machine learning algorithms to infer trait‐matching and predict
 species interactions in ecological networks. \emph{Methods in Ecology
 and Evolution}, \emph{11}(2), 281--293.
 \url{https://doi.org/10.1111/2041-210X.13329}
 
-\leavevmode\hypertarget{ref-Pilosof2017MulNat}{}%
+\leavevmode\vadjust pre{\hypertarget{ref-Pilosof2017MulNat}{}}%
 Pilosof, S., Porter, M. A., Pascual, M., \& Kéfi, S. (2017). The
 multilayer nature of ecological networks. \emph{Nature Ecology \&
 Evolution}, \emph{1}, 0101.
 \url{https://doi.org/10.1038/s41559-017-0101}
 
-\leavevmode\hypertarget{ref-Poisot2021GloKno}{}%
+\leavevmode\vadjust pre{\hypertarget{ref-Poisot2021GloKno}{}}%
 Poisot, T., Bergeron, G., Cazelles, K., Dallas, T., Gravel, D.,
 MacDonald, A., Mercier, B., Violet, C., \& Vissault, S. (2021). Global
 knowledge gaps in species interaction networks data. \emph{Journal of
 Biogeography}, jbi.14127. \url{https://doi.org/10.1111/jbi.14127}
 
-\leavevmode\hypertarget{ref-Poisot2021ImpMam}{}%
+\leavevmode\vadjust pre{\hypertarget{ref-Poisot2021ImpMam}{}}%
 Poisot, T., Ouellet, M.-A., Mollentze, N., Farrell, M. J., Becker, D.
 J., Albery, G. F., Gibb, R. J., Seifert, S. N., \& Carlson, C. J.
 (2021). \emph{Imputing the mammalian virome with linear filtering and
 singular value decomposition}. \url{http://arxiv.org/abs/2105.14973}
 
-\leavevmode\hypertarget{ref-Saito2015PrePlo}{}%
+\leavevmode\vadjust pre{\hypertarget{ref-Saito2015PrePlo}{}}%
 Saito, T., \& Rehmsmeier, M. (2015). The Precision-Recall Plot Is More
 Informative than the ROC Plot When Evaluating Binary Classifiers on
 Imbalanced Datasets. \emph{PLOS ONE}, \emph{10}(3), e0118432.
 \url{https://doi.org/10.1371/journal.pone.0118432}
 
-\leavevmode\hypertarget{ref-Schisterman2005OptCut}{}%
+\leavevmode\vadjust pre{\hypertarget{ref-Schisterman2005OptCut}{}}%
 Schisterman, E. F., Perkins, N. J., Liu, A., \& Bondell, H. (2005).
 Optimal Cut-point and Its Corresponding Youden Index to Discriminate
 Individuals Using Pooled Blood Samples. \emph{Epidemiology},
 \emph{16}(1), 73--81.
 \url{https://doi.org/10.1097/01.ede.0000147512.81966.ba}
 
-\leavevmode\hypertarget{ref-Somodi2017PreDep}{}%
+\leavevmode\vadjust pre{\hypertarget{ref-Somodi2017PreDep}{}}%
 Somodi, I., Lepesi, N., \& Botta‐Dukát, Z. (2017). Prevalence dependence
 in model goodness measures with special emphasis on true skill
 statistics. \emph{Ecology and Evolution}, \emph{7}(3), 863--872.
 \url{https://doi.org/10.1002/ece3.2654}
 
-\leavevmode\hypertarget{ref-Steen2021SpaThi}{}%
+\leavevmode\vadjust pre{\hypertarget{ref-Steen2021SpaThi}{}}%
 Steen, V. A., Tingley, M. W., Paton, P. W. C., \& Elphick, C. S. (2021).
 Spatial thinning and class balancing: Key choices lead to variation in
 the performance of species distribution models with citizen science
 data. \emph{Methods in Ecology and Evolution}, \emph{12}(2), 216--226.
 \url{https://doi.org/10.1111/2041-210X.13525}
 
-\leavevmode\hypertarget{ref-Strona2017ForPer}{}%
+\leavevmode\vadjust pre{\hypertarget{ref-Strona2017ForPer}{}}%
 Strona, G., \& Veech, J. A. (2017). Forbidden versus permitted
 interactions: Disentangling processes from patterns in ecological
 network analysis. \emph{Ecology and Evolution}, \emph{7}(14),
 5476--5481. \url{https://doi.org/10.1002/ece3.3102}
 
-\leavevmode\hypertarget{ref-Strydom2021RoaPre}{}%
+\leavevmode\vadjust pre{\hypertarget{ref-Strydom2021RoaPre}{}}%
 Strydom, T., Catchen, M. D., Banville, F., Caron, D., Dansereau, G.,
 Desjardins-Proulx, P., Forero-Muñoz, N. R., Higino, G., Mercier, B.,
 Gonzalez, A., Gravel, D., Pollock, L., \& Poisot, T. (2021). A roadmap
@@ -1435,36 +1487,36 @@ towards predicting species interaction networks (across space and time).
 Sciences}, \emph{376}(1837), 20210063.
 \url{https://doi.org/10.1098/rstb.2021.0063}
 
-\leavevmode\hypertarget{ref-Valdovinos2019MutNet}{}%
+\leavevmode\vadjust pre{\hypertarget{ref-Valdovinos2019MutNet}{}}%
 Valdovinos, F. S. (2019). Mutualistic networks: Moving closer to a
 predictive theory. \emph{Ecology Letters}, \emph{0}(0).
 \url{https://doi.org/10.1111/ele.13279}
 
-\leavevmode\hypertarget{ref-Weitz2005CoeArm}{}%
+\leavevmode\vadjust pre{\hypertarget{ref-Weitz2005CoeArm}{}}%
 Weitz, J. S., Hartman, H., \& Levin, S. A. (2005). Coevolutionary arms
 races between bacteria and bacteriophage. \emph{Proceedings of the
 National Academy of Sciences of the United States of America},
 \emph{102}(27), 9535--9540.
 \url{https://doi.org/10.1073/pnas.0504062102}
 
-\leavevmode\hypertarget{ref-Whalen2021NavPit}{}%
+\leavevmode\vadjust pre{\hypertarget{ref-Whalen2021NavPit}{}}%
 Whalen, S., Schreiber, J., Noble, W. S., \& Pollard, K. S. (2021).
 Navigating the pitfalls of applying machine learning in genomics.
 \emph{Nature Reviews Genetics}, 1--13.
 \url{https://doi.org/10.1038/s41576-021-00434-9}
 
-\leavevmode\hypertarget{ref-Wood2015EffSpa}{}%
+\leavevmode\vadjust pre{\hypertarget{ref-Wood2015EffSpa}{}}%
 Wood, S. A., Russell, R., Hanson, D., Williams, R. J., \& Dunne, J. A.
 (2015). Effects of spatial scale of sampling on food web structure.
 \emph{Ecology and Evolution}, \emph{5}(17), 3769--3782.
 \url{https://doi.org/10.1002/ece3.1640}
 
-\leavevmode\hypertarget{ref-Xie2017ComCom}{}%
+\leavevmode\vadjust pre{\hypertarget{ref-Xie2017ComCom}{}}%
 Xie, J.-R., Zhang, P., Zhang, H.-F., \& Wang, B.-H. (2017). Completeness
 of Community Structure in Networks. \emph{Scientific Reports},
 \emph{7}(1), 5269. \url{https://doi.org/10.1038/s41598-017-05585-6}
 
-\leavevmode\hypertarget{ref-Youden1950IndRat}{}%
+\leavevmode\vadjust pre{\hypertarget{ref-Youden1950IndRat}{}}%
 Youden, W. J. (1950). Index for rating diagnostic tests. \emph{Cancer},
 \emph{3}(1), 32--35.
 \url{https://doi.org/10.1002/1097-0142(1950)3:1\%3C32::AID-CNCR2820030106\%3E3.0.CO;2-3}
